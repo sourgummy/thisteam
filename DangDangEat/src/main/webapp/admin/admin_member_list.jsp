@@ -116,23 +116,28 @@ if(sId == null || !sId.equals("admin")) {
 				status : "${member.member_status }"
 <%--			, authStatus : "${member.member_authStatus }" --%>
 			});
+			
+		</c:forEach>
 		
-			for(let member of member_list) {
-				alert(member.id + ", " + member.status);
-				
-				if(member.status == "Y") {
-					$("#member").prop("selected", true);
-				} else if(member.status == "N") {
-					alert("회원 아님");
-					$("#withdraw_member").prop("selected", true);
-				} else if(member.status == "D") {
-					$("#dormant_member").porp("selected", true);
-				}
-				
+		for(let member of member_list) { // let i; i < member_list.length; i++
+// 			alert(member.id + ", " + member.status);
+			
+			if(member.status == "Y") {
+// 				alert("회원");
+				$("#member_status").val("Y").prop("selected", true);
+// 				$("#member_status:eq(1)").prop("selected", true);
+			} else if(member.status == "N") {
+// 				alert("탈퇴 회원");
+				$("#member_status").val("N").prop("selected", true);
+// 				$("#member_status:eq(2)").prop("selected", true);
+			} else if(member.status == "D") {
+// 				alert("휴면 회원");
+				$("#member_status").val("D").prop("selected", true);
+// 				$("#member_status:eq(3)").prop("selected", true);
 			}
 			
-		
-		</c:forEach>
+		}
+			
 	});
 	
 	
@@ -511,9 +516,9 @@ if(sId == null || !sId.equals("admin")) {
 	                                            <td>${member.member_birth }</td>
 	                                            <td>
 	                                            	<select id="member_status" name="${member.member_status }">
-	                                            		<option id="member" value="Y">회원</option>
-	                                            		<option id="withdraw_member" value="N">탈퇴 회원</option>
-	                                            		<option id="dormant_member" value="D">휴면 회원</option>
+	                                            		<option value="Y">회원</option>
+	                                            		<option value="N">탈퇴 회원</option>
+	                                            		<option value="D">휴면 회원</option>
 	                                            	</select>
 	                                            </td>
 	                                            <td>${member.member_authStatus }</td>

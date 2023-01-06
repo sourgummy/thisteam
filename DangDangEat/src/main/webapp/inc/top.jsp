@@ -142,6 +142,7 @@ header > div {
 </head>
 <body>
   <!--TOP-->
+  <div class="container">
   <header>
     <div class="myDiv">
       <a href="./">
@@ -149,6 +150,7 @@ header > div {
       </a>
     </div>
   </header>
+  
 
   <div class="login">
 	  <c:choose>
@@ -174,13 +176,13 @@ header > div {
     <ul class="ul-top-icon">
         <li><a href="WishlistDetail.ct"><img class="top-icon" src="img/heart.png"></a></li>
         <li><a href="CartList.ct"><img class="top-icon" src="img/shopping-cart.png"></a></li>
-        <li><a href="CheckPassForm.me"><img class="top-icon" src="img/dog.png"></a></li>
+        <li><a href="MyPage.me"><img class="top-icon" src="img/dog.png"></a></li>
     </ul>
 </div>
 
   <div class="top-menu">
     <ul>
-      <li><a href="About.ad">About</a></li>
+      <li><a href="#">About</a></li>
       <li>/</li>
       <li><a href="ProductList.pd">Shop</a></li>
       <li>/</li>
@@ -188,5 +190,6 @@ header > div {
       <li>/</li>
       <li><a href="#">Q&A</a></li>
     </ul>
+  </div>
   </div>
 </html>

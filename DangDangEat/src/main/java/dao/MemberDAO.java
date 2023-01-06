@@ -66,49 +66,52 @@ public class MemberDAO {
 	}
 
 	// id 중복확인
-	public boolean selectMemberId(MemberBean member) {
-		//      System.out.println("selectMemberId");
-		boolean isCheck = false;
-		PreparedStatement pstmt = null,pstmt2 = null;
-		ResultSet rs = null,rs2 = null;
+		public boolean selectMemberId(MemberBean member) {
+			      System.out.println("selectMemberId");
+			boolean isCheck = false;
+			PreparedStatement pstmt = null, pstmt2 = null;
+			ResultSet rs = null, rs2= null;
 
-		try {
-			if(member.getMember_id() != null) {
-				String sql = "SELECT Member_id FROM member WHERE Member_id=?";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, member.getMember_id());
-				rs = pstmt.executeQuery();
-				
-				if(rs.next()) {
-					isCheck = true;
+			try {
+				if(member.getMember_id() != null) {
+					String sql = "SELECT Member_id FROM member WHERE Member_id=?";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setString(1, member.getMember_id());
+					rs = pstmt.executeQuery();
+					System.out.println("id확인" + member.getMember_id());
+					if(rs.next()) {
+						isCheck = true;
+					}
+					
 				}
 				
-			}
-			
-			if(member.getMember_email() != null) {
-				String sql = "SELECT Member_email FROM member WHERE Member_email=?";
-				pstmt2 = con.prepareStatement(sql);
-				pstmt2.setString(1, member.getMember_email());
-				rs2 = pstmt2.executeQuery();
-				
-				if(rs2.next()) {
-					isCheck = true;
+				if(member.getMember_email() != null) {
+					String sql = "SELECT Member_email FROM member WHERE Member_email=?";
+					pstmt2 = con.prepareStatement(sql);
+					pstmt2.setString(1, member.getMember_email());
+					rs2 = pstmt2.executeQuery();
+					if(rs2.next()) {
+						isCheck = true;
+					}
+					
 				}
-				
-			}
-		} catch (SQLException e) {
-			System.out.println("SQL 구문 오류 : selectMemberId()");
-			e.printStackTrace();
-		} finally {
-			JdbcUtil.close(rs);
-			JdbcUtil.close(pstmt);
-			JdbcUtil.close(rs2);
-			JdbcUtil.close(pstmt2);
+			} catch (SQLException e) {
+				System.out.println("SQL 구문 오류 : selectMemberId()");
+				e.printStackTrace();
+			} finally {
+				if(member.getMember_id() != null) {
+					JdbcUtil.close(rs);
+					JdbcUtil.close(pstmt);
+				}
+				if(member.getMember_email() != null) {
+					JdbcUtil.close(rs2);
+					JdbcUtil.close(pstmt2);
+				}
 
+			}
+
+			return isCheck;
 		}
-
-		return isCheck;
-	}
    
    // 로그인, 패스워드 확인, 비밀번호 찾기 회원 확인(isPass = false)
    public boolean selectMember(MemberBean member, boolean isPass) {
@@ -547,6 +550,133 @@ public class MemberDAO {
 		}
 		
 		return updateCount;
+	}
+
+	public int selectMemberOrder(String id) {
+		System.out.println("MemberDAO - selectMemberOrder()");
+		int orderCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT count(*) FROM orders WHERE member_id=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				orderCount = rs.getInt(1);
+				System.out.println(orderCount);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류! - selectMemberOrder()");
+			e.printStackTrace();
+		} finally {
+			// DB 자원 반환
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+		
+		return orderCount;
+	}
+
+	public int selectMemberQna(String id) {
+		System.out.println("MemberDAO - selectMemberQna()");
+		
+		int qnaCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT count(*) FROM qna WHERE member_id=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				qnaCount = rs.getInt(1);
+				System.out.println(qnaCount);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류! - selectMemberQna()");
+			e.printStackTrace();
+		} finally {
+			// DB 자원 반환
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+		
+		return qnaCount;
+	}
+
+	public int selectMemberReview(String id) {
+		System.out.println("MemberDAO - selectMemberReview()");
+		
+		int reviewCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT count(*) FROM review WHERE member_id=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				reviewCount = rs.getInt(1);
+				System.out.println(reviewCount);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류! - selectMemberReview()");
+			e.printStackTrace();
+		} finally {
+			// DB 자원 반환
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+		
+		return reviewCount;
+	}
+
+	public int selectMemberCoupon(String id) {
+		System.out.println("MemberDAO - selectMemberCoupon()");
+		
+		int couponCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT count(*) FROM member_coupon WHERE member_id=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				couponCount = rs.getInt(1);
+				System.out.println(couponCount);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류! - selectMemberCoupon()");
+			e.printStackTrace();
+		} finally {
+			// DB 자원 반환
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+		
+		return couponCount;
 	}
 
    
