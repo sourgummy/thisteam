@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="../css/orderConfirmation.css">
     <!-- jQuery for import--> 
   <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
-
+<!--  <img src="http://localhost:8080/DangDangEat/upload/${cart.pro_real_thumb }" alt="${cart.pro_name }" class="product-frame" height="100">  -->
 </head>
 <body>
 <jsp:include page="../inc/top.jsp"></jsp:include>
@@ -21,7 +21,7 @@
 	<div class="row d-flex justify-content-center">
 	<div class="col-md-8">
 	<div class="card">
-	<div class="text-left logo p-2 px-5"> <img src="https://i.imgur.com/2zDU056.png" width="50"> </div>
+	<div class = "dangLogo" align="center"><img src="img/maindog.png" width="100" > </div>
 	<div class="invoice p-5">
 		<c:forEach var="pay" items="${paymentList }" varStatus="status">
         
@@ -34,8 +34,10 @@
 		<table class="table table-borderless">
 			<tbody>
 			<tr>
+			<c:forEach var="pay" items="${paymentList }" varStatus="status">
+				<td><div class="py-2"> <span class="d-block text-muted">Order No</span> <span>${pay.pay_number}</span> </div></td>
+			</c:forEach>
 				<td><div class="py-2"> <span class="d-block text-muted">Order Date</span> <span>12 Jan,2018</span> </div></td>
-				<td><div class="py-2"> <span class="d-block text-muted">Order No</span> <span>MT12332345</span> </div></td>
 				<td><div class="py-2"> <span class="d-block text-muted">Payment</span> <span><img src="https://img.icons8.com/color/48/000000/mastercard.png" width="20" /></span> </div></td>
 				<td><div class="py-2"> <span class="d-block text-muted">Shiping Address</span> <span>414 Advert Avenue, NY,USA</span> </div></td>
 			</tr>
@@ -76,23 +78,19 @@
 		<table class="table table-borderless">
 			<tbody class="totals">
 			<tr>
-				<td><div class="text-left"> <span class="text-muted">Subtotal</span> </div></td>
+				<td><div class="text-left"> <span class="text-muted">주문금액</span> </div></td>
 				<td><div class="text-right"> <span>$168.50</span> </div></td>
 			</tr>
 			<tr>
-				<td><div class="text-left"> <span class="text-muted">Shipping Fee</span> </div></td>
+				<td><div class="text-left"> <span class="text-muted">배송비</span> </div></td>
 				<td><div class="text-right"> <span>$22</span> </div></td>
 			</tr>
 			<tr>
-				<td><div class="text-left"> <span class="text-muted">Tax Fee</span> </div></td>
-				<td><div class="text-right"> <span>$7.65</span> </div></td>
-			</tr>
-			<tr>
-				<td><div class="text-left"> <span class="text-muted">Discount</span> </div></td>
+				<td><div class="text-left"> <span class="text-muted">할인금액</span> </div></td>
 				<td><div class="text-right"> <span class="text-success">$168.50</span> </div></td>
 			</tr>
 			<tr class="border-top border-bottom">
-				<td><div class="text-left"> <span class="font-weight-bold">Subtotal</span> </div></td>
+				<td><div class="text-left"> <span class="font-weight-bold">총주문금액</span> </div></td>
 				<td><div class="text-right"> <span class="font-weight-bold">$238.50</span> </div></td>
 			</tr>
 			</tbody>
@@ -100,9 +98,9 @@
 	  </div>
 	</div>
 			<p>We will be sending shipping confirmation email when the item shipped successfully!</p>
-			<p class="font-weight-bold mb-0">Thanks for shopping with us!</p> <span>Nike Team</span>
+			<p class="font-weight-bold mb-0">Thanks for shopping with us!</p> <span>DangDangEat Team</span>
 	</div>
-	<div class="d-flex justify-content-between footer p-3"> <span>Need Help? visit our <a href="#"> help center</a></span> <span>12 June, 2020</span> </div>
+<!-- 	<div class="d-flex justify-content-between footer p-3"> <span>Need Help? visit our <a href="#"> help center</a></span> <span>12 June, 2020</span> </div> -->
 	</div>
 	</div>
 	</div>

@@ -66,14 +66,14 @@ public class OrderPaymentService {
 	}
 
 	// 결제 완료시 주문상품 수량 업데이트 하는 구문
-	public int productQtyUpdate(int order_code, int pro_code, int cart_code) {
+	public int productQtyUpdate(int order_code, int pro_code) {
 		int productQtyUpdateCount = 0;
 		
 		Connection con = JdbcUtil.getConnection();
 		OrderDAO dao = OrderDAO.getInstance();
 		dao.setConnection(con);
 		
-		productQtyUpdateCount = dao.productQtyUpdate(order_code, pro_code, cart_code);
+		productQtyUpdateCount = dao.productQtyUpdate(order_code, pro_code);
 		
 		if(productQtyUpdateCount > 0) {
 			JdbcUtil.commit(con);
@@ -84,7 +84,7 @@ public class OrderPaymentService {
 		return productQtyUpdateCount;
 	}
 
-
+	
 	
 	
 }

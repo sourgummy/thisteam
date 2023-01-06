@@ -35,7 +35,8 @@ public class OrderPaymentProAction implements Action {
 		 *  완료 4. 주문 확인서 페이지로 이동
 		 *  완료 5. cart에 있는 상품 cart_ischecked 업데이트 해서 카트 페이지에서 삭제하기 
 		 *  
-		 *  6. 주문완료한 수량 product 수량에서 (-)변경하기   
+		 *  23/01/06 완료 부분
+		 *  완료 6. 주문완료한 수량 product 수량에서 (-)변경하기   
 		 */
 		
 		
@@ -77,8 +78,7 @@ public class OrderPaymentProAction implements Action {
 		request.setAttribute("paymentList", paymentList);
 		System.out.println("여기까지 넘어왔니 페이먼트 프로 액션" + paymentList);
 		
-		// 결제완료시 상품 테이블에서 수량변경하는 코드
-		int productQtyUpdate = service.productQtyUpdate(order_code, pro_code, cart_code);
+		
 		
 			try {
 				// orders 테이블에 order_status = 1 (결제완료) 로 변환하는 작업
@@ -89,9 +89,17 @@ public class OrderPaymentProAction implements Action {
 					
 					 if(cartUpdateCount > 0) {
 						 
-						forward = new ActionForward();
-						forward.setPath("OrderConfirm.od");
-						forward.setRedirect(false);
+						 
+						 // 결제완료시 상품 테이블에서 수량변경하는 코드
+						 int productQtyUpdateCount = service.productQtyUpdate(order_code, pro_code);
+						 if(productQtyUpdateCount > 0) {
+							 
+							 forward = new ActionForward();
+							 forward.setPath("OrderConfirm.od");
+							 forward.setRedirect(false);
+							 
+						 }
+						 
 						
 					 } else {
 						response.setContentType("text/html; charset=UTF-8");

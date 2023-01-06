@@ -177,7 +177,7 @@
 		        <div class="item">
 			          <div class="product-image">
 			            <a href="ProductDetail.pd?pro_code=${cart.pro_code}">
-			            	<img src="${cart.pro_real_thumb }" alt="${cart.pro_name }" class="product-frame" height="100">
+			            	<img src="http://localhost:8080/DangDangEat/upload/${cart.pro_real_thumb }" alt="${cart.pro_name }" class="product-frame" height="100">
 			           	</a>
 			          </div>
 			          <div class="product-details">

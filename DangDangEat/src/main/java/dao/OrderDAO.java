@@ -234,8 +234,8 @@ public class OrderDAO {
 			pstmt.setString(2, id);
 			rs = pstmt.executeQuery();
 			
+			orderMemberList = new ArrayList<OrdersBean>();
 			if(rs.next()) {
-				orderMemberList = new ArrayList<OrdersBean>();
 				OrdersBean order = new OrdersBean();
 					order.setOrder_code(rs.getInt("order_code"));
 					order.setMember_id(rs.getString("member_id"));
@@ -253,7 +253,7 @@ public class OrderDAO {
 			}
 			
 		} catch (SQLException e) {
-			System.out.println("orderDAO - selectMemberList 구문오류");
+			System.out.println("orderDAO - getOrderMemberList 구문오류");
 			e.printStackTrace();
 		} finally {
 			JdbcUtil.close(rs);
@@ -402,21 +402,29 @@ public class OrderDAO {
 			return paymentList;
 		} // paymentInsert
 		
-		// 23-01-05 작업중
+		// 23-01-06 추가사항
 		// 결제 완료시 주문상품 수량 업데이트 하는 구문
-		public int productQtyUpdate(int order_code, int pro_code, int cart_code) {
+		public int productQtyUpdate(int order_code, int pro_code) {
 			int productQtyUpdateCount = 0;
 			
 			PreparedStatement pstmt = null;
 			
 			try {
-				String sql = "UPDATE product SET pro_qty = ? WHERE "
-						+ "";
+				String sql = "UPDATE product SET pro_qty = "
+						+ "((SELECT pro_qty FROM (SELECT pro_qty, pro_code FROM product) AS pro_update_sample WHERE pro_code = ?) "
+						+ "- (SELECT order_stock FROM order_product WHERE order_code = ?)) "
+						+ "WHERE pro_code = (SELECT pro_code FROM order_product WHERE order_code = ?)";
 				pstmt = con.prepareStatement(sql);
-				pstmt.executeUpdate();
+				pstmt.setInt(1, pro_code);
+				pstmt.setInt(2, order_code);
+				pstmt.setInt(3, order_code);
+				productQtyUpdateCount =  pstmt.executeUpdate();
+				
 			} catch (SQLException e) {
 				System.out.println("orderdao - productQtyUpdate()");
 				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(pstmt);
 			}
 			
 			return productQtyUpdateCount;
@@ -434,34 +442,40 @@ public class OrderDAO {
 				String sql = "SELECT * FROM admin_order_list_view";
 				pstmt = con.prepareStatement(sql);
 				rs = pstmt.executeQuery();
+
+				adminOrderList = new ArrayList<AdminOrderListBean>();
 				
-				if(rs.next()) {
-					adminOrderList = new ArrayList<AdminOrderListBean>();
+				while(rs.next()) {
 					AdminOrderListBean adminOrderBean = new AdminOrderListBean();
 					adminOrderBean.setOrder_code(rs.getInt("order_code"));
 					adminOrderBean.setMember_id(rs.getString("member_id"));
 					adminOrderBean.setOrder_name(rs.getString("order_name"));
 					adminOrderBean.setOrder_postcode(rs.getString("order_postcode"));
 					adminOrderBean.setOrder_address1(rs.getString("order_address1"));
-					adminOrderBean.setOrder_address2(rs.getString("order_address3"));
+					adminOrderBean.setOrder_address2(rs.getString("order_address2"));
 					adminOrderBean.setOrder_mobile(rs.getString("order_mobile"));
 					adminOrderBean.setOrder_comment(rs.getString("order_comment"));
 					adminOrderBean.setOrder_status(rs.getInt("order_status"));
 					adminOrderBean.setOrder_date(rs.getDate("order_date"));
 					adminOrderBean.setPay_number(rs.getInt("pay_number"));
 					adminOrderBean.setPay_amount(rs.getInt("pay_amount"));
+					
 					adminOrderList.add(adminOrderBean);
 				}
+				System.out.println("orderDAO 에서 나오는 " + adminOrderList);
 			} catch (SQLException e) {
 				System.out.println("SQL 구문 오류 - orderDAO > getAdminOrderList");
 				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(pstmt);
+				JdbcUtil.close(rs);
 			}
 			
 			return adminOrderList;
 		} //getAdminOrderList
 
 		
-
+		
 
 	
 	
