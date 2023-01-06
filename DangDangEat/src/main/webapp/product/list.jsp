@@ -93,40 +93,19 @@ body {
 </style>
 
 <script src="js/jquery-3.6.3.js"></script>
-<script
+<!--<script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-<script
+ <script
 	src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js" integrity="sha512-cdV6j5t5o24hkSciVrb8Ki6FveC2SgwGfLE31+ZQRHAeSRxYhAQskLkq3dLm8ZcWe1N3vBOEYmmbhzf7NTtFFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/ScrollToPlugin.min.js" integrity="sha512-kSI9CgGh60rJbNVeMJvfNX0UTKAq8LEOea/yKJQbFpIroxT7bf9/zUFXbnfsQP5F6xlOOHtCfBPgsE1ceiHnRw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="assets/js/main.js"></script>
+<script src="assets/js/main.js"></script> -->
 <script>
 	function fn_search(){
 		location.href ="./ProductList.pd?keyword="+$("#query").val();
 	}
-	
-// 	/* Top Button */
-// 	// Get the button:
-// 	let mybutton = document.getElementById("myBtn");
-	
-// 	// When the user scrolls down 20px from the top of the document, show the button
-// 	window.onscroll = function() {scrollFunction()};
-	
-// 	function scrollFunction() {
-// 	  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-// 	    mybutton.style.display = "block";
-// 	  } else {
-// 	    mybutton.style.display = "none";
-// 	  }
-// 	}
-	
-// 	// When the user clicks on the button, scroll to the top of the document
-// 	function topFunction() {
-// 	  document.body.scrollTop = 0; // For Safari
-// 	  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-// 	}
 </script>
 </head>
 <body>
@@ -165,8 +144,8 @@ body {
 								<div class="card h-100">
 									<!-- Product image-->
 									<a href="ProductDetail.pd?pro_code=${product.pro_code}"> 
-									<img class="card-img-top" style="height: 300px"
- 										src="http://localhost:8080/DangDangEat/upload/${product.pro_real_thumb }"
+									<img class="card-img-top" style="height: 250px"
+										src="http://localhost:8080/DangDangEat/upload/${product.pro_real_thumb }"
 										alt="..." onerror="this.src='./img/sample1_thumb.png';" />
 <!-- 										alt="..." onerror="this.src='./img/error_img.png';" /> -->
 									</a>
@@ -186,6 +165,7 @@ body {
 										</div>
 									</div>
 									<!-- Product actions-->
+									<!-- 장바구니 추가 -->
 									<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 										<div class="text-center">
 											<a class="btn btn-outline-dark mt-auto" href="#">Add Cart</a>
@@ -248,13 +228,11 @@ body {
 			<p class="m-0 text-center text-white">Copyright &copy; Your
 				Website 2022</p>
 		</div>
-		<!-- Top Button -->		
-		<button onclick="topFunction()" id="myBtn" title="Go to top">TOP</button>	
 	</footer>
 	<!-- Bootstrap core JS-->
-	<script
+<!-- 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-	<!-- Core theme JS-->
-	<script src="js/scripts.js"></script>
+	Core theme JS
+	<script src="js/scripts.js"></script> -->
 </body>
 </html>

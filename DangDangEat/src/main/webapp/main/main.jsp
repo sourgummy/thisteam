@@ -16,19 +16,18 @@
 	src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 <script src="../js/jquery-3.6.3.js"></script>
 <script type="text/javascript">
-          $(document).ready(function(){
-            $('.slider').bxSlider({
-            	auto: true,
-            	pager: true,
-            	slideWidth: 1200,
-            	speed: 15, // 숫자 작을수록 빠르게 넘어감
-            	infinitelLoop : true
+	$(document).ready(function() {
+		$('.slider_image').bxSlider({
+			mode : "horizontal",
+			auto : true,
+			pager : true,
+			//        slideWidth: 1300,  // 절대 수정 금지!!!건들지마세요!!!
+			speed : 15, // 숫자 작을수록 빠르게 넘어감
+			infinitelLoop : true
 
-            });
-          });
-        
-
-        </script>
+		});
+	});
+</script>
 <style type="text/css">
 @font-face {
 	font-family: 'GmarketSansMedium';
@@ -42,6 +41,13 @@
 body {
 	font-family: "GmarketSansMedium";
 }
+
+#slider {
+	margin: 0 auto;
+	width: 1200px;
+	padding: 0;
+	position: relative;
+}
 </style>
 </head>
 <body>
@@ -52,13 +58,13 @@ body {
 
 	<section class="py-1"></section>
 <body>
-	<div class="slider">
-		<img src="img/cheerup.jpg" width="400"> <img
-			src="img/cheerup.jpg"> <img src="img/cheerup.jpg">
-		<div>I am a slide.</div>
-		<div>I am another slide.</div>
+	<div id="slider">
+		<ul class="slider_image">
+			<li><img src="img/slider1.png" /></li>
+			<li><img src="img/cheerup.jpg" /></li>
+			<li><img src="img/cheerup.jpg" /></li>
+		</ul>
 	</div>
-
 
 </body>
 

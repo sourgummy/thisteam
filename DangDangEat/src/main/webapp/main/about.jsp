@@ -52,20 +52,21 @@ body {
 
 	<!-- lookbook -->
 	<section class="hero bg-purple"
-		style="background-color: #ebebeb;"> 
+		style="background-color: #cce4a8; padding: 65px 0px;"> 
 		<div class="container-fluid-px py-6 container-fluid">
-			<div class="row justify-content-center">
+			<div class="row justify-content-center" style="margin-bottom: 20px;">
 				<div class="col-lg-8">
-					<h1 class="mb-2" style="text-align: center;">모든 동물들의 더 나은 내일을 만듭니다</h1>
+					<h1 class="mb-2" style="text-align: center;font-style: oblique;">
+					<img src="img/dog_logo.png" width="50px" height="50px" style="margin-bottom: 20px;">&nbsp;모든 동물들의 더 나은 내일을 만듭니다</h1>
 					<br>
-					<p class="lead" style="text-align: center; color: white;"><b>For Better Life!</b><br>
-						올바른 반려 문화를 만들기 위해, 더 의식 있는 브랜드와 서비스를 제공합니다 </p>
+					<h3 style="font-weight: 900;color: #4c8e5f; text-align: center;">#For Better Life</h3><br>
+					<p class="lead" style="text-align: center; ">	올바른 반려 문화를 만들기 위해, 더 의식 있는 <b style="font-weight: bold;">'브랜드'</b>와 <b style="font-weight: bold;">'서비스'</b>를 제공합니다 </p>
 					<br>
-					<p class="lead" style="text-align: center; color: white;">
-						댕댕잇은 마음이 놓이는 믿을 수 있는 제품만,<br> 여러분이 더욱 똑똑한 선택을 할 수 있도록 돕습니다.
+					<p class="lead" style="text-align: center; ">
+						<span style="font-size: 25px;font-weight: bold;">"댕댕잇"</span>은 마음이 놓이는 믿을 수 있는 제품만,<br> 여러분이 더욱 똑똑한 선택을 할 수 있도록 돕습니다.
 					</p>
 					<br>
-					<p class="lead" style="text-align: center; color: white;">건강한 반려생활을 위한 더 나은 방법을 고민하고,<br>
+					<p class="lead" style="text-align: center; ">건강한 반려생활을 위한 더 나은 방법을 고민하고,<br>
 						빠르고 쉬운 길보다는 옳은 길을 향해 가고자 합니다 </p>
 					<br>
 				</div>
@@ -91,27 +92,31 @@ body {
 <!-- 				</div> -->
 <!-- 			</div> -->
 
-
+			
 			<div class="row gutter-4">
 				<div class="col-md-4">
 					<div class="text-center px-2">
 						<i class="icon-Guard fs-40 mb-2"></i>
-						<h4 class="eyebrow d-block text-white">반려동물 제품도 브랜드를 말하다</h4>
+						<h4 class="eyebrow d-block">반려동물 제품도 브랜드를 말하다</h4>
 						<p>국내 대표 브랜드 커머스 플랫폼</p>
+						<img src="img/circle_1.png" width="150px" height="150px" style="border-radius: 100%;margin-bottom: 20px;">
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="text-center px-2">
 						<i class="icon-Truck fs-40 mb-2"></i>
-						<h4 class="eyebrow d-block text-white">편리한 댕댕잇 자체 배송</h4>
+						<h4 class="eyebrow d-block">편리한 댕댕잇 자체 배송</h4>
 						<p>더욱더 안전한 배송 시스템</p>
+						<img src="img/circle_2.png" width="150px" height="150px" style="border-radius: 100%;margin-bottom: 20px;">
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="text-center px-2">
 						<i class="icon-Money---Alt fs-40 mb-2"></i>
-						<h4 class="eyebrow d-block text-white">지구와 환경을 사랑하는 마음, 가득담아</h4>
+						<h4 class="eyebrow d-block">지구와 환경을 사랑하는 마음, 가득담아</h4>
 						<p>지구와 환경에 이로운 방법을 고민합니다</p>
+						<img src="img/circle_3.jpeg" width="150px" height="150px" style="border-radius: 100%;margin-bottom: 20px;">
+						
 					</div>
 				</div>
 			</div>
@@ -119,7 +124,7 @@ body {
 	</section>
 
 	<!-- text -->
-	<section style="padding: 50px;">
+	<section style="padding-top: 100px;padding-bottom: 50px;background-color: #f4f4f4;">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-8">
@@ -132,7 +137,7 @@ body {
 
 
 	<!-- numbers -->
-	<section style="padding: 20px;">
+	<section style="padding: 20px;padding-bottom: 60px;background-color: #f4f4f4;">
 		<div class="container">
 			<div class="row gutter-2 gutter-md-4" style="text-align: center;">
 				<div class="col-md-6 col-lg-12">

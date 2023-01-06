@@ -237,6 +237,7 @@ public class ProductDAO {
 		
 			//상품코드에 해당하는 레코드 삭제
 			String sql = "DELETE FROM product WHERE pro_Code = ? ";
+			//String sql = "UPDATE product SET PRO_USE_YN ='N' WHERE pro_Code = ? ";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, product.getPro_code());
@@ -272,6 +273,7 @@ public class ProductDAO {
 					+ "WHERE pro_name "
 					+ "LIKE ? "
 					+ " AND cate_code like ?"
+//					+ "AND pro_use_yn='Y'"
 					+ "ORDER BY pro_code DESC LIMIT ?,?";
 			
 			pstmt = con.prepareStatement(sql);
