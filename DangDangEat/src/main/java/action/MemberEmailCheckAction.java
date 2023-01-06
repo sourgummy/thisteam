@@ -10,17 +10,18 @@ import svc.MemberIdCheckService;
 import vo.ActionForward;
 import vo.MemberBean;
 
-public class MemberIdCheckAction implements Action {
+public class MemberEmailCheckAction implements Action {
 
+	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("MemberIdCheckAction");
+		System.out.println("MemberEmailCheckAction");
 		ActionForward forward = null;
 		boolean isCheck = false;
 		try {
 			MemberBean member = new MemberBean();
 			// 회원이 입력한 id 파라미터에서 전달받아 변수에 저장
-			if(!request.getParameter("id").equals("") || request.getParameter("id") != null) {
-				member.setMember_id(request.getParameter("id"));
+			if(!request.getParameter("email").equals("") || request.getParameter("email") != null) {
+				member.setMember_email(request.getParameter("email"));
 				// MemberIdCheckService 객체 생성 후 isCheckId() 메서드 호출
 				// 파라미터 : String(id) , 리턴값 : boolean(isCheck)
 				MemberIdCheckService service = new MemberIdCheckService();

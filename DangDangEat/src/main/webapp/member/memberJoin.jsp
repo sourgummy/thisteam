@@ -281,10 +281,10 @@ var emailResult = false;
 			} else {
 				//// Email 중복체크 ////
 				$.ajax({
-					url: "MemberIdCheck.me",
+					url: "MemberEmailCheck.me",
 					data: { email: $("#email").val()},
 					success: function(result) {
-						$("#checkId").html(result);
+						$("#checkEmail").html(result);
 						
 						if(result == "true") {
 							$("#checkEmail").html("이미 사용중인 이메일 이다멍!").css("color","red");
