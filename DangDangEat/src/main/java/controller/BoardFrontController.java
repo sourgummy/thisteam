@@ -24,7 +24,6 @@ import action.QnaModifyProAction;
 import action.QnaReplyFormAction;
 import action.QnaReplyProAction;
 import action.QnaWriteProAction;
-import action.ReviewCommentAction;
 import action.ReviewDeleteProAction;
 import action.ReviewDetailAction;
 import action.ReviewListAction;
@@ -146,10 +145,7 @@ public class BoardFrontController extends HttpServlet {
 		} else if(command.equals("/ReviewReplyPro.bo")) {
 			action = new ReviewReplyProAction();
 			forward = action.execute(request, response);
-		}   else if(command.equals("/Comment.bo")) {
-			action = new ReviewCommentAction();
-			forward = action.execute(request, response);
-		}
+		} 
 		
 		// ----------------------------------------------------------------------
 		// ActionForward 객체 내용에 따라 각각 다른 방식의 포워딩 작업 수행(공통)
