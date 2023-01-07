@@ -33,7 +33,7 @@ public class MemberSelectAction implements Action {
 				out.println("alert('로그인이 필요한 페이지입니다!')");
 				out.println("history.back()");
 				out.println("</script>");
-			} else { // 관리자일 경우
+			} else { // 세션 아이디 있을 경우
 				// MemberSelectService - selectMember() 으로 회원 목록 조회
 				// => 파라미터 : 세션아이디    리턴타입 : List<MemberBean>(memberList)
 				MemberSelectService service = new MemberSelectService();

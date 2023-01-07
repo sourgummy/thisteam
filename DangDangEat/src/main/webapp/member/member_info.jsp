@@ -180,7 +180,7 @@ if(sId == null || sId.equals("")) {
     <!-- top.jsp -->
 	<jsp:include page="../inc/top.jsp"></jsp:include>
 	
-	<div class="col-lg-12">
+	<div class="container">
 		<div class="card">
 		    <div class="card-header">
 		        <strong>회원 정보</strong>
