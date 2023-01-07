@@ -362,7 +362,7 @@ var emailResult = false;
         <!--  이메일_전화번호 -->
         <div class="field">
             <b>이메일</b>
-            <input type="email" placeholder="인증메일이 발송될 이메일입니다." name="email" required="required">
+            <input type="email" placeholder="인증메일이 발송될 이메일입니다." name="email" id="email" required="required">
             <span id="checkEmail"></span>
         </div>
         
