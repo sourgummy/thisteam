@@ -109,7 +109,7 @@ public class ProductDAO {
 				product.setCate_code(rs.getInt("cate_code"));
 				
 				if(rs.getString("pro_brand").equals("1")) {
-					product.setPro_brand("없음");
+					product.setPro_brand("-");
 				} else if (rs.getString("pro_brand").equals("2")) {
 					product.setPro_brand("LILY'S KITCHEN");
 				} else if (rs.getString("pro_brand").equals("3")) {
@@ -295,7 +295,7 @@ public class ProductDAO {
 				product.setCate_code(rs.getInt("cate_code"));
 				
 				if(rs.getString("pro_brand").equals("1")) {
-					product.setPro_brand("없음");
+					product.setPro_brand("-");
 				} else if (rs.getString("pro_brand").equals("2")) {
 					product.setPro_brand("LILY'S KITCHEN");
 				} else if (rs.getString("pro_brand").equals("3")) {

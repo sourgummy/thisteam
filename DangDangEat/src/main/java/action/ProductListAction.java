@@ -22,7 +22,7 @@ public class ProductListAction implements Action {
 		// 조회 결과(List 객체)를 request 객체를 통해 list.jsp 페이지로 전달
 		// ---------------------------------------------------------------------------
 		// 페이징 처리를 위한 변수 선언
-		int listLimit = 10; // 한 페이지에서 표시할 게시물 목록을 10개로 제한
+		int listLimit = 12; // 한 페이지에서 표시할 게시물 목록을 10개로 제한
 		int pageNum = 1; // 현재 페이지 번호 설정(pageNum 파라미터 사용)
 		
 		String category = request.getParameter("category");
@@ -61,7 +61,7 @@ public class ProductListAction implements Action {
 //			System.out.println("총 게시물 수 : " + listCount);
 		
 		// 2. 한 페이지에서 표시할 페이지 목록 갯수 설정
-		int pageListLimit = 10; // 한 페이지에서 표시할 페이지 목록을 3개로 제한
+		int pageListLimit = 12; // 한 페이지에서 표시할 페이지 목록을 3개로 제한
 		
 		// 3. 전체 페이지 목록 수 계산
 		int maxPage = listCount / listLimit 
@@ -84,6 +84,9 @@ public class ProductListAction implements Action {
 		System.out.println(pageInfo);
 		// ----------------------------------------------------------------------
 		// 글목록(List 객체)과 페이징처리정보를 request 객체에 저장 - setAttribute()
+		
+		
+		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("productList", productList);
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("category", category);

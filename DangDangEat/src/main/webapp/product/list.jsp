@@ -1,227 +1,318 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<!-- Favicon-->
-<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-<!-- Bootstrap icons-->
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
+<title>list | Template</title>
+
+<link href="css/styles.css" rel="stylesheet" />
+ <link rel="stylesheet" href="resources/css/bootstrap.min.css"
+	type="text/css">
+<link rel="stylesheet" href="resources/css/slicknav.min.css"
+	type="text/css">
+<link rel="stylesheet" href="resources/css/style.css" type="text/css">	
+<!-- Css Styles -->
+<!-- <link rel="stylesheet" href="resources/css/bootstrap.min.css"
+	type="text/css">
+
+Bootstrap icons
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
 	rel="stylesheet" />
-<!-- Core theme CSS (includes Bootstrap)-->
-<link href="css/styles.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+Core theme CSS (includes Bootstrap)
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="resources/css/elegant-icons.css"
+	type="text/css">
+<link rel="stylesheet" href="resources/css/magnific-popup.css"
+	type="text/css">
+<link rel="stylesheet" href="resources/css/nice-select.css"
+	type="text/css">
+<link rel="stylesheet" href="resources/css/owl.carousel.min.css"
+	type="text/css">
+<link rel="stylesheet" href="resources/css/slicknav.min.css"
+	type="text/css">
+<link rel="stylesheet" href="resources/css/style.css" type="text/css">
 <style type="text/css">
 @font-face {
-    font-family: 'GmarketSansMedium';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+	font-family: 'GmarketSansMedium';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
 }
-  
+
 body {
-    font-family:"GmarketSansMedium" ;
+	font-family: "GmarketSansMedium";
 }
 
-</style>
-<style type="text/css">
-	* {
-		margin: 0;
-		padding: 0;
-	}
-	
-	ul {
-		list-style: none;
-	}
-	
-	a {
-		color: inherit;
-		text-decoration: none;
-	}
-	
-	#wrap {
-		width: 100%;
-		height: 100%;
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-		justify-items: flex-start;
-		align-items: stretch
-	}
-	
-	img {
-		max-width: 100%;
-	}
-	
-	#nav {
-		flex-basis: 20vw;
-		flex-grow: 1;
-		flex-shrink: 4;
-		text-align: center;
-	}
-	
-	#nav ul li {
-		line-height: 50px;
-		font-weight: bold;
-		font-size: 20px;
-	}
-	
-	.logoli {
-		padding: 20px 0;
-	}
-	
-	.widget--vendor .widget-title {
-	    margin-bottom: 35px;
-	    border-bottom: 2px solid #5fa30f;
-	    line-height: 3em;
-	    font-size: 20px;
-	    color: #000;
-	    font-weight: 600;
-	}
-	
-	/* Top Button */
-	
-	#myBtn:hover {
-	  background-color: #555; /* Add a dark-grey background on hover */
-	}
+.btn-space {
+	    margin-right: 5px;
+}
+
+.navbar>.container, .navbar>.container-fluid, .navbar>.container-sm,
+	.navbar>.container-md, .navbar>.container-lg, .navbar>.container-xl,
+	.navbar>.container-xxl {
+	display: flex;
+	flex-wrap: inherit;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.navbar-text {
+	padding-top: 0rem;
+	padding-bottom: 0rem;
+}
+
+li {
+	margin-bottom: 7px;
+	font-size: 22px;
+	line-height: 40px;
+}
+
+
+</style> -->
+
+<style>
+h1 {
+	text-align: center;
+}
+
+/*default*/
+@font-face {
+	font-family: 'GmarketSansMedium';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	/* 영어(소문자,대문자)적용 */
+	font-family: 'Abril Fatface';
+	src:
+		url('https://fonts.googleapis.com/css2?family=Bigshot+One&display=swap');
+	unicode-range: U+0041-005A, U+0061-007A;
+}
+
+body {
+	font-family: "GmarketSansMedium";
+}
+
 
 </style>
-
 <script src="js/jquery-3.6.3.js"></script>
-<!--<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
- <script
-	src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js" integrity="sha512-cdV6j5t5o24hkSciVrb8Ki6FveC2SgwGfLE31+ZQRHAeSRxYhAQskLkq3dLm8ZcWe1N3vBOEYmmbhzf7NTtFFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/ScrollToPlugin.min.js" integrity="sha512-kSI9CgGh60rJbNVeMJvfNX0UTKAq8LEOea/yKJQbFpIroxT7bf9/zUFXbnfsQP5F6xlOOHtCfBPgsE1ceiHnRw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="assets/js/main.js"></script> -->
 <script>
-	function fn_search(){
-		location.href ="./ProductList.pd?keyword="+$("#query").val();
+	//검색 기능 추가
+	function fn_search() {
+		location.href = "./ProductList.pd?keyword=" + $("#query").val();
 	}
+	
+	
+	function fn_count_qty(obj,price) {
+
+		var totalPrice =obj.value*price;
+		totalPrice = totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+		$(".totalPrice").text(totalPrice+" 원");
+	}
+
+
+
+	$(function() {
+		
+		$("#cart").on("click",function(){
+			   
+		      var url_href = window.location.href;
+		      var url = new URL(url_href);
+
+		      alert($("#amount").val());
+		       
+		       $.ajax({
+		          url: "CartInsert.ct",
+		          data: {
+		             pro_code : url.searchParams.get("pro_code"),
+		             amount : $("#amount").val(),
+		             pro_name : $("#pro_name").val()
+		          },
+		          success: function(result) {
+		             alert("성공");
+		          }
+		          
+		          
+		       });//    $.ajax({
+
+	 	 });
+	 });
+	
 </script>
+
 </head>
 <body>
-	<!-- Header-->
-
 	<!-- top.jsp -->
 	<jsp:include page="../inc/top.jsp" />
 
-	<!-- Section-->
-	<section class="py-5">
-		<!-- nav -->
-		<!-- 		<div id="wrap">
-			<nav id="nav">
-				<ul>
-					<li class="logoli">
-					<a href="/" class="logo">
-					<img src="http://gahyun.wooga.kr/main/img/testImg/logoimg.png" alt=""></a></li>
-					<li><a href="#">사료</a></li>
-					<li><a href="#">간식</a></li>
-					<li><a href="#">영양제</a></li>
-					<li><a href="#">브랜드</a></li>
-				</ul>
-			</nav>
-		</div> -->
-		<div class="container-fluid-px py-6 container-fluid">
-
+	<!-- Shop Section Begin -->
+	<section class="shop spad"
+		style="padding-top: 50px; padding-bottom: 100px;">
+		<div class="container">
 			<div class="row">
-
-				<div class="products-grid order-lg-2 col-xl-9 col-lg-8 ms-4">
-					<div
-						class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-						<!-- for 문 시작 -->
-						<%--                 	<c:forEach var="item" items="${names }" varStatus="status"> --%>
-						<c:forEach var="product" items="${productList }">
-							<div class="col mb-5">
-								<div class="card h-100">
-									<!-- Product image-->
-									<a href="ProductDetail.pd?pro_code=${product.pro_code}"> 
-									<img class="card-img-top" style="height: 250px"
-										src="http://localhost:8080/DangDangEat/upload/${product.pro_real_thumb }"
-										alt="..." onerror="this.src='./img/sample1_thumb.png';" />
-<!-- 										alt="..." onerror="this.src='./img/error_img.png';" /> -->
-									</a>
-									<!-- Product details-->
-									<div class="card-body p-4">
-										<div class="text-center">
-											<!-- Product name-->
-											<a href="ProductDetail.pd?pro_code=${product.pro_code}">
-												<h5 class="fw-bolder">${product.pro_name }</h5>
-											</a>
-											<!-- Brand Name-->
-											${product.pro_brand }<br>
-											<!-- Product price-->
-											<fmt:formatNumber value="${product.pro_price}"
-												pattern="#,###" />
-											원
-										</div>
+				<div class="col-lg-3">
+					<div class="shop__sidebar">
+						<!-- 사이드 메뉴바 -->
+						<div class="shop__sidebar__accordion">
+							<div class="accordion" id="accordionExample">
+								<div class="card">
+									<div class="card-title">
+										<h5 style="margin-bottom: revert;">
+											<a href="./ProductList.pd" class="fst-italic"><strong>Categories</strong></a>
+										</h5>
 									</div>
-									<!-- Product actions-->
-									<!-- 장바구니 추가 -->
-									<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-										<div class="text-center">
-											<a class="btn btn-outline-dark mt-auto" href="#">Add Cart</a>
-<!-- 										</div> -->
-<!-- 									</div> -->
-<!-- 									<div class="card-footer p-2 pt-0 border-top-0 bg-transparent"> -->
-<!-- 										<div class="text-center"> -->
-											<a class="btn btn-outline-dark mt-auto" href="#">WishList</a>
+									<div id="collapseOne" class="collapse show"
+										data-parent="#accordionExample">
+										<div class="card-body">
+											<div class="shop__sidebar__categories">
+												<ul class="nice-scroll">
+													<li><a style="font-size: 22px; line-height: 40px;"
+														href="./ProductList.pd?category=1">사료</a></li>
+													<li><a style="font-size: 22px; line-height: 40px;"
+														href="./ProductList.pd?category=2">간식</a></li>
+													<li><a style="font-size: 22px; line-height: 40px;"
+														href="./ProductList.pd?category=3">파우더 · 토핑제</a></li>
+													<li><a style="font-size: 22px; line-height: 40px;"
+														href="./ProductList.pd?category=4">껌 · 츄르</a></li>
+													<li><a style="font-size: 22px; line-height: 40px;"
+														href="./ProductList.pd?category=5">건강보조제</a></li>
+												</ul>
+											</div>
 										</div>
 									</div>
 								</div>
+								<!-- 검색바 -->
+								<div class="shop__sidebar__search">
+									<form action="#">
+										<input type="text" id="query"
+											onkeyup="if(window.event.keyCode==13){fn_search()}"
+											placeholder="Search..."> <a
+											href="javascript:fn_search()"></a>
+									</form>
+								</div>
 							</div>
-							<!-- 상품 창 -->
-						</c:forEach>
-						<!-- for 문 끝 -->
-					</div>
-				</div>
-				<div class="sidebar pe-xl-5 order-lg-1 col-xl-2 col-lg-4">
-					<div class="sidebar-block px-3 px-lg-0">
-						<div id="wrap">
-							<nav id="nav">
-								<ul>
-									<li><h3 class="widget-title" id="shop">
-									<a href="./ProductList.pd" class="fst-italic"><strong>shop</strong></a></h3>
-									<li>
-									<li><a href="./ProductList.pd?category=1">사료</a></li>
-									<li><a href="./ProductList.pd?category=2">간식</a></li>
-									<li><a href="./ProductList.pd?category=3">파우더 · 토핑제</a></li>
-									<li><a href="./ProductList.pd?category=4">껌 · 츄르</a></li>
-									<li><a href="./ProductList.pd?category=5">건강보조제</a></li>
-									<li><input type="text" class="search-query" id="query"
-										onkeyup="if(window.event.keyCode==13){fn_search()}"
-										placeholder="search" style="width: 80%;height: 80%;padding-left: 10px;">
-								        <a href="javascript:fn_search()" class="bi bi-search fs-5"></a>
-								    </li>
-								</ul>
-							</nav>
 						</div>
 					</div>
 				</div>
-<!-- 				pagination -->
-<!-- 					<nav aria-label="..."> -->
-<!-- 			<ul class="pagination justify-content-center"> -->
-<!-- 				<li class="page-item disabled"><a class ="page-link text-secondary"  href="#" -->
-<!-- 					tabindex="-1" aria-disabled="true">Previous</a></li> -->
-<!-- 				<li class="page-item"><a class="page-link" href="#">1</a></li> -->
-				
-<!-- 				<li class="page-item active" aria-current="page"><a -->
-<!-- 					class="page-link" href="#">2</a></li> -->
-<!-- 				<li class="page-item"><a class="page-link" href="#">3</a></li> -->
-<!-- 				<li class="page-item"><a class="page-link text-secondary" href="#" >Next</a></li> -->
-<!-- 			</ul> -->
-<!-- 		</nav> -->
+				<div class="col-lg-9">
+					<div class="shop__product__option">
+						<div class="row">
+							<div class="col-lg-6 col-md-6 col-sm-6">
+								<div class="shop__product__option__left">
+									<p>Showing 1–12 of 2 results</p>
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6 col-sm-6">
+								<!-- 								<div class="shop__product__option__right"> -->
+								<!-- 									<p>Sort by Price:</p> -->
+								<!-- 									<select> -->
+								<!-- 										<option value="">Low To High</option> -->
+								<!-- 										<option value="">$0 - $55</option> -->
+								<!-- 										<option value="">$55 - $100</option> -->
+								<!-- 									</select> -->
+								<!-- 								</div> -->
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<c:forEach var="product" items="${productList }">
+							<div class="col-lg-4 col-md-6 col-sm-6">
+								<div class="product__item">
+									<div class="product__item__pic set-bg">
+										<!-- Product image-->
+										<a href="ProductDetail.pd?pro_code=${product.pro_code}"> <img
+											class="card-img-top"
+											src="http://localhost:8080/DangDangEat/upload/${product.pro_real_thumb }"
+											alt="..." onerror="this.src='./img/sample1_thumb.png';" /> <!--alt="..." onerror="this.src='./img/error_img.png';" /> -->
+										</a>
+									</div>
+									<div class="product__item__text">
+										<!-- 상품명 -->
+										<h6>${product.pro_name }</h6>
+										<!-- 브랜드명 -->
+										<h8>${product.pro_brand }</h8>
+										<!-- 									<i class="bi bi-cart"></i> -->
+										<!-- 									<a href="#" class="add-cart">+ Add To Cart</a> -->
+										<!--상품가격-->
+										<h5>
+											<fmt:formatNumber value="${product.pro_price}"
+												pattern="#,###" />
+											원
+										</h5>
+										<!-- 									<div class="product__color__select"> -->
+										<!-- 										<label for="pc-4"> <input type="radio" id="pc-4"> -->
+										<!-- 										</label> <label class="active black" for="pc-5"> <input -->
+										<!-- 											type="radio" id="pc-5"> -->
+										<!-- 										</label> <label class="grey" for="pc-6"> <input type="radio" -->
+										<!-- 											id="pc-6"> -->
+										<!-- 										</label> -->
+										<!-- 									</div> -->
+									</div>
+									<div>
+									<!-- 장바구니 -->
+									<form action="CartInsert.ct" method="post" style="display:inline">
+										<input type="hidden" name="pro_code"
+											value=${product.pro_code }>
+											<input type="hidden" name="path" value="product">
+											<input type="hidden" name="amount" value="1"> 
+<!-- 											<i class="bi-cart-fill me-1"></i> -->
+										<input type="submit" class="btn btn-outline-dark flex-shrink-0"	value="Add to Cart">
+									</form>
+									<!-- wishList -->
+									<form action="WishlistInsert.ct" method="post" style="display:inline">
+										<input type="hidden" name="pro_code"
+											value=${product.pro_code }> <input type="hidden" name="amount" value="1">
+<!-- 											<i class="bi bi-heart-fill"></i> -->
+										<input type="submit"
+											class="btn btn-outline-dark flex-shrink-0" value="Wishlist">
+									</form>
+									</div>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
 			</div>
 		</div>
+		<!-- 페이징처리 -->
+		<div class="row" id="pageList">
+			<div class="col-lg-12">
+				<div class="product__pagination">
+					<!-- 페이지 번호 목록은 시작 페이지(startPage)부터 끝 페이지(endPage) 까지 표시 -->
+					<c:forEach var="i" begin="${pageInfo.startPage }"
+						end="${pageInfo.endPage }">
+						<!-- 단, 현재 페이지 번호는 링크 없이 표시 -->
+						<c:choose>
+							<c:when test="${pageNum eq i}">
+								<a class="active" href="#none"> ${i}</a>
+							</c:when>
+							<c:otherwise>
+								<a href="ProductList.pd?pageNum=${i }">${i }</a>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+
+				</div>
+			</div>
+		</div>
+
 	</section>
+	<!-- Shop Section End -->
+	
 	<!-- Footer-->
 	<footer class="py-5 bg-dark">
 		<div class="container">
@@ -229,10 +320,18 @@ body {
 				Website 2022</p>
 		</div>
 	</footer>
-	<!-- Bootstrap core JS-->
-<!-- 	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-	Core theme JS
-	<script src="js/scripts.js"></script> -->
+
+	<!-- Js Plugins -->
+	<script src="js/jquery-3.6.3.js"></script>
+	<!--     <script src="resources/js/jquery-3.3.1.min.js"></script> -->
+	<!--     <script src="resources/js/bootstrap.min.js"></script> -->
+	<!--     <script src="resources/js/jquery.nice-select.min.js"></script> -->
+	<!--     <script src="resources/js/jquery.nicescroll.min.js"></script> -->
+	<!--     <script src="resources/js/jquery.magnific-popup.min.js"></script> -->
+	<!--     <script src="resources/js/jquery.countdown.min.js"></script> -->
+	<!--     <script src="resources/js/jquery.slicknav.js"></script> -->
+	<!--     <script src="resources/js/mixitup.min.js"></script> -->
+	<!--     <script src="resources/js/owl.carousel.min.js"></script> -->
+	<!--     <script src="resources/js/main.js"></script> -->
 </body>
 </html>
