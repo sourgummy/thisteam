@@ -378,6 +378,59 @@ public class ProductDAO {
 		
 		return listCount;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	public List<ProductBean> selectNewProduct(int numberOfProducts) {
+	
+
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<ProductBean> productList = null;
+		try {
+			// product 테이블의 모든 레코드 갯수 조회
+			// => 제목에 검색어를 포함하는 레코드 조회(WHERE pro_name LIKE '%검색어%')
+			//   (단, 쿼리에 직접 '%?%' 형태로 작성 시 ? 문자를 파라미터로 인식하지 못함
+			//   (따라서, setXXX() 메서드에서 문자열 결합으로 "%" + "검색어" + "%" 로 처리)
+			String sql = "SELECT  pro_code, pro_name, pro_thumb, pro_real_thumb "
+					+ " FROM product "
+					+ " WHERE  pro_yn = 1 "
+					+ " ORDER BY pro_date DESC"
+					+ " LIMIT ?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1,numberOfProducts);
+		
+			rs = pstmt.executeQuery();
+			System.out.println("실행됨");
+			 productList = new ArrayList<ProductBean>();
+			// 조회 결과가 있을 경우 ArrayList에 저장 변수에 저장
+			while(rs.next()) {
+				ProductBean product = new ProductBean();
+				product.setPro_name(rs.getString("pro_name"));
+				product.setPro_code(rs.getInt("pro_code"));
+				product.setPro_thumb(rs.getString("pro_thumb"));
+				product.setPro_real_thumb(rs.getString("pro_real_thumb"));
+				productList.add(product);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL구문 오류 - selectNewProduct(int numberOfProducts)");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			// DB 자원 반환
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+		return productList;
+	}
 
 	
 } //class ProductDAO 끝

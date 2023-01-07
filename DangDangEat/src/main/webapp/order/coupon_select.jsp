@@ -100,7 +100,7 @@ $(function(){
 				
 				if(result == false){
 					alert("사용가능한 쿠폰이 아닙니다.")
-				}else if(result == "exist"){
+				}else if(result == true ){
 					alert("이미 등록된 쿠폰입니다")
 				}else{
 					
@@ -118,6 +118,7 @@ $(function(){
 									   +  "<b>"+coupon.cp_discount_value+"% 할인 (<small>최대 "+ coupon.cp_max_discount +" 원</small></b>)<br>"
 									   +  "<small>" + coupon.cp_min_price +  "원 이상 구매 시</small>"+"<br>"
 									   + "<small>"+ coupon.target_sd + " - " +coupon.target_ed +" ("+coupon.cp_period +"일)</small>"
+									   +"<input type='hidden' name='cp_code' value='"+coupon.cp_code+"'>"
 									+"</div>"
 								+"</div><br>"
 								
@@ -141,7 +142,16 @@ $(function(){
 	function couponSubmit() {
 		//쿠폰체크 여부에 따라 submit 여부 결정
 		if($("input[name=cp_code]").is(":checked")){
-			return true;
+				let cp_code = $("$input[name=cp_code]").val();
+			function sendCp_code(cp_code){
+
+				opener.getCp_code(cp_code);
+
+				return true;
+				window.close();
+
+
+	}
 	}else {
 		alert("선택된 쿠폰이 없습니다.")
 		return false;

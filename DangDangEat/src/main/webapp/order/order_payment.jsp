@@ -223,7 +223,17 @@
 	
 	    
 	    
-    });
+
+//     });
+
+
+function getCp_code(let cp_code){
+
+		alert(cp_code);
+//       document.getElementById("값 넣을곳 id").value = cp_code;
+
+}
+
 	</script>
 </head>
 
@@ -328,7 +338,7 @@
 	       <div class="basket-module"> 
 		        <label for="promo-code">Enter a promotional code</label>
 		        <input id="promo-code" type="text" name="promo-code" maxlength="5" class="promo-code-field">
-		        <button class="promo-code-cta"  type="button">Coupon</button>
+		        <input type="button" class="promo-code-cta" onclick="window.open('SelectCoupon.od, '_blank', 'height:700, width:300')">Apply
 	      </div>
 	  	 <hr>
 	</div>
