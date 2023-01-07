@@ -23,6 +23,6 @@ font-size: 12px;
 font-size: 12px;
 color: #dedbdb;
 }
-.dangLogo > img {
-padding: 5px;
+.dangLogo  {
+padding: 3rem!important;
 }
