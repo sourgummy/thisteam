@@ -109,7 +109,7 @@ if (sId == null || sId.equals("")) {
 					<div class="card-body">
 						<div class="stat-widget-five">
 							<div class="stat-icon dib flat-color-1">
-								<i class="pe-7s-cart"></i>
+								<i class="fa fa-shopping-cart"></i>
 							</div>
 							<div class="stat-content">
 								<div class="text-left dib">
@@ -129,7 +129,7 @@ if (sId == null || sId.equals("")) {
 					<div class="card-body">
 						<div class="stat-widget-five">
 							<div class="stat-icon dib flat-color-2">
-								<i class="fa-tags"></i>
+								<i class="fa fa-tags"></i>
 							</div>
 							<div class="stat-content">
 								<div class="text-left dib">
@@ -149,7 +149,7 @@ if (sId == null || sId.equals("")) {
 					<div class="card-body">
 						<div class="stat-widget-five">
 							<div class="stat-icon dib flat-color-3">
-								<i class="fa-question"></i>
+								<i class="fa fa-question"></i>
 							</div>
 							<div class="stat-content">
 								<div class="text-left dib">
@@ -169,7 +169,7 @@ if (sId == null || sId.equals("")) {
 					<div class="card-body">
 						<div class="stat-widget-five">
 							<div class="stat-icon dib flat-color-4">
-								<i class="fa-list-ul"></i>
+								<i class="fa fa-list-ul"></i>
 							</div>
 							<div class="stat-content">
 								<div class="text-left dib">
@@ -273,7 +273,14 @@ if (sId == null || sId.equals("")) {
 							class=" form-control-label font-weight-bold">댕생일</label>
 					</div>
 					<div class="col-12 col-md-6">
-						<span class="form-control-static bg-gradient-light" id="birth">${member.member_birth }</span>
+						<c:choose>
+							<c:when test="${empty member.member_birth }">
+								<span class="form-control-static bg-gradient-light" id="birth">입력한 생일이 없습니다.</span>
+							</c:when>
+							<c:otherwise>
+								<span class="form-control-static bg-gradient-light" id="birth">${member.member_birth }</span>
+							</c:otherwise>
+						</c:choose>
 						<small class="form-text text-muted">변경 불가한 정보입니다.</small>
 					</div>
 				</div>
