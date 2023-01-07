@@ -5,19 +5,18 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>DangDangEat - Shop List</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="../css/styles.css" rel="stylesheet" />
-        <link href="../css/bootstrap.min.css" rel="stylesheet" />
-	<style type="text/css">
+  <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+  <style type="text/css">
+	@font-face {
+	    font-family: 'GmarketSansMedium';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+	  
+	body {
+	    font-family:"GmarketSansMedium" ;
+	}
 	
 	#listForm {
 		width: 1600px;
@@ -71,6 +70,12 @@
 		text-decoration: none;
 	}
 	
+	input[type=button], input[type=submit] {
+	    font-family:"GmarketSansMedium" ;
+	}
+	
+	
+	
 	</style>
 	
     </head>
@@ -79,13 +84,13 @@
        
     <!-- Header-->
         <!-- top.jsp -->
-		<jsp:include page="../inc/top.jsp"></jsp:include>
+		<jsp:include page="/inc/top.jsp"></jsp:include>
 		<!-- Section-->
   	
 
   <section id="listForm">
   <h2>NOTICE LIST</h2>
-	<table>	
+	<table class="table">	
 	<tr id="tr_top">
       <th scope="row" width="100">NO.</th>
       <td width="400px">Subject</td>
@@ -178,15 +183,6 @@
 			</c:otherwise>
 		</c:choose>
 	</section>
-
-
-        <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; DANGDANGEAT 2022</p></div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="../js/scripts.js"></script>
+       
     </body>
 </html>

@@ -281,10 +281,10 @@ var emailResult = false;
 			} else {
 				//// Email 중복체크 ////
 				$.ajax({
-					url: "MemberIdCheck.me",
+					url: "MemberEmailCheck.me",
 					data: { email: $("#email").val()},
 					success: function(result) {
-						$("#checkId").html(result);
+						$("#checkEmail").html(result);
 						
 						if(result == "true") {
 							$("#checkEmail").html("이미 사용중인 이메일 이다멍!").css("color","red");
@@ -362,7 +362,7 @@ var emailResult = false;
         <!--  이메일_전화번호 -->
         <div class="field">
             <b>이메일</b>
-            <input type="email" placeholder="인증메일이 발송될 이메일입니다." name="email" required="required">
+            <input type="email" placeholder="인증메일이 발송될 이메일입니다." name="email" id="email" required="required">
             <span id="checkEmail"></span>
         </div>
         

@@ -1,14 +1,16 @@
 package action;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import svc.ReviewDetailService;
 import vo.ActionForward;
+import vo.CommentBean;
 import vo.ReviewBean;
 
 public class ReviewDetailAction implements Action {
-
+	
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
@@ -29,8 +31,19 @@ public class ReviewDetailAction implements Action {
 		ReviewBean review = service.getReview(review_code, true);
 //		System.out.println(review);
 		
+		
+		// 댓글
+		CommentBean comment = new CommentBean();
+		
+		// 파리미터 값을 가져온다.
+		String comment_content = request.getParameter("comment_content");
+        		
+		comment.setComment_content(comment_content);
+	
+		
 		// 뷰페이지로 데이터 전달을 위해 request 객체에 저장
 		request.setAttribute("review", review);
+		request.setAttribute("comment", comment);
 		
 		forward = new ActionForward();
 		forward.setPath("board/review_detail.jsp");
@@ -38,4 +51,5 @@ public class ReviewDetailAction implements Action {
 		
 		return forward;
 	}
+	
 }

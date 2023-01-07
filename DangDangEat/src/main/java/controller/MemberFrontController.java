@@ -24,6 +24,7 @@ import action.MemberLogoutAction;
 import action.MemberModifyProAction;
 import action.MemberSelectAction;
 import action.MemberWithdrawProAction;
+import action.MyPageAction;
 import vo.ActionForward;
 
 @WebServlet("*.me")
@@ -115,7 +116,7 @@ public class MemberFrontController extends HttpServlet {
 			forward = action.execute(request, response);
 			
 		} else if(command.equals("/MemberInfo.me")) {
-			System.out.println("마이페이지");
+			System.out.println("회원 정보");
 			action = new MemberSelectAction();
 			forward = action.execute(request, response);
 			
@@ -171,16 +172,26 @@ public class MemberFrontController extends HttpServlet {
 			forward = action.execute(request, response);
 			
 		} else if(command.equals("/MemberEmailUpdate.me")) {
-			System.out.println("마이페이지 회원 이메일 변경");
+			System.out.println("회원 정보 페이지 회원 이메일 변경");
 			
 			action = new MemberEmailUpdateAction();
 			forward = action.execute(request, response);
 		} else if(command.equals("/MemberEmailAuth.me")) {
-			System.out.println("마이페이지 회원 이메일 인증");
+			System.out.println("회원 정보 페이지 회원 이메일 인증");
 			
 			action = new MemberEmailAuthAction();
 			forward = action.execute(request, response);
-		}
+		} else if(command.equals("/MyPage.me")) {
+			System.out.println("마이페이지");
+			
+			action = new MyPageAction();
+			forward = action.execute(request, response);
+		} else if(command.equals("/MemberEmailCheck.me")) {
+//	         System.out.println("MemberIdCheck");
+	         
+	         action = new MemberEmailCheckAction(); // sangwoo 브랜치 커밋
+	         forward = action.execute(request, response);
+	      }
 	
 		// ----------------------------------------------------------------------
 		// ActionForward 객체 내용에 따라 각각 다른 방식의 포워딩 작업 수행(공통)

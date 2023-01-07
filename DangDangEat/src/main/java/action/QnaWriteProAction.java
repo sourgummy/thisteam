@@ -46,9 +46,10 @@ public class QnaWriteProAction implements Action {
 					new DefaultFileRenamePolicy() // 5) 중복 파일명을 처리할 객체
 			);
 			
-			// 전달받은 파라미터 데이터를 Bean 클래스 인스턴스 생성 후 저장
+			// 전달받은 파라미터 데이터를 ReviewBean 클래스 인스턴스 생성 후 저장
 			QnaBean qna = new QnaBean();
 			qna.setMember_id(multi.getParameter("member_id"));
+			qna.setPro_code(Integer.parseInt(multi.getParameter("pro_code")));
 			qna.setQna_pass(multi.getParameter("qna_pass"));
 			qna.setQna_subject(multi.getParameter("qna_subject"));
 			qna.setQna_content(multi.getParameter("qna_content"));

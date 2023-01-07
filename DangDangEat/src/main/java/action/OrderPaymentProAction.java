@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import svc.OrderPaymentService;
 import vo.ActionForward;
+import vo.OrdersBean;
+import vo.cart_productBean;
 import vo.paymentsBean;
 
 public class OrderPaymentProAction implements Action {
@@ -35,7 +37,13 @@ public class OrderPaymentProAction implements Action {
 		 *  완료 4. 주문 확인서 페이지로 이동
 		 *  완료 5. cart에 있는 상품 cart_ischecked 업데이트 해서 카트 페이지에서 삭제하기 
 		 *  
-		 *  6. 주문완료한 수량 product 수량에서 (-)변경하기   
+		 *  23/01/06 완료 부분
+		 *  완료 6. 주문완료한 수량 product 수량에서 (-)변경하기   
+		 *  
+		 *  23/01/07 진행 부분
+		 *  1. 주문 확인서 페이지에 넘길 정보 생성하기 (주문상품 + 배송정보 + 주문 금액 관련 정보)
+		 *  2. 쿠폰 페이지 연결하기
+		 *  3. 아임포트 api 연결하기
 		 */
 		
 		
@@ -55,7 +63,7 @@ public class OrderPaymentProAction implements Action {
 		
 			// 현재 날짜 구하기
 	        LocalDate now = LocalDate.now();
-	        // 포맷 정의
+	        // 포맷 정의 (230107 + 주문번호)
 	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyMMdd00");
 	        int formatedNow = Integer.parseInt(now.format(formatter));
 	        int pay_number = (formatedNow + order_code);
@@ -72,13 +80,20 @@ public class OrderPaymentProAction implements Action {
 		OrderPaymentService service = new OrderPaymentService();
 		// orders 테이블에 order_status = 1 (결제완료) 로 변환하는 작업
 		boolean isOrderStatusUpdate = service.orderStatusUpdate(id, order_code);
-		// 결제 정보 생성 구문
-		List<paymentsBean> paymentList = service.paymentInsert(payments);
+		// payments 테이블에 결제정보 입력하는 작업
+		int paymentInsertCount = service.paymentInsertPro(payments);
+		// 결제 정보 리스트 생성 구문
+		List<paymentsBean> paymentList = service.getPaymentsList(pay_number, order_code);
 		request.setAttribute("paymentList", paymentList);
-		System.out.println("여기까지 넘어왔니 페이먼트 프로 액션" + paymentList);
-		
-		// 결제완료시 상품 테이블에서 수량변경하는 코드
-		int productQtyUpdate = service.productQtyUpdate(order_code, pro_code, cart_code);
+		System.out.println("페이먼트 프로 액션 결제 정보 리스트" + paymentList);
+		// 결제 상품 정보 리스트 생성 구문
+		List<cart_productBean> orderProductList = service.getOrderProductList(id, pro_code, cart_code);
+		request.setAttribute("orderProductList", orderProductList);
+		System.out.println("페이먼트 프로 액션 주문 상품 리스트" + orderProductList);
+		// 배송 정보 및 주문 정보 리스트 생성 구문
+		List<OrdersBean> orderInfoList = service.getOrderInfoList(id, cart_code);
+		request.setAttribute("orderInfoList", orderInfoList);
+		System.out.println("페이먼트 프로 액션 주문 정보 리스트" + orderInfoList);
 		
 			try {
 				// orders 테이블에 order_status = 1 (결제완료) 로 변환하는 작업
@@ -89,9 +104,27 @@ public class OrderPaymentProAction implements Action {
 					
 					 if(cartUpdateCount > 0) {
 						 
-						forward = new ActionForward();
-						forward.setPath("OrderConfirm.od");
-						forward.setRedirect(false);
+						 
+						 // 결제완료시 상품 테이블에서 수량변경하는 코드
+						 int productQtyUpdateCount = service.productQtyUpdate(order_code, pro_code);
+						 
+							 if(productQtyUpdateCount > 0) {
+								 
+								 if(paymentInsertCount > 0 ) {
+										forward = new ActionForward();
+										forward.setPath("OrderConfirm.od");
+										forward.setRedirect(false);
+									} else {
+										response.setContentType("text/html; charset=UTF-8");
+										PrintWriter out = response.getWriter();
+										out.println("<script>");
+										out.println("alert('결제정보 입력 실패')");
+										out.println("history.back()");
+										out.println("</script>");
+									}
+								 
+							 }
+						 
 						
 					 } else {
 						response.setContentType("text/html; charset=UTF-8");

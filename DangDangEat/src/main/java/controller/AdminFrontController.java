@@ -97,21 +97,14 @@ public class AdminFrontController extends HttpServlet {
 			action = new CouponUpdateAction();
 			forward = action.execute(request, response);
 
-	//--------사랑하는 예람시 화이팅-------------
-  //--------저도 미주시 사랑해요 화이팅!-------------
-	//--------23/01/05 추가된 AdminOrderList 시작----------
-	} else if (command.equals("/AdminOrderListPro.ad")) {
-		// 관리자 페이지 주문 관리 페이지
-		action = new AdminOrderListAction();
-		forward = action.execute(request, response);
-		
-	}	else if (command.equals("/AdminOrderList.ad")) {
-		// 관리자 페이지 주문 관리 페이지
-		forward = new ActionForward();
-		forward.setPath("admin/admin_orderList.jsp");
-		forward.setRedirect(false);
 	
-	//--------23/01/05 추가된 AdminOrderList 끝----------
+	//--------23/01/06 수정된 AdminOrderList 시작----------
+		} else if (command.equals("/AdminOrderList.ad")) {
+		      // 관리자 페이지 주문 관리 페이지
+		      action = new AdminOrderListAction();
+		      forward = action.execute(request, response);
+	
+	//--------23/01/06 수정된 AdminOrderList 시작----------
 
 		} else if (command.equals("/AdminProductList.ad")) { // 주문 관리
 			// 관리자 상품 리스트 출력 작업 요청

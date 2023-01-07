@@ -137,60 +137,9 @@ body {
 
 
 	<!-- numbers -->
-	<section style="padding: 20px;padding-bottom: 60px;background-color: #f4f4f4;">
-		<div class="container">
-			<div class="row gutter-2 gutter-md-4" style="text-align: center;">
-				<div class="col-md-6 col-lg-12">
-					<!-- <span class="h1 font-weight-bold">50</span> -->
-					<span><img src="img/miju_dog.png" width="120px"
-						height="120px" style="margin-bottom: 20px;"></span>
-					<p>
-						김미주/팀장<br>김미주@gmail.com
-					</p>
-				</div>
-				<div class="col-md-6 col-lg-4">
-					<span><img src="img/sangwoo_dog.png" width="120px"
-						height="120px" style="margin-bottom: 20px;"></span>
-					<p>
-						오상우/팀원<br>오상우@gmail.com
-					</p>
-				</div>
-				<div class="col-md-6 col-lg-4">
-					<span><img src="img/jooyoung_dog.png" width="120px"
-						height="120px" style="margin-bottom: 20px;"></span>
-					<p>
-						윤주영/팀원<br>윤주영@gmail.com
-					</p>
-				</div>
-				<div class="col-md-6 col-lg-4">
-					<span><img src="img/hawon_dog.png" width="120px"
-						height="120px" style="margin-bottom: 20px;"></span>
-					<p>
-						이하원/팀원<br>이하원@gmail.com
-					</p>
-				</div>
-				<div class="col-md-6 col-lg-4">
-					<span><img src="img/jakyoung_dog.png" width="120px"
-						height="120px" style="margin-bottom: 20px;"></span>
-					<p>
-						김자경/팀원<br>김자경@gmail.com
-					</p>
-				</div>
-				<div class="col-md-6 col-lg-4">
-					<span><img src="img/sewon_dog.png" width="120px"
-						height="120px" style="margin-bottom: 20px;"></span>
-					<p>
-						전세원/팀원<br>전세원@gmail.com
-					</p>
-				</div>
-				<div class="col-md-6 col-lg-4">
-					<span><img src="img/yeram_dog.png" width="120px"
-						height="120px" style="margin-bottom: 20px;"></span>
-					<p>
-						문예람/팀원<br>문예람@gmail.com
-					</p>
-				</div>
-			</div>
+	<section style="padding: 20px; padding-bottom: 60px;background-color: #f4f4f4;">
+		<div class="container-center">
+			 <input type="image" src="img/team_member_info.png" class="rounded mx-auto d-block" width="700px">
 		</div>
 	</section>
 
