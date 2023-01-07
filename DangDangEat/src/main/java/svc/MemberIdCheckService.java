@@ -23,8 +23,6 @@ public class MemberIdCheckService {
 		
 		JdbcUtil.commit(con);
 		
-		JdbcUtil.commit(con);
-			
 		JdbcUtil.close(con);
 		
 		
