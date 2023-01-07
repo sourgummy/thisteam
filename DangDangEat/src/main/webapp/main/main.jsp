@@ -48,6 +48,12 @@ body {
 	padding: 0;
 	position: relative;
 }
+
+.main_rec{
+	/*main 네모*/
+width: 200px;
+height:  200px;
+}
 </style>
 </head>
 <body>
@@ -57,7 +63,7 @@ body {
 	<!-- Header-->
 
 	<section class="py-1"></section>
-<body>
+
 	<div id="slider">
 		<ul class="slider_image">
 			<li><img src="img/slider1.png" /></li>
@@ -66,8 +72,38 @@ body {
 		</ul>
 	</div>
 
+<article>
+	<%String uploadPath = "upload"; // 업로드 가상디렉토리(이클립스) 
+	String realPath = request.getServletContext().getRealPath(uploadPath);
+	request.getContextPath();
+	//실제 업로드 경로(집) : C:\Users\eyeds\eclipse_jsp\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\DangDangEat\ upload
+	//실제 업로드 경로(학원) : D:\workspace_jsp5\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\DangDangEat\ upload
+//	//String uploadPath = "ftp://db.itwillbs.dev:8030/upload"; // FTP 주소!!!체크필수!!!  12/30
+	System.out.println("실제 업로드 경로 : " + realPath);
+	System.out.println("request.getSession().getServletContext().getRealPath(/)"+  request.getSession().getServletContext().getRealPath(uploadPath));
+	%>
+	         <!-- 메인 네모 부분 // 관련 클래스: main_rec-->
+        <div class="mt-5 d-flex flex-row justify-content-center">
+         </div>
+	        <div class=" mb-5 d-flex flex-row justify-content-center">
+			       <img class=" bg-light main_rec m-3" src="img/saleban.png"></img>
+	        </div>
+	
+         <!-- 메인 네모 부분 // 관련 클래스: main_rec-->
+        <div class="mt-5 d-flex flex-row justify-content-center">
+	         <div class = ""> NEW EAT </div>
+         </div>
+	        <div class=" mb-5 d-flex flex-row justify-content-center">
+		         <c:forEach items="${productList}" var="product" >
+		         ${product.pro_real_thumb }
+			       <img class=" bg-light main_rec m-3" src="<%=request.getSession().getServletContext().getRealPath(uploadPath) %>/${product.pro_real_thumb }"></img>
+		         </c:forEach>
+	        </div>
+	        
+	        
+	        
+</article>
 </body>
-
 <!-- Footer-->
 <footer class="py-5 bg-dark">
 	<div class="container">
