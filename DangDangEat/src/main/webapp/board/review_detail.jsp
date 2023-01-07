@@ -64,6 +64,13 @@
 		width: 500px;
 		text-align: center;
 	}
+	
+	#CommentAria {
+	text-align: center; 
+	border: 1px solid #dddddd
+	
+	
+	}
 </style>
 </head>
 <body>
@@ -73,14 +80,14 @@
 	
 	<!-- 게시판 상세내용 보기 -->
 	<section id="articleForm">
-		<h2>글 상세내용 보기</h2>
+		<h2>리뷰 내용</h2>
 		<section id="basicInfoArea">
 			<table border="1">
 			<tr><th width="70">제 목</th><td colspan="3" >${review.review_subject }</td></tr>
 			<tr>
 				<th width="70">작성자</th><td>${review.member_id }</td>
 				<th width="70">작성일</th>
-				<td><fmt:formatDate value="${review.review_date }" pattern="yy-MM-dd HH:mm:SS" /></td>
+				<td><fmt:formatDate value="${review.review_date }" pattern="yy-MM-dd" /></td>
 			</tr>
 			<tr>
 				<th width="70">첨부파일</th>
@@ -104,13 +111,31 @@
 		<input type="button" value="삭제" onclick="location.href='ReviewDeleteForm.bo?review_code=${param.review_code}&pageNum=${param.pageNum }'">
 		<input type="button" value="목록" onclick="location.href='ReviewList.bo?pageNum=${param.pageNum}'">
 	</section>
-  <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; DANGDANGEAT 2022</p></div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="../js/scripts.js"></script>
-    </body>
-</html>
+	
+	        <form action="Comment.bo">
+	      <section id="CommentAria">				
+					<thead>										
+						<tr>
+							<th colspan="3"
+								style="background-color: #eeeeeee; text-align: center;">댓글</th>
+						</tr>
+					</thead>
+					 <%-- for(CommentBean comment : commentList) {} --%>
+											
+		            
+					<td><textarea type ="text" class="form-control"
+								placeholder="댓글을 입력하세요." name="comment_content" maxlength="8000">${param.comment_date }</textarea></td>
+						</td>
+		        
+				</table>
+				</section>
+				<section id="commandList">
+				<input type="submit" class="btn" value="댓글입력">
+				<input type="hidden" name="comment_code" value="${param.comment_code }" >
+		        <input type="hidden" name="review_code" value="${param.review_code }" >
+		        <input type="hidden" name="member_id" value="${param.member_id }" >
+	            </section>
+		
+			</form>
+	
+  

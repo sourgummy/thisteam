@@ -5,18 +5,19 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>DangDangEat - Shop List</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="../css/styles.css" rel="stylesheet" />
-        <style type="text/css">
+     <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+  <style type="text/css">
+	@font-face {
+	    font-family: 'GmarketSansMedium';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+	  
+	body {
+	    font-family:"GmarketSansMedium" ;
+	}
+       
 	#detailForm {
 		width: 500px;
 		height: 550px;
@@ -62,6 +63,10 @@
 		width: 500px;
 		text-align: center;
 	}
+		input[type=button], input[type=submit] {
+	    font-family:"GmarketSansMedium" ;
+	}
+	
    </style>	
    </head>
    <body>
@@ -78,7 +83,7 @@
 			<tr>
 				<th width="70">작성자</th><td>${notice.member_id }</td>
 				<th width="70">작성일</th>
-				<td><fmt:formatDate value="${notice.notice_date }" pattern="yy-MM-dd HH:mm:SS" /></td>
+				<td><fmt:formatDate value="${notice.notice_date }" pattern="yy-MM-dd" /></td>
 				<th width="70">조회수</th>
 				<td>${notice.notice_readcount }</td>
 			</tr>
