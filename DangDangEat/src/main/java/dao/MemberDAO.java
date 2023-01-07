@@ -297,9 +297,9 @@ public class MemberDAO {
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
-			memberList = new ArrayList<MemberBean>();
 			
 			while(rs.next()) {
+				memberList = new ArrayList<MemberBean>();
 				MemberBean member = new MemberBean();
 				member.setMember_id(rs.getString("member_id"));
 				member.setMember_email(rs.getString("member_email"));

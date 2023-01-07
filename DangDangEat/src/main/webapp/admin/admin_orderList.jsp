@@ -48,18 +48,18 @@ String sId = (String)session.getAttribute("sId");
 // System.out.println(sId);
 // 잘못된 접근일 때 바로 main.jsp 로 보내기
 if(sId == null || !sId.equals("admin")) {
-	%>
-	<script>
-		alert("잘못된 접근입니다!");
-		location.href = "./";
-	</script>
-	<%
+   %>
+   <script>
+      alert("잘못된 접근입니다!");
+      location.href = "./";
+   </script>
+   <%
 }
 %>
 
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <script type="text/javascript">
-		
+      
 </script>
 </head>
 
@@ -381,79 +381,28 @@ if(sId == null || !sId.equals("admin")) {
                                             <th>배송상세주소</th>
                                             <th>배송 연락처</th>
                                             <th>배송 메시지</th>
+                                            <th>주문상태</th>
                                             <th>주문일</th>
-                                            <th>
-                                            	주문 : <span class="btn btn-info btn-circle btn-sm">
-			                                        <i class="fas fa-info-circle"></i>
-			                                    </span>
-			                                    수정 : <span class="btn btn-warning btn-circle btn-sm">
-			                                        <i class="fas fa-exclamation-triangle"></i>
-			                                    </span>
-			                                    삭제 : <span class="btn btn-danger btn-circle btn-sm">
-			                                        <i class="fas fa-trash"></i>
-			                                    </span>
-                                    		</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>최종주문번호</th> <!-- payments.pay_number -->
-                                            <th>주문코드</th> <!-- payments.order_code -->
-                                            <th>주문금액</th> <!-- payments.pay_amount -->
-                                            <th>주문 아이디</th> <!-- orders안에서 조회 가능 -->
-                                            <th>주문자 이름</th>
-                                            <th>우편번호</th>
-                                            <th>배송주소</th>
-                                            <th>배송상세주소</th>
-                                            <th>배송 연락처</th>
-                                            <th>배송 메시지</th>
-                                            <th>주문일</th>
-                                            <th>
-                                            	<span class="btn btn-info btn-circle btn-sm">
-			                                        <i class="fas fa-info-circle"></i>
-			                                    </span>
-			                                    <span class="btn btn-warning btn-circle btn-sm">
-			                                        <i class="fas fa-exclamation-triangle"></i>
-			                                    </span>
-			                                    <span class="btn btn-danger btn-circle btn-sm">
-			                                        <i class="fas fa-trash"></i>
-			                                    </span>
-                                    		</th>
-                                        </tr>
-                                    </tfoot>
+                                   
                                     <tbody>
-                                    	<c:forEach var="order" items="${adminOrderList }">
-	                                    	<tr>
-	                                            <td class="member_id">${order.member_id }</td>
-	                                            <td>${order.order_name }</td>
-	                                            <td>${order.order_postcode }</td>
-	                                            <td>${order.order_address1 }</td>
-	                                            <td>${order.order_address2 }</td>
-	                                            <td>${order.order_mobile }</td>
-	                                            <td>${order.order_comment }</td>
-	                                            <td>${order.order_status }</td>
-	                                            <td>${order.order_date }</td>
-	                                            <td>
-	                                            	<select id="member_status" name="${order.pay_number }">
-	                                            		<option id="member">회원</option>
-	                                            		<option id="withdraw_member">탈퇴 회원</option>
-	                                            		<option id="dormant_member">휴면 회원</option>
-	                                            	</select>
-	                                            </td>
-<%-- 	                                            <td>${order.member_authStatus }</td> --%>
-	                                            <td>
-<!-- 	                                            	<span class="btn btn-info btn-circle btn-sm"> -->
-<!-- 				                                        <i class="fas fa-info-circle"></i> -->
-<!-- 				                                    </span> -->
-<%-- 				                                    <span class="btn btn-warning btn-circle btn-sm" onclick="confirmUpdate('${member.member_id}')"> --%>
-<!-- 				                                        <i class="fas fa-exclamation-triangle"></i> -->
-<!-- 				                                    </span> -->
-<%-- 				                                    <span class="btn btn-danger btn-circle btn-sm" onclick="confirmDelete('${member.member_id}')"> --%>
-<!-- 				                                        <i class="fas fa-trash"></i> -->
-<!-- 				                                    </span> -->
-	                                    		</td>
-	                                        </tr>
-                                        </c:forEach>
+	                                  <c:forEach var="order" items="${adminOrderList }" varStatus="status">
+                                          <tr>
+                                             <td>${order.pay_number }</td>
+                                             <td>${order.order_code }</td>
+                                             <td>${order.pay_amount }</td>
+                                             <td>${order.member_id }</td>
+                                             <td>${order.order_name }</td>
+                                             <td>${order.order_postcode }</td>
+                                             <td>${order.order_address1 }</td>
+                                             <td>${order.order_address2 }</td>
+                                             <td>${order.order_mobile }</td>
+                                             <td>${order.order_comment }</td>
+                                             <td>${order.order_status }</td>
+                                             <td>${order.order_date }</td>
+                                           </tr>
+	                                  </c:forEach>
                                     </tbody>
                                 </table>
                             </div>

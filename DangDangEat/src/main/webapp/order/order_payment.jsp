@@ -11,6 +11,18 @@
   <title>orderPayment</title>
   <link href="css/orderForm.css" rel="stylesheet" type="text/css">
   <link href="css/orderForm2.css" rel="stylesheet" type="text/css">
+  <style type="text/css">
+		@font-face {
+		    font-family: 'GmarketSansMedium';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+		  
+		* {
+		    font-family:"GmarketSansMedium" ;
+		}
+  </style>
 	<!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
   <!-- iamport.payment.js -->
@@ -20,6 +32,16 @@
     var promoCode;
     var promoPrice;
     var fadeTime = 300;
+    var cp_code;
+
+    
+    function getCp_code(cp_code){
+        document.getElementById("#promo-code").value = cp_code;
+  	}
+    
+    function couponView() {
+    	 window.open("SelectCoupon.od", "_blank", "height:700, width:300");
+    }
     
     function iamport() {
 		
@@ -52,11 +74,12 @@
 	          
 	      });
     
-//     $(function() {
+    $(function() {
     	
-// //     	$("#checkout").click(function() {
-// // 			iamport();
-// // 		});	
+    	$('.promo-code-cta').click(function() {
+    	 
+    	    window.open('SelectCoupon.od', '_blank', 'height:700, width:300');
+		});	
 // 		/* 상품금액 + 배송비 = Total (자동로드 되도록 수정예정)*/
 		
 // // 	    	$("#basket-subtotal").val($(".price").val());
@@ -200,7 +223,7 @@
 	
 	    
 	    
-//     });
+    });
 	</script>
 </head>
 
@@ -212,11 +235,11 @@
   		<input type="hidden" name="cart_code" value="${cart.cart_code }">
   		<input type="hidden" name="pro_code" value="${cart.pro_code }">
   		<input type="hidden" name="pro_amount" value="${cart.pro_price * cart.cart_amount + 3500 }">
-			<h1> ${cart.cart_code }, ${cart.pro_code }</h1>
   	</c:forEach>
-  		<h1 align="center">주문서 확인 & 결제 페이지 - order_payment</h1>
-  		<h1 align="left">주문상품 확인</h1>
+  		<h1 align="center">주문서 확인 & 결제 페이지</h1>
 	    <div class="basket">
+  		<h1>주문상품 확인</h1>
+  		<p>Please check your shopping details.</p>
 	      <div class="basket-labels">
 	        <ul>
 	          <li class="item item-heading">Item</li>
@@ -231,12 +254,13 @@
 		        <div class="item">
 			          <div class="product-image">
 			          		<a href="ProductDetail.pd?pro_code=${cart.pro_code}">
-			            	<img src="${cart.pro_real_thumb }" alt="${cart.pro_name }" class="product-frame" height="100">
+			            	<img src="http://localhost:8080/DangDangEat/upload/${cart.pro_real_thumb }" alt="${cart.pro_name }" 
+			            	class="product-frame" height="100" onerror="this.src='./img/sample1_thumb.png';" >
 			            	</a>
 			          </div>
 			          <div class="product-details">
 			            <h1><strong><span class="item-quantity" >상품명 : ${cart.pro_name }</span></strong></h1>
-			            <p><strong>브랜드명 : ${cart.pro_brand }</strong></p>
+<%-- 			            <p><strong>브랜드명 : ${cart.pro_brand }</strong></p> --%>
 			            <p>Product Code : ${cart.pro_code }</p>
 			          </div>
 		        </div>
@@ -251,7 +275,7 @@
 	   <!-- 주문자 정보 -->
 	  <hr />    
 	  <h1>배송 정보 확인</h1>
-	  <p>Please check your shopping details.</p>
+	  <p>Please check your shipping details.</p>
 	  <hr />
 		  <div class="form">
 		    <c:forEach var="order" items="${orderMemberList }" varStatus="status">
@@ -304,7 +328,7 @@
 	       <div class="basket-module"> 
 		        <label for="promo-code">Enter a promotional code</label>
 		        <input id="promo-code" type="text" name="promo-code" maxlength="5" class="promo-code-field">
-		        <button class="promo-code-cta">Apply</button>
+		        <button class="promo-code-cta"  type="button">Coupon</button>
 	      </div>
 	  	 <hr>
 	</div>
@@ -321,17 +345,16 @@
 				          <div class="subtotal-title">배송비</div>
 				          <div class="subtotal-value final-value" id="basket-delivery">3,500</div>
 			        </div>
-		      </div>
-		      <div class="summary-total">
-		          <div class="total-title">Total</div>
-		          <div class="total-value final-value" id="basket-total"><fmt:formatNumber pattern="#,###">${price.pro_price * price.cart_amount + 3500 }</fmt:formatNumber></div>
+			      <div class="summary-total">
+			          <div class="total-title">Total</div>
+			          <div class="total-value final-value" id="basket-total"><fmt:formatNumber pattern="#,###">${price.pro_price * price.cart_amount + 3500 }</fmt:formatNumber></div>
+			      </div>
+		      	  <div class="summary-checkout">
+		             <button class="button" id="checkout" type="submit" >Checkout</button>
+		     	  </div>
 		      </div>
 	     </c:forEach> 
 	 
-	      	<div class="summary-checkout">
-<%-- 	          <button class="button" id="checkout" type="button" onclick="iamPort('${cart.pro_name }',${price.pro_price * price.cart_amount + 3500 },'${order.order_name }')" >Checkout</button> --%>
-	          <button class="button" id="checkout" type="submit" >Checkout</button>
-	      </div>
 	   </form>   
   </main>
 </body>
