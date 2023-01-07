@@ -90,7 +90,7 @@
 
   <section id="listForm">
   <h2>NOTICE LIST</h2>
-	<table>	
+	<table class="table">	
 	<tr id="tr_top">
       <th scope="row" width="100">NO.</th>
       <td width="400px">Subject</td>
