@@ -25,10 +25,11 @@ public class CartInsertAction implements Action {
 	//		System.out.println(id);
 	//		String id = request.getParameter("id");
 			int cart_amount = Integer.parseInt(request.getParameter("amount"));
+			System.out.println(cart_amount);
 	//		String name = request.getParameter("pro_name");
 			String path = request.getParameter("path");
-			System.out.println(pro_code + ", " + id + ", "+ cart_amount);
-			System.out.println(id);
+//			System.out.println(pro_code + ", " + id + ", "+ cart_amount);
+//			System.out.println(id);
 			if(id == null || id.equals(null)) {
 				System.out.println(id);
 				response.setContentType("text/html; charset=UTF-8");
@@ -43,26 +44,31 @@ public class CartInsertAction implements Action {
 				
 				// 아이디, 제품코드, 수량 받아오기
 				CartBean cart = new CartBean();
-					cart.setMember_id(id);
-					cart.setPro_code(pro_code);
+				cart.setMember_id(id);
+				cart.setPro_code(pro_code);
+				if(cart_amount == 1) {
 					cart.setCart_amount(1);
-					if(cart_amount > 0) {
-						cart.setCart_amount(cart_amount);
-					}
-					cart.setCart_ischecked(1);
+				} else {
+					cart.setCart_amount(cart_amount);
+				}
+				cart.setCart_ischecked(1);
 			//		cart.setCart_wishlist(0);
-					System.out.println(cart + "액션");
+//					System.out.println(cart + "액션");
 				CartInsertService service = new CartInsertService();
 				int insertCount = service.insertCart(cart);
-				System.out.println("insertCount = " + insertCount);
+//				System.out.println("insertCount = " + insertCount);
 				if(insertCount == 1) { // 장바구니 추가 성공
-					if(path.equals("product")) {
+					if(path.equals("product_detail")) { // 경로 상품상세
 						forward = new ActionForward();
 						forward.setPath("ProductDetail.pd?pro_code=" + pro_code);
 						forward.setRedirect(true);
-					} else if(path.equals("wishlist")) {
+					} else if(path.equals("wishlist")) { // 경로 위시리스트
 						forward = new ActionForward();
 						forward.setPath("CartList.ct");
+						forward.setRedirect(true);
+					} else if(path.equals("product_list")) { // 경로 상품 목록
+						forward = new ActionForward();
+						forward.setPath("ProductList.pd");
 						forward.setRedirect(true);
 					}
 				} else if(insertCount == 2){ 

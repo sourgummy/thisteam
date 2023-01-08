@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.AdminOrderListAction;
+import action.AdminTotalMainAction;
 import action.CouponCodeCheckAction;
 import action.CouponDeleteAction;
 import action.CouponListAction;
@@ -50,9 +51,9 @@ public class AdminFrontController extends HttpServlet {
 		if(command.equals("/AdminMain.ad")) { // 관리자 페이지 메인
 			System.out.println("관리자 페이지");
 
-			forward = new ActionForward();
-			forward.setPath("admin/admin_main.jsp");
-			forward.setRedirect(false);
+			action = new AdminTotalMainAction();
+			forward = action.execute(request, response);
+			
 		} else if(command.equals("/AdminMemberList.ad")) { // 회원 관리 페이지
 
 			System.out.println("회원 목록");
