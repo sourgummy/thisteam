@@ -182,7 +182,7 @@ header > div {
 
   <div class="top-menu">
     <ul>
-      <li><a href="#">About</a></li>
+      <li><a href="About.ad">About</a></li>
       <li>/</li>
       <li><a href="ProductList.pd">Shop</a></li>
       <li>/</li>

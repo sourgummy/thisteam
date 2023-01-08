@@ -939,16 +939,15 @@ a:focus {
 /* 	visibility: visible; */
 /* } */
 
-.product__item:hover .product__item__text h6 {
+/* .product__item:hover .product__item__text h6 {
 	opacity: 0;
-}
+} */
 
 .product__item:hover .product__item__text .product__color__select {
 	opacity: 1;
 }
 
 .product__item__pic {
-	height: 260px;
 	position: relative;
 	background-position: center center;
 }
@@ -1226,8 +1225,8 @@ a:focus {
 .shop__sidebar__price ul li a,
 .shop__sidebar__brand ul li a {
 	color: #b7b7b7;
-	font-size: 15px;
-	line-height: 32px;
+	font-size: 20px;
+	line-height: 40px;
 	-webkit-transition: all, 0.3s;
 	-o-transition: all, 0.3s;
 	transition: all, 0.3s;

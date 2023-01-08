@@ -62,7 +62,7 @@ public class ProductDeleteProAction implements Action {
 				}
 				
 				forward = new ActionForward();
-				forward.setPath("AdminProductList.pd");
+				forward.setPath("AdminProductList.ad");
 				forward.setRedirect(true);
 			}
 			
