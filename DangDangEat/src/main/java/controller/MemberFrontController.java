@@ -15,6 +15,7 @@ import action.MemberIdCheckAction;
 import action.MemberJoinAction;
 import action.MemberCheckProAction;
 import action.MemberEmailAuthAction;
+import action.MemberEmailCheckAction;
 import action.MemberEmailUpdateAction;
 import action.MemberFindIdProAction;
 import action.MemberFindPassProAction;
