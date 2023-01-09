@@ -69,12 +69,9 @@
 	a {
 		text-decoration: none;
 	}
-	
-	input[type=button], input[type=submit] {
+		input[type=button], input[type=submit] {
 	    font-family:"GmarketSansMedium" ;
 	}
-	
-	
 	
 	</style>
 	
@@ -86,8 +83,7 @@
         <!-- top.jsp -->
 		<jsp:include page="/inc/top.jsp"></jsp:include>
 		<!-- Section-->
-  	
-
+		
   <section id="listForm">
   <h2>NOTICE LIST</h2>
 	<table class="table">	
@@ -96,7 +92,7 @@
       <td width="400px">Subject</td>
       <td width="150px">Writer</td>
       <td width="150px">Date</td>
-      <td width="100px"></td>
+      <td width="100px">HIT</td>
     </tr>	
     <!-- JSTL 과 EL 활용하여 글목록 표시 작업 반복 -->
 		<%-- for(NoticeBean notice : noticeList) {} --%>

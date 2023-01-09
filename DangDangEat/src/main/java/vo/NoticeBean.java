@@ -11,9 +11,9 @@ public class NoticeBean {
 	   CREATE TABLE notice (  
 	   notice_code INT PRIMARY KEY,
 	   member_id VARCHAR(20),	   
-	   notice_subject VARCHAR(100) NOT NULL,
-	   notice_content VARCHAR(2000) NOT NULL,
-	   notice_readcount INT DEFAULT 0,
+	   notice_subject VARCHAR(100),
+	   notice_content VARCHAR(2000),
+	   notice_readcount INT,
 	   notice_date DATE,
 	   FOREIGN KEY(member_id) references member(member_id)
 	   );
@@ -26,7 +26,6 @@ public class NoticeBean {
 		
 	
 	
-	// notice 테이블 컬럼에 대응하는 멤버변수 선언
 	private int notice_code;
 	private String member_id;
 	private String notice_subject;

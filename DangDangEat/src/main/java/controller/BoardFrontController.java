@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.CommentWriteProAction;
 import action.NoticeDeleteProAction;
 import action.NoticeDetailAction;
 import action.NoticeListAction;
@@ -145,7 +146,10 @@ public class BoardFrontController extends HttpServlet {
 		} else if(command.equals("/ReviewReplyPro.bo")) {
 			action = new ReviewReplyProAction();
 			forward = action.execute(request, response);
-		} 
+		}  else if(command.equals("/CommentWritePro.bo")) {
+			action = new CommentWriteProAction();
+			forward = action.execute(request, response);
+		}
 		
 		// ----------------------------------------------------------------------
 		// ActionForward 객체 내용에 따라 각각 다른 방식의 포워딩 작업 수행(공통)

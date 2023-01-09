@@ -53,6 +53,7 @@
 <body>
 	
 		<jsp:include page="/inc/top.jsp"></jsp:include>
+				
 	
 	<!-- 게시판 등록 -->
 	<section id="writeForm">
@@ -64,10 +65,7 @@
 					<td class="td_left"><label for="member_id">작성자</label></td>
 					<td class="td_right"><input type="text" name="member_id" required="required" /></td>
 				</tr>
-				<tr>
-					<td class="td_left"><label for="pro_code">상품코드</label></td>
-					<td class="td_right"><input type="text" name="pro_code" required="required" /></td>
-				</tr>
+				
 				<tr>
 					<td class="td_left"><label for="review_pass">비밀번호</label></td>
 					<td class="td_right">

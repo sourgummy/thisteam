@@ -70,22 +70,25 @@
 	a {
 		text-decoration: none;
 	}
+	
+	input[type=button], input[type=submit] {
+	    font-family:"GmarketSansMedium" ;
+	}
 </style>
+<%String sId = (String)session.getAttribute("sId"); %>
 </head>
 <body>
-	
 		<jsp:include page="../inc/top.jsp"></jsp:include>
 	
 	<!-- 게시판 리스트 -->
 	<section id="listForm">
 	<h2>문의</h2>
-    <table>	
+    <table class="table">	
 		<tr id="tr_top">
 			<td width="100px">No</td>
 			<td>Subject</td>
 			<td width="150px">Writer</td>
 			<td width="150px">Date</td>
-			<td width="150px">Status</td>
 		</tr>
 		<!-- JSTL 과 EL 활용하여 글목록 표시 작업 반복 -->
 		<%-- for(QnaBean qna : qnaList) {} --%>
@@ -114,18 +117,42 @@
 						<img src="images/re.gif">	
 					</c:if>
 					<%-- =============================================================== --%>
-					<a href="QnaDetail.bo?qna_code=${qna.qna_code }&pageNum=${pageNum }">
-						${qna.qna_subject }
-					</a>
+					<c:if test="${qna.qna_secret eq 'N' }" >
+						<img alt="" src="img/lock.svg">
+						<c:choose>
+							<c:when test="${qna.member_id eq sId || sId eq 'admin'}">
+								<a href="QnaDetail.bo?qna_code=${qna.qna_code }&pageNum=${pageNum }">
+									<c:out value="${qna.qna_subject }"></c:out>
+								</a>
+							</c:when>
+							<c:otherwise>비밀글은 작성자와 관리자만 볼 수 있습니다.</c:otherwise>
+						</c:choose>
+					</c:if>
+					<c:if test="${qna.qna_secret eq 'Y' }">
+						<a href="QnaDetail.bo?qna_code=${qna.qna_code }&pageNum=${pageNum }">
+							${qna.qna_subject }
+						</a>
+					</c:if>
 				</td>
-				<td>${qna.member_id }</td>
+				<td>
+					<c:if test="${qna.qna_secret eq 'N' }" >
+						<c:choose>
+							<c:when test="${qna.member_id eq sId || sId eq 'admin'}">
+								<c:out value="${qna.member_id }"></c:out>
+							</c:when>
+						<c:otherwise>비밀이개~</c:otherwise>	
+						</c:choose>
+					</c:if>
+					<c:if test="${qna.qna_secret eq 'Y' }">
+						${qna.member_id }
+					</c:if>
+				</td>
 				<td>
 					<%-- JSTL 의 fmt 라이브러리를 활용하여 날짜 표현 형식 변경 --%>
 					<%-- fmt:formatDate - Date 타입 날짜 형식 변경 --%>
 					<%-- fmt:parseDate - String 타입 날짜 형식 변경 --%>
 					<fmt:formatDate value="${qna.qna_date }" pattern="yy-MM-dd"/>
 				</td>
-					<td>${qna.qna_status }</td>
 			  </tr>
 		</c:forEach>
 	</table>
@@ -176,6 +203,4 @@
 			</c:otherwise>
 		</c:choose>
 	</section>
-	
-
 	

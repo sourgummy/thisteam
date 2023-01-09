@@ -78,14 +78,12 @@
 </head>
 <body>
 	
-	<jsp:include page="/inc/top.jsp"></jsp:include>
-
+<%-- 		<jsp:include page="/inc/top.jsp"></jsp:include> --%>
 	
 	<!-- 게시판 리스트 -->
 	<section id="listForm">
-	
-	<table class="table">	
 	<h2>REVIEW</h2>
+	<table>
 		<tr id="tr_top">
 			<td width="100px">No</td>
 			<td>Subject</td>
@@ -129,7 +127,7 @@
 					<%-- JSTL 의 fmt 라이브러리를 활용하여 날짜 표현 형식 변경 --%>
 					<%-- fmt:formatDate - Date 타입 날짜 형식 변경 --%>
 					<%-- fmt:parseDate - String 타입 날짜 형식 변경 --%>
-					<fmt:formatDate value="${review.review_date }" pattern="yy-MM-dd"/>
+					<fmt:formatDate value="${review.review_date }" pattern="yy-MM-dd HH:mm"/>
 				</td>
 				<td>${review.review_readcount }</td>
 			</tr>

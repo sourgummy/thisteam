@@ -70,20 +70,19 @@ public class ReviewDAO {
 			// => 참조글번호(review_re_ref)는 새 글 번호와 동일한 번호로 지정
 			// => 들여쓰기레벨(review_re_lev)과 순서번호(board_re_seq)는 0으로 지정
 			// => INSERT 구문 실행 후 리턴값을 insertCount 변수에 저장
-			sql = "INSERT INTO review VALUES (?,?,?,?,?,?,?,?,?,?,?,?,now())";
+			sql = "INSERT INTO review VALUES (?,?,?,?,?,?,?,?,?,?,?,now())";
 			pstmt2 = con.prepareStatement(sql);
 			pstmt2.setInt(1, review_code); // 글번호
 			pstmt2.setString(2, review.getMember_id()); // 작성자
-			pstmt2.setInt(3, review.getPro_code()); 
-			pstmt2.setString(4, review.getReview_pass()); 
-			pstmt2.setString(5, review.getReview_subject());
-			pstmt2.setString(6, review.getReview_content());
-			pstmt2.setString(7, review.getReview_file()); // 원본파일명
-			pstmt2.setString(8, review.getReview_real_file()); // 실제파일명
-			pstmt2.setInt(9, review_code); // 참조글번호(글쓰기는 글번호와 동일하게 사용)
-			pstmt2.setInt(10, 0); // 들여쓰기레벨
-			pstmt2.setInt(11, 0); // 순서번호
-			pstmt2.setInt(12, 0); // 조회수
+			pstmt2.setString(3, review.getReview_pass()); 
+			pstmt2.setString(4, review.getReview_subject());
+			pstmt2.setString(5, review.getReview_content());
+			pstmt2.setString(6, review.getReview_file()); // 원본파일명
+			pstmt2.setString(7, review.getReview_real_file()); // 실제파일명
+			pstmt2.setInt(8, review_code); // 참조글번호(글쓰기는 글번호와 동일하게 사용)
+			pstmt2.setInt(9, 0); // 들여쓰기레벨
+			pstmt2.setInt(10, 0); // 순서번호
+			pstmt2.setInt(11, 0); // 조회수
 			
 			insertCount = pstmt2.executeUpdate();
 			
@@ -136,7 +135,6 @@ public class ReviewDAO {
 				ReviewBean review = new ReviewBean();
 				review.setReview_code(rs.getInt("review_code"));
 				review.setMember_id(rs.getString("member_id"));
-				review.setPro_code(rs.getInt("pro_code"));
 //				review.setReview_pass(rs.getString("review_pass"));
 				review.setReview_subject(rs.getString("review_subject"));
 				review.setReview_content(rs.getString("review_content"));
@@ -221,7 +219,6 @@ public class ReviewDAO {
 				review = new ReviewBean();
 				review.setReview_code(rs.getInt("review_code"));
 				review.setMember_id(rs.getString("member_id"));
-				review.setPro_code(rs.getInt("pro_code"));
 //				review.setReview_pass(rs.getString("review_pass"));
 				review.setReview_subject(rs.getString("review_subject"));
 				review.setReview_content(rs.getString("review_content"));
@@ -431,20 +428,19 @@ public class ReviewDAO {
 			// ------------------------------------------------------------
 			// 답글 INSERT
 			// => 글쓰기와 달리 ref, lev, seq 값은 설정된 값으로 변경
-			sql = "INSERT INTO review VALUES (?,?,?,?,?,?,?,?,?,?,?,?,now())";
+			sql = "INSERT INTO review VALUES (?,?,?,?,?,?,?,?,?,?,?,now())";
 			pstmt2 = con.prepareStatement(sql);
 			pstmt2.setInt(1, review_code); // 글번호
 			pstmt2.setString(2, review.getMember_id()); // 작성자
-			pstmt2.setInt(3, review.getPro_code()); 
-			pstmt2.setString(4, review.getReview_pass()); 
-			pstmt2.setString(5, review.getReview_subject()); // 제목
-			pstmt2.setString(6, review.getReview_content()); // 내용
-			pstmt2.setString(7, review.getReview_file()); // 원본파일명
-			pstmt2.setString(8, review.getReview_real_file()); // 실제파일명
-			pstmt2.setInt(9, ref); // 참조글번호
-			pstmt2.setInt(10, lev); // 들여쓰기레벨
-			pstmt2.setInt(11, seq); // 순서번호
-			pstmt2.setInt(12, 0); // 조회수
+			pstmt2.setString(3, review.getReview_pass()); 
+			pstmt2.setString(4, review.getReview_subject()); // 제목
+			pstmt2.setString(5, review.getReview_content()); // 내용
+			pstmt2.setString(6, review.getReview_file()); // 원본파일명
+			pstmt2.setString(7, review.getReview_real_file()); // 실제파일명
+			pstmt2.setInt(8, ref); // 참조글번호
+			pstmt2.setInt(9, lev); // 들여쓰기레벨
+			pstmt2.setInt(10, seq); // 순서번호
+			pstmt2.setInt(11, 0); // 조회수
 			
 			insertCount = pstmt2.executeUpdate();
 			

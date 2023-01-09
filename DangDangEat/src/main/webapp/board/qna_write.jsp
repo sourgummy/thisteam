@@ -61,13 +61,16 @@
 		<form action="QnaWritePro.bo" name="qnaForm" method="post" enctype="multipart/form-data">
 			<table>
 				<tr>
+					<td class="td_left"><label for="member_id">비밀글</label></td>
+					<td class="td_right">
+    				<input type="radio" name="qna_secret" id="qna_secret" value="Y" class="radio" /><span>공개</span>&nbsp;&nbsp;&nbsp;&nbsp;
+				    <input type="radio" name="qna_secret" id="qna_secret" value="N" class="radio" /><span>비공개</span>&nbsp;
+					</td>
+				</tr>
+				<tr>
 					<td class="td_left"><label for="member_id">작성자</label></td>
 					<td class="td_right"><input type="text" name="member_id" required="required" /></td>
 				</tr>
-				<tr>
-               <td class="td_left"><label for="pro_code">상품코드</label></td>
-               <td class="td_right"><input type="text" name="pro_code" required="required" /></td>
-               </tr>
 				<tr>
 					<td class="td_left"><label for="qna_pass">비밀번호</label></td>
 					<td class="td_right">
@@ -77,6 +80,7 @@
 				<tr>
 					<td class="td_left"><label for="qna_subject">제목</label></td>
 					<td class="td_right"><input type="text" name="qna_subject" required="required" /></td>
+					
 				</tr>
 				<tr>
 					<td class="td_left"><label for="qna_content">내용</label></td>
@@ -101,4 +105,3 @@
 			</section>
 		</form>
 	</section>
-

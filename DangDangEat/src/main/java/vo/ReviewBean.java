@@ -9,25 +9,22 @@ public class ReviewBean {
 	   CREATE TABLE review (
 	   review_code INT PRIMARY KEY,
 	   member_id VARCHAR(20),
-	   pro_code INT,
-	   review_pass VARCHAR(16) NOT NULL,
-	   review_subject VARCHAR(100) NOT NULL,
-	   review_content VARCHAR(2000) NOT NULL,
-	   review_file VARCHAR(200) NOT NULL,
-	   review_real_file VARCHAR(200) NOT NULL,
-	   review_re_ref INT NOT NULL,
-	   review_re_lev INT NOT NULL,
-	   review_re_seq INT NOT NULL,
-	   review_readcount INT DEFAULT 0,
+	   review_pass VARCHAR(16),
+	   review_subject VARCHAR(100),
+	   review_content VARCHAR(2000),
+	   review_file VARCHAR(200),
+	   review_real_file VARCHAR(200),
+	   review_re_ref INT,
+	   review_re_lev INT,
+	   review_re_seq INT,
+	   review_readcount INT,
 	   review_date DATE,
-	   FOREIGN KEY(member_id) references member(member_id),
-	   FOREIGN KEY(pro_code) references product(pro_code)
+	   FOREIGN KEY(member_id) references member(member_id)
 	 );	 
 */
 	
 		private int review_code;				
 		private String member_id;
-		private int pro_code;
 		private String review_pass;
 		private String review_subject;
 		private String review_content;
@@ -51,13 +48,8 @@ public class ReviewBean {
 		public void setMember_id(String member_id) {
 			this.member_id = member_id;
 		}
-		public int getPro_code() {
-			return pro_code;
-		}
-		public void setPro_code(int pro_code) {
-			this.pro_code = pro_code;
-		
-		} public String getReview_pass() {
+	
+		public String getReview_pass() {
 			return review_pass;
 		}
 		
@@ -122,8 +114,7 @@ public class ReviewBean {
 		
 		@Override
 		public String toString() {
-			return "ReviewBean [review_code=" + review_code + ", member_id=" + member_id + ", pro_code=" + pro_code
-					+ ", review_pass=" + review_pass + ", review_subject=" + review_subject + ", review_content="
+			return "ReviewBean [review_code=" + review_code + ", member_id=" + member_id + ", review_pass=" + review_pass + ", review_subject=" + review_subject + ", review_content="
 					+ review_content + ", review_file=" + review_file + ", review_real_file=" + review_real_file
 					+ ", review_re_ref=" + review_re_ref + ", review_re_lev=" + review_re_lev + ", review_re_seq="
 					+ review_re_seq + ", review_readcount=" + review_readcount + ", review_date=" + review_date + "]";

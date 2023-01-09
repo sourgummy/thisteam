@@ -48,7 +48,6 @@ public class ReviewWriteProAction implements Action {
 			// 전달받은 파라미터 데이터를 ReviewBean 클래스 인스턴스 생성 후 저장
 			ReviewBean review = new ReviewBean();
 			review.setMember_id(multi.getParameter("member_id"));
-			review.setPro_code(Integer.parseInt(multi.getParameter("pro_code")));
 			review.setReview_pass(multi.getParameter("review_pass"));
 			review.setReview_subject(multi.getParameter("review_subject"));
 			review.setReview_content(multi.getParameter("review_content"));

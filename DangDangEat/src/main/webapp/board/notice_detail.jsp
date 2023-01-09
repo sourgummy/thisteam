@@ -70,11 +70,13 @@
 	
    </style>	
    </head>
+      
    <body>
         <!-- Header-->
         <!-- top.jsp -->
 		<jsp:include page="../inc/top.jsp"></jsp:include>
         <!-- Section-->
+  	
         <!-- 게시판 리스트 -->	
        <section id="detailForm">
 		<h2>Notice</h2>
