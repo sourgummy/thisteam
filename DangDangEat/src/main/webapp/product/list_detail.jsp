@@ -254,8 +254,8 @@ body {
 			<div class="container navbar-text">
 				<a class="navbar-brand" href="#pro_info">상품상세</a>
 				<a class="navbar-brand" href="#pro_delivery">배송/교환/환불</a>
-				<input class="navbar-brand" type="button" id="review_button" value="리뷰">
-				<input class="navbar-brand" type="button" id="qna_button" value="상품문의">
+				<a class="navbar-brand" type="button" id="review_button">리뷰</a>
+				<a class="navbar-brand" type="button" id="qna_button">상품문의</a>
 			</div>
 		</nav>
 	 </div>	

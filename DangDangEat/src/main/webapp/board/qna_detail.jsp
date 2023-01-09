@@ -19,20 +19,20 @@
 	}
         
 	#articleForm {
-		width: 500px;
+		width: 1224px;
 		height: 550px;
 		border: 1px solid #D3D3D3;
 		margin: auto;
 	}
 	
 	h2 {
+		font-family:"GmarketSansMedium" ;
 		text-align: center;
 	}
 	
 	table {
-		border: 1px solid black;
 		border-collapse: collapse; 
-	 	width: 500px;
+	 	width: 1224px;
 	}
 	
 	th {
@@ -50,6 +50,7 @@
 	}
 	
 	#articleContentArea {
+		margin-bottom: 30px;
 		background: #D3D3D3;
 		margin-top: 20px;
 		height: 350px;
@@ -60,8 +61,13 @@
 	
 	#commandList {
 		margin: auto;
+		margin-bottom: 30px;
 		width: 500px;
 		text-align: center;
+	}
+	
+	input[type=button], input[type=submit] {
+	    font-family:"GmarketSansMedium" ;
 	}
 </style>
 </head>
@@ -131,11 +137,12 @@
 		<!-- Login, Join 링크 표시 영역 -->
 		<jsp:include page="../inc/top.jsp"></jsp:include>
 	
+	<div class="container">
 	<!-- 게시판 상세내용 보기 -->
-	<section id="articleForm">
-		<h2>글 상세내용 보기</h2>
-		<section id="basicInfoArea">
-			<table border="1">
+<!-- 		<h2>글 상세내용 보기</h2> -->
+	<section>
+		<section>
+			<table class="table">
 			<tr><th width="70">제 목</th><td colspan="3" >${qna.qna_subject }</td></tr>
 			<tr>
 				<th width="70">작성자</th><td>${qna.member_id }</td>
@@ -144,7 +151,7 @@
 			</tr>
 			<tr>
 				<th width="70">첨부파일</th>
-				<td>
+				<td colspan="3">
 					<a href="upload/${qna.qna_real_file }" download="${qna.qna_file }">
 						${qna.qna_file }
 					</a>
@@ -156,6 +163,7 @@
 			${qna.qna_content }
 		</section>
 	</section>
+			</div>
 	<section id="commandList">
 		<input type="button" value="답변" onclick="location.href='QnaReplyForm.bo?qna_code=${param.qna_code}&pageNum=${param.pageNum }'">
 		<input type="button" value="수정" onclick="location.href='QnaModifyForm.bo?qna_code=${param.qna_code}&pageNum=${param.pageNum }'">

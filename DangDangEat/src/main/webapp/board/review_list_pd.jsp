@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-  <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+<!--   <link href="css/bootstrap.css" rel="stylesheet" type="text/css"> -->
   <style type="text/css">
 	@font-face {
 	    font-family: 'GmarketSansMedium';
@@ -20,7 +20,7 @@
 	
 	  
 	#listForm {
-		width: 1600px;
+		width: 1224px;
         max-height: 610px;
         margin: auto;
 	}
@@ -30,7 +30,7 @@
 	}
 	
 	table {
-		margin: auto;
+		margin: 20px;
 		width: 1024px;
 	}
 	
@@ -82,8 +82,8 @@
 	
 	<!-- 게시판 리스트 -->
 	<section id="listForm">
-	<h2>REVIEW</h2>
-	<table>
+<!-- 	<h2>REVIEW</h2> -->
+	<table class="container">
 		<tr id="tr_top">
 			<td width="100px">No</td>
 			<td>Subject</td>

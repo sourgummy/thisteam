@@ -92,8 +92,6 @@ if(sId == null || !sId.equals("admin")) {
 
 // 		}); // "#deleteMember"
 		
-		
-		
 // 	}); // function() {}
 	
 	function confirmDelete(id) {
@@ -104,7 +102,19 @@ if(sId == null || !sId.equals("admin")) {
 			location.href = "AdminMemberDelete.ad?id=" + id;
 		}
 	}
-
+	
+	function confirmUpdate(id, status) {
+// 		alert(id + ", " + status);
+		let result = confirm(id + "회원의 상태를 수정하시겠습니까?");
+		
+		if(result) {
+			location.href = "AdminMemberUpdate.ad?id=" + id + "&status=" + status;
+		} else {
+			alert("취소되었습니다.");
+			location.reload();
+		}
+		
+	}
 		
 	$(function() {
 		// 받은 memberList 변수에 넣기
@@ -127,7 +137,24 @@ if(sId == null || !sId.equals("admin")) {
 			
 		</c:forEach>
 		
-		
+// 		for(let member of member_list) { // let i; i < member_list.length; i++
+// 			alert(member.id + ", " + member.status);
+			
+// 			if(member.status == "Y") {
+// 				alert("회원");
+// 				$("#member_status").val("Y").prop("selected", true);
+// 				$("#member_status:eq(1)").prop("selected", true);
+// 			} else if(member.status == "N") {
+// 				alert("탈퇴 회원");
+// 				$("#member_status").val("N").prop("selected", true);
+// 				$("#member_status:eq(2)").prop("selected", true);
+// 			} else if(member.status == "D") {
+// 				alert("휴면 회원");
+// 				$("#member_status").val("D").prop("selected", true);
+// 				$("#member_status:eq(3)").prop("selected", true);
+// 			}
+			
+// 		}
 			
 	});
 	
@@ -451,26 +478,13 @@ if(sId == null || !sId.equals("admin")) {
                                             <th>이메일</th>
                                             <th>이름</th>
                                             <th>휴대폰</th>
-                                            <th>도로명주소</th>
-                                            <th>상세주소</th>
+                                            <th>주소</th>
                                             <th>우편<br>번호</th>
                                             <th>가입일</th>
                                             <th>댕생일</th>
                                             <th>회원 상태</th>
-                                            <th>이메일<br>인증 여부</th>
-                                            <th>
-                                            	<small>
-	                                            	주문: <span class="btn btn-info btn-circle btn-sm">
-				                                        <i class="fas fa-info-circle"></i>
-				                                    </span><br>
-				                                    수정: <span class="btn btn-warning btn-circle btn-sm">
-				                                        <i class="fas fa-exclamation-triangle"></i>
-				                                    </span><br>
-				                                    삭제: <span class="btn btn-danger btn-circle btn-sm">
-				                                        <i class="fas fa-trash"></i>
-				                                    </span>
-			                                    </small>
-                                    		</th>
+                                            <th>이메일<br>인증</th>
+                                            <th>삭제</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -479,26 +493,13 @@ if(sId == null || !sId.equals("admin")) {
                                             <th>이메일</th>
                                             <th>이름</th>
                                             <th>휴대폰</th>
-                                            <th>도로명주소</th>
-                                            <th>상세주소</th>
+                                            <th>주소</th>
                                             <th>우편<br>번호</th>
                                             <th>가입일</th>
                                             <th>댕생일</th>
                                             <th>회원 상태</th>
-                                            <th>이메일<br>인증 여부</th>
-                                            <th>
-                                            	<small>
-	                                            	<span class="btn btn-info btn-circle btn-sm">
-				                                        <i class="fas fa-info-circle"></i>
-				                                    </span>
-				                                    <span class="btn btn-warning btn-circle btn-sm">
-				                                        <i class="fas fa-exclamation-triangle"></i>
-				                                    </span>
-				                                    <span class="btn btn-danger btn-circle btn-sm">
-				                                        <i class="fas fa-trash"></i>
-				                                    </span>
-			                                    </small>
-                                    		</th>
+                                            <th>이메일<br>인증</th>
+                                            <th>삭제</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -508,13 +509,14 @@ if(sId == null || !sId.equals("admin")) {
 	                                            <td>${member.member_email }</td>
 	                                            <td>${member.member_name }</td>
 	                                            <td>${member.member_mobile }</td>
-	                                            <td>${member.member_addr1 }</td>
-	                                            <td>${member.member_addr2 }</td>
+	                                            <td>
+	                                            	${member.member_addr1 }<br>
+	                                            	${member.member_addr2 }</td>
 	                                            <td>${member.member_postcode }</td>
 	                                            <td>${member.member_date }</td>
 	                                            <td>${member.member_birth }</td>
 	                                            <td>
-	                                            	<select id="member_status" name="${member.member_status }">
+	                                            	<select id="member_status_${status.current}" name="${member.member_status }" onchange="confirmUpdate('${member.member_id}', this.value)">
 	                                            		<c:choose>
 		                                            		<c:when test="${member.member_status eq 'Y' }">
 		                                            			<option value="Y" selected="selected">회원</option>
@@ -543,12 +545,6 @@ if(sId == null || !sId.equals("admin")) {
 	                                            </td>
 	                                            <td>${member.member_authStatus }</td>
 	                                            <td>
-	                                            	<button class="btn btn-info btn-circle btn-sm">
-				                                        <i class="fas fa-info-circle"></i>
-				                                    </button>
-				                                    <button type="submit" form="status_select" class="btn btn-warning btn-circle btn-sm" onclick="confirmUpdate('${member.member_id}')">
-				                                        <i class="fas fa-exclamation-triangle"></i>
-				                                    </button>
 				                                    <button class="btn btn-danger btn-circle btn-sm" onclick="confirmDelete('${member.member_id}')">
 				                                        <i class="fas fa-trash"></i>
 	                                    			</button>

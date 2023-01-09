@@ -15,34 +15,44 @@
 	}
 	  
 	#writeForm {
-		width: 500x;
+		width: 1224x;
 		height: 500px;
-		border: 1px solid red;
+		border: 1px;
 		margin: auto;
 	}
 	
-	h5 {
+	h3 {
+		font-family: 'GmarketSansMedium';
 		text-align: center;
 	}
 	
 	table {
 		margin: auto;
-		width: 450px;
+		width: 1224px;
 	}
 	
 	.td_left {
-		width: 150px;
+/* 		width: 150px; */
 		background: #D3D3D3;
 		text-align: center;
 	}
 	
 	.td_right {
-		width: 300px;
+/* 		width: 300px; */
 		background: white;
 	}
 	
 	#commandCell {
 		text-align: center;
+		margin-bottom: 30px;
+	}
+
+	input[type=button], input[type=submit], input[type=reset], input[type=text] {
+	    font-family:"GmarketSansMedium" ;
+	}
+	
+	table > tbody {
+		border-style: none;
 	}
 	
 </style>
@@ -54,13 +64,14 @@
 
 	<!-- 게시판 등록 -->
 	<section class="writeForm">
-		<h5>Notice Write</h5>
+		<h3>Notice Write</h3>
 		<form action="NoticeWritePro.bo" name="noticeForm" method="post">
-			<table>
-				<tr>
-					<td class="td_left"><label for="member_id">Writer</label></td>
-					<td class="td_right"><input type="text" name="member_id" required="required" /></td>
-				</tr>				
+			<table class="table container">
+			<tbody>
+<!-- 				<tr> -->
+<!-- 					<td class="td_left"><label for="member_id">Writer</label></td> -->
+<!-- 					<td class="td_right"><input type="text" name="member_id" required="required" /></td> -->
+<!-- 				</tr>				 -->
 					
 				<tr>
 					<td class="td_left"><label for="notice_subject">Subject</label></td>
@@ -69,9 +80,11 @@
 				<tr>
 					<td class="td_left"><label for="notice_content">Content</label></td>
 					<td class="td_right">
-						<textarea id="notice_content" name="notice_content" cols="40" rows="15" required="required"></textarea>
+						<input type="text" id="notice_content" style="width: 500px">
+<!-- 						<textarea id="notice_content" name="notice_content" cols="250" rows="15" required="required"></textarea> -->
 					</td>
-				</tr>				
+				</tr>	
+				</tbody>			
 			</table>
 			<section id="commandCell">
 				<input type="submit" value="등록">&nbsp;&nbsp;

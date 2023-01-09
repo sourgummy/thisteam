@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-  <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+<!--   <link href="css/bootstrap.css" rel="stylesheet" type="text/css"> -->
   <style type="text/css">
 	@font-face {
 	    font-family: 'GmarketSansMedium';
@@ -20,7 +20,7 @@
 	  
 	  
 	#listForm {
-		width: 1600px;
+		width: 1224px;
         max-height: 610px;
         margin: auto;
 	}
@@ -30,7 +30,7 @@
 	}
 	
 	table {
-		margin: auto;
+		margin: 20px;
 		width: 1024px;
 	}
 	
@@ -78,14 +78,14 @@
 	
 	<!-- 게시판 리스트 -->
 	<section id="listForm">
-	<h2>문의</h2>
-    <table>	
+<!-- 	<h2>문의</h2> -->
+    <table class="container">	
 		<tr id="tr_top">
 			<td width="100px">No</td>
 			<td>Subject</td>
 			<td width="150px">Writer</td>
 			<td width="150px">Date</td>
-			<td width="150px">Status</td>
+<!-- 			<td width="150px">Status</td> -->
 		</tr>
 		<!-- JSTL 과 EL 활용하여 글목록 표시 작업 반복 -->
 		<%-- for(QnaBean qna : qnaList) {} --%>
@@ -125,7 +125,7 @@
 					<%-- fmt:parseDate - String 타입 날짜 형식 변경 --%>
 					<fmt:formatDate value="${qna.qna_date }" pattern="yy-MM-dd"/>
 				</td>
-					<td>${qna.qna_status }</td>
+<%-- 					<td>${qna.qna_status }</td> --%>
 			  </tr>
 		</c:forEach>
 	</table>

@@ -684,6 +684,35 @@ public class MemberDAO {
 		return couponCount;
 	}
 
+	// 관리자 페이지 - 회원 정보 수정
+	public int UpdateMember(MemberBean member) {
+		System.out.println("MemberDAO - UpdateMember()");
+		
+		int updateCount = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			String sql = "UPDATE member "
+						+ "		SET member_status=?"
+						+ "		WHERE member_id=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, member.getMember_status());
+			pstmt.setString(2, member.getMember_id());
+			
+			updateCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류! - UpdateMember()");
+			e.printStackTrace();
+		} finally {
+			// DB 자원 반환
+			JdbcUtil.close(pstmt);
+		}
+		
+		return updateCount;
+	}
+
    
    
 }

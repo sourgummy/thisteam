@@ -19,12 +19,13 @@
 	}
 	
 	#listForm {
-		width: 1600px;
+ 		width: 1224px; 
         max-height: 610px;
         margin: auto;
 	}
 	
 	h2 {
+	    font-family:"GmarketSansMedium" ;
 		text-align: center;
 	}
 	

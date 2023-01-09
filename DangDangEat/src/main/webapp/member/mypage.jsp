@@ -64,12 +64,13 @@ if (sId == null || sId.equals("")) {
 <%
 }
 %>
-
-<% if(request.getParameter("cp_code") != null){
-	String cp_code = request.getParameter("cp_code");
-}%>
 <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+
+
+
+
+
 <script type="text/javascript">
 	$(function(cp_code) {
 
@@ -78,18 +79,24 @@ if (sId == null || sId.equals("")) {
 		// 		alert(email);
 
 		
-		if(cp_code != null){
-			//cp_code가 파라미터로 넘어오면 click이벤트 강제 실행
-			$("#CouponCount").trigger("click");
-
+	
+		
+		
+		//파라미터 cp_code 추출
+		const param = new URL(location).searchParams;
+		param.get("cp_code")
+		if(param.get("cp_code") != null){
+			$("CouponCount").trigger("click");
+			alert("클릭됨 !");
 		}
+
 		
 		$("#CouponCount").on("click", function(){
 			
 			$.ajax({//자동등록된 쿠폰(생일쿠폰,회원가입쿠폰) 있는지 확인
 				type: "get",
 				url: "SearchUsableCoupon.od",
-				dataType: "html",
+				dataType: "HTML",
 				data:{
 					"isMypage":true
 				}
@@ -97,7 +104,6 @@ if (sId == null || sId.equals("")) {
 			})
 			.done(function(result){
 	    		
-				alert(typeof(result));
 				$("#ajax_changeDiv").html(result);
 				
 
@@ -147,23 +153,21 @@ if (sId == null || sId.equals("")) {
 		<div class="row">
 			<div class="col-lg-3 col-md-6">
 				<div class="card">
-					<a href="">
-						<div class="card-body">
-							<div class="stat-widget-five">
-								<div class="stat-icon dib flat-color-1">
-									<i class="fa fa-shopping-cart"></i>
-								</div>
-								<div class="stat-content">
-									<div class="text-left dib">
-										<div class="stat-heading">주문</div>
-										<div class="stat-text">
-											<span>${order_count } 건</span>
-										</div>
+					<div class="card-body">
+						<div class="stat-widget-five">
+							<div class="stat-icon dib flat-color-1">
+								<i class="fa fa-shopping-cart"></i>
+							</div>
+							<div class="stat-content">
+								<div class="text-left dib">
+									<div class="stat-heading">주문</div>
+									<div class="stat-text">
+										<span>${order_count } 건</span>
 									</div>
 								</div>
 							</div>
 						</div>
-					</a>
+					</div>
 				</div>
 			</div>
 
@@ -183,51 +187,47 @@ if (sId == null || sId.equals("")) {
 								</div>
 							</div>
 						</div>
-					</a>
+					</div>
 				</div>
 			</div>
 
 			<div class="col-lg-3 col-md-6">
 				<div class="card">
-					<a href="">
-						<div class="card-body">
-							<div class="stat-widget-five">
-								<div class="stat-icon dib flat-color-3">
-									<i class="fa fa-question"></i>
-								</div>
-								<div class="stat-content">
-									<div class="text-left dib">
-										<div class="stat-heading">리뷰</div>
-										<div class="stat-text">
-											<span>${review_count } 개</span>
-										</div>
+					<div class="card-body">
+						<div class="stat-widget-five">
+							<div class="stat-icon dib flat-color-3">
+								<i class="fa fa-question"></i>
+							</div>
+							<div class="stat-content">
+								<div class="text-left dib">
+									<div class="stat-heading">리뷰</div>
+									<div class="stat-text">
+										<span>${review_count } 개</span>
 									</div>
 								</div>
 							</div>
 						</div>
-					</a>
+					</div>
 				</div>
 			</div>
 
 			<div class="col-lg-3 col-md-6">
 				<div class="card">
-					<a href="">
-						<div class="card-body">
-							<div class="stat-widget-five">
-								<div class="stat-icon dib flat-color-4">
-									<i class="fa fa-list-ul"></i>
-								</div>
-								<div class="stat-content">
-									<div class="text-left dib">
-										<div class="stat-heading">Q&A</div>
-										<div class="stat-text">
-											<span>${qna_count } 건</span>
-										</div>
+					<div class="card-body">
+						<div class="stat-widget-five">
+							<div class="stat-icon dib flat-color-4">
+								<i class="fa fa-list-ul"></i>
+							</div>
+							<div class="stat-content">
+								<div class="text-left dib">
+									<div class="stat-heading">Q&A</div>
+									<div class="stat-text">
+										<span>${qna_count } 건</span>
 									</div>
 								</div>
 							</div>
 						</div>
-					</a>
+					</div>
 				</div>
 			</div>
 		</div>

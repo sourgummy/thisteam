@@ -15,7 +15,7 @@
 <script
 	src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 <script src="../js/jquery-3.6.3.js"></script>
-
+<%String realPath = request.getServletContext().getRealPath("upload"); %>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('.slider_image').bxSlider({
@@ -29,18 +29,18 @@
 		});
 	});
 	
-	$(document).ready(function(imgUrl) {
+	$(document).ready(function(realPath) {
 		$.ajax({
 			type:"get",
 			url:"Main",
 			dataType : 'json', 
 			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 			success: function(result) {
-//						alert(JSON.stringify(result));
+// 						alert(JSON.stringify(result));
 						
 						for(let product of result){
 							$("#new_eat").append(
-							 "<img class='bg-light main_rec m-3' src='"+imgUrl+"/"+product.pro_real_thumb+"'></img>"
+							 "<img class='bg-light main_rec m-3' src='"+realPath+"/"+product.pro_real_thumb+"'></img>"
 							);
 						}
 						
@@ -146,24 +146,22 @@ cursor: pointer;
 	</div>
 
 <article>
-	<%String uploadPath = "upload"; // 업로드 가상디렉토리(이클립스) 
-	String realPath = request.getServletContext().getRealPath(uploadPath);
-	request.getContextPath();
+	<%
 	//실제 업로드 경로(집) : C:\Users\eyeds\eclipse_jsp\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\DangDangEat\ upload
 	//실제 업로드 경로(학원) : D:\workspace_jsp5\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\DangDangEat\ upload
 //	//String uploadPath = "ftp://db.itwillbs.dev:8030/upload"; // FTP 주소!!!체크필수!!!  12/30
 	System.out.println("실제 업로드 경로 : " + realPath);
-	System.out.println("request.getSession().getServletContext().getRealPath(/)"+  request.getSession().getServletContext().getRealPath(uploadPath));
+	System.out.println("request.getSession().getServletContext().getRealPath(/)"+  request.getSession().getServletContext().getRealPath("upload"));
 	%>
 	     <!-- 메인 네모 부분 // 관련 클래스: main_rec-->
         <div class="mt-5 d-flex flex-row justify-content-center" >
          </div>
 	        <div class=" mb-5 d-flex flex-row justify-content-center" >
 	        		<div  width="500" style="position:relative;">
-				       <img class="m-3" src="img/main_sale_banner.png" width="500"></img>
+				       <img class="m-3" src="img/salebanner.png" width="500"></img>
 				       <div id="downloadCoupon" onclick="couponDown()"></div> 
 	       			</div>
-			       <img class="m-3"  src="img/main_ship_banner.png" width="500"></img>
+			       <img class="m-3"  src="img/orderbanner.png" width="500"></img>
 	        </div>
 	
          <!-- 메인 네모 부분 // 관련 클래스: main_rec-->

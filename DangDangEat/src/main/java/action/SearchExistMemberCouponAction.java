@@ -20,7 +20,11 @@ public class SearchExistMemberCouponAction implements Action {
 		ActionForward forward = null;
 		String sId = null;
 		boolean isMypage =false ;
-		
+		String param_cp_code = null;
+		if(request.getParameter("param_cp_code") != null) {
+			param_cp_code = request.getParameter("param_cp_code");
+			System.out.println("param_cp_code  :"  + param_cp_code);
+		}
 		if(request.getParameter("isMypage") != null) {
 			//마이페이지에서 호출 시에 이동 경로 다름!
 		     isMypage = Boolean.valueOf(request.getParameter("isMypage"));
@@ -42,6 +46,7 @@ public class SearchExistMemberCouponAction implements Action {
 			System.out.println(this.getClass()+ "   isMypage: "+ isMypage);
 			
 			request.setAttribute("couponList", couponList);
+			request.setAttribute("param_cp_code", param_cp_code);
 			
 			forward = new ActionForward();
 			forward.setPath("member/mypage_couponAjax.jsp");

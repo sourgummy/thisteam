@@ -20,13 +20,14 @@
 	  
 	  
 	#listForm {
-		width: 1600px;
+		width: 1224px;
         max-height: 610px;
         margin: auto;
 	}
 	
 	h2 {
 		text-align: center;
+		font-family:"GmarketSansMedium" ;
 	}
 	
 	table {
