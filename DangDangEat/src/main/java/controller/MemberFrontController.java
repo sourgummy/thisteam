@@ -11,14 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.MailCheckAction;
-import action.MemberIdCheckAction;
-import action.MemberJoinAction;
 import action.MemberCheckProAction;
 import action.MemberEmailAuthAction;
+import action.MemberEmailCheckAction;
 import action.MemberEmailUpdateAction;
 import action.MemberFindIdProAction;
 import action.MemberFindPassProAction;
-import action.MemberListAction;
+import action.MemberIdCheckAction;
+import action.MemberJoinAction;
 import action.MemberLoginProAction;
 import action.MemberLogoutAction;
 import action.MemberModifyProAction;
@@ -189,7 +189,7 @@ public class MemberFrontController extends HttpServlet {
 		} else if(command.equals("/MemberEmailCheck.me")) {
 //	         System.out.println("MemberIdCheck");
 	         
-	         action = new MemberEmailCheckAction(); // sangwoo 브랜치 커밋
+	         action = new MemberEmailCheckAction();
 	         forward = action.execute(request, response);
 	      }
 	

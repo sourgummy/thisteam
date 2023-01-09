@@ -6,22 +6,22 @@
 
 <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
 
-    <title>DangDangEat Admin - MemberList</title>
+<title>DangDangEat Admin - MemberList</title>
 
-    <!-- Custom fonts for this template -->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<!-- Custom fonts for this template -->
+<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
-    <!-- Custom styles for this template -->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="css/sb-admin-2.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this page -->
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+<!-- Custom styles for this page -->
+<link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 <!-- 폰트 설정 -->
 <style>
@@ -39,6 +39,14 @@
 
 body {
     font-family: 'GmarketSans';
+}
+
+.main-icon {
+    padding: 1%;
+    height: 40px;
+    width: auto;
+   margin-right: 3%;
+   padding: 5px;
 }
 
 </style>
@@ -119,24 +127,7 @@ if(sId == null || !sId.equals("admin")) {
 			
 		</c:forEach>
 		
-		for(let member of member_list) { // let i; i < member_list.length; i++
-// 			alert(member.id + ", " + member.status);
-			
-			if(member.status == "Y") {
-// 				alert("회원");
-				$("#member_status").val("Y").prop("selected", true);
-// 				$("#member_status:eq(1)").prop("selected", true);
-			} else if(member.status == "N") {
-// 				alert("탈퇴 회원");
-				$("#member_status").val("N").prop("selected", true);
-// 				$("#member_status:eq(2)").prop("selected", true);
-			} else if(member.status == "D") {
-// 				alert("휴면 회원");
-				$("#member_status").val("D").prop("selected", true);
-// 				$("#member_status:eq(3)").prop("selected", true);
-			}
-			
-		}
+		
 			
 	});
 	
@@ -153,10 +144,13 @@ if(sId == null || !sId.equals("admin")) {
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="./">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="AdminMain.ad">
+                <div class="div-top-icon">
+                <img class="main-icon" src="img/maindog_white.png">
+<!--                     <i class="fas fa-laugh-wink"></i> -->
                 </div>
+
                 <div class="sidebar-brand-text mx-3">DangDangEat Admin</div>
             </a>
 
@@ -164,8 +158,9 @@ if(sId == null || !sId.equals("admin")) {
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-                <a class="nav-link" href="index.html">
+
+            <li class="nav-item active">
+                <a class="nav-link" href="AdminMain.ad">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>관리자 메인 페이지</span></a>
             </li>
@@ -440,7 +435,7 @@ if(sId == null || !sId.equals("admin")) {
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800 font-weight-bold">회원 관리</h1>
                     <p class="mb-4">회원 목록 페이지 <a target="_blank"
-                            href="https://datatables.net">회원 검색, 필터 기능 등 필요</a>.</p>
+                            href="https://datatables.net"></a>.</p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -458,21 +453,23 @@ if(sId == null || !sId.equals("admin")) {
                                             <th>휴대폰</th>
                                             <th>도로명주소</th>
                                             <th>상세주소</th>
-                                            <th>우편번호</th>
+                                            <th>우편<br>번호</th>
                                             <th>가입일</th>
                                             <th>댕생일</th>
                                             <th>회원 상태</th>
-                                            <th>이메일 인증 여부</th>
+                                            <th>이메일<br>인증 여부</th>
                                             <th>
-                                            	주문 : <span class="btn btn-info btn-circle btn-sm">
-			                                        <i class="fas fa-info-circle"></i>
-			                                    </span>
-			                                    수정 : <span class="btn btn-warning btn-circle btn-sm">
-			                                        <i class="fas fa-exclamation-triangle"></i>
-			                                    </span>
-			                                    삭제 : <span class="btn btn-danger btn-circle btn-sm">
-			                                        <i class="fas fa-trash"></i>
-			                                    </span>
+                                            	<small>
+	                                            	주문: <span class="btn btn-info btn-circle btn-sm">
+				                                        <i class="fas fa-info-circle"></i>
+				                                    </span><br>
+				                                    수정: <span class="btn btn-warning btn-circle btn-sm">
+				                                        <i class="fas fa-exclamation-triangle"></i>
+				                                    </span><br>
+				                                    삭제: <span class="btn btn-danger btn-circle btn-sm">
+				                                        <i class="fas fa-trash"></i>
+				                                    </span>
+			                                    </small>
                                     		</th>
                                         </tr>
                                     </thead>
@@ -484,21 +481,23 @@ if(sId == null || !sId.equals("admin")) {
                                             <th>휴대폰</th>
                                             <th>도로명주소</th>
                                             <th>상세주소</th>
-                                            <th>우편번호</th>
+                                            <th>우편<br>번호</th>
                                             <th>가입일</th>
                                             <th>댕생일</th>
                                             <th>회원 상태</th>
-                                            <th>이메일 인증 여부</th>
+                                            <th>이메일<br>인증 여부</th>
                                             <th>
-                                            	<span class="btn btn-info btn-circle btn-sm">
-			                                        <i class="fas fa-info-circle"></i>
-			                                    </span>
-			                                    <span class="btn btn-warning btn-circle btn-sm">
-			                                        <i class="fas fa-exclamation-triangle"></i>
-			                                    </span>
-			                                    <span class="btn btn-danger btn-circle btn-sm">
-			                                        <i class="fas fa-trash"></i>
-			                                    </span>
+                                            	<small>
+	                                            	<span class="btn btn-info btn-circle btn-sm">
+				                                        <i class="fas fa-info-circle"></i>
+				                                    </span>
+				                                    <span class="btn btn-warning btn-circle btn-sm">
+				                                        <i class="fas fa-exclamation-triangle"></i>
+				                                    </span>
+				                                    <span class="btn btn-danger btn-circle btn-sm">
+				                                        <i class="fas fa-trash"></i>
+				                                    </span>
+			                                    </small>
                                     		</th>
                                         </tr>
                                     </tfoot>
@@ -516,22 +515,43 @@ if(sId == null || !sId.equals("admin")) {
 	                                            <td>${member.member_birth }</td>
 	                                            <td>
 	                                            	<select id="member_status" name="${member.member_status }">
-	                                            		<option value="Y">회원</option>
-	                                            		<option value="N">탈퇴 회원</option>
-	                                            		<option value="D">휴면 회원</option>
+	                                            		<c:choose>
+		                                            		<c:when test="${member.member_status eq 'Y' }">
+		                                            			<option value="Y" selected="selected">회원</option>
+		                                            		</c:when>
+		                                            		<c:otherwise>
+		                                            			<option value="Y">회원</option>
+		                                            		</c:otherwise>
+	                                            		</c:choose>
+	                                            		<c:choose>
+		                                            		<c:when test="${member.member_status eq 'N' }">
+			                                            		<option value="N" selected="selected">탈퇴 회원</option>
+		                                            		</c:when>
+		                                            		<c:otherwise>
+			                                            		<option value="N">탈퇴 회원</option>
+		                                            		</c:otherwise>
+	                                            		</c:choose>
+	                                            		<c:choose>
+		                                            		<c:when test="${member.member_status eq 'D' }">
+			                                            		<option value="D" selected="selected">휴면 회원</option>
+		                                            		</c:when>
+		                                            		<c:otherwise>
+		                                            			<option value="D">휴면 회원</option>
+		                                            		</c:otherwise>
+	                                            		</c:choose>
 	                                            	</select>
 	                                            </td>
 	                                            <td>${member.member_authStatus }</td>
 	                                            <td>
-	                                            	<span class="btn btn-info btn-circle btn-sm">
+	                                            	<button class="btn btn-info btn-circle btn-sm">
 				                                        <i class="fas fa-info-circle"></i>
-				                                    </span>
-				                                    <span class="btn btn-warning btn-circle btn-sm" onclick="confirmUpdate('${member.member_id}')">
+				                                    </button>
+				                                    <button type="submit" form="status_select" class="btn btn-warning btn-circle btn-sm" onclick="confirmUpdate('${member.member_id}')">
 				                                        <i class="fas fa-exclamation-triangle"></i>
-				                                    </span>
-				                                    <span class="btn btn-danger btn-circle btn-sm" onclick="confirmDelete('${member.member_id}')">
+				                                    </button>
+				                                    <button class="btn btn-danger btn-circle btn-sm" onclick="confirmDelete('${member.member_id}')">
 				                                        <i class="fas fa-trash"></i>
-				                                    </span>
+	                                    			</button>
 	                                    		</td>
 	                                        </tr>
                                         </c:forEach>

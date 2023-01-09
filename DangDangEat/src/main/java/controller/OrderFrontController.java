@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.CouponSearchAction;
+import action.OrderCouponProAction;
 import action.CheckCouponCodeAction;
 import action.OrderFormAction;
 import action.OrderInsertProAction;
@@ -113,6 +114,12 @@ public class OrderFrontController extends HttpServlet {
 			forward = new ActionForward();
 			forward.setPath("order/orderConfirmation.jsp");
 			forward.setRedirect(false);
+		} else if(command.equals("/OrderCouponPro.od")) {
+			// 쿠폰 페이지에서 받아온 쿠폰코드로 할인금액 계산하는 페이지
+			action = new OrderCouponProAction();
+			forward = action.execute(request, response);
+			
+			
 		} 
  
 

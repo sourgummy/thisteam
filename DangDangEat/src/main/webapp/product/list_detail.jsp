@@ -150,7 +150,7 @@ body {
 <!-- 					<div class="small mb-1"> -->
 <%-- 						 ${product.pro_brand } --%>
 <!-- 					</div> -->
-					<h1 class="display-5 fw-bolder" id="pro_name">${product.pro_name }</h1>
+					<h2 class="display-5 fw-bolder" id="pro_name">${product.pro_name }</h2>
 					<!-- 상품 상세내용 -->
 					<p class="lead fs-5">${fn:replace(product.pro_info, replaceChar, "<br/>")}</p>
 					<p class="fs-5">
@@ -244,7 +244,7 @@ body {
 				</div>
 		</div>
 	</section>
-		<section class="py-2 bg-light" id="pro_delivery">
+	<section class="py-2 bg-light" id="pro_delivery">
 		<div class="container px-lg-5 mt-5">
 			<h3>배송안내</h3>
 			&nbsp;
@@ -282,7 +282,7 @@ body {
 			</p>
 			<p>
 				<strong>-&nbsp;</strong><strong>예약배송/프리오더&nbsp;제품을&nbsp;다른&nbsp;상품과&nbsp;함께&nbsp;구매하시는&nbsp;경우&nbsp;
-				예약배송/프리오더&nbsp;제품&nbsp;출고날짜에&nbsp;합배송되어&nbsp;순차&nbsp;출고되므로&nbsp;별도배송을&nbsp;원하시면&nbsp;각각&nbsp;따로&nbsp;주문
+					예약배송/프리오더&nbsp;제품&nbsp;출고날짜에&nbsp;합배송되어&nbsp;순차&nbsp;출고되므로&nbsp;별도배송을&nbsp;원하시면&nbsp;각각&nbsp;따로&nbsp;주문
 					바랍니다.</strong>
 			</p>
 			<p>

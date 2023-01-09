@@ -1,34 +1,42 @@
+<%@page import="org.json.JSONArray"%>
+<%@page import="org.json.JSONObject"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>   
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<meta charset="utf-8">
 
-    <title>DangDangEat Admin - MemberList</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
 
-    <!-- Custom fonts for this template -->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<title>DangDangEat Admin - 쿠폰 등록</title>
 
-    <!-- Custom styles for this template -->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+   <link href="css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+ <!-- 드롭다운에 필요한 부트스트랩 bootstrap.bundle.min.js-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  
 
-    <!-- Custom styles for this page -->
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+<!-- Custom fonts for this template -->
+<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
+<!-- Custom styles for this template -->
+<link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+<!-- Custom styles for this page -->
+<link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 <!-- 폰트 설정 -->
 <style>
 @font-face {
     font-family: 'GmarketSans';
-    font-weight: 300;
+    font-weight: normal;
     font-style: normal;
     src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.eot');
     src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.eot?#iefix') format('embedded-opentype'),
@@ -37,48 +45,239 @@
          url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.ttf') format("truetype");
     font-display: swap;
 } 
+  @font-face { /*지마켓 산스*/
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}    
 
 body {
-    font-family: 'GmarketSans';
+    font-family: 'GmarketSansMedium';
+    vertical-align: middle;
 }
-.main-icon {
+
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+     
+<style type="text/css">
+
+	input {
+  width: 300x;
+  height: 32px;
+  font-size: 15px;
+  border: 0;
+  border-radius: 15px;
+  outline: none;
+  padding-left: 10px;
+  background-color: rgb(233, 233, 233);
+  vertical-align: middle;
+
+}
+.input_wid65{
+  width: 85px;
+  height: 32px;
+  border-radius: 10px;
+  align-content: center;
+}
+
+.input_wid100{
+  width: 200px;
+  height: 32px;
+  border-radius: 10px;
+  align-content: center;
+}
+
+
+ label {
+  vertical-align: middle;
+ }
+ 
+ tr {
+ 	text-align: center;
+   vertical-align: middle;
+ }
+ 
+ .main-icon {
     padding: 1%;
     height: 40px;
     width: auto;
    margin-right: 3%;
    padding: 5px;
 }
-
 </style>
-<%
-// 세션 아이디가 null 이거나 "admin" 이 아닐 경우 "잘못된 접근입니다!" 출력 후 메인페이지로 이동
-String sId = (String)session.getAttribute("sId");
-// System.out.println(sId);
-// 잘못된 접근일 때 바로 main.jsp 로 보내기
-if(sId == null || !sId.equals("admin")) {
-   %>
-   <script>
-      alert("잘못된 접근입니다!");
-      location.href = "./";
-   </script>
-   <%
-}
-%>
-
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <script type="text/javascript">
-      
+
+	
+$(function () {
+	$("input[name=deleteCpBtn]" ).on("click", function () {
+		let tr_id  = $(this).closest('tr').attr('id');// 버튼이 속한 tr태그의 id가져오기
+		let cp_name =  $("#"+tr_id).children('td').eq(0).text(); //tr태그안의 td에서 첫번째(=쿠폰명)의 text가져오기
+		let cp_code =  $("#"+tr_id).children('td').eq(2).text(); 
+// 		alert(cp_name + "/ " + cp_code);
+		let isDelete = confirm("쿠폰을 삭제하시겠습니까? \n\n ※삭제될 쿠폰명 : "+ cp_name);
+		
+		if(isDelete){
+			location.href = "CouponDelete.ad?cp_code="+cp_code+"&isDelete=" + isDelete;
+		}
+	});
+	
+	$("input[name=updateCpBtn]" ).on("click", function () {
+		let tr_id  = $(this).closest('tr').attr('id');// 버튼이 속한 tr태그의 id가져오기
+		let cp_name =  $("#"+tr_id).children('td').eq(0).text(); //tr태그안의 td에서 첫번째(=쿠폰명)의 text가져오기
+		let cp_code =  $("#"+tr_id).children('td').eq(2).text(); 
+// 		alert(cp_name + "/ " + cp_code);
+
+		let isDelete = false;
+		
+	 $originalName =  $("#"+tr_id).children('td').eq(0).text();
+	 $originalperiod = $("#"+tr_id).children('td').eq(4).text()
+	 $originalMin =  $("#"+tr_id).children('td').eq(7).text();
+	 $originalMax =  $("#"+tr_id).children('td').eq(8).text();
+	 $originalEnddate =  $("#"+tr_id).children('td').eq(9).text();
+	 
+	 $originalUpdateCpBtn =  $("#"+tr_id).children('td').eq(10).children('input').eq(0)
+	 $originalDeleteCpBtn =  $("#"+tr_id).children('td').eq(10).children('input').eq(1)
+	
+	 
+
+
+	
+			$("#"+tr_id).html("<td><input class='input_wid100' type='text' required='required' value="+$("#"+tr_id).children('td').eq(0).text() +"><div></div></td>"//cp_name
+							   +"<td>"+$("#"+tr_id).children('td').eq(1).text() +"</td>"//cp_target
+							   +"<td>"+$("#"+tr_id).children('td').eq(2).text()+"</td>"//cp_code
+							   +"<td>"+$("#"+tr_id).children('td').eq(3).text()+"</td>"//cp_discount_value
+							   +"<td><input class='input_wid65' type='number' value="+$("#"+tr_id).children('td').eq(4).text()+"></td>"//cp_period
+							   +"<td>"+$("#"+tr_id).children('td').eq(5).text()+"</td>"//cp_startdate
+							   +"<td>"+"</td>"//cp_enddate
+							   +"<td><input class='input_wid65' type='number' required='required' value="+$("#"+tr_id).children('td').eq(7).text()+"></td>"//cp_min_price
+							   +"<td><input class='input_wid65' type='number' required='required' value="+$("#"+tr_id).children('td').eq(8).text()+"></td>"//cp_max_discount
+							   +"<td></td>"
+							   +"<td><input type='button' value='수정' class ='btn btn-success btn-sm' name='updateComplete'>"
+							   +" <input type='button' value='취소' class ='btn btn-danger btn-sm' name='cancelUpdate'></td>"
+					);
+			
+			
+			$("input[name=cancelUpdate]" ).on("click", function () {//수정 창에서 취소버튼 클릭시
+				
+			
+				$("#"+tr_id).html( //기존내용으로 바꾸기
+							"<td>"+ $originalName +"</td>"//cp_name
+						   +"<td>"+$("#"+tr_id).children('td').eq(1).text() +"</td>"//cp_target
+						   +"<td>"+$("#"+tr_id).children('td').eq(2).text()+"</td>"//cp_code
+						   +"<td>"+$("#"+tr_id).children('td').eq(3).text()+"</td>"//cp_discount_value
+						   +"<td>"+$originalperiod+"</td>"//cp_period
+						   +"<td>"+$("#"+tr_id).children('td').eq(5).text()+"</td>"//cp_startdate
+						   +"<td>"+$("#"+tr_id).children('td').eq(6).text()+"</td>"//cp_enddate
+						   +"<td>"+  $originalMin  +"</td>"//
+						   +"<td>"+ $originalMax +"</td>"//
+						   +"<td>"+ $originalEnddate+"</td>"//cp_enddate
+						   +"<td><input type='button' value='수정' class ='btn btn-primary btn-sm' name='updateCpBtn'>"
+						   +" <input type='button' value='삭제' class ='btn btn-primary btn-sm' name='deleteCpBtn'></td>"
+				);
+			return;
+			});
+			
+			
+				$name = $("#"+tr_id).children('td').eq(0).children('input');
+				$btn =  $("input[name=updateComplete]")
+				
+				$name.on("change", function() {
+				let regex = /^[가-힣a-zA-Z0-9_%]{2,30}$/;
+					
+					if(!regex.exec($name.val())){
+			
+						$name.next().html("<small>2 - 30자 이내, 한글,영어,특수문자(_%)</small>").css("color","red").css("magin","0");
+						$btn.prop("disable", true);
+					}else{
+						$name.closest('div').html();
+					}
+				});
+				
+			$("input[name=updateComplete]" ).on("click",function () {//수정 창에서 쿠폰 수정 버튼 클릭시
+				
+			
+			
+				
+				let coupon_name =  $("#"+tr_id).children('td').eq(0).children('input').val();
+				let cp_period = $("#"+tr_id).children('td').eq(4).children('input').val();
+				let cp_min_price = $("#"+tr_id).children('td').eq(7).children('input').val();
+				let cp_max_discount = $("#"+tr_id).children('td').eq(8).children('input').val();
+		
+	
+				
+					$.ajax({//
+							url:"CouponUpdate.ad",
+							data:{
+								"cp_code": cp_code,
+								"cp_name": coupon_name,
+								"isDelete":isDelete,//false
+								"cp_period":cp_period,
+								"cp_min_price": cp_min_price,
+								"cp_max_discount": cp_max_discount
+							},
+							 dataType: "json" ,
+							
+							success: function(result){
+							
+								for(let cp of result){
+									alert("수정 성공 !")
+// 									alert(tr_id);
+											//cp_current_st를 발급중/만료됨 문자열로 치환
+												let statStr = "";
+											if(cp.cp_current_st.equals == 1){
+												statStr = "발급중";
+											}else{
+												if(cp.cp_target.equals =="event"){
+													statStr ="만료됨";
+												}else{
+													statStr ="-";
+													}
+												}
+									$("#"+tr_id).empty();
+									$("#"+tr_id).html(
+											"<td>"+cp.cp_name+"</td>"
+											+"<td>"+cp.cp_target+"</td>"
+											+"<td>"+cp.cp_code+"</td>"
+											+"<td>"+cp.cp_discount_value+" %</td>"
+											+"<td>"+cp.cp_period+"</td>"
+											+"<td>"+cp.cp_startdate+"</td>"
+											+"<td>"+cp.cp_enddate+"</td>"
+											+"<td>"+cp.cp_min_price+"</td>"
+											+"<td>"+cp.cp_max_discount+"</td>"
+											+"<td>"+statStr+"</td>"
+											+"<td>"
+							 					+"<input type='button' value='수정 완료' class = 'btn btn-success btn-sm' name='updateCpBtn'>"
+							 				+"</td>"
+									);
+								}
+								if(result == false){//액션클래스에서 false리턴받을 경우
+									alert("쿠폰 정보 수정에 실패했습니다.")
+								}
+							},
+							error:  function(result){}
+					});//$.ajax{()
+						
+				
+			});
+			
+
+	});
+	});//$(function 
+		
+		
+
 </script>
 </head>
-
+<body>
 <body id="page-top">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <!-- Sidebar -->
-               <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+               <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
 
@@ -101,7 +300,6 @@ if(sId == null || !sId.equals("admin")) {
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>관리자 메인 페이지</span></a>
             </li>
-
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -366,69 +564,91 @@ if(sId == null || !sId.equals("admin")) {
                 </nav>
                 <!-- End of Topbar -->
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
+ <!------------------------------------------------------------------------------------------------------------------- -->
+ 	<div class="m-5">
+ 	&#128273;관리자 >
+ 	
+<div class="dropdown d-inline">
+  <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+    쿠폰
+  </a>
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800 font-weight-bold">주문 관리</h1>
-                    <p class="mb-4">주문 목록 페이지 <a target="_blank"
-                            href="https://datatables.net">주문 검색, 필터 기능 등 필요</a>.</p>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <li><a class="dropdown-item" href="CouponRegister.ad">쿠폰 등록</a></li>
+    <li><a class="dropdown-item" href="AdminCouponList.ad">등록된 쿠폰 관리</a></li>
+  </ul>
+</div>
+ 	  > &#127903; 쿠폰등록
+ 		<div class="m-3"> <h3>등록된 쿠폰 관리&#127903;</h3> </div>
+ 		<hr>
+ 		
+	 		<table class="table">
+	 		  <thead class="">
+		 		<tr>
+<!-- 		 		<th>#</th> -->
+	 				<th>쿠폰명</th>
+	 				<th>발행대상</th>
+	 				<th>쿠폰 코드</th>
+	 				<th>할인율</th>
+	 				<th>쿠폰 유효기간 (일)</th>
+	 				<th>쿠폰 시작일</th>
+	 				<th>쿠폰 만료일</th>
+	 				<th>최소 적용 금액</th>
+	 				<th>최대 할인액</th>
+	 				<th>쿠폰 상태</th>
+	 				<th>쿠폰 관리</th>
+	 				
+		 		</tr>
+	 			</thead>
+	
+	 			
+	 		<%  JSONArray  couponList = (JSONArray)request.getAttribute("CouponList");
+// 	 					for(Object obj : couponList){
+// 	 						JSONObject jo = (JSONObject)couponList;
+							
+						for(int i=0; i<couponList.length(); i++){
+							JSONObject coupon = couponList.getJSONObject(i);%>
+					
+		 		<tr id="couponIdx_<%=i %>">
+<%-- 		 			<td><%=i %><td> --%>
+	 				<td><%=coupon.get("cp_name")%></td>
+	 				<td><%=coupon.get("cp_target")%></td>
+	 				<td><%=coupon.get("cp_code")%></td>
+	 				<td><%=coupon.get("cp_discount_value")%> %</td>
+	 				<td><%=coupon.get("cp_period")%></td>
+	 				<td><%=coupon.get("cp_startdate")%></td>
+	 				<td><%= coupon.get("cp_enddate") %></td>
+	 				<td><%=coupon.get("cp_min_price")%></td>
+	 				<td><%=coupon.get("cp_max_discount")%></td>
+	 				<td><%if(coupon.get("cp_current_st").equals(1)){%>
+	 					발급중
+	 				<%}else{ 
+	 					if(coupon.get("cp_target").equals("event")){%> 
+	 					   만료됨
+	 					<%}else{%>
+						   - </td>
+	 				<%} 
+	 				} %>
+	 				<td>
+	 					<input type="button" value="수정" class = "btn btn-primary btn-sm m-1" name="updateCpBtn"> 
+	 					<input type="button" value="삭제" class = "btn btn-primary btn-sm m-1" name="deleteCpBtn">
+	 				</td>
+		 		</tr>
+	 				
+	 			<%} //end of for()%>
+	
 
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">주문 목록</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>최종주문번호</th> <!-- payments.pay_number -->
-                                            <th>주문금액</th> <!-- payments.pay_amount -->
-                                            <th>주문 아이디</th> <!-- orders안에서 조회 가능 -->
-                                            <th>주문자 이름</th>
-                                            <th>우편번호</th>
-                                            <th>배송주소</th>
-                                            <th>배송상세주소</th>
-                                            <th>배송 연락처</th>
-                                            <th>배송 메시지</th>
-                                            <th>주문일</th>
-                                        </tr>
-                                    </thead>
-                                   
-                                    <tbody>
-	                                  <c:forEach var="order" items="${adminOrderList }" varStatus="status">
-                                          <tr>
-                                             <td>${order.pay_number }</td>
-                                             <td><fmt:formatNumber pattern="#,###">${order.pay_amount }</fmt:formatNumber></td>
-                                             <td>${order.member_id }</td>
-                                             <td>${order.order_name }</td>
-                                             <td>${order.order_postcode }</td>
-                                             <td>${order.order_address1 }</td>
-                                             <td>${order.order_address2 }</td>
-                                             <td>${order.order_mobile }</td>
-                                             <td>${order.order_comment }</td>
-                                             <td>${order.order_date }</td>
-                                           </tr>
-	                                  </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <!-- /.container-fluid -->
-
-            </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
+	 		
+	 		</table>
+	 		</div>
+	 	</div>
+       <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+
+                        <span>Copyright &copy; Your Website 2021</span>
+
                     </div>
                 </div>
             </footer>
@@ -476,11 +696,19 @@ if(sId == null || !sId.equals("admin")) {
     <script src="js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
+
+<!--     <script src="vendor/chart.js/Chart.min.js"></script> -->
+
+<!--     Page level custom scripts -->
+<!--     <script src="js/demo/chart-area-demo.js"></script> -->
+<!--     <script src="js/demo/chart-pie-demo.js"></script> -->
+
     <script src="vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
+
 
 </body>
 

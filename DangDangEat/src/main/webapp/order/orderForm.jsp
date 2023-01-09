@@ -10,6 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>orderForm</title>
   <link href="css/orderForm.css" rel="stylesheet" type="text/css">
+  <!-- top.jsp 랑 중복되는 container  : orderForm2.css -->
   <link href="css/orderForm2.css" rel="stylesheet" type="text/css">
   <style type="text/css">
 		@font-face {
@@ -59,6 +60,7 @@
 
 <body>
  <jsp:include page="../inc/top.jsp"></jsp:include>
+<!--  <section> -->
   <main>
   	<form action="OrderInsertPro.od" method="post">
   		<!-- order_product 에 들어갈 정보 -->
@@ -204,6 +206,8 @@
 	      </div>
 	   </form>   
   </main>
+<!--   </section> -->
+  
 </body>
 <%-- 카카오 주소 API 적용하기 --%>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

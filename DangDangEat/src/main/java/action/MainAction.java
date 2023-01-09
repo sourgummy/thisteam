@@ -1,32 +1,41 @@
 package action;
 
-import java.util.List;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import svc.ProductSelectService;
+import org.json.JSONArray;
+
+import svc.ProductListNewService;
 import vo.ActionForward;
-import vo.ProductBean;
 
 public class MainAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
+		ActionForward forward = null;
 		
-		
-		ProductSelectService service = new ProductSelectService();
-		List<ProductBean> productList  = service.getNewProduct(5);
+		ProductListNewService service = new ProductListNewService();
+		JSONArray productList  = service.getNewProduct(5);
 
-		System.out.println("productList: "+ productList);
+
 		
 		request.setAttribute("productList", productList);
 		
 		
-		ActionForward forward = new ActionForward();
-		forward.setPath("main/main.jsp");
-		forward.setRedirect(false);
+		try {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println(productList);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
+
 		return forward;
 	}
 

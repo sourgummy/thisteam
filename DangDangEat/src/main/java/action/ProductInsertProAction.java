@@ -28,7 +28,8 @@ public class ProductInsertProAction implements Action {
 			//업로드 실제 디렉토리(톰캣) 얻어오기 
 			
 			String realPath = request.getServletContext().getRealPath(uploadPath);
-			//실제 업로드 경로(집) : C:\Users\eyeds\eclipse_jsp\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\DangDangEat\ upload
+			//실제 업로드 경로(집) :
+			// C:\Users\eyeds\eclipse_jsp\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\DangDangEat\ upload
 			//실제 업로드 경로(학원) : D:\workspace_jsp5\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\DangDangEat\ upload
 //			//String uploadPath = "ftp://db.itwillbs.dev:8030/upload"; // FTP 주소!!!체크필수!!!  12/30
 			System.out.println("실제 업로드 경로 : " + realPath);
@@ -114,7 +115,7 @@ public class ProductInsertProAction implements Action {
 				// 포워딩 정보 저장을 위한 ActionForward 객체 생성
 				// 포워딩 경로 : ProductList.pd, 포워딩 방식 : Redirect
 				forward = new ActionForward();
-				forward.setPath("AdminProductList.pd"); 
+				forward.setPath("AdminProductList.ad"); 
 				forward.setRedirect(true);
 			}
 

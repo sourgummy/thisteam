@@ -29,19 +29,16 @@
   <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
   <script type="text/javascript">
     /* Set values + misc */
-    var promoCode;
-    var promoPrice;
+//     var promoCode;
+    
     var fadeTime = 300;
-    var cp_code;
-
-    
-    function getCp_code(cp_code){
-        document.getElementById("#promo-code").value = cp_code;
-  	}
-    
-    function couponView() {
-    	 window.open("SelectCoupon.od", "_blank", "height:700, width:300");
-    }
+  
+    function plz() {
+    	$("#promo-code").on("change", function() {
+	    	alert($("#promo-code").val());
+		});
+		
+	}
     
     function iamport() {
 		
@@ -73,13 +70,39 @@
 // 	      }
 	          
 	      });
+	      
     
     $(function() {
+		let promoPrice;
     	
-    	$('.promo-code-cta').click(function() {
-    	 
-    	    window.open('SelectCoupon.od', '_blank', 'height:700, width:300');
-		});	
+    	$("#promo-code").on("change", function() {
+	    	alert($("#promo-code").val());
+		});
+    	
+    	$("input").change(function(){
+        
+			$.ajax({
+				type: "get",
+				url: "OrderCouponPro.od",
+				async:false,
+				data: {
+					cp_code : $('#promo-code').val(), 
+					pro_amount : $('#pro_amount').val(),
+					cart_code : $('#cart_code').val(),
+					order_code : $('#order_code').val()
+					},
+				success: function (data) {
+					promoPrice = data;
+					alert(promoPrice);
+					 $('#basket-promo').text(promoPrice);
+	               	}
+			}); // ajax
+    	}); // input
+    	
+    }); // func()
+    </script>
+    <script type="text/javascript">
+    	
 // 		/* 상품금액 + 배송비 = Total (자동로드 되도록 수정예정)*/
 		
 // // 	    	$("#basket-subtotal").val($(".price").val());
@@ -121,130 +144,23 @@
 // // 		}); // 아임포트 api
 	    	
 		
-// 	    /* Promo actions */
-	
-	
-// 	    $('.promo-code-cta').click(function() {
-	
-// 	      promoCode = $('#promo-code').val();
-	
-// 	      if (promoCode == '10off' || promoCode == '10OFF') {
-// 	        //If promoPrice has no value, set it as 10 for the 10OFF promocode
-// 	        if (!promoPrice) {
-// 	          promoPrice = 10;
-// 	        } else if (promoCode) {
-// 	          promoPrice = promoPrice * 1;
-// 	        }
-// 	      } else if (promoCode != '') {
-// 	        alert("Invalid Promo Code");
-// 	        promoPrice = 0;
-// 	      }
-// 	      //If there is a promoPrice that has been set (it means there is a valid promoCode input) show promo
-// 	      if (promoPrice) {
-// 	        $('.summary-promo').removeClass('hide');
-// 	        $('.promo-value').text(promoPrice.toFixed(2));
-// 	        recalculateCart(true);
-// 	      }
-// 	    });
-	
-// 	    /* Recalculate cart */
-// 	    function recalculateCart(onlyTotal) {
-// 	      var subtotal = 0;
-	
-// 	      /* Sum up row totals */
-// 	      $('.basket-product').each(function() {
-// 	        subtotal += parseInt($(this).children('.subtotal').text());
-// 	      });
-	
-// 	      /* Calculate totals */
-// 	      var total = subtotal;
-	
-// 	      //If there is a valid promoCode, and subtotal < 10 subtract from total
-// 	      var promoPrice = parseInt($('.promo-value').text());
-// 	      if (promoPrice) {
-// 	        if (subtotal >= 10) {
-// 	          total -= promoPrice;
-// 	        } else {
-// 	          alert('Order must be more than £10 for Promo code to apply.');
-// 	          $('.summary-promo').addClass('hide');
-// 	        }
-// 	      }
-	
-// 	      /*If switch for update only total, update only total display*/
-// 	      if (onlyTotal) {
-// 	        /* Update total display */
-// 	        $('.total-value').fadeOut(fadeTime, function() {
-// 	          $('#basket-total').html(total.toFixed(2));
-// 	          $('.total-value').fadeIn(fadeTime);
-// 	        });
-// 	      } else {
-// 	        /* Update summary display. */
-// 	        $('.final-value').fadeOut(fadeTime, function() {
-// 	          $('#basket-subtotal').html(subtotal.toFixed(2));
-// 	          $('#basket-total').html(total.toFixed(2));
-// 	          if (total == 0) {
-// 	            $('.checkout-cta').fadeOut(fadeTime);
-// 	          } else {
-// 	            $('.checkout-cta').fadeIn(fadeTime);
-// 	          }
-// 	          $('.final-value').fadeIn(fadeTime);
-// 	        });
-// 	      }
-// 	    }
-	
-// 	    /* Update quantity */
-// 	    function updateQuantity(quantityInput) {
-// 	      /* Calculate line price */
-// 	      var productRow = $(quantityInput).parent().parent();
-// 	      var price = parseFloat(productRow.children('.price').text());
-// 	      var quantity = $(quantityInput).val();
-// 	      var linePrice = price * quantity;
-	
-// 	      /* Update line price display and recalc cart totals */
-// 	      productRow.children('.subtotal').each(function() {
-// 	        $(this).fadeOut(fadeTime, function() {
-// 	          $(this).text(linePrice.toFixed(2));
-// 	          recalculateCart();
-// 	          $(this).fadeIn(fadeTime);
-// 	        });
-// 	      });
-	
-// 	      productRow.find('.item-quantity').text(quantity);
-// 	      updateSumItems();
-// 	    }
-	
-// 	    function updateSumItems() {
-// 	      var sumItems = 0;
-// 	      $('.quantity input').each(function() {
-// 	        sumItems += parseInt($(this).val());
-// 	      });
-// 	      $('.total-items').text(sumItems);
-// 	    }
-	
-	    
-	    
 
+	
+	    
+	    
 //     });
-
-
-function getCp_code(let cp_code){
-
-		alert(cp_code);
-//       document.getElementById("값 넣을곳 id").value = cp_code;
-
-}
-
 	</script>
 </head>
 
 <body>
  <jsp:include page="../inc/top.jsp"></jsp:include>
   <main>
+  <div id="resultArea"></div>
   	<form action="OrderPaymentPro.od" method="post">
   	<c:forEach var="cart" items="${orderProductList }" varStatus="status">
-  		<input type="hidden" name="cart_code" value="${cart.cart_code }">
+  		<input type="hidden" name="cart_code" name="cart_code" value="${cart.cart_code }">
   		<input type="hidden" name="pro_code" value="${cart.pro_code }">
-  		<input type="hidden" name="pro_amount" value="${cart.pro_price * cart.cart_amount + 3500 }">
+  		<input type="hidden" name="pro_amount" id ="pro_amount" value="${cart.pro_price * cart.cart_amount + 3500 }">
   	</c:forEach>
   		<h1 align="center">주문서 확인 & 결제 페이지</h1>
 	    <div class="basket">
@@ -289,7 +205,7 @@ function getCp_code(let cp_code){
 	  <hr />
 		  <div class="form">
 		    <c:forEach var="order" items="${orderMemberList }" varStatus="status">
-		    	<input type="hidden" name="order_code" value="${order.order_code }">
+		    	<input type="hidden" name="order_code" id="order_code" value="${order.order_code }">
 			  <div class="fields fields--2">
 			    <label class="field">
 			      <span class="field__label" >이름</span>
@@ -324,8 +240,6 @@ function getCp_code(let cp_code){
 			    <input class="field__input" type="text" id="order_message" value="${order.order_comment }" readonly="readonly"/>
 			  </label>
 			  
-			
-			  
 	  	</c:forEach>
 	  </div>
 	  <!-- 주문자 정보 -->
@@ -337,8 +251,9 @@ function getCp_code(let cp_code){
 	  <h1>할인 정보</h1>
 	       <div class="basket-module"> 
 		        <label for="promo-code">Enter a promotional code</label>
-		        <input id="promo-code" type="text" name="promo-code" maxlength="5" class="promo-code-field">
-		        <input type="button" class="promo-code-cta" onclick="window.open('SelectCoupon.od, '_blank', 'height:700, width:300')">Apply
+		        <input id="promo-code" type="text"  maxlength="5" class="promo-code-field" >
+		        <button class="promo-code-cta" type="button" onclick = "window.open('SelectCoupon.od', '_blank', 'height:700, width:300')">Coupon</button>
+	      		<pre id="inputPre"></pre>
 	      </div>
 	  	 <hr>
 	</div>
