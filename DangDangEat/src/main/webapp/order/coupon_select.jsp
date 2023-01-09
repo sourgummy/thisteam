@@ -138,6 +138,11 @@ $(function(){
 	
 });//$(function(){}
 
+
+function setOrderCouponValue() {
+    opener.document.getElementById("promo-code").value = document.getElementById("selectedCoupon").value;
+    window.close();
+   }
 	
 	function couponSubmit() {
 		//쿠폰체크 여부에 따라 submit 여부 결정
@@ -189,7 +194,7 @@ $(function(){
 		
 		</div>
 			<div class="m-3">
-				<input type="submit" value="쿠폰 적용" class = "btn btn-primary btn-sm">
+				<input type="button" value="쿠폰 적용" class = "btn btn-primary btn-sm"  onclick="setOrderCouponValue()">
 				<input type="button" value="취소" class = "btn btn-secondary btn-sm" onclick="window.close()">
 			</div>
 		</form>

@@ -69,21 +69,21 @@ public class AdminFrontController extends HttpServlet {
 		} else if(command.equals("/CouponRegister.ad")) {
 			//관리자 쿠폰등록 view페이지
 			forward = new ActionForward();
-			forward.setPath("order/admin_coupon.jsp");
+			forward.setPath("admin/admin_coupon.jsp");
 			forward.setRedirect(false);
 
 		} else if(command.equals("/CouponRegisterPro.ad")) {
 			//관리자 쿠폰등록 비지니스로직
 			action = new CouponRegisterProAction();
 			forward = action.execute(request, response);
-
+			
 
 		} else if(command.equals("/CheckExistCouponCode.ad")) {
 			//관리자 쿠폰등록페이지_쿠폰코드 중복인지 확인
 			action = new CouponCodeCheckAction();
 			forward = action.execute(request, response);
 
-		} else if(command.equals("/CouponList.ad")) {
+		} else if(command.equals("/AdminCouponList.ad")) {
 			//관리자 쿠폰 리스트 view페이지
 			action = new CouponListAction();
 			forward = action.execute(request, response);	

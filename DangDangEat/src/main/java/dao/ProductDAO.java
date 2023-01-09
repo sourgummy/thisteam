@@ -7,6 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.mysql.cj.xdevapi.JsonArray;
+
 import db.JdbcUtil;
 import vo.ProductBean;
 
@@ -386,13 +391,13 @@ public class ProductDAO {
 	
 	
 	
-	public List<ProductBean> selectNewProduct(int numberOfProducts) {
+	public JSONArray selectNewProduct(int numberOfProducts) {
 	
 
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ArrayList<ProductBean> productList = null;
+		JSONArray productList = null;
 		try {
 			// product 테이블의 모든 레코드 갯수 조회
 			// => 제목에 검색어를 포함하는 레코드 조회(WHERE pro_name LIKE '%검색어%')
@@ -409,15 +414,16 @@ public class ProductDAO {
 		
 			rs = pstmt.executeQuery();
 			System.out.println("실행됨");
-			 productList = new ArrayList<ProductBean>();
+			  productList = new JSONArray();
 			// 조회 결과가 있을 경우 ArrayList에 저장 변수에 저장
 			while(rs.next()) {
-				ProductBean product = new ProductBean();
-				product.setPro_name(rs.getString("pro_name"));
-				product.setPro_code(rs.getInt("pro_code"));
-				product.setPro_thumb(rs.getString("pro_thumb"));
-				product.setPro_real_thumb(rs.getString("pro_real_thumb"));
-				productList.add(product);
+				JSONObject product = new JSONObject();
+				product.put("pro_name", rs.getString("pro_name"));
+				product.put("pro_code", rs.getInt("pro_code"));
+				product.put("pro_thumb", rs.getString("pro_thumb"));
+				product.put("pro_real_thumb", rs.getString("pro_real_thumb"));
+				product.put("pro_name", rs.getString("pro_name"));
+				productList.put(product);
 			}
 		} catch (SQLException e) {
 			System.out.println("SQL구문 오류 - selectNewProduct(int numberOfProducts)");
