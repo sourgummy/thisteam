@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.AdminOrderListAction;
+import action.BoardAdminListAction;
+import action.AdminTotalMainAction;
 import action.CouponCodeCheckAction;
 import action.CouponDeleteAction;
 import action.CouponListAction;
@@ -51,9 +53,8 @@ public class AdminFrontController extends HttpServlet {
 		if(command.equals("/AdminMain.ad")) { // 관리자 페이지 메인
 			System.out.println("관리자 페이지");
 
-			forward = new ActionForward();
-			forward.setPath("admin/admin_main.jsp");
-			forward.setRedirect(false);
+			action = new AdminTotalMainAction();
+			forward = action.execute(request, response);
 		} else if(command.equals("/AdminMemberList.ad")) { // 회원 관리 페이지
 
 			System.out.println("회원 목록");
@@ -76,7 +77,7 @@ public class AdminFrontController extends HttpServlet {
 		} else if(command.equals("/CouponRegister.ad")) {
 			//관리자 쿠폰등록 view페이지
 			forward = new ActionForward();
-			forward.setPath("order/admin_coupon.jsp");
+			forward.setPath("admin/admin_coupon.jsp");
 			forward.setRedirect(false);
 
 		} else if(command.equals("/CouponRegisterPro.ad")) {
@@ -89,8 +90,8 @@ public class AdminFrontController extends HttpServlet {
 			//관리자 쿠폰등록페이지_쿠폰코드 중복인지 확인
 			action = new CouponCodeCheckAction();
 			forward = action.execute(request, response);
-
-		} else if(command.equals("/CouponList.ad")) {
+			
+		} else if(command.equals("/AdminCouponList.ad")) {
 			//관리자 쿠폰 리스트 view페이지
 			action = new CouponListAction();
 			forward = action.execute(request, response);	
@@ -119,7 +120,10 @@ public class AdminFrontController extends HttpServlet {
 			forward = action.execute(request, response);
 
 		} else if (command.equals("/AdminBoardList.ad")) { // 게시판 관리
-
+			System.out.println("게시판");
+			action = new BoardAdminListAction();
+			forward = action.execute(request, response);
+			
 		}  else if (command.equals("/AdminCouponList.ad")) { // 쿠폰 관리 새로 매핑해주세요!!
 
 		}  else if (command.equals("/About.ad")) { //
