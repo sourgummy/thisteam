@@ -147,21 +147,23 @@ if (sId == null || sId.equals("")) {
 		<div class="row">
 			<div class="col-lg-3 col-md-6">
 				<div class="card">
-					<div class="card-body">
-						<div class="stat-widget-five">
-							<div class="stat-icon dib flat-color-1">
-								<i class="fa fa-shopping-cart"></i>
-							</div>
-							<div class="stat-content">
-								<div class="text-left dib">
-									<div class="stat-heading">주문</div>
-									<div class="stat-text">
-										<span>${order_count } 건</span>
+					<a href="">
+						<div class="card-body">
+							<div class="stat-widget-five">
+								<div class="stat-icon dib flat-color-1">
+									<i class="fa fa-shopping-cart"></i>
+								</div>
+								<div class="stat-content">
+									<div class="text-left dib">
+										<div class="stat-heading">주문</div>
+										<div class="stat-text">
+											<span>${order_count } 건</span>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+					</a>
 				</div>
 			</div>
 
@@ -181,47 +183,51 @@ if (sId == null || sId.equals("")) {
 								</div>
 							</div>
 						</div>
-					</div>
+					</a>
 				</div>
 			</div>
 
 			<div class="col-lg-3 col-md-6">
 				<div class="card">
-					<div class="card-body">
-						<div class="stat-widget-five">
-							<div class="stat-icon dib flat-color-3">
-								<i class="fa fa-question"></i>
-							</div>
-							<div class="stat-content">
-								<div class="text-left dib">
-									<div class="stat-heading">리뷰</div>
-									<div class="stat-text">
-										<span>${review_count } 개</span>
+					<a href="">
+						<div class="card-body">
+							<div class="stat-widget-five">
+								<div class="stat-icon dib flat-color-3">
+									<i class="fa fa-question"></i>
+								</div>
+								<div class="stat-content">
+									<div class="text-left dib">
+										<div class="stat-heading">리뷰</div>
+										<div class="stat-text">
+											<span>${review_count } 개</span>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+					</a>
 				</div>
 			</div>
 
 			<div class="col-lg-3 col-md-6">
 				<div class="card">
-					<div class="card-body">
-						<div class="stat-widget-five">
-							<div class="stat-icon dib flat-color-4">
-								<i class="fa fa-list-ul"></i>
-							</div>
-							<div class="stat-content">
-								<div class="text-left dib">
-									<div class="stat-heading">Q&A</div>
-									<div class="stat-text">
-										<span>${qna_count } 건</span>
+					<a href="">
+						<div class="card-body">
+							<div class="stat-widget-five">
+								<div class="stat-icon dib flat-color-4">
+									<i class="fa fa-list-ul"></i>
+								</div>
+								<div class="stat-content">
+									<div class="text-left dib">
+										<div class="stat-heading">Q&A</div>
+										<div class="stat-text">
+											<span>${qna_count } 건</span>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+					</a>
 				</div>
 			</div>
 		</div>

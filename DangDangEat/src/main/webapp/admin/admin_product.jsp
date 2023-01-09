@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,18 +17,15 @@
 
 <title>DangDangEat - 관리자 상품 관리</title>
 
-<!-- Custom fonts for this template -->
-<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-<link
-    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-    rel="stylesheet">
+  <!-- Custom fonts for this template -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
-<!-- Custom styles for this template -->
-<link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
-<!-- Custom styles for this page -->
-<link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+    <!-- Custom styles for this page -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
 <style>
 
 @font-face {
@@ -43,7 +43,32 @@
 body {
     font-family: 'GmarketSans';
 }
+
+.main-icon {
+    padding: 1%;
+    height: 40px;
+    width: auto;
+   margin-right: 3%;
+   padding: 5px;
+}
+
 </style>
+<%
+// 세션 아이디가 null 이거나 "admin" 이 아닐 경우 "잘못된 접근입니다!" 출력 후 메인페이지로 이동
+String sId = (String)session.getAttribute("sId");
+// System.out.println(sId);
+// 잘못된 접근일 때 바로 main.jsp 로 보내기
+if(sId == null || !sId.equals("admin")) {
+   %>
+   <script>
+      alert("잘못된 접근입니다!");
+      location.href = "./";
+   </script>
+   <%
+}
+%>
+<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+
 </head>
 <body id="page-top">
 
@@ -54,23 +79,25 @@ body {
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="./">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="AdminMain.ad">
+                <div class="div-top-icon">
+                <img class="main-icon" src="img/maindog_white.png">
+<!--                     <i class="fas fa-laugh-wink"></i> -->
                 </div>
                 <div class="sidebar-brand-text mx-3">DangDangEat Admin</div>
             </a>
-            
+
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
+
+            <li class="nav-item active">
                 <a class="nav-link" href="AdminMain.ad">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>관리자 메인 페이지</span></a>
             </li>
-
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -338,21 +365,18 @@ body {
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">상품 관리</h1>
-                    <p class="mb-4">
-                    	<!-- 내용 입력 가능 -->
-					</p>
+                    <p class="mb-4">상품목록 페이지 
+<!--                     <a target="_blank" href="https://datatables.net">주문 검색, 필터 기능 등 필요</a> -->
+                    </p>
 	
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold text-primary">DataTables
-								Example</h6>
-
+							<h6 class="m-0 font-weight-bold text-primary">상품 목록</h6>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
-								<table class="table table-bordered" id="dataTable" width="100%"
-									cellspacing="0">
+								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 									<thead>
 										<tr>
 											<th>상품 코드</th>
@@ -366,13 +390,15 @@ body {
 											<th>관리</th>
 										</tr>
 									</thead>
+									
 									<tbody>
-										<c:forEach var="product" items="${productList }">
+										<c:forEach var="product" items="${productList }" varStatus="status">
 											<tr>
 												<td class="pro_code">${product.pro_code }</td>
 												<td>${product.pro_name }</td>
 												<%--<td>${product.cate_code }</td>--%>
-												<td class="form" id="cate_code" name="cate_code">
+<!-- 												<td class="form" id="cate_code" name="cate_code"> -->
+												<td>
 													<c:if test="${product.cate_code eq '1'}">사료</c:if>
 													<c:if test="${product.cate_code eq '2'}">간식</c:if>
 													<c:if test="${product.cate_code eq '3'}">파우더 · 토핑</c:if>
@@ -383,7 +409,8 @@ body {
 												<td>${product.pro_qty } 개</td>
 												<td><fmt:formatNumber value="${product.pro_price}"
 														pattern="#,###" /> 원</td>
-												<td class="form" name="pro_yn" id="pro_yn">
+<!-- 												<td class="form" name="pro_yn" id="pro_yn"> -->
+												<td>
 													<c:if test="${product.pro_yn eq '1'}">판매중</c:if>
 													<c:if test="${product.pro_yn eq '2'}">판매중단</c:if>
 													<c:if test="${product.pro_yn eq '3'}">재고없음</c:if>
@@ -394,13 +421,12 @@ body {
 <%-- 												<fmt:parseDate value="${product.pro_date }" var="dateValue" pattern="yyyy-MM-dd"/> --%>
 <%-- 												<fmt:formatDate value="${product.pro_date }" pattern="yyyy-MM-dd"/> --%>
 												</td>
-												
-												<td><input type="button" value="수정" class="form-control text-center"  onclick="location.href='ProductModifyForm.pd?pro_code='+${product.pro_code}"></td>
+												<td><button class="form-control text-center"  onclick="location.href='ProductModifyForm.pd?pro_code='+${product.pro_code}">수정</button></td>
 											</tr>
 										</c:forEach>
 									</tbody>
 								</table>
-								<button type="button" class="btn btn-outline-secondary" onclick="location.href='ProductInsertForm.pd'">상품 등록</button>
+								
 							</div>
 						</div>
 					</div>
