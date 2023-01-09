@@ -20,13 +20,15 @@
 	
 	  
 	#listForm {
-		width: 1600px;
+		width: 1224px;
         max-height: 610px;
         margin: auto;
 	}
 	
 	h2 {
 		text-align: center;
+		font-family:"GmarketSansMedium" ;
+		margin-bottom: 30px;
 	}
 	
 	table {
@@ -70,7 +72,8 @@
 	a {
 		text-decoration: none;
 	}
-		input[type=button], input[type=submit] {
+		input[type=button], input[type=submit], input[type=text] {
+		border-radius: 0px;
 	    font-family:"GmarketSansMedium" ;
 	}
 	
