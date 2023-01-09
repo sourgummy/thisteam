@@ -52,6 +52,7 @@
 		margin: auto;
 		width: 1024px;
 		text-align: center;
+		margin-bottom: 30px;
 	}
 	
 	#emptyArea {
@@ -65,13 +66,15 @@
 		width: 1024px;
 		text-align: right;
 		margin-top: 10px;
+		margin-bottom: 30px;
 	}
 	
 	a {
 		text-decoration: none;
 	}
-		input[type=button], input[type=submit] {
+		input {
 	    font-family:"GmarketSansMedium" ;
+	    border-radius: 0px;
 	}
 	
 	</style>
@@ -86,14 +89,14 @@
 		<!-- Section-->
 		
   <section id="listForm">
-  <h2>NOTICE LIST</h2>
+  <h2>Notice List</h2>
 	<table class="table">	
 	<tr id="tr_top">
       <th scope="row" width="100">NO.</th>
       <td width="400px">Subject</td>
       <td width="150px">Writer</td>
       <td width="150px">Date</td>
-      <td width="100px">HIT</td>
+      <td width="100px">Views</td>
     </tr>	
     <!-- JSTL 과 EL 활용하여 글목록 표시 작업 반복 -->
 		<%-- for(NoticeBean notice : noticeList) {} --%>
@@ -180,6 +183,13 @@
 			</c:otherwise>
 		</c:choose>
 	</section>
-       
+ <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; DANGDANGEAT 2022</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="../js/scripts.js"></script>
     </body>
 </html>

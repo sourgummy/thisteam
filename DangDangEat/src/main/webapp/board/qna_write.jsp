@@ -26,7 +26,8 @@
 		margin: auto;
 	}
 	
-	h1 {
+	h2 {
+	    font-family:"GmarketSansMedium" ;
 		text-align: center;
 	}
 	
@@ -47,6 +48,20 @@
 	
 	#commandCell {
 		text-align: center;
+		margin-bottom: 30px;
+	}
+	
+	input[type=radio]{
+		top: -0.7em;
+	}
+	
+	input, textarea{
+	    font-family:"GmarketSansMedium" ;
+	    border-radius: 0px;
+	}
+
+	textarea {
+		resize: none;
 	}
 </style>
 </head>
@@ -56,15 +71,15 @@
 	
 	<!-- 게시판 등록 -->
 	<section id="writeForm">
-		<h1>Q&A 등록</h1>
+		<h2>Q&A Write</h2>
 		<!-- 파일 업로드 기능 사용 위해 enctype 속성 설정 => cos.jar 라이브러리 필요 -->
 		<form action="QnaWritePro.bo" name="qnaForm" method="post" enctype="multipart/form-data">
-			<table>
+			<table class="table container">
 				<tr>
 					<td class="td_left"><label for="member_id">비밀글</label></td>
 					<td class="td_right">
-    				<input type="radio" name="qna_secret" id="qna_secret" value="Y" class="radio" /><span>공개</span>&nbsp;&nbsp;&nbsp;&nbsp;
-				    <input type="radio" name="qna_secret" id="qna_secret" value="N" class="radio" /><span>비공개</span>&nbsp;
+    				<input type="radio" name="qna_secret" id="qna_secret" value="Y" class="radio" />&nbsp;&nbsp;&nbsp;&nbsp;<span>공개</span>&nbsp;&nbsp;&nbsp;&nbsp;
+				    <input type="radio" name="qna_secret" id="qna_secret" value="N" class="radio" />&nbsp;&nbsp;&nbsp;&nbsp;<span>비공개</span>&nbsp;
 					</td>
 				</tr>
 				<tr>
@@ -85,7 +100,7 @@
 				<tr>
 					<td class="td_left"><label for="qna_content">내용</label></td>
 					<td class="td_right">
-						<textarea id="qna_content" name="qna_content" cols="40" rows="15" required="required"></textarea>
+						<textarea cols="50" rows="15" required="required"></textarea>
 					</td>
 				</tr>
 				<tr>
@@ -105,3 +120,13 @@
 			</section>
 		</form>
 	</section>
+ <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; DANGDANGEAT 2022</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="../js/scripts.js"></script>
+    </body>
+</html>

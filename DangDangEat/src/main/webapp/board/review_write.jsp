@@ -20,13 +20,14 @@
 	
 	  
 	#reviewForm {
-		width: 500px;
+		width: 1224px;
 		height: 450px;
 		border: 1px solid black;
 		margin: auto;
 	}
 	
-	h1 {
+	h2 {
+	    font-family:"GmarketSansMedium" ;
 		text-align: center;
 	}
 	
@@ -47,6 +48,16 @@
 	
 	#commandCell {
 		text-align: center;
+		margin-bottom: 30px;
+	}
+	
+	input, textarea {
+	    font-family:"GmarketSansMedium" ;
+	    border-radius: 0px;
+	}
+	
+	textarea {
+		resize: none;
 	}
 </style>
 </head>
@@ -57,10 +68,10 @@
 	
 	<!-- 게시판 등록 -->
 	<section id="writeForm">
-		<h1>REVIEW 등록</h1>
+		<h2>Review Write</h2>
 		<!-- 파일 업로드 기능 사용 위해 enctype 속성 설정 => cos.jar 라이브러리 필요 -->
 		<form action="ReviewWritePro.bo" name="reviewForm" method="post" enctype="multipart/form-data">
-			<table>
+			<table class="table container">
 				<tr>
 					<td class="td_left"><label for="member_id">작성자</label></td>
 					<td class="td_right"><input type="text" name="member_id" required="required" /></td>
@@ -79,7 +90,7 @@
 				<tr>
 					<td class="td_left"><label for="review_content">내용</label></td>
 					<td class="td_right">
-						<textarea id="review_content" name="review_content" cols="40" rows="15" required="required"></textarea>
+						<textarea cols="50" rows="15" required="required"></textarea>
 					</td>
 				</tr>
 				<tr>

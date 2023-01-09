@@ -21,7 +21,7 @@
 		margin: auto;
 	}
 	
-	h3 {
+	h2 {
 		font-family: 'GmarketSansMedium';
 		text-align: center;
 	}
@@ -47,12 +47,17 @@
 		margin-bottom: 30px;
 	}
 
-	input[type=button], input[type=submit], input[type=reset], input[type=text] {
+	input[type=button], input[type=submit], input[type=reset], input[type=text], textarea {
 	    font-family:"GmarketSansMedium" ;
+	    border-radius: 0px;
 	}
 	
 	table > tbody {
 		border-style: none;
+	}
+	
+	textarea {
+		resize: none;
 	}
 	
 </style>
@@ -64,7 +69,7 @@
 
 	<!-- 게시판 등록 -->
 	<section class="writeForm">
-		<h3>Notice Write</h3>
+		<h2>Notice Write</h2>
 		<form action="NoticeWritePro.bo" name="noticeForm" method="post">
 			<table class="table container">
 			<tbody>
@@ -80,8 +85,8 @@
 				<tr>
 					<td class="td_left"><label for="notice_content">Content</label></td>
 					<td class="td_right">
-						<input type="text" id="notice_content" style="width: 500px">
-<!-- 						<textarea id="notice_content" name="notice_content" cols="250" rows="15" required="required"></textarea> -->
+<!-- 						<input type="text" id="notice_content" style="width: 500px; height: 300px;" required="required"> -->
+						<textarea cols="50" rows="15" required="required"></textarea>
 					</td>
 				</tr>	
 				</tbody>			
