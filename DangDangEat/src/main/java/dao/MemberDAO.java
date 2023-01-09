@@ -297,9 +297,9 @@ public class MemberDAO {
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
+			memberList = new ArrayList<MemberBean>();
 			
 			while(rs.next()) {
-				memberList = new ArrayList<MemberBean>();
 				MemberBean member = new MemberBean();
 				member.setMember_id(rs.getString("member_id"));
 				member.setMember_email(rs.getString("member_email"));
@@ -656,7 +656,12 @@ public class MemberDAO {
 		ResultSet rs = null;
 		
 		try {
-			String sql = "SELECT count(*) FROM member_coupon WHERE member_id=?";
+			String sql = " SELECT count(*) "
+					+ "		FROM mc_view   "
+					+ "		WHERE  member_id = ?  "
+					+ "			AND   cp_status = 1  "
+					+ "			AND  mc_stat = 1 "
+					+ "			AND mc_used = 'N' ";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
