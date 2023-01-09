@@ -112,35 +112,52 @@ public class CouponDAO {
 	public int InsertCouponCodeToMemCp(String sId , String coupon_code) {
 		//2) 쿠폰 INSERT
 		PreparedStatement pstmt = null;
+		PreparedStatement  pstmt2 = null;
 		int insertCount = 0;
+		ResultSet rs = null;
+		boolean isExist = false; //회원이 가지지 않은 쿠폰
 	
-		try {
-			// TODO: 나중에member_coupon테이블 수정 후 mc_fixed_date 지우기 - 수정완료
-			String sql =  " INSERT INTO member_coupon ( member_id,cp_code , mc_used)"
-					+ "	 SELECT "
-					+ "   ? as 'member_id',cp_code , 'N' as 'mc_used' "
-					+ "  FROM mc_view "
-					+ "  WHERE cp_code = ? AND member_id <> ? ; ";
-			pstmt =  con.prepareStatement(sql);
+		try {//이미 가지고 있는 쿠폰인지 조회
+			String sql1=" SELECT  cp_code "
+						+ "  FROM mc_view "
+					    +" WHERE member_id =  ? AND cp_code = ? ";
 			
-			pstmt.setString(1,sId);// member_id
-			pstmt.setString(2, coupon_code);//cp_code
-			pstmt.setString(3, sId);//cp_code
+			pstmt =  con.prepareStatement(sql1);
+			pstmt.setString(1, sId);
+			pstmt.setString(2, coupon_code);
+			rs = pstmt.executeQuery();
 			
+			if(rs.next()) {
+				isExist = true;
+			}
 			
-			insertCount = pstmt.executeUpdate();
+			System.out.println("isExist" + isExist);
+			System.out.println(sId +"/"+coupon_code);
+			String sql2 =  "INSERT INTO member_coupon VALUES ("+"'"+ sId+"'"+", " +"'"+coupon_code+"'"+", 'N') ";
+			 pstmt2 =  con.prepareStatement(sql2);
+//			pstmt2.setString(1,sId);// member_id
+//			pstmt2.setString(2, coupon_code);//cp_code
+//			pstmt2.setString(3, "N");//cp_code
 			
+				if(!isExist) {//이미 가지고 있는 쿠폰이 아니라면 INSERT 
+					
+					pstmt2 =  con.prepareStatement(sql2);
+					insertCount = pstmt2.executeUpdate();
+					
+				 }
 			
-			
-		}catch (SQLException e) {
-			System.out.println("SQL 구문 오류 - InsertCouponCodeToMemCp(String sId , String coupon_code)");
-			System.out.println(pstmt);
-		}finally {
-		
-			JdbcUtil.close(pstmt);
-			
-		}
-		
+			}catch (SQLException e) {
+				
+				System.out.println("SQL 구문 오류 - InsertCouponCodeToMemCp(String sId , String coupon_code)");
+				System.out.println(pstmt);
+				
+			}catch (Exception e) {
+				e.getStackTrace();
+			}finally {
+				
+					JdbcUtil.close(pstmt2); 
+					JdbcUtil.close(pstmt); 
+			}
 		return insertCount;
 	}
 	
@@ -152,11 +169,10 @@ public class CouponDAO {
 		PreparedStatement pstmt = null;
 
 		ResultSet rs = null;
+		String sql = "SELECT * FROM mc_view  "
+		+" WHERE  member_id = ?  AND   cp_status = 1  AND  mc_stat = 1 AND mc_used = 'N' ";
+	
 		
-		String sql = "SELECT * FROM mc_view "
-					+ " WHERE  member_id = ? "
-					+ " AND "
-					+ " ( mc_stat = 1 OR mc_used = 'N' )";
 		
 		JSONArray odj = new JSONArray();
 

@@ -64,15 +64,56 @@ if (sId == null || sId.equals("")) {
 <%
 }
 %>
+
+<% if(request.getParameter("cp_code") != null){
+	String cp_code = request.getParameter("cp_code");
+}%>
 <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <script type="text/javascript">
-	$(function() {
+	$(function(cp_code) {
 
 		let id = $("#id").text(); // 회원 아이디
 		let email = $("#email").val(); // 이메일 인증 상태 확인용 (원래 이메일 주소)
 		// 		alert(email);
 
+		
+		if(cp_code != null){
+			//cp_code가 파라미터로 넘어오면 click이벤트 강제 실행
+			$("#CouponCount").trigger("click");
+
+		}
+		
+		$("#CouponCount").on("click", function(){
+			
+			$.ajax({//자동등록된 쿠폰(생일쿠폰,회원가입쿠폰) 있는지 확인
+				type: "get",
+				url: "SearchUsableCoupon.od",
+				dataType: "html",
+				data:{
+					"isMypage":true
+				}
+
+			})
+			.done(function(result){
+	    		
+				alert(typeof(result));
+				$("#ajax_changeDiv").html(result);
+				
+
+			})
+			.fail(function(data){
+				alert("ajax요청 실패");
+			});
+				
+
+			
+
+			
+				
+				
+			
+		});//$("#CouponCount")
 	});
 </script>
 
@@ -128,18 +169,16 @@ if (sId == null || sId.equals("")) {
 
 			<div class="col-lg-3 col-md-6">
 				<div class="card">
-					<a href="">
-						<div class="card-body">
-							<div class="stat-widget-five">
-								<div class="stat-icon dib flat-color-2">
-									<i class="fa fa-tags"></i>
-								</div>
-								<div class="stat-content">
-									<div class="text-left dib">
-										<div class="stat-heading">쿠폰</div>
-										<div class="stat-text">
-											<span>${coupon_count } 개</span>
-										</div>
+					<div class="card-body">
+						<div class="stat-widget-five">
+							<div class="stat-icon dib flat-color-2">
+								<i class="fa fa-tags"></i>
+							</div>
+							<div class="stat-content"  id="CouponCount" >
+								<div class="text-left dib">
+									<div class="stat-heading">쿠폰</div>
+									<div class="stat-text">
+										<span>${coupon_count } 개</span>
 									</div>
 								</div>
 							</div>
@@ -195,12 +234,12 @@ if (sId == null || sId.equals("")) {
 	</div>
 	<!-- /Widgets -->
 
-	<div class="container">
-		<div class="card">
+	<div class="container" id="ajax_changeDiv">
+		<div class="card" id="titleDiv">
 			<div class="card-header">
 				<strong>회원 정보</strong>
 			</div>
-			<div class="card-body card-block">
+			<div class="card-body card-block" id="coupinDiv">
 				<div class="row form-group">
 					<div class="col col-md-3">
 						<label class="form-control-label font-weight-bold">ID</label>

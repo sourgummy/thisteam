@@ -27,12 +27,6 @@ body {
 
 <script type="text/javascript">
 
-	function setOrderCouponValue() {
-		opener.document.getElementById("promo-code").value = document.getElementById("selectedCoupon").value;
-		window.close();
-	  }
-
-
 $(function(){
 
 		$.ajax({//자동등록된 쿠폰(생일쿠폰,회원가입쿠폰) 있는지 확인
@@ -144,11 +138,25 @@ $(function(){
 	
 });//$(function(){}
 
+
+function setOrderCouponValue() {
+    opener.document.getElementById("promo-code").value = document.getElementById("selectedCoupon").value;
+    window.close();
+   }
 	
 	function couponSubmit() {
 		//쿠폰체크 여부에 따라 submit 여부 결정
 		if($("input[name=cp_code]").is(":checked")){
-			return true;
+				let cp_code = $("$input[name=cp_code]").val();
+			function sendCp_code(cp_code){
+
+				opener.getCp_code(cp_code);
+
+				return true;
+				window.close();
+
+
+	}
 	}else {
 		alert("선택된 쿠폰이 없습니다.")
 		return false;
@@ -177,7 +185,7 @@ $(function(){
 				<input type="text"  class="col-sm-4 bg-light border border-secondary rounded" id="search_coupon_code" name="search_coupon_code" placeholder="  쿠폰코드를 입력하세요."> 
 				<input type="button" value="쿠폰 등록" class=" mx-2 btn btn-sm btn-dark rounded" id="c-search-btn">
 			</div>
-		<form action="OrderPaymentForm.od" onsubmit="return couponSubmit();">
+		<form action="결제페이지" onsubmit="return couponSubmit();">
 		<div  class=" m-3 p-3" id="coupon_list">
 			
 				
