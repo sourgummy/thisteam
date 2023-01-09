@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>   
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,6 +41,13 @@
 body {
     font-family: 'GmarketSans';
 }
+.main-icon {
+    padding: 1%;
+    height: 40px;
+    width: auto;
+   margin-right: 3%;
+   padding: 5px;
+}
 
 </style>
 <%
@@ -69,13 +77,17 @@ if(sId == null || !sId.equals("admin")) {
     <div id="wrapper">
 
         <!-- Sidebar -->
+               <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="./">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="AdminMain.ad">
+                <div class="div-top-icon">
+                <img class="main-icon" src="img/maindog_white.png">
+<!--                     <i class="fas fa-laugh-wink"></i> -->
                 </div>
+
                 <div class="sidebar-brand-text mx-3">DangDangEat Admin</div>
             </a>
 
@@ -83,8 +95,9 @@ if(sId == null || !sId.equals("admin")) {
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-                <a class="nav-link" href="index.html">
+
+            <li class="nav-item active">
+                <a class="nav-link" href="AdminMain.ad">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>관리자 메인 페이지</span></a>
             </li>
@@ -372,7 +385,6 @@ if(sId == null || !sId.equals("admin")) {
                                     <thead>
                                         <tr>
                                             <th>최종주문번호</th> <!-- payments.pay_number -->
-                                            <th>주문코드</th> <!-- payments.order_code -->
                                             <th>주문금액</th> <!-- payments.pay_amount -->
                                             <th>주문 아이디</th> <!-- orders안에서 조회 가능 -->
                                             <th>주문자 이름</th>
@@ -381,7 +393,6 @@ if(sId == null || !sId.equals("admin")) {
                                             <th>배송상세주소</th>
                                             <th>배송 연락처</th>
                                             <th>배송 메시지</th>
-                                            <th>주문상태</th>
                                             <th>주문일</th>
                                         </tr>
                                     </thead>
@@ -390,8 +401,7 @@ if(sId == null || !sId.equals("admin")) {
 	                                  <c:forEach var="order" items="${adminOrderList }" varStatus="status">
                                           <tr>
                                              <td>${order.pay_number }</td>
-                                             <td>${order.order_code }</td>
-                                             <td>${order.pay_amount }</td>
+                                             <td><fmt:formatNumber pattern="#,###">${order.pay_amount }</fmt:formatNumber></td>
                                              <td>${order.member_id }</td>
                                              <td>${order.order_name }</td>
                                              <td>${order.order_postcode }</td>
@@ -399,7 +409,6 @@ if(sId == null || !sId.equals("admin")) {
                                              <td>${order.order_address2 }</td>
                                              <td>${order.order_mobile }</td>
                                              <td>${order.order_comment }</td>
-                                             <td>${order.order_status }</td>
                                              <td>${order.order_date }</td>
                                            </tr>
 	                                  </c:forEach>
