@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -46,7 +47,9 @@ public class QnaWriteProAction implements Action {
 			);
 			
 			QnaBean qna = new QnaBean();
-			qna.setMember_id(multi.getParameter("member_id"));
+			HttpSession session = request.getSession();
+//			String sId = (String)session.getAttribute("sId");
+			qna.setMember_id((String)session.getAttribute("sId"));
 			qna.setQna_pass(multi.getParameter("qna_pass"));
 			qna.setQna_subject(multi.getParameter("qna_subject"));
 			qna.setQna_content(multi.getParameter("qna_content"));
@@ -59,24 +62,8 @@ public class QnaWriteProAction implements Action {
 //			System.out.println(multi.getFilesystemName("qna_file"));
 			qna.setQna_file(multi.getOriginalFileName("qna_file"));
 			qna.setQna_real_file(multi.getFilesystemName("qna_file"));
-//			System.out.println(qna);
+//			System.out.println(qna);			
 			
-			// -------------------------------------------------------------------------
-			// 파라미터명이 다른 복수개의 파일이 전달될 경우 복수개의 파라미터 처리 방법
-			// 1) 파일에 대한 파라미터명을 관리하는 객체(Enumeration) 가져오기
-//			Enumeration e = multi.getFileNames();
-//			// 2) while 문을 사용하여 Enumeration 객체의 hasMoreElements() 메서드가
-//			//    true 일 동안(다음 요소가 존재할 동안) 반복
-//			while(e.hasMoreElements()) {
-//				// 3) nextElement() 메서드를 호출하여 다음 요소(파라미터 이름) 가져오기
-//				// => 리턴타입이 Object 이므로 문자열로 변환
-//				String fileElement = e.nextElement().toString();
-////				System.out.println(fileElement);
-//				// 4) 파라미터명에 해당하는 원본 파일명, 실제 파일명 가져오기
-//				System.out.println("원본 파일명 : " + multi.getOriginalFileName(fileElement));
-//				System.out.println("실제 파일명 : " + multi.getFilesystemName(fileElement));
-//			}
-			// -------------------------------------------------------------------------
 			QnaWriteProService service = new QnaWriteProService();
 			boolean isWriteSuccess = service.registQna(qna);
 			
