@@ -42,7 +42,6 @@
 			   
 		      var url_href = window.location.href;
 		      var url = new URL(url_href);
-
 		      alert($("#amount").val());
 		       
 		       $.ajax({
@@ -50,16 +49,38 @@
 		          data: {
 		             pro_code : url.searchParams.get("pro_code"),
 		             amount : $("#amount").val(),
-		             pro_name : $("#pro_name").val()
+		             path : "product_detail"
+// 		             pro_name : $("#pro_name").val()
 		          },
 		          success: function(result) {
-		             alert("성공");
+		             alert("장바구니에 상품이 담겼습니다.");
+		          }
+		       }); // ajax
+		}); //cart
+		          
+  		$("#wishlist").on("click",function(){
+			   
+		      var url_href = window.location.href;
+		      var url = new URL(url_href);
+//  		      alert($("#amount").val());
+		       
+		       $.ajax({
+		          url: "WishlistInsert.ct",
+		          data: {
+		             pro_code : url.searchParams.get("pro_code"),
+		             amount : 1,
+		             path : "product_detail"
+//  		             pro_name : $("#pro_name").val()
+		          },
+		          success: function(result) {
+		             alert("위시리스트에 상품이 담겼습니다.");
 		          }
 		          
 		          
 		       });//    $.ajax({
 
-	 	 });
+	 	 }); // wishlist
+		
 		$("#qna_button").on("click", function() {
 			let sendData = $("form").serialize();
 			$.ajax({
@@ -77,7 +98,8 @@
 					$("#resultArea").html("xhr = " + xhr + "<br>textStatus =  " + textStatus + "<br>errorThrown =  " + errorThrown );
 				}
 			});
-		});
+		}); // qna_button
+		
 		$("#review_button").on("click", function() {
 			let sendData = $("form").serialize();
 			$.ajax({
@@ -95,7 +117,7 @@
 					$("#resultArea").html("xhr = " + xhr + "<br>textStatus =  " + textStatus + "<br>errorThrown =  " + errorThrown );
 				}
 			});
-		});
+		}); // review_button
 	 });
 		
 </script>
@@ -194,21 +216,27 @@ body {
 					<div class="fs-5 mb-5">
 						<div class="d-flex">
 							<!-- 장바구니 추가 -->	
-							<form action="CartInsert.ct" method="post">
-								<input type="hidden" name="pro_code" value=${product.pro_code }>
-								<input type="hidden" name="path" value="product">
-								<input type="hidden" name="amount" value="1">
-								<i class="bi-cart-fill me-1"></i>
-								<input type="submit" class="btn btn-outline-dark flex-shrink-0" value="Add to Cart">
-							</form>
+							<button class="btn btn-outline-dark flex-shrink-0" type="button" id="cart">
+								<i class="bi-cart-fill me-1"></i> Add to cart
+							</button>
+<!-- 							<form action="CartInsert.ct" method="post"> -->
+<%-- 								<input type="hidden" name="pro_code" value=${product.pro_code }> --%>
+<!-- 								<input type="hidden" name="path" value="product"> -->
+<%-- 								<input type="hidden" name="amount" value=${amount }> --%>
+<!-- 								<i class="bi-cart-fill me-1"></i> -->
+<!-- 								<input type="submit" class="btn btn-outline-dark flex-shrink-0" value="Add to Cart"> -->
+<!-- 							</form> -->
 							&nbsp;&nbsp;&nbsp;
 							<!-- wishList -->
-							<form action="WishlistInsert.ct" method="post">
-								<input type="hidden" name="pro_code" value=${product.pro_code }>
-								<input type="hidden" name="amount" value="1">
-								<i class="bi bi-heart-fill"></i> 
-								<input type="submit" class="btn btn-outline-dark flex-shrink-0" value="Wishlist">
-							</form>
+							<button class="btn btn-outline-dark flex-shrink-0" type="button" id="wishlist">
+								<i class="bi bi-heart-fill"></i> Wishlist
+							</button>
+<!-- 							<form action="WishlistInsert.ct" method="post"> -->
+<%-- 								<input type="hidden" name="pro_code" value=${product.pro_code }> --%>
+<!-- 								<input type="hidden" name="amount" value="1"> -->
+<!-- 								<i class="bi bi-heart-fill"></i>  -->
+<!-- 								<input type="submit" class="btn btn-outline-dark flex-shrink-0" value="Wishlist"> -->
+<!-- 							</form> -->
 							<div>
 <!-- 							총 합계 <input type="text" id="count" value="1"> -->
 							</div>
