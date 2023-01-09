@@ -9,6 +9,7 @@ import java.util.List;
 
 import db.JdbcUtil;
 import vo.CartBean;
+import vo.WishProductBean;
 import vo.cart_wish_proBean;
 
 public class CartDAO {
@@ -112,11 +113,11 @@ public class CartDAO {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM cart WHERE member_id=? AND pro_code=?";
+		String sql = "SELECT * FROM cart WHERE member_id=? AND pro_code=? ";
 		if(isCart) { // 장바구니 조회
-			sql += " AND cart_ischecked=?";
+			sql += "AND cart_ischecked=?";
 		} else { // 위시리스트 조회
-			sql += " AND cart_wishlist=?";
+			sql += "AND cart_wishlist=?";
 		}
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -126,7 +127,6 @@ public class CartDAO {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				// 이거 해결안하면 장바구니 한개만 가능합니다
 				isExist = true;
 			}
 		} catch (SQLException e) {
@@ -169,13 +169,18 @@ public class CartDAO {
 		PreparedStatement pstmt = null;
 		
 		try {// 장바구니 업데이트
-			String sql = "UPDATE cart SET cart_ischecked=1 WHERE pro_code=?";
+			String sql = "UPDATE cart SET cart_ischecked=1, cart_amount = ? WHERE pro_code=?";
 			
 			if(!isCart) { // 위시리스트 업데이트
 				sql = "UPDATE cart SET cart_wishlist=1 WHERE pro_code=?";
 			}
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, cart.getPro_code());
+			if(isCart) {
+				pstmt.setInt(1, cart.getCart_amount());
+				pstmt.setInt(2, cart.getPro_code());
+			} else {
+				pstmt.setInt(1, cart.getPro_code());
+			}
 			updateCount = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("SQL 구문 오류 - updateCart()");
@@ -307,7 +312,7 @@ public class CartDAO {
 			
 			updateCount = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("SQL 구문 오류! - updateCartNumber");
+			System.out.println("SQL 구문 오류! - updateCartNumber()");
 			e.printStackTrace();
 		} finally {
 			JdbcUtil.close(pstmt);
@@ -315,5 +320,8 @@ public class CartDAO {
 		
 		return updateCount;
 	}
+
+
+
 	
 }
