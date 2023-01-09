@@ -85,11 +85,11 @@ public class ProductListAction implements Action {
 		// ----------------------------------------------------------------------
 		// 글목록(List 객체)과 페이징처리정보를 request 객체에 저장 - setAttribute()
 		
-		
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("productList", productList);
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("category", category);
+		request.setAttribute("resultlistCount", productList.size()); //실제 출력되는 상품 갯수
 		
 		
 		

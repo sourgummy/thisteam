@@ -115,7 +115,7 @@ public class ProductModifyProAction implements Action {
 				// 포워딩 정보 저장을 위한 ActionForward 객체 생성
 				// 포워딩 경로 : ProductList.pd, 포워딩 방식 : Redirect
 				forward = new ActionForward();
-				forward.setPath("AdminProductList.pd");
+				forward.setPath("AdminProductList.ad");
 				forward.setRedirect(true);
 			}
 
