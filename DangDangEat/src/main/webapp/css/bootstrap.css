@@ -345,7 +345,7 @@ label {
 }
 
 button {
-  border-radius: 0;
+  border-radius: 0px;
 }
 
 button:focus:not(:focus-visible) {
@@ -10998,11 +10998,11 @@ input,
   border-radius: 255px 25px 225px 25px/25px 225px 25px 255px;
 }
 
-textarea,
+/* textarea, */
 textarea.form-control,
 select,
 select.form-control {
-  border-radius: 55px 225px 15px 25px/25px 25px 35px 355px !important;
+/*   border-radius: 55px 225px 15px 25px/25px 25px 35px 355px !important; */
 }
 
 [type=checkbox] {
