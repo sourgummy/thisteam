@@ -73,7 +73,6 @@ if(sId == null || sId.equals("")) {
 		
 	}
 	
-	
 	$(function() {
 		
 		let id = $("#id").text(); // 회원 아이디
@@ -88,7 +87,57 @@ if(sId == null || sId.equals("")) {
 			} else {
 				$("#confirmNewPass").prop("required", false); // 신규 비밀번호 확인
 			}
+			
+		// 패스워드 정규식 체크
+		let passwd = $("#newPass").val(); // 패스워드 값 가져오기
+		let lengthRegex = /^[A-Za-z0-9!@#$%]{8,16}$/; // 패스워드 길이 체크 8~16자 대,소문자 숫자 특수문자
+		let engUpperRegex = /[A-Z]/;
+		let engLowerRegex = /[a-z]/; 
+		let numRegex = /[0-9]/;
+		let specRegex = /[!@#$%]/;
+		if(!lengthRegex.exec(passwd)) { // 입력한 패스워드가 정규식에 포함 X
+			$("#checkPw").html("영문 대소문자/숫자/특수문자(!@#$%) 8자~16자를 조합해주세요.");
+			passwdResult = false; 
+		} else { // 입력한 패스워드가 정규식에 포함 O
+			// 복잡도 검사 (전체 규칙 검사 통과 시)
+			let count = 0;
+			// 항목별 검사 후 포함되어 있으면 카운트 증가
+			if(engUpperRegex.exec(passwd)) { count++ };
+			if(engLowerRegex.exec(passwd)) { count++ };
+			if(numRegex.exec(passwd)) { count++ };
+			if(specRegex.exec(passwd)) { count++ };
+			
+			// 카운트 값 판별
+			switch(count) {
+				case 4 : $("#checkPw").html("만족스럽개!"),
+						 passwdResult = true; break;
+				case 3 : $("#checkPw").html("뭔가 부족하지만 쓸 수 있개"),
+						 passwdResult = true; break;
+				case 2 : $("#checkPw").html("패스워드 너무 쉽개!"),
+						 passwdResult = true; break;
+				case 1 : $("#checkPw").html("사용불가"),
+						 passwdResult = false;
+			}
+			count = 0;
+		}
+			
+		// 가입하기 버튼 누를 시 확인 안된 사항 알림
+		$("form").submit(function() {
+			
+			if(!passwdResult) {
+				alert("패스워드를 확인해주세요");
+				return false;
+			}
+			
+			if(!passwdCheckResult) {
+				alert("패스워드가 동일한지 확인해주세요");
+				return false;
+			}
+			
 		});
+		
+	});
+		
 		
 		// 이메일 인증 상태 변경 메서드 호출
 		$("#email").on("change", function() {
@@ -214,7 +263,7 @@ if(sId == null || sId.equals("")) {
 		                </div>
 		                <div class="col-12 col-md-4">
 		                	<input type="password" id="newPass" name="newPass" class="form-control bg-gradient-light">
-		                	<small class="help-block form-text text-muted">변경 시 입력 (영문 대소문자/숫자 4자~16자)</small>
+		                	<small class="help-block form-text text-muted" id="checkPw">변경 시 입력 (영문 대소문자/숫자/특수문자(!@#$%) 8자~16자)</small>
 		                </div>
 		            </div>
 		            <div class="row form-group">

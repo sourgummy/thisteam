@@ -61,8 +61,8 @@ body {
                                 <div class="p-5">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-2">회원 가입</h1>
-                                        <p class="mb-4">회원 가입을 축하하개!
-                                        				이메일 인증을 완료해주개!</p>
+                                        <p class="mb-4">회원 가입을 축하하개!<br>
+                                        				이메일 인증을 완료 후 로그인 하개</p>
                                     </div>
                                     <div class="form-group">
                                     </div>

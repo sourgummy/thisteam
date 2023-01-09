@@ -131,13 +131,9 @@ public class MemberJoinAction implements Action {
 
 				if(mailSuccess) { // 메일 발송 성공시
 					
-					response.setContentType("text/html; charset=UTF-8");
-					out = response.getWriter();
-					
-					out.println("<script>");
-					out.println("alert('인증 메일이 발송되었습니다.')");
-					out.println("location.href='MemberJoinResult.me'");
-					out.println("</script>");
+					forward = new ActionForward();
+					forward.setPath("MemberJoinResult.me");
+					forward.setRedirect(true);
 
 				} else { // 메일 발송 실패시
 					response.setContentType("text/html; charset=UTF-8");
