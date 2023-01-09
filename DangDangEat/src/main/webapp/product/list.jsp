@@ -9,13 +9,14 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
 <title>list | Template</title>
-
 <link href="css/styles.css" rel="stylesheet" />
  <link rel="stylesheet" href="resources/css/bootstrap.min.css"
 	type="text/css">
 <link rel="stylesheet" href="resources/css/slicknav.min.css"
 	type="text/css">
 <link rel="stylesheet" href="resources/css/style.css" type="text/css">	
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <!-- Css Styles -->
 <!-- <link rel="stylesheet" href="resources/css/bootstrap.min.css"
 	type="text/css">
@@ -39,46 +40,7 @@ Core theme CSS (includes Bootstrap)
 <link rel="stylesheet" href="resources/css/slicknav.min.css"
 	type="text/css">
 <link rel="stylesheet" href="resources/css/style.css" type="text/css">
-<style type="text/css">
-@font-face {
-	font-family: 'GmarketSansMedium';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
-
-body {
-	font-family: "GmarketSansMedium";
-}
-
-.btn-space {
-	    margin-right: 5px;
-}
-
-.navbar>.container, .navbar>.container-fluid, .navbar>.container-sm,
-	.navbar>.container-md, .navbar>.container-lg, .navbar>.container-xl,
-	.navbar>.container-xxl {
-	display: flex;
-	flex-wrap: inherit;
-	align-items: center;
-	justify-content: space-evenly;
-}
-
-.navbar-text {
-	padding-top: 0rem;
-	padding-bottom: 0rem;
-}
-
-li {
-	margin-bottom: 7px;
-	font-size: 22px;
-	line-height: 40px;
-}
-
-
-</style> -->
+-->
 
 <style>
 h1 {
@@ -106,6 +68,23 @@ h1 {
 body {
 	font-family: "GmarketSansMedium";
 }
+
+.card-img-top {
+    position: relative;
+    width: 300px;
+    height: 300px;
+}
+.card-img-top img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(50, 50);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin: auto;
+}
+
 
 
 </style>
@@ -180,16 +159,11 @@ body {
 										<div class="card-body">
 											<div class="shop__sidebar__categories">
 												<ul class="nice-scroll">
-													<li><a style="font-size: 22px; line-height: 40px;"
-														href="./ProductList.pd?category=1">사료</a></li>
-													<li><a style="font-size: 22px; line-height: 40px;"
-														href="./ProductList.pd?category=2">간식</a></li>
-													<li><a style="font-size: 22px; line-height: 40px;"
-														href="./ProductList.pd?category=3">파우더 · 토핑제</a></li>
-													<li><a style="font-size: 22px; line-height: 40px;"
-														href="./ProductList.pd?category=4">껌 · 츄르</a></li>
-													<li><a style="font-size: 22px; line-height: 40px;"
-														href="./ProductList.pd?category=5">건강보조제</a></li>
+													<li><a href="./ProductList.pd?category=1">사료</a></li>
+													<li><a href="./ProductList.pd?category=2">간식</a></li>
+													<li><a href="./ProductList.pd?category=3">파우더 · 토핑제</a></li>
+													<li><a href="./ProductList.pd?category=4">껌 · 츄르</a></li>
+													<li><a  href="./ProductList.pd?category=5">건강보조제</a></li>
 												</ul>
 											</div>
 										</div>
@@ -202,6 +176,7 @@ body {
 											onkeyup="if(window.event.keyCode==13){fn_search()}"
 											placeholder="Search..."> <a
 											href="javascript:fn_search()"></a>
+										<button type="button" onclick="javascript:fn_search()"><i class="bi bi-search"></i></button>	
 									</form>
 								</div>
 							</div>
@@ -213,7 +188,7 @@ body {
 						<div class="row">
 							<div class="col-lg-6 col-md-6 col-sm-6">
 								<div class="shop__product__option__left">
-									<p>Showing 1–12 of 2 results</p>
+									<p>Showing ${pageInfo.startPage}–${pageInfo.listCount} of ${resultlistCount} results</p>
 								</div>
 							</div>
 							<div class="col-lg-6 col-md-6 col-sm-6">
@@ -229,61 +204,83 @@ body {
 						</div>
 					</div>
 					<div class="row">
-						<c:forEach var="product" items="${productList }">
-							<div class="col-lg-4 col-md-6 col-sm-6">
-								<div class="product__item">
-									<div class="product__item__pic set-bg">
-										<!-- Product image-->
-										<a href="ProductDetail.pd?pro_code=${product.pro_code}"> <img
-											class="card-img-top"
-											src="http://localhost:8080/DangDangEat/upload/${product.pro_real_thumb }"
-											alt="..." onerror="this.src='./img/sample1_thumb.png';" /> <!--alt="..." onerror="this.src='./img/error_img.png';" /> -->
-										</a>
+							<c:choose>
+								<c:when test="${resultlistCount eq 0}">
+									<h3>검색결과가 없습니다.</h3>
+								</c:when>
+								<c:otherwise>
+								<!-- 검색결과가 있을 경우 결과 도출  -->
+								<c:forEach var="product" items="${productList }">
+									<div class="col-lg-4 col-md-6 col-sm-6">
+										<div class="product__item">
+											<div class="product__item__pic set-bg">
+												<!-- Product image-->
+												<a href="ProductDetail.pd?pro_code=${product.pro_code}">
+													<img class="card-img-top"
+													src="http://localhost:8080/DangDangEat/upload/${product.pro_real_thumb }"
+													alt="..." onerror="this.src='./img/sample1_thumb.png';" />
+													<!--alt="..." onerror="this.src='./img/error_img.png';" /> -->
+												</a>
+											</div>
+											<div class="product__item__text">
+												<div style="height: 50px;">
+													<!-- 상품명 -->
+													<h6>${product.pro_name }</h6>
+												</div>
+												<div style="height: 30px;">
+													<!-- 브랜드명 -->
+													<h8>${product.pro_brand }</h8>
+												</div>
+												<div style="height: 30px;">
+													<!-- 									<i class="bi bi-cart"></i> -->
+													<!-- 									<a href="#" class="add-cart">+ Add To Cart</a> -->
+													<!--상품가격-->
+													<h5>
+														<fmt:formatNumber value="${product.pro_price}"
+															pattern="#,###" />
+														원
+													</h5>
+												</div>
+												<!-- 									<div class="product__color__select"> -->
+												<!-- 										<label for="pc-4"> <input type="radio" id="pc-4"> -->
+												<!-- 										</label> <label class="active black" for="pc-5"> <input -->
+												<!-- 											type="radio" id="pc-5"> -->
+												<!-- 										</label> <label class="grey" for="pc-6"> <input type="radio" -->
+												<!-- 											id="pc-6"> -->
+												<!-- 										</label> -->
+												<!-- 									</div> -->
+											</div>
+											<div>
+												<!-- 장바구니 -->
+												<form action="CartInsert.ct" method="post"
+													style="display: inline">
+													<input type="hidden" name="pro_code"
+														value=${product.pro_code }> <input type="hidden"
+														name="path" value="product"> <input type="hidden"
+														name="amount" value="1">
+													<!-- 											<i class="bi-cart-fill me-1"></i> -->
+													<input type="submit"
+														class="btn btn-outline-dark flex-shrink-0"
+														value="Add to Cart">
+												</form>
+												<!-- wishList -->
+												<form action="WishlistInsert.ct" method="post"
+													style="display: inline">
+													<input type="hidden" name="pro_code"
+														value=${product.pro_code }> <input type="hidden"
+														name="amount" value="1">
+													<!-- 											<i class="bi bi-heart-fill"></i> -->
+													<input type="submit"
+														class="btn btn-outline-dark flex-shrink-0"
+														value="Wishlist">
+												</form>
+											</div>
+										</div>
 									</div>
-									<div class="product__item__text">
-										<!-- 상품명 -->
-										<h6>${product.pro_name }</h6>
-										<!-- 브랜드명 -->
-										<h8>${product.pro_brand }</h8>
-										<!-- 									<i class="bi bi-cart"></i> -->
-										<!-- 									<a href="#" class="add-cart">+ Add To Cart</a> -->
-										<!--상품가격-->
-										<h5>
-											<fmt:formatNumber value="${product.pro_price}"
-												pattern="#,###" />
-											원
-										</h5>
-										<!-- 									<div class="product__color__select"> -->
-										<!-- 										<label for="pc-4"> <input type="radio" id="pc-4"> -->
-										<!-- 										</label> <label class="active black" for="pc-5"> <input -->
-										<!-- 											type="radio" id="pc-5"> -->
-										<!-- 										</label> <label class="grey" for="pc-6"> <input type="radio" -->
-										<!-- 											id="pc-6"> -->
-										<!-- 										</label> -->
-										<!-- 									</div> -->
-									</div>
-									<div>
-									<!-- 장바구니 -->
-									<form action="CartInsert.ct" method="post" style="display:inline">
-										<input type="hidden" name="pro_code"
-											value=${product.pro_code }>
-											<input type="hidden" name="path" value="product">
-											<input type="hidden" name="amount" value="1"> 
-<!-- 											<i class="bi-cart-fill me-1"></i> -->
-										<input type="submit" class="btn btn-outline-dark flex-shrink-0"	value="Add to Cart">
-									</form>
-									<!-- wishList -->
-									<form action="WishlistInsert.ct" method="post" style="display:inline">
-										<input type="hidden" name="pro_code"
-											value=${product.pro_code }> <input type="hidden" name="amount" value="1">
-<!-- 											<i class="bi bi-heart-fill"></i> -->
-										<input type="submit"
-											class="btn btn-outline-dark flex-shrink-0" value="Wishlist">
-									</form>
-									</div>
-								</div>
-							</div>
-						</c:forEach>
+								</c:forEach>
+								</c:otherwise>
+							</c:choose>
+
 					</div>
 				</div>
 			</div>
@@ -293,8 +290,8 @@ body {
 			<div class="col-lg-12">
 				<div class="product__pagination">
 					<!-- 페이지 번호 목록은 시작 페이지(startPage)부터 끝 페이지(endPage) 까지 표시 -->
-					<c:forEach var="i" begin="${pageInfo.startPage }"
-						end="${pageInfo.endPage }">
+					<c:forEach var="i" begin="${pageInfo.startPage}"
+						end="${pageInfo.endPage}">
 						<!-- 단, 현재 페이지 번호는 링크 없이 표시 -->
 						<c:choose>
 							<c:when test="${pageNum eq i}">
@@ -309,7 +306,6 @@ body {
 				</div>
 			</div>
 		</div>
-
 	</section>
 	<!-- Shop Section End -->
 	

@@ -93,7 +93,7 @@ public class ProductAdminListAction implements Action {
 		// ActionForward 객체 생성 후 product/list.jsp 페이지 포워딩 설정
 		// => URL 및 request 객체 유지 : Dispatch 방식
 		forward = new ActionForward();
-		forward.setPath("/product/admin_product.jsp");
+		forward.setPath("/admin/admin_product.jsp");
 		forward.setRedirect(false); // 생략 가능
 		
 		return forward;
