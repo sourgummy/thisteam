@@ -45,7 +45,7 @@ public class CouponSearchAction implements Action {
 				}else {//이미 등록된 쿠폰
 					response.setContentType("text/html; charset=UTF-8");
 					PrintWriter out = response.getWriter();
-					out.println("exist");
+					out.println(true);
 				}
 				
 			}else {//사용불가능한 쿠폰인 경우

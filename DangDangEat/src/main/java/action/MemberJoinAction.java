@@ -71,8 +71,9 @@ public class MemberJoinAction implements Action {
 
 			if(isJoinSuccess) {
 				// 회원가입 쿠폰 코드
-//				CouponAutoPaymentService service2 = new CouponAutoPaymentService();
-//				int insertCount = service2.autoCouponInsert(member.getMember_id()); 
+				CouponAutoPaymentService service2 = new CouponAutoPaymentService();
+				int insertCount = service2.autoCouponInsert(member.getMember_id()); 
+				
 				
 				//// DB에 등록 성공(회원가입 성공시) 인증 이메일 발송 절차 실행 ////
 				response.setContentType("text/html; charset=UTF-8");

@@ -22,7 +22,7 @@ public class CouponListAction implements Action {
 		request.setAttribute("CouponList", CouponList);
 		
 		forward = new ActionForward();
-		forward.setPath("order/admin_couponList.jsp");//
+		forward.setPath("admin/admin_couponList.jsp");//
 		forward.setRedirect(false);
 		return forward;
 	}

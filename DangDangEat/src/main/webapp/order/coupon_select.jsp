@@ -26,9 +26,15 @@ body {
 </head>
 
 <script type="text/javascript">
-
+function setOrderCouponValue() {
+    opener.document.getElementById("promo-code").value = document.getElementById("selectedCoupon").value;
+    window.close();
+   }
+   
+   
 $(function(){
 
+	
 		$.ajax({//자동등록된 쿠폰(생일쿠폰,회원가입쿠폰) 있는지 확인
 			type: "get",
 			url: "SearchUsableCoupon.od",
@@ -49,31 +55,61 @@ $(function(){
 							"<div class='align-self-center p-2'>사용가능한 쿠폰이 없습니다.</div>"+
 						"</div>");
 			}else{
+		
 
-			
-				for(let coupon of result) {
 				
-					$("#coupon_list").append(
-							"<div  class='border rounded-2 d-flex ' >"
-								+"<div class='p-3'>"
-									+"<input type='radio' id='selectedCoupon' name='cp_code' value="+coupon.cp_code+">" 
-							 		+"<label for='selectedCoupon'></label>"
-						  		 +"</div>"
-								+"<div class='p-3'>"
-								   +  "<h4>"+coupon.cp_name+"</h4>"
-								   +  "<b>"+coupon.cp_discount_value+"% 할인 (<small>최대 "+ coupon.cp_max_discount +" 원</small></b>)<br>"
-								   +  "<small>" + coupon.cp_min_price +  "원 이상 구매 시</small>"+"<br>"
-								   + "<small>"+ coupon.target_sd + " - " +coupon.target_ed +" ("+coupon.cp_period +"일)</small>"
-								+"</div>"
-							+"</div><br>"
-							
-					);
-						
+				for(let coupon of result) {
+					
+// 					alert("total: " + parseInt($("#total").text()));
+// 					alert("cp_min_price: " +parseInt(coupon.cp_min_price));
+// 					alert(parseInt($("#total").text()) > parseInt(coupon.cp_min_price));
+					
+					if( parseInt($("#total").text()) < parseInt(coupon.cp_min_price)){
+// 						alert(parseInt($("#total").text()) > parseInt(coupon.cp_min_price))
+							$("#coupon_list").append(
+									"<div  class='border rounded-2 d-flex bg-secondary bg-gradient' style='--bs-bg-opacity: .1' >"
+										+"<div class='p-3'>"
+											+"<input type='radio' id='selectedCoupon' disabled='disabled' name='cp_code' value="+coupon.cp_code+">" 
+											+"<input type='hidden' id='cp_min_price' value="+coupon.cp_min_price+">" 
+									 		+"<label for='selectedCoupon'></label>"
+								  		 +"</div>"
+										+"<div class='p-3'>"
+										   +  "<h4>"+coupon.cp_name+"</h4>"
+										   +  "<b>"+coupon.cp_discount_value+"% 할인 (<small>최대 "+ coupon.cp_max_discount +" 원</small></b>)<br>"
+										   +  "<small>" + coupon.cp_min_price +  "원 이상 구매 시</small>"+"<br>"
+										   + "<small>"+ coupon.target_sd + " - " +coupon.target_ed +" ("+coupon.cp_period +"일)</small>"
+										+"</div>"
+									+"</div><br>"
+									
+							);
+					}else{
+					
+					
+						$("#coupon_list").append(
+								"<div  class='border rounded-2 d-flex ' >"
+									+"<div class='p-3'>"
+										+"<input type='radio' id='selectedCoupon' name='cp_code' value="+coupon.cp_code+">" 
+										+"<input type='hidden' id='cp_min_price' value="+coupon.cp_min_price+">" 
+								 		+"<label for='selectedCoupon'></label>"
+							  		 +"</div>"
+									+"<div class='p-3'>"
+									   +  "<h4>"+coupon.cp_name+"</h4>"
+									   +  "<b>"+coupon.cp_discount_value+"% 할인 (<small>최대 "+ coupon.cp_max_discount +" 원</small></b>)<br>"
+									   +  "<small>" + coupon.cp_min_price +  "원 이상 구매 시</small>"+"<br>"
+									   + "<small>"+ coupon.target_sd + " - " +coupon.target_ed +" ("+coupon.cp_period +"일)</small>"
+									+"</div>"
+								+"</div><br>"
+								
+						);
+					
+					}
+				
 				}//for
+					
 			}//else
 		})
 		.fail(function(data){
-			$("#resultArea").html("요청실패").css("color","red");
+			alert("ajax 요청실패");
 		});
 		
 
@@ -105,7 +141,7 @@ $(function(){
 				}else{
 					
 // 				alert(JSON.stringify(result));
-					$("#coupon_list").empty();
+// 					$("#coupon_list").empty();
 					for(let coupon of result) {
 						$("#coupon_list").append(
 								"<div  class='border rounded-2 d-flex ' >"
@@ -132,17 +168,29 @@ $(function(){
 			});
 			
 		
+			
+
+			
+			
+
 		
-		
+	
+	
 	});
+	
 	
 });//$(function(){}
 
-
-function setOrderCouponValue() {
-    opener.document.getElementById("promo-code").value = document.getElementById("selectedCoupon").value;
-    window.close();
-   }
+$(document).on("change","input[type=radio]",function(){ 
+	alert("input[type=radio]");
+    alert(parseInt($("#total").text()));
+    
+    $("input[type=radio]").is(":checked").closest("#cp_min_price").val();
+    
+	let calDiscount = parseInt($("#total").text()) * $("input[type=radio]").is(":checked").closest("#cp_min_price").val() / 100;
+	alert("calDiscount " +  $("input[type=radio]").is(":checked").val())
+	$("#discountTotal").text() = calDiscount +"원";
+});
 	
 	function couponSubmit() {
 		//쿠폰체크 여부에 따라 submit 여부 결정
@@ -155,8 +203,7 @@ function setOrderCouponValue() {
 				return true;
 				window.close();
 
-
-	}
+			}
 	}else {
 		alert("선택된 쿠폰이 없습니다.")
 		return false;
@@ -175,7 +222,6 @@ function setOrderCouponValue() {
 			- 쿠폰코드는 대소문자를 구분합니다.
 		</div>
 	</div>
-
 	<br>
 	
 	<div>
@@ -199,6 +245,33 @@ function setOrderCouponValue() {
 			</div>
 		</form>
 
+
+<div>
+<br>
+<div class="m-3 text-center" >
+
+		<table class=" table  text-center">
+			<thead>
+				<tr>
+					<th width="100">현재 구매액 </th>
+				    <th width="100">할인 적용액 </th>
+				</tr> 
+			</thead>
+			<tbody>
+				<tr>
+					<td id="total"><%=Integer.parseInt(request.getParameter("total")) %> 원</td>
+				    <td id="discountTotal"> </td>
+				 </tr>
+			</tbody>
+		</table>
+		
+
+</div>
+	
+
+</div>
+
+</div>
 	</div>
 	
 	</div>
