@@ -7,8 +7,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
-
-
 	<div class="container" id="mypage_couponAjax">
 		<div class="card" id="titleDiv">
 			<div class="card-header">

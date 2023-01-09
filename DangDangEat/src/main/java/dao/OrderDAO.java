@@ -470,9 +470,7 @@ public class OrderDAO {
 			return adminOrderList;
 		} //getAdminOrderList
 
-		// 예람시 오늘도 감사합니다 예람시 없었으면 나 여기 업서,,, 진로 변경했서,,,,
-		// 끝까지 화이팅 해봅시다!!!!! 살앙해여
-		// ----------------------------------------------------------23/01/07 추가
+		// 23/01/07 추가
 		// 결제 정보 가져오는 메서드 (주문서 확인용)
 		public List<paymentsBean> getOrderPaymentsList(int payNumber, int orderCode) {
 			
@@ -510,92 +508,6 @@ public class OrderDAO {
 			
 			return orderPaymentsList;
 		} // getOrderProductList
-
-		
-		
-		
-		// 23/01/08 추가
-		
-		/*
-		 *  할인금액 구하는 공식 
-			select truncate(((pro_price * cart_amount) * (select cp_discount_value  from coupon where cp_code = '20OFF_2023') / 100 ),0)
-			from cart_product_view cpv  where cart_code = 8;
-			
-			 최대 할인 금액 구하는 공식 
-			select cp_max_discount  from coupon c where cp_code = '20OFF_2023';
-			
-			------------진행중
-			 coupon의 cp_target이 new_member랑 event 항목의 쿠폰을 사용한다면 member_coupon의 사용유무를 y로 변경
-			update member_coupon set mc_used = 'y' where  
-				select cp_target from coupon where cp_target in ('event', 'new_member') and cp_code = '20OFF_2023'; 
-			
-			mc_coupon 테이블과 coupon테이블 조인 (cp_code가 일치하는) - 진행중
-			update member_coupon set mc.mc_used = 'y' 
-			from (select mc.cp_code, mc.mc_used, mc.member_id, c.cp_target from member_coupon mc join coupon c on mc.cp_code = c.cp_code) 
-			where c.cp_target in ('event', 'new_member') and cp_code = '20OFF_2023' and member_id = 'plz';
-			
-			select mc.cp_code, mc.mc_used, mc.member_id, c.cp_target  
-			from member_coupon mc join coupon c 
-			on mc.cp_code = c.cp_code;
-
-		 * 
-		 * 
-		 */
-		
-		// 23/01/08 추가
-		// 쿠폰코드를 활용하여 할인금액을 계산하는 메서드 (결제작업 시 필요) - 할인금액 단일 항목 리턴
-		// 쿠폰코드에 할당된 최대 할인 금액과 주문마다 다른 쿠폰 적용 할인 금액 비교 후 리턴값 다르게 설정
-		public int getCouponDiscountAmount(int cart_code, String cp_code) {
-			int finalCouponDiscount = 0; // 최종 리턴값
-			
-			int couponDiscountAmount = 0; // 쿠폰 적용 할인 금액 (주문마다 - 변동)
-			int couponMaxDiscount = 0; // 최대 할인 금액(쿠폰마다 정해진 상한선 - 고정)
-			
-			PreparedStatement pstmt = null;
-			PreparedStatement pstmt2 = null;
-			ResultSet rs = null;
-			try { // 쿠폰 적용 할인 금액 구하는 공식
-				String sql = "SELECT TRUNCATE(((pro_price * cart_amount) * "
-						+ "(SELECT cp_discount_value FROM coupon WHERE cp_code = ? ) / 100 ),0) "
-						+ "FROM cart_product_view WHERE cart_code = ?";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setInt(1, cart_code);
-				pstmt.setString(2, cp_code);
-				rs = pstmt.executeQuery();
-				
-				if(rs.next()) { // 코드번호에 할당된 최대 할인 금액 구하는 공식
-					couponDiscountAmount = rs.getInt(1); // 할인금액 가지고 return
-					System.out.println("ORDERDAO - getCouponDiscountAmount 할인금액 : " + couponDiscountAmount);
-					
-					sql = "SELECT cp_max_discount FROM coupon WHERE cp_code = ?";
-					pstmt2 = con.prepareStatement(sql);
-					pstmt2.setString(1, cp_code); 
-					rs = pstmt.executeQuery();
-					
-					if(rs.next()) { 
-						couponMaxDiscount = rs.getInt(1);
-						
-						// 쿠폰 적용 할인 금액 > 최대 할인 금액 
-						// return 최대 할인 금액
-						if(couponDiscountAmount > couponMaxDiscount) {
-							finalCouponDiscount = couponMaxDiscount;
-						
-						// 최대 할인 금액 > 쿠폰 적용 할인 금액
-						// return 쿠폰 적용 할인 금액
-						} else {
-							finalCouponDiscount = couponDiscountAmount;
-						}
-						
-					}
-					
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			return finalCouponDiscount;
-		}
 		
 
 	

@@ -72,6 +72,8 @@ if (sId == null || sId.equals("")) {
 
 
 <script type="text/javascript">
+
+
 	$(function(cp_code) {
 
 		let id = $("#id").text(); // 회원 아이디
@@ -86,8 +88,9 @@ if (sId == null || sId.equals("")) {
 		const param = new URL(location).searchParams;
 		param.get("cp_code")
 		if(param.get("cp_code") != null){
-			$("CouponCount").trigger("click");
-			alert("클릭됨 !");
+			
+			$("#CouponCount").trigger("click");
+// 			alert("클릭됨 !");
 		}
 
 		
@@ -96,6 +99,7 @@ if (sId == null || sId.equals("")) {
 			$.ajax({//자동등록된 쿠폰(생일쿠폰,회원가입쿠폰) 있는지 확인
 				type: "get",
 				url: "SearchUsableCoupon.od",
+				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 				dataType: "HTML",
 				data:{
 					"isMypage":true
@@ -106,7 +110,20 @@ if (sId == null || sId.equals("")) {
 	    		
 				$("#ajax_changeDiv").html(result);
 				
-
+				//현재 URL가져와서 파라미터(cp_code)존재하면 값주기
+				const urlParams = new URL(location.href).searchParams;
+				
+				//파라미터가 깨지므로 decode
+// 				alert(decodeURI(urlParams));
+// 				alert("urlParams.has('cp_code') : "+ urlParams.has('cp_code'));
+				if(urlParams.has('cp_code')){
+					
+				const cp_code = decodeURI(urlParams.get('cp_code'));
+				result.find("#search_coupon_code").val() = cp_code;
+				
+				}else{
+					
+				}
 			})
 			.fail(function(data){
 				alert("ajax요청 실패");

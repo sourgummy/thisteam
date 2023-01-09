@@ -57,12 +57,11 @@
 });
 
 function couponDown() {
-
 let ok = prompt('할인 쿠폰 발급 완료!\n (확인을 누르면 쿠폰등록창으로 넘어갑니다. ) \n↓↓↓할인코드↓↓↓',"2023년도_잘_부탁한댕")
 if(ok){
-	location.href = "MyPage.me?cp_code="+ok;
+	location.href="MyPage.me?cp_code="+ ok ;
 	
-}
+	}
 } 
 </script>
 <style type="text/css">
