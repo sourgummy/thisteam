@@ -15,136 +15,85 @@
 	}
 	  body {
 	    font-family:"GmarketSansMedium" ;
-	}
-	
+	}	
 	  
 	#modifyForm {
-		width: 500px;
+    	width: 1224px; 
 		height: 500px;
-		border: 1px solid black;
 		margin: auto;
 	}
 	
-	h1 {
+	h2 {
+		font-family:"GmarketSansMedium" ;
 		text-align: center;
 	}
 	
 	table {
-		margin: auto;
-		width: 450px;
+	    border-collapse: collapse; 
+	 	width: 1224px;
 	}
 	
 	.td_left {
-		width: 150px;
+/* 		width: 150px; */
 		background: #D3D3D3;
 		text-align: center;
 	}
 	
 	.td_right {
-		width: 300px;
+/* 		width: 300px; */
 		background: white;
 	}
 	
 	#commandCell {
 		text-align: center;
+		margin-bottom: 30px;
 	}
+	
+		input[type=button], input[type=submit], input[type=reset], input[type=text] {
+	    font-family:"GmarketSansMedium" ;
+	}
+	
+	
+	table > tbody {
+		border-style: none;
+	}
+	
 </style>
 </head>
-<body>
-	
-		<jsp:include page="/inc/top.jsp"></jsp:include>
-				
-<!-- 챗봇 관련 코드 -->
-<script>
-  (function() {
-    var w = window;
-    if (w.ChannelIO) {
-      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
-    }
-    var ch = function() {
-      ch.c(arguments);
-    };
-    ch.q = [];
-    ch.c = function(args) {
-      ch.q.push(args);
-    };
-    w.ChannelIO = ch;
-    function l() {
-      if (w.ChannelIOInitialized) {
-        return;
-      }
-      w.ChannelIOInitialized = true;
-      var s = document.createElement('script');
-      s.type = 'text/javascript';
-      s.async = true;
-      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
-      s.charset = 'UTF-8';
-      var x = document.getElementsByTagName('script')[0];
-      x.parentNode.insertBefore(s, x);
-    }
-    if (document.readyState === 'complete') {
-      l();
-    } else if (window.attachEvent) {
-      window.attachEvent('onload', l);
-    } else {
-      window.addEventListener('DOMContentLoaded', l, false);
-      window.addEventListener('load', l, false);
-    }
-  })();
-//   ChannelIO('boot', {
-//     pluginKey: "1340eb3c-ddf6-43c5-a497-6a91281156bc", //please fill with your plugin key
-//     memberId: "YOUR_USER_ID", //fill with user id
-//     profile: {
-//       "name": "YOUR_USER_NAME", //fill with user name
-//       "mobileNumber": "YOUR_USER_MOBILE_NUMBER", //fill with user phone number
-//       "CUSTOM_VALUE_1": "VALUE_1", //any other custom meta data
-//       "CUSTOM_VALUE_2": "VALUE_2"
-//     }
-//   });
-  ChannelIO('boot', {
-     pluginKey: '1340eb3c-ddf6-43c5-a497-6a91281156bc'
-      }, function onBoot(error, user) {
-           if (error) {
-                console.error(error);
-           } else {
-             console.log('boot success', user)
-           }
-   });
-  
-</script>
-<!-- 챗봇 관련 코드 -->
-  	
-	
-	<!-- 게시판 글 수정 -->
+
+	<jsp:include page="/inc/top.jsp"></jsp:include>
+
+<body>	
+	<!-- 리뷰 글 수정 -->
 	<section id="modifyForm">
-		<h1>답글 글 수정</h1>
+		<h2>Review Modify</h2>
 		<form action="ReviewModifyPro.bo" name="reviewForm" method="post" enctype="multipart/form-data">
 			<!-- 입력받지 않은 글번호, 페이지번호 hidden 속성으로 전달 -->
 			<input type="hidden" name="review_code" value="${param.review_code }" >
 			<input type="hidden" name="pageNum" value="${param.pageNum }" >
 			<!-- 파일 수정 시 기존 파일 삭제를 위해 실제 파일명도 파라미터로 전달 필요 -->
 			<input type="hidden" name="review_real_file" value="${review.review_real_file }" >
-			<table>
+			<table class="table">
 				<tr>
-					<td class="td_left"><label for="member_id">글쓴이</label></td>
+					<td class="td_left"><label for="member_id">Writer</label></td>
 					<td class="td_right"><input type="text" name="member_id" value="${review.member_id }" readonly="readonly"></td>
 				</tr>
 				<tr>
-					<td class="td_left"><label for="review_pass">비밀번호</label></td>
+					<td class="td_left"><label for="review_pass">Pass</label></td>
 					<td class="td_right"><input type="password" name="review_pass" required="required"></td>
 				</tr>
 				<tr>
-					<td class="td_left"><label for="review_subject">제목</label></td>
+					<td class="td_left"><label for="review_subject">Subject</label></td>
 					<td class="td_right"><input type="text" name="review_subject" value="${review.review_subject }" required="required"></td>
 				</tr>
 				<tr>
-					<td class="td_left"><label for="review_content">내용</label></td>
+					<td class="td_left"><label for="review_content">Content</label></td>
 					<td class="td_right">
 						<textarea id="review_content" name="review_content" cols="40" rows="15" required="required">${review.review_content }</textarea>
 					</td>
 				</tr>
 				<tr>
-					<td class="td_left"><label for="review_file">파일</label></td>
+					<td class="td_left"><label for="review_file">file</label></td>
 					<!-- 파일 수정할 경우에만 선택하도록 required 속성 제거 -->
 					<td class="td_right">
 						<input type="file" name="review_file">

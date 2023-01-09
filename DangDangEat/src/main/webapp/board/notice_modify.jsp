@@ -13,66 +13,75 @@
 	    font-weight: normal;
 	    font-style: normal;
 	}
-	body {
-	    font-family:"GmarketSansMedium" ;
-	}
-	
 	  
 	#modifyForm {
-		width: 500px;
+		width: 1224x;
 		height: 500px;
+		border: 1px;
 		margin: auto;
 	}
 	
-	h1 {
+	h2 {
+		font-family: 'GmarketSansMedium';
 		text-align: center;
 	}
 	
 	table {
-		margin: auto;
-		width: 450px;
-	}
+	    border-collapse: collapse; 
+	 	width: 1224px;
+	   }
+	
 	
 	.td_left {
-		width: 150px;
+/* 		width: 150px; */
 		background: #D3D3D3;
 		text-align: center;
 	}
 	
 	.td_right {
-		width: 300px;		
+/* 		width: 300px; */
+		background: white;
 	}
 	
 	#commandCell {
 		text-align: center;
+		margin-bottom: 30px;
+	}
+    input[type=button], input[type=submit], input[type=reset], input[type=text] {
+	    font-family:"GmarketSansMedium" ;
+	}
+	
+	table > tbody {
+		border-style: none;
 	}
 </style>
-</head>
-<body>
-	
+</head>	
 		<jsp:include page="/inc/top.jsp"></jsp:include>
-	
+	<body>
 	<!-- 게시판 글 수정 -->
 	<section id="modifyForm">
-		<h5>게시판 글 수정</h5>
+		<h2>Notice modify</h2>
 		<form action="NoticeModifyPro.bo" name="noticeForm" method="post">
-			<!-- 입력받지 않은 글번호, 페이지번호 hidden 속성으로 전달 -->
-			<input type="hidden" name="notice_code" value="${param.notice_code }" >
+		    <input type="hidden" name="notice_code" value="${param.notice_code }" >
 			<input type="hidden" name="pageNum" value="${param.pageNum }" >
-			<table>
+			<table class="table container">
+			<tbody>
+			<!-- 입력받지 않은 글번호, 페이지번호 hidden 속성으로 전달 -->
+			
+<!-- 				<tr> -->
+<!-- 					<td class="td_left"><label for="member_id">글쓴이</label></td> -->
+<!-- 					<td class="td_right"><input type="text" name="member_id" value="${notice.member_id }" readonly="readonly"></td> --%>
+<!-- 				</tr> -->
 				<tr>
-					<td class="td_left"><label for="member_id">글쓴이</label></td>
-					<td class="td_right"><input type="text" name="member_id" value="${notice.member_id }" readonly="readonly"></td>
-				</tr>
 				<tr>
-				<tr>
-					<td class="td_left"><label for="notice_subject">제목</label></td>
+					<td class="td_left"><label for="notice_subject">Subject</label></td>
 					<td class="td_right"><input type="text" name="notice_subject" value="${notice.notice_subject }" required="required"></td>
 				</tr>
 				<tr>
-					<td class="td_left"><label for="notice_content">내용</label></td>
+					<td class="td_left"><label for="notice_content">Content</label></td>
 					<td class="td_right">
-						<textarea id="notice_content" name="notice_content" cols="40" rows="15" required="required">${notice.notice_content }</textarea>
+					<input type="text" id="notice_content" style="width: 500px">
+<!-- 						<textarea id="notice_content" name="notice_content" cols="250" rows="15" required="required"></textarea> -->
 					</td>
 				</tr>
 			</table>
@@ -83,7 +92,7 @@
 			</section>
 		</form>
 	</section>
-	  <!-- Footer-->
+	<!-- Footer-->
         <footer class="py-5 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; DANGDANGEAT 2022</p></div>
         </footer>

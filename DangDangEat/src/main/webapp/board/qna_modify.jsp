@@ -19,44 +19,52 @@
 	}
 	
 	#modifyForm {
-		width: 500px;
-		height: 500px;
-		border: 1px solid black;
+		width: 1224px;
+		height: 550px;
 		margin: auto;
 	}
 	
-	h1 {
+	h2 {
+	    font-family:"GmarketSansMedium" ;
 		text-align: center;
 	}
 	
 	table {
-		margin: auto;
-		width: 450px;
-	}
+	    border-collapse: collapse; 
+	 	width: 1224px;
+	   }
 	
 	.td_left {
-		width: 150px;
+/* 		width: 150px; */
 		background: #D3D3D3;
 		text-align: center;
 	}
 	
 	.td_right {
-		width: 300px;
+/* 		width: 300px; */
 		background: white;
-	}
+	}	
 	
 	#commandCell {
 		text-align: center;
+		margin-bottom: 30px;
+	}
+		input[type=button], input[type=submit], input[type=reset], input[type=text] {
+	    font-family:"GmarketSansMedium" ;
+	}	
+	
+	table > tbody {
+		border-style: none;
 	}
 </style>
 </head>
-<body>
-	
-		<jsp:include page="/inc/top.jsp"></jsp:include>
+  <jsp:include page="/inc/top.jsp"></jsp:include>
 
-	<!-- 게시판 글 수정 -->
+<body>	
+		
+	<!-- Q&A 글 수정 -->
 	<section id="modifyForm">
-		<h1>답글 글 수정</h1>
+		<h2>Q&A Modify</h2>
 		<form action="QnaModifyPro.bo" name="qnaForm" method="post" enctype="multipart/form-data">
 			<!-- 입력받지 않은 글번호, 페이지번호 hidden 속성으로 전달 -->
 			<input type="hidden" name="qna_code" value="${param.qna_code }" >
@@ -65,25 +73,25 @@
 			<input type="hidden" name="qna_real_file" value="${qna.qna_real_file }" >
 			<table>
 				<tr>
-					<td class="td_left"><label for="member_id">글쓴이</label></td>
+					<td class="td_left"><label for="member_id">Writer</label></td>
 					<td class="td_right"><input type="text" name="member_id" value="${qna.member_id }" readonly="readonly"></td>
 				</tr>
 				<tr>
-					<td class="td_left"><label for="qna_pass">비밀번호</label></td>
+					<td class="td_left"><label for="qna_pass">Pass</label></td>
 					<td class="td_right"><input type="password" name="qna_pass" required="required"></td>
 				</tr>
 				<tr>
-					<td class="td_left"><label for="qna_subject">제목</label></td>
+					<td class="td_left"><label for="qna_subject">Subject</label></td>
 					<td class="td_right"><input type="text" name="qna_subject" value="${qna.qna_subject }" required="required"></td>
 				</tr>
 				<tr>
-					<td class="td_left"><label for="qna_content">내용</label></td>
+					<td class="td_left"><label for="qna_content">Content</label></td>
 					<td class="td_right">
 						<textarea id="qna_content" name="qna_content" cols="40" rows="15" required="required">${qna.qna_content }</textarea>
 					</td>
 				</tr>
 				<tr>
-					<td class="td_left"><label for="qna_file">파일</label></td>
+					<td class="td_left"><label for="qna_file">File</label></td>
 					<!-- 파일 수정할 경우에만 선택하도록 required 속성 제거 -->
 					<td class="td_right">
 						<input type="file" name="qna_file">
@@ -97,14 +105,4 @@
 				<input type="button" value="취소" onclick="history.back()">
 			</section>
 		</form>
-	</section>
-  <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; DANGDANGEAT 2022</p></div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="../js/scripts.js"></script>
-    </body>
-</html>
+	</section> 

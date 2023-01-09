@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -47,7 +48,9 @@ public class ReviewWriteProAction implements Action {
 			
 			// 전달받은 파라미터 데이터를 ReviewBean 클래스 인스턴스 생성 후 저장
 			ReviewBean review = new ReviewBean();
-			review.setMember_id(multi.getParameter("member_id"));
+			HttpSession session = request.getSession();
+//			String sId = (String)session.getAttribute("sId");
+			review.setMember_id((String)session.getAttribute("sId"));			
 			review.setReview_pass(multi.getParameter("review_pass"));
 			review.setReview_subject(multi.getParameter("review_subject"));
 			review.setReview_content(multi.getParameter("review_content"));
