@@ -27,7 +27,7 @@ html {
 }
 
 body {
-  margin: 0;
+/*   margin: 0; */
 }
 
 h1 {
@@ -46,7 +46,8 @@ hr {
   margin: 2rem 0;
 }
 
-.container {
+/*23/01/09 이거 수정안하면 top.jsp 다깨진다*/
+.container2 {
   max-width: 40rem;
   padding: 10vw 2rem 0;
   margin: 0 auto;

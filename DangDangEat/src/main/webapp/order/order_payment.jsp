@@ -30,9 +30,15 @@
   <script type="text/javascript">
     /* Set values + misc */
 //     var promoCode;
-    var promoPrice;
+    
     var fadeTime = 300;
   
+    function plz() {
+    	$("#promo-code").on("change", function() {
+	    	alert($("#promo-code").val());
+		});
+		
+	}
     
     function iamport() {
 		
@@ -67,7 +73,11 @@
 	      
     
     $(function() {
-
+		let promoPrice;
+    	
+    	$("#promo-code").on("change", function() {
+	    	alert($("#promo-code").val());
+		});
     	
     	$("input").change(function(){
         
@@ -84,6 +94,7 @@
 				success: function (data) {
 					promoPrice = data;
 					alert(promoPrice);
+					 $('#basket-promo').text(promoPrice);
 	               	}
 			}); // ajax
     	}); // input

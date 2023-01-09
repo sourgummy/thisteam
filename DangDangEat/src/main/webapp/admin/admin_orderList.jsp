@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>   
 <!DOCTYPE html>
 <html lang="en">
 
@@ -384,7 +385,6 @@ if(sId == null || !sId.equals("admin")) {
                                     <thead>
                                         <tr>
                                             <th>최종주문번호</th> <!-- payments.pay_number -->
-                                            <th>주문코드</th> <!-- payments.order_code -->
                                             <th>주문금액</th> <!-- payments.pay_amount -->
                                             <th>주문 아이디</th> <!-- orders안에서 조회 가능 -->
                                             <th>주문자 이름</th>
@@ -393,7 +393,6 @@ if(sId == null || !sId.equals("admin")) {
                                             <th>배송상세주소</th>
                                             <th>배송 연락처</th>
                                             <th>배송 메시지</th>
-                                            <th>주문상태</th>
                                             <th>주문일</th>
                                         </tr>
                                     </thead>
@@ -402,8 +401,7 @@ if(sId == null || !sId.equals("admin")) {
 	                                  <c:forEach var="order" items="${adminOrderList }" varStatus="status">
                                           <tr>
                                              <td>${order.pay_number }</td>
-                                             <td>${order.order_code }</td>
-                                             <td>${order.pay_amount }</td>
+                                             <td><fmt:formatNumber pattern="#,###">${order.pay_amount }</fmt:formatNumber></td>
                                              <td>${order.member_id }</td>
                                              <td>${order.order_name }</td>
                                              <td>${order.order_postcode }</td>
@@ -411,7 +409,6 @@ if(sId == null || !sId.equals("admin")) {
                                              <td>${order.order_address2 }</td>
                                              <td>${order.order_mobile }</td>
                                              <td>${order.order_comment }</td>
-                                             <td>${order.order_status }</td>
                                              <td>${order.order_date }</td>
                                            </tr>
 	                                  </c:forEach>

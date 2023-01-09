@@ -19,7 +19,7 @@ public class OrderCouponProAction implements Action {
 		String id = (String)session.getAttribute("sId");
 		int cart_code = Integer.parseInt(request.getParameter("cart_code"));
 		int order_code = Integer.parseInt(request.getParameter("order_code"));
-		int cp_code = Integer.parseInt(request.getParameter("cp_code"));
+		String cp_code = request.getParameter("cp_code");
 		int pro_amount = Integer.parseInt(request.getParameter("pro_amount"));
 		
 		System.out.println("쿠폰 입력시 상품 코드 잘넘어 옵니까" + cp_code);
