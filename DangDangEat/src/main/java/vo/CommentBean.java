@@ -9,9 +9,9 @@ public class CommentBean {
 	 CREATE TABLE comment (
      comment_code INT PRIMARY KEY AUTO_INCREMENT,
      review_code INT,
-     member_id VARCHAR(20) NOT NULL,
-     comment_content VARCHAR(500) NOT NULL,
-     comment_date DATE
+     member_id VARCHAR(20),
+     comment_content VARCHAR(500),
+     comment_date DATE,
      FOREIGN KEY(review_code) references review(review_code),
      FOREIGN KEY(member_id) references member(member_id)
     );	 	 

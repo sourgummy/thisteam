@@ -17,7 +17,10 @@ public class ReviewListAction implements Action {
 		System.out.println("ReviewListAction");
 		
 		ActionForward forward = null;
-		
+		boolean test = false;
+		if(request.getParameter("pd") != null) {
+			test = true;
+		}
 		// ReviewListService 객체를 통해 게시물 목록 조회 후
 		// 조회 결과(List 객체)를 request 객체를 통해 review_list.jsp 페이지로 전달
 		// ---------------------------------------------------------------------------
@@ -82,10 +85,15 @@ public class ReviewListAction implements Action {
 		
 		// ActionForward 객체 생성 후 review/review_list.jsp 페이지 포워딩 설정
 		// => URL 및 request 객체 유지 : Dispatch 방식
-		forward = new ActionForward();
-		forward.setPath("board/review_list.jsp");
-		forward.setRedirect(false); // 생략 가능
-		
+		if(test) {
+			forward = new ActionForward();
+			forward.setPath("board/review_list_pd.jsp");
+			forward.setRedirect(false); // 생략 가능
+		} else {
+			forward = new ActionForward();
+			forward.setPath("board/review_list.jsp");
+			forward.setRedirect(false); // 생략 가능
+		}
 		return forward;
 	}
 

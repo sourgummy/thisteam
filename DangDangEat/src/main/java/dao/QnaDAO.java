@@ -50,11 +50,11 @@ public class QnaDAO {
 		PreparedStatement pstmt = null, pstmt2 = null;
 		ResultSet rs = null;
 		
-		try {
-
-			int qna_code = 1; // 새 글 번호
+		int qna_code = 1; // 새 글 번호
+		
+		try {			
 			
-			String sql = "SELECT MAX(qna_code) FROM qna";
+			String sql = "SELECT COUNT(qna_code) FROM qna";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -64,24 +64,19 @@ public class QnaDAO {
 			}
 			System.out.println("새 글 번호 : " + qna_code);
 			// --------------------------------------------------------------------------------
-			// 전달받은 데이터(QnaBean 객체)를 사용하여 INSERT 작업 수행
-			// => 참조글번호(qna_re_ref)는 새 글 번호와 동일한 번호로 지정
-			// => 들여쓰기레벨(qna_re_lev)과 순서번호(board_re_seq)는 0으로 지정
-			// => INSERT 구문 실행 후 리턴값을 insertCount 변수에 저장
-			sql = "INSERT INTO qna VALUES (?,?,?,?,?,?,?,?,?,?,?,now(),?)";
+			sql = "INSERT INTO qna VALUES (?,?,?,?,?,?,?,?,?,?,now(),?)";
 			pstmt2 = con.prepareStatement(sql);
 			pstmt2.setInt(1, qna_code); // 글번호
 			pstmt2.setString(2, qna.getMember_id()); // 작성자
-			pstmt2.setInt(3, qna.getPro_code()); 
-			pstmt2.setString(4, qna.getQna_pass()); 
-			pstmt2.setString(5, qna.getQna_subject());
-			pstmt2.setString(6, qna.getQna_content());
-			pstmt2.setString(7, qna.getQna_file());
-			pstmt2.setString(8, qna.getQna_real_file()); // 실제파일명
-			pstmt2.setInt(9, qna_code); // 참조글번호(글쓰기는 글번호와 동일하게 사용)
-			pstmt2.setInt(10, 0); // 들여쓰기레벨
-			pstmt2.setInt(11, 0); // 순서번호
-			pstmt2.setString(12, qna.getQna_status()); // 답변대기/완료 컬럼
+			pstmt2.setString(3, qna.getQna_pass()); 
+			pstmt2.setString(4, qna.getQna_subject());
+			pstmt2.setString(5, qna.getQna_content());
+			pstmt2.setString(6, qna.getQna_file());
+			pstmt2.setString(7, qna.getQna_real_file()); // 실제파일명
+			pstmt2.setInt(8, qna_code); // 참조글번호(글쓰기는 글번호와 동일하게 사용)
+			pstmt2.setInt(9, 0); // 들여쓰기레벨
+			pstmt2.setInt(10, 0); // 순서번호		
+			pstmt2.setString(11, qna.getQna_secret());
 			
 			insertCount = pstmt2.executeUpdate();
 			
@@ -89,10 +84,10 @@ public class QnaDAO {
 			System.out.println("SQL 구문 오류! - insert()");
 			e.printStackTrace();
 		} finally {
-			// DB 자원 반환
-			JdbcUtil.close(rs);
+			// DB 자원 반환			
 			JdbcUtil.close(pstmt);
 			JdbcUtil.close(pstmt2);
+			JdbcUtil.close(rs);
 			// 주의! Connection 객체는 Service 클래스가 관리하므로 DAO 에서 반환 금지!
 		}
 		
@@ -127,7 +122,6 @@ public class QnaDAO {
 				QnaBean qna = new QnaBean();
 				qna.setQna_code(rs.getInt("qna_code"));
 				qna.setMember_id(rs.getString("member_id"));
-				qna.setPro_code(rs.getInt("pro_code"));
 //				qna.setQna_pass(rs.getString("qna_pass"));
 				qna.setQna_subject(rs.getString("qna_subject"));
 				qna.setQna_content(rs.getString("qna_content"));
@@ -137,7 +131,7 @@ public class QnaDAO {
 				qna.setQna_re_lev(rs.getInt("qna_re_lev"));
 				qna.setQna_re_seq(rs.getInt("qna_re_seq"));
 				qna.setQna_date(rs.getDate("qna_date"));
-				qna.setQna_status(rs.getString("qna_status"));
+				qna.setQna_secret(rs.getString("qna_secret"));
 				System.out.println(qna);
 				
 				qnaList.add(qna);
@@ -208,7 +202,6 @@ public class QnaDAO {
 				qna = new QnaBean();
 				qna.setQna_code(rs.getInt("qna_code"));
 				qna.setMember_id(rs.getString("member_id"));
-				qna.setPro_code(rs.getInt("pro_code"));
 //				qna.setQna_pass(rs.getString("qna_pass"));
 				qna.setQna_subject(rs.getString("qna_subject"));
 				qna.setQna_content(rs.getString("qna_content"));
@@ -218,7 +211,7 @@ public class QnaDAO {
 				qna.setQna_re_lev(rs.getInt("qna_re_lev"));
 				qna.setQna_re_seq(rs.getInt("qna_re_seq"));
 				qna.setQna_date(rs.getDate("qna_date"));
-				qna.setQna_status(rs.getString("qna_status"));
+				qna.setQna_secret(rs.getString("qna_secret"));
 				System.out.println(qna);
 			}			
 		} catch (SQLException e) {
@@ -348,12 +341,13 @@ public class QnaDAO {
 		PreparedStatement pstmt = null, pstmt2 = null;
 		ResultSet rs = null;
 		
+		int qna_code = 1; // 새 글 번호
+		
 		try {
 			// 새 글 번호 계산을 위해 기존 qna 테이블의 모든 번호(qna_code) 중 가장 큰 번호 조회
 			// => 조회 결과 + 1 값을 새 글 번호로 지정하고, 조회 결과가 없으면 기본값 1 로 설정
 			// => MySQL 구문의 MAX() 함수 사용(SELECT MAX(컬럼명) FROM 테이블명)
-			int qna_code = 1; // 새 글 번호
-			
+						
 			String sql = "SELECT MAX(qna_code) FROM qna";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -392,11 +386,10 @@ public class QnaDAO {
 			// ------------------------------------------------------------
 			// 답글 INSERT
 			// => 글쓰기와 달리 ref, lev, seq 값은 설정된 값으로 변경
-			sql = "INSERT INTO qna VALUES (?,?,?,?,?,?,?,?,?,?,?,now(),?)";
+			sql = "INSERT INTO qna VALUES (?,?,?,?,?,?,?,?,?,?,now(),?)";
 			pstmt2 = con.prepareStatement(sql);
 			pstmt2.setInt(1, qna_code); // 글번호
 			pstmt2.setString(2, qna.getMember_id()); // 작성자
-			pstmt2.setInt(3, qna.getPro_code()); 
 			pstmt2.setString(4, qna.getQna_pass()); 
 			pstmt2.setString(5, qna.getQna_subject()); // 제목
 			pstmt2.setString(6, qna.getQna_content()); // 내용
@@ -405,7 +398,7 @@ public class QnaDAO {
 			pstmt2.setInt(9, ref); // 참조글번호
 			pstmt2.setInt(10, lev); // 들여쓰기레벨
 			pstmt2.setInt(11, seq); // 순서번호
-			pstmt2.setString(12, qna.getQna_status());
+			pstmt2.setString(12, qna.getQna_secret());
 			
 			insertCount = pstmt2.executeUpdate();
 			

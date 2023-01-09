@@ -70,6 +70,7 @@
 					<td class="td_left"><label for="member_id">글쓴이</label></td>
 					<td class="td_right"><input type="text" name="member_id" required="required"></td>
 				</tr>
+				
 				<tr>
 					<td class="td_left"><label for="qna_pass">비밀번호</label></td>
 					<td class="td_right"><input type="password" name="qna_pass" required="required"></td>

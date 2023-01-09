@@ -66,15 +66,21 @@
 		width: 500px;
 		text-align: center;
 	}
-	
-	#CommentAria {
-	text-align: center; 
-	border: 1px solid #dddddd
-	
-	
+	#insertForm {
+		margin: auto;
+		width: 500px;
+		text-align: center;
 	}
+	#commentViewAria {
+	margin: auto;
+	text-align: center; 
+	border: 1px solid #dddddd		
+	}
+		input[type=button], input[type=submit] {
+	    font-family:"GmarketSansMedium" ;
+	}
+	
 </style>
-
 
 </head>
 <body>
@@ -93,20 +99,18 @@
 				<th width="70">작성일</th>
 				<td><fmt:formatDate value="${review.review_date }" pattern="yy-MM-dd" /></td>
 			</tr>
-			<tr>
-				<th width="70">첨부파일</th>
+			<tr>		
+			<th width="70">첨부파일</th>
 				<td>
 					<a href="upload/${review.review_real_file }" download="${review.review_file }">
 						${review.review_file }
 					</a>
 				</td>
-				<th width="70">조회수</th>
-				<td>${review.review_readcount }</td>
-			</tr>
 			</table>
 		</section>
 		<section id="articleContentArea">
 			${review.review_content }
+
 		</section>
 	</section>
 	<section id="commandList">
@@ -116,72 +120,36 @@
 		<input type="button" value="목록" onclick="location.href='ReviewList.bo?pageNum=${param.pageNum}'">
 	</section>
 	
-	 <!-- 댓글 부분 -->
-	<div id="comment">
-	<table border="1" bordercolor="lightgray">
-	<!-- 댓글 목록 -->	
-			<%-- for(CommentBean comment : commentList) {} --%>
-		<c:forEach var="comment" items="${commentList }">
-			<tr>
-				<!-- 아이디, 작성날짜 -->
-					
-						<td><tr><th width="70">작성자</th>${comment.member_id}<br></tr>
-						<tr><th width="70">날짜</th>${comment.comment_date}</tr></td>
-					
+	<div class="clear"></div>
+			
+				<div class="clear"></div>
+			
+			<div id="commentViewArea">	
+				<!-- insertForm 영역(댓글 작성 영역) - 세션 아이디 존재 시에만 표시 -->
+					<c:if test="${not empty sessionScope.sId and sessionScope.sId eq 'admin'}">
+					<div id="insertForm">
+						<form action="CommentWritePro.bo" method="post">
+							<!-- 글번호, 게시판타입, 페이지번호를 함께 전달 -->
+							<input type="hidden" name="review_code" value=${param.review_code }>
+							<input type="hidden" name="pageNum" value=${param.pageNum }>
+							<input type="hidden" name="comment_code" value=${param.comment_code }>
+							<textarea rows="3" cols="50" name="comment_content" id="replyTextarea"></textarea> 
+							<input type="submit" value="등록" id="replySubmit">
+						</form>
+					    </div>
+						</c:if>			
 				
-				<!-- 본문내용 -->
-				<td width="550">
-					<div class="text_wrapper">
-						${comment.comment_content}
-					</div>
-				</td>
-				<!-- 버튼 -->
-				<td width="100">
-					<div id="btn" style="text-align:center;">
-			   	  <c:if test="${not empty sessionScope.sId and sessionScope.sId eq 'admin'}">					
-						<a href="#">[수정]</a><br>	
-						<a href="#">[삭제]</a>
-					</c:if>		
-					</div>
-				</td>
-			</tr>
-			
-		</c:forEach>
-			
-			<!-- 로그인 했을 경우만 댓글 작성가능 -->
-			<c:if test="${not empty sessionScope.sId and sessionScope.sId eq 'admin'}">
-			<tr bgcolor="#F5F5F5">
-			
-				<input type="hidden" name="review_code" value="${comment.review_code}">
-				<input type="hidden" name="member_id" value="${sessionScope.sessionID}">
-				<!-- 아이디-->
-				<td width="150">
-					<div>
-						${sessionScope.sessionID}
-					</div>
-				</td>
-				<!-- 본문 작성-->
-				<td width="550">
-					<div>
-						<textarea name="comment_content" rows="4" cols="70" ></textarea>
-					</div>
-				</td>
-				<!-- 댓글 등록 버튼 -->
-		
-				<td width="100">
-					<div id="btn" style="text-align:center;">
-						<input type="submit" value="등록">&nbsp;&nbsp;	
-					</div>
-				</td>			
-			</form>
-			</tr>
-			
-			</c:if>
-			
-	
-		</table>
-	</div>
-
-</body>
-</html>
-  
+				<!-- 댓글 표시 영역 -->
+				  <section id="commentContentArea">
+					 <%-- for(CommentBean comment : commentList) {} --%>
+		             <c:forEach var="comment" items="${commentList }">
+		           
+		             <input type="hidden" name="comment_code" value=${param.comment_code }>
+		             <th width="70">admin</th><td>${comment.member_id }</td>
+					 <td><fmt:formatDate value="${comment.comment_date }" pattern="yy-MM-dd" /></td></tr>
+					 <tr>	               
+				     <td>${comment.comment_content }</td>
+					 <img src="img/delete.png" width="10px" height="10px"></section>
+					 </c:forEach>
+				</div>							
+			</div>

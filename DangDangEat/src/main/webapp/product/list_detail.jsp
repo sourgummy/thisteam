@@ -60,6 +60,42 @@
 		       });//    $.ajax({
 
 	 	 });
+		$("#qna_button").on("click", function() {
+			let sendData = $("form").serialize();
+			$.ajax({
+				type: "post", // AJAX 로 요청 시
+				url: "QnaList.bo?pd=1",
+				// serialize() 함수를 통해 가져온 폼 데이터를 전송할 데이터로 지정
+				data: sendData,
+				dataType: "text", // 전송되는 데이터에 대한 타입 지정(일반 데이터는 text)
+				success: function(response) { // 요청에 대한 처리 성공 시 이벤트 호출
+					// 익명 함수 파라미터로 응답 데이터가 전달됨(처리 페이지의 응답 결과)
+					// id 선택자 resultArea 영역에 응답 데이터(response) 출력
+					$("#resultArea").html(response);
+				},
+				error: function(xhr, textStatus, errorThrown) {
+					$("#resultArea").html("xhr = " + xhr + "<br>textStatus =  " + textStatus + "<br>errorThrown =  " + errorThrown );
+				}
+			});
+		});
+		$("#review_button").on("click", function() {
+			let sendData = $("form").serialize();
+			$.ajax({
+				type: "post", // AJAX 로 요청 시
+				url: "ReviewList.bo?pd=1",
+				// serialize() 함수를 통해 가져온 폼 데이터를 전송할 데이터로 지정
+				data: sendData,
+				dataType: "text", // 전송되는 데이터에 대한 타입 지정(일반 데이터는 text)
+				success: function(response) { // 요청에 대한 처리 성공 시 이벤트 호출
+					// 익명 함수 파라미터로 응답 데이터가 전달됨(처리 페이지의 응답 결과)
+					// id 선택자 resultArea 영역에 응답 데이터(response) 출력
+					$("#resultArea").html(response);
+				},
+				error: function(xhr, textStatus, errorThrown) {
+					$("#resultArea").html("xhr = " + xhr + "<br>textStatus =  " + textStatus + "<br>errorThrown =  " + errorThrown );
+				}
+			});
+		});
 	 });
 		
 </script>
@@ -190,12 +226,12 @@ body {
 			<div class="container navbar-text">
 				<a class="navbar-brand" href="#pro_info">상품상세</a>
 				<a class="navbar-brand" href="#pro_delivery">배송/교환/환불</a>
-				<a class="navbar-brand" href="#">리뷰</a>
-				<a class="navbar-brand" href="#">상품문의</a>
+				<input class="navbar-brand" type="button" id="review_button" value="리뷰">
+				<input class="navbar-brand" type="button" id="qna_button" value="상품문의">
 			</div>
 		</nav>
 	 </div>	
-	
+	 <div id="resultArea"><%-- 리뷰,상품문의 게시판 보여주는곳 --%></div>
 	<!-- 상품 상세 -->	
 	<section class="py-2">
 		<div class="container px-4 px-lg-5 mt-3">

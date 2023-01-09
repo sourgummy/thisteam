@@ -12,19 +12,17 @@ public class QnaBean {
       CREATE TABLE qna (
          qna_code INT PRIMARY KEY,
          member_id VARCHAR(20),
-         pro_code INT,
-         qna_pass VARCHAR(16) NOT NULL,
-	     qna_subject VARCHAR(100) NOT NULL,
-	     qna_content VARCHAR(2000) NOT NULL,
-	     qna_file VARCHAR(200) NOT NULL,
-	     qna_real_file VARCHAR(200) NOT NULL,
-	     qna_re_ref INT NOT NULL,
-	     qna_re_lev INT NOT NULL,
-	     qna_re_seq INT NOT NULL,
+         qna_pass VARCHAR(16),
+	     qna_subject VARCHAR(100),
+	     qna_content VARCHAR(2000),
+	     qna_file VARCHAR(200), 
+	     qna_real_file VARCHAR(200), 
+	     qna_re_ref INT,
+	     qna_re_lev INT,
+	     qna_re_seq INT,
          qna_date DATE, 
-         qna_status VARCHAR(20),     
-         FOREIGN KEY(member_id) references member(member_id),
-	     FOREIGN KEY(pro_code) references product(pro_code)
+         qna_secret VARCHAR(1),
+         FOREIGN KEY(member_id) references member(member_id)
         );
        
 	 * 
@@ -35,7 +33,6 @@ public class QnaBean {
 	
 	private int qna_code;
 	private String member_id;
-	private int pro_code;
 	private String qna_pass;
 	private String qna_subject;
 	private String qna_content;
@@ -45,7 +42,8 @@ public class QnaBean {
 	private int qna_re_lev;
 	private int qna_re_seq;
 	private Date qna_date;
-	private String qna_status;
+	private String qna_secret;
+	
 	
 	public int getQna_code() {
 		return qna_code;
@@ -58,12 +56,6 @@ public class QnaBean {
 	}
 	public void setMember_id(String member_id) {
 		this.member_id = member_id;
-	}
-	public int getPro_code() {
-		return pro_code;
-	}
-	public void setPro_code(int pro_code) {
-		this.pro_code = pro_code;
 	}
 	public String getQna_pass() {
 		return qna_pass;
@@ -119,18 +111,20 @@ public class QnaBean {
 	public void setQna_date(Date qna_date) {
 		this.qna_date = qna_date;
 	}
-	public String getQna_status() {
-		return qna_status;
+
+	public String getQna_secret() {
+		return qna_secret;
 	}
-	public void setQna_status(String qna_status) {
-		this.qna_status = qna_status;
+	public void setQna_secret(String qna_secret) {
+		this.qna_secret = qna_secret;
 	}
+	
 	@Override
 	public String toString() {
-		return "QnaBean [qna_code=" + qna_code + ", member_id=" + member_id + ", pro_code=" + pro_code + ", qna_pass="
-				+ qna_pass + ", qna_subject=" + qna_subject + ", qna_content=" + qna_content + ", qna_file=" + qna_file
+		return "QnaBean [qna_code=" + qna_code + ", member_id=" + member_id + ", qna_pass=" + qna_pass
+				+ ", qna_subject=" + qna_subject + ", qna_content=" + qna_content + ", qna_file=" + qna_file
 				+ ", qna_real_file=" + qna_real_file + ", qna_re_ref=" + qna_re_ref + ", qna_re_lev=" + qna_re_lev
-				+ ", qna_re_seq=" + qna_re_seq + ", qna_date=" + qna_date + ", qna_status=" + qna_status + "]";
+				+ ", qna_re_seq=" + qna_re_seq + ", qna_date=" + qna_date + ", qna_secret=" + qna_secret + "]";
 	}
 	
 }

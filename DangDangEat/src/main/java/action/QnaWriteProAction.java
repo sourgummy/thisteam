@@ -13,7 +13,6 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import svc.QnaWriteProService;
 import vo.ActionForward;
 import vo.QnaBean;
-import vo.ReviewBean;
 
 public class QnaWriteProAction implements Action {
 
@@ -46,13 +45,12 @@ public class QnaWriteProAction implements Action {
 					new DefaultFileRenamePolicy() // 5) 중복 파일명을 처리할 객체
 			);
 			
-			// 전달받은 파라미터 데이터를 ReviewBean 클래스 인스턴스 생성 후 저장
 			QnaBean qna = new QnaBean();
 			qna.setMember_id(multi.getParameter("member_id"));
-			qna.setPro_code(Integer.parseInt(multi.getParameter("pro_code")));
 			qna.setQna_pass(multi.getParameter("qna_pass"));
 			qna.setQna_subject(multi.getParameter("qna_subject"));
 			qna.setQna_content(multi.getParameter("qna_content"));
+			qna.setQna_secret(multi.getParameter("qna_secret"));
 			
 			// 파일명은 getParameter() 로 단순 처리 불가능
 			// => 원본 파일명 : getOriginalFileName()

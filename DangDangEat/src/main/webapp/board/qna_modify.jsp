@@ -53,7 +53,7 @@
 <body>
 	
 		<jsp:include page="/inc/top.jsp"></jsp:include>
-	
+
 	<!-- 게시판 글 수정 -->
 	<section id="modifyForm">
 		<h1>답글 글 수정</h1>

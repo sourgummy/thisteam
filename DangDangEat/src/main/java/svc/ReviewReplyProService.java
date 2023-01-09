@@ -11,7 +11,7 @@ public class ReviewReplyProService {
 	// 글쓰기 작업 요청
 	public boolean registReplyReview(ReviewBean review) {
 		boolean isWriteSuccess = false;
-		
+
 		Connection con = JdbcUtil.getConnection();
 		
 		ReviewDAO dao = ReviewDAO.getInstance();
