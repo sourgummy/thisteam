@@ -84,7 +84,7 @@
 	<!-- 게시판 리스트 -->
 	<section id="listForm">
 	<h2>문의</h2>
-    <table class="table">	
+    <table class="table container">	
 		<tr id="tr_top">
 			<td width="100px">No</td>
 			<td>Subject</td>
