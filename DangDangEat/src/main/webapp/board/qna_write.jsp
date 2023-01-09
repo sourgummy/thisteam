@@ -63,6 +63,15 @@
 	textarea {
 		resize: none;
 	}
+	
+	input[type=radio]{
+		top: -0.7em;
+	}
+	
+	input{
+	    font-family:"GmarketSansMedium" ;
+	    border-radius: 0px;
+	}
 </style>
 </head>
 <body>

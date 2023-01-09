@@ -67,6 +67,7 @@
 	}
 	
 	input[type=button], input[type=submit] {
+		border-radius: 0px;
 	    font-family:"GmarketSansMedium" ;
 	}
 </style>

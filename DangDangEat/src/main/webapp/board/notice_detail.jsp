@@ -20,20 +20,21 @@
 	}
        
 	#detailForm {
-		width: 500px;
+		width: 1224px;
 		height: 550px;
-		border: 1px solid black;
+/* 		border: 1px solid #D3D3D3; */
 		margin: auto;
 	}
 	
 	h2 {
+		font-family:"GmarketSansMedium" ;
 		text-align: center;
 	}
 	
 	table {
-		border: 1px solid black;
-		border-collapse: collapse; 
-	 	width: 500px;
+/* 		border: 1px solid black; */
+ 		border-collapse: collapse;
+	 	width: 1224px;
 	}
 	
 	th {
@@ -51,6 +52,7 @@
 	}
 	
 	#detailContentArea {
+		margin-bottom: 30px;
 		background: #D3D3D3;
 		margin-top: 20px;
 		height: 350px;
@@ -61,10 +63,12 @@
 	
 	#commandList {
 		margin: auto;
+		margin-bottom: 30px;
 		width: 500px;
 		text-align: center;
 	}
 		input[type=button], input[type=submit] {
+		border-radius: 0px;
 	    font-family:"GmarketSansMedium" ;
 	}
 	
@@ -76,13 +80,13 @@
         <!-- top.jsp -->
 		<jsp:include page="../inc/top.jsp"></jsp:include>
         <!-- Section-->
-  	
+  	<div class="container">
         <!-- 게시판 리스트 -->	
-       <section id="detailForm">
-		<h2>Notice</h2>
-		<section id="basicInfoArea">
-			<table border="1">
-			<tr><th width="70">제 목</th><td colspan="3" >${notice.notice_subject }</td></tr>
+       <section >
+<!-- 		<h2>Notice</h2> -->
+		<section >
+			<table class="table">
+			<tr><th width="70">제 목</th><td colspan="5">${notice.notice_subject }</td></tr>
 			<tr>
 				<th width="70">작성자</th><td>${notice.member_id }</td>
 				<th width="70">작성일</th>
@@ -96,6 +100,7 @@
 			${notice.notice_content }
 		</section>
 	</section>
+	</div>
 	<section id="commandList">
 	    <c:if test="${not empty sessionScope.sId and sessionScope.sId eq 'admin'}"> 
 		<input type="button" value="수정" onclick="location.href='NoticeModifyForm.bo?notice_code=${param.notice_code}&pageNum=${param.pageNum }'">
