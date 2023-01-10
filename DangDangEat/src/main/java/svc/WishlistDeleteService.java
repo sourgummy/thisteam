@@ -36,7 +36,7 @@ public class WishlistDeleteService {
 	}
 	
 	// 장바구니에 없어서 삭제 - delete
-	public boolean removeWishlist(int pro_code) {
+	public boolean removeWishlist(CartBean cart) {
 		boolean isDeleteSuccess = false;
 		
 		// 공통작업-1. Connection 객체 가져오기
@@ -46,7 +46,7 @@ public class WishlistDeleteService {
 		// 공통작업-3. BoardDAO 객체에 Connection 객체 전달하기
 		dao.setConnection(con);
 		
-		int deleteCount = dao.deleteCart(pro_code);
+		int deleteCount = dao.deleteCart(cart);
 		
 		if(deleteCount > 0) {
 			JdbcUtil.commit(con);
@@ -74,7 +74,8 @@ public class WishlistDeleteService {
 		
 		CartBean cart = new CartBean();
 		cart.setPro_code(pro_code);
-		updateCount = dao.resetCart(cart, true);
+		// cart_wishlist = 0 으로 만들기
+		updateCount = dao.resetCart(cart, false);
 		
 		if(updateCount > 0) {
 			JdbcUtil.commit(con);

@@ -58,10 +58,17 @@ public class CartInsertAction implements Action {
 				int insertCount = service.insertCart(cart);
 //				System.out.println("insertCount = " + insertCount);
 				if(insertCount == 1) { // 장바구니 추가 성공
+					// ajax 는 경로를 줄 필요가 없음
 					if(path.equals("product_detail")) { // 경로 상품상세
-						forward = new ActionForward();
-						forward.setPath("ProductDetail.pd?pro_code=" + pro_code);
-						forward.setRedirect(true);
+//						forward = new ActionForward();
+//						forward.setPath("ProductDetail.pd?pro_code=" + pro_code);
+//						forward.setRedirect(true);
+						response.setContentType("text/html; charset=UTF-8");
+						PrintWriter out = response.getWriter();
+//						out.println("<script>");
+						out.println("장바구니에 상품이 담겼습니다!");
+//						out.println("history.back()");
+//						out.println("</script>");
 					} else if(path.equals("wishlist")) { // 경로 위시리스트
 						forward = new ActionForward();
 						forward.setPath("CartList.ct");
@@ -71,13 +78,20 @@ public class CartInsertAction implements Action {
 						forward.setPath("ProductList.pd");
 						forward.setRedirect(true);
 					}
+//					request.setAttribute("result1", 1);
+//					response.setContentType("text/html; charset=UTF-8");
+//					PrintWriter out = response.getWriter();
+//					out.println("<script>");
+//					out.println("장바구니에 상품이 담겼습니다!");
+//					out.println("history.back()");
+//					out.println("</script>");
 				} else if(insertCount == 2){ 
 					response.setContentType("text/html; charset=UTF-8");
 					PrintWriter out = response.getWriter();
-					out.println("<script>");
-					out.println("alert('장바구니에 있는 상품입니다!')");
-					out.println("history.back()");
-					out.println("</script>");
+//					out.println("<script>");
+					out.println("장바구니에 있는 상품입니다!");
+//					out.println("history.back()");
+//					out.println("</script>");
 				} else { // 추가 실패
 					response.setContentType("text/html; charset=UTF-8");
 					PrintWriter out = response.getWriter();
