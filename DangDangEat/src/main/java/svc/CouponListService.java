@@ -18,7 +18,7 @@ public class CouponListService {
 		
 		couponList = dao.selectCouponFromCouponView();
 		
-
+		JdbcUtil.commit(con);
 		JdbcUtil.close(con);
 		return couponList;
 		

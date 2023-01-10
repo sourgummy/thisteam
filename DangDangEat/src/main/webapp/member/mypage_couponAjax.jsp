@@ -7,7 +7,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
+
+
 	<div class="container" id="mypage_couponAjax">
+
 		<div class="card" id="titleDiv">
 			<div class="card-header">
 				<strong>내가 가진 쿠폰</strong>
@@ -63,10 +66,14 @@
 							    <%=coupon.get("cp_min_price") %>원 이상 구매 시 ( 최대 <%=coupon.get("cp_max_discount") %> 원)<br>
 							  <%=coupon.get("target_sd") %> - <%=coupon.get("target_ed") %> ( <%=coupon.get("cp_period") %> 일)
 							</div>
-						</div>
+					</div>
 					
 				<% }} %>
+			
+					
+			
 				
+	</div>
 	</div>
 	</div>
 </div>

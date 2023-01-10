@@ -18,6 +18,7 @@ public class CouponSearchAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = null;
 		
+	
 		String cp_code = request.getParameter("cp_code");
 		HttpSession session = request.getSession(false);
 		String sId =  (String)session.getAttribute("sId");

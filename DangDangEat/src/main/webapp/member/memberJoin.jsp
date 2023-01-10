@@ -22,6 +22,21 @@
     outline: none; /*focus 했을때 테두리 나오게 */
 }
 
+   @font-face { /*지마켓 산스*/
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}    
+
+body {
+
+}
+
+input::placeholder  {
+	font-family: "GmarketSans";
+}
+
 body{
     font-family: 'GmarketSans', sans-serif;
     font-size:14px;

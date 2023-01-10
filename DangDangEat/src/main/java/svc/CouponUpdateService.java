@@ -19,8 +19,10 @@ public class CouponUpdateService {
 		
 		
 		updateCount = dao.updateCoupon(coupon,isDelete);
+		
 		if(updateCount > 0) {
 			JdbcUtil.commit(con);
+			System.out.println("쿠폰 삭제됨 - "+ this.getClass());
 		}else {
 			JdbcUtil.rollback(con);
 		}
