@@ -100,6 +100,7 @@ public class AdminFrontController extends HttpServlet {
 			//관리자 쿠폰 삭제
 			action = new CouponDeleteAction();
 			forward = action.execute(request, response);	
+			
 		} else if (command.equals("/CouponUpdate.ad")) {
 			//관리자 쿠폰 수정
 			action = new CouponUpdateAction();

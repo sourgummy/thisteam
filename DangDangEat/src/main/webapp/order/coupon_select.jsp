@@ -27,9 +27,19 @@ body {
 
 <script type="text/javascript">
 function setOrderCouponValue() {
-    opener.document.getElementById("promo-code").value = document.getElementById("selectedCoupon").value;
-    window.close();
-   }
+// alert("setOrderCouponValue()");
+// alert("$('#selectedCoupon').val()" + $("#selectedCoupon").val());
+// alert('$("input[type=radio]:checked").attr("value1")' + $("input[type=radio]:checked").attr("value1"));
+
+	$("input[type=radio]").each(function(){
+		if(this.is(":checked") == false){
+			alert("선택된 쿠폰이 없습니다.");
+		    window.close();
+		}
+	}
+			opener.getCouponCode($("input[type=radio]:checked").attr("value1"));
+	  	 	window.close();
+}
    
    
 $(function(){
@@ -60,17 +70,14 @@ $(function(){
 				
 				for(let coupon of result) {
 					
-// 					alert("total: " + parseInt($("#total").text()));
-// 					alert("cp_min_price: " +parseInt(coupon.cp_min_price));
-// 					alert(parseInt($("#total").text()) > parseInt(coupon.cp_min_price));
-					
+					//최소구매금액보다 구매액이 작은 경우 => disabled='disabled'
 					if( parseInt($("#total").text()) < parseInt(coupon.cp_min_price)){
-// 						alert(parseInt($("#total").text()) > parseInt(coupon.cp_min_price))
 							$("#coupon_list").append(
 									"<div  class='border rounded-2 d-flex bg-secondary bg-gradient' style='--bs-bg-opacity: .1' >"
 										+"<div class='p-3'>"
-											+"<input type='radio' id='selectedCoupon' disabled='disabled' name='cp_code' value="+coupon.cp_code+">" 
-											+"<input type='hidden' id='cp_min_price' value="+coupon.cp_min_price+">" 
+											+"<input type='radio' disabled='disabled' name='cp_code' value1="+coupon.cp_code+">" 
+											+"<input type='hidden' id='cp_min_price' value2="+coupon.cp_min_price+">" 
+										
 									 		+"<label for='selectedCoupon'></label>"
 								  		 +"</div>"
 										+"<div class='p-3'>"
@@ -82,14 +89,12 @@ $(function(){
 									+"</div><br>"
 									
 							);
-					}else{
-					
+					}else{//최소구매금액보다 구매액이 큰 경우
 					
 						$("#coupon_list").append(
 								"<div  class='border rounded-2 d-flex ' >"
 									+"<div class='p-3'>"
-										+"<input type='radio' id='selectedCoupon' name='cp_code' value="+coupon.cp_code+">" 
-										+"<input type='hidden' id='cp_min_price' value="+coupon.cp_min_price+">" 
+										+"<input type='radio' id='selectedCoupon' name='cp_code' value1="+coupon.cp_code+" value2="+coupon.cp_discount_value+" value3="+coupon.cp_max_discount+">" 
 								 		+"<label for='selectedCoupon'></label>"
 							  		 +"</div>"
 									+"<div class='p-3'>"
@@ -181,34 +186,23 @@ $(function(){
 	
 });//$(function(){}
 
-$(document).on("change","input[type=radio]",function(){ 
-	alert("input[type=radio]");
-    alert(parseInt($("#total").text()));
+//할인금액 계산
+$(document).on("change","input[type=radio]:checked",function(){ 
+
+ 	$totalPrice =  parseInt($("#total").text());//회원 구매액
+ 	$minPrice = parseInt($("input[type=radio]:checked").attr("value2")); //최소구매액
+    $maxPrice = parseInt($("input[type=radio]:checked").attr("value3")); //최대할인액
     
-    $("input[type=radio]").is(":checked").closest("#cp_min_price").val();
-    
-	let calDiscount = parseInt($("#total").text()) * $("input[type=radio]").is(":checked").closest("#cp_min_price").val() / 100;
-	alert("calDiscount " +  $("input[type=radio]").is(":checked").val())
-	$("#discountTotal").text() = calDiscount +"원";
+	let calDiscount = $totalPrice * ($minPrice / 100); //할인금액
+	
+	if(parseInt(calDiscount) > $maxPrice){//최대할인액보다 할인액이 더 크면
+		calDiscount =  $maxPrice; //최대할인액으로 변경
+	}
+	let calResult =  $totalPrice - calDiscount;
+	$("#discountTotal").html(calDiscount +" 원");
+	$("#calResult").html(calResult +" 원");
 });
 	
-	function couponSubmit() {
-		//쿠폰체크 여부에 따라 submit 여부 결정
-		if($("input[name=cp_code]").is(":checked")){
-				let cp_code = $("$input[name=cp_code]").val();
-			function sendCp_code(cp_code){
-
-				opener.getCp_code(cp_code);
-
-				return true;
-				window.close();
-
-			}
-	}else {
-		alert("선택된 쿠폰이 없습니다.")
-		return false;
-	}
-}
 
 </script>
 <body>
@@ -255,12 +249,14 @@ $(document).on("change","input[type=radio]",function(){
 				<tr>
 					<th width="100">현재 구매액 </th>
 				    <th width="100">할인 적용액 </th>
+				    <th width="100">최종 구매액 </th>
 				</tr> 
 			</thead>
 			<tbody>
 				<tr>
 					<td id="total"><%=Integer.parseInt(request.getParameter("total")) %> 원</td>
 				    <td id="discountTotal"> </td>
+				    <td id="calResult"> </td>
 				 </tr>
 			</tbody>
 		</table>

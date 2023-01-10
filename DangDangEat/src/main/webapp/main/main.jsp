@@ -15,8 +15,8 @@
 <script
 	src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 <script src="../js/jquery-3.6.3.js"></script>
-<%String realPath = request.getServletContext().getRealPath("upload"); %>
 <script type="text/javascript">
+
 	$(document).ready(function() {
 		$('.slider_image').bxSlider({
 			mode : "horizontal",
@@ -29,7 +29,11 @@
 		});
 	});
 	
-	$(document).ready(function(realPath) {
+	$(document).ready(function() {
+		
+		$imgPath = $("#imgPath").val();
+		
+		
 		$.ajax({
 			type:"get",
 			url:"Main",
@@ -37,22 +41,24 @@
 			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 			success: function(result) {
 // 						alert(JSON.stringify(result));
+// 						alert($imgPath);
 						
 						for(let product of result){
+
+							let decodingImg = decodeURI(product.pro_real_thumb);
+							
 							$("#new_eat").append(
-							 "<img class='bg-light main_rec m-3' src='"+realPath+"/"+product.pro_real_thumb+"'></img>"
+							 "<img class='bg-light main_rec m-3' onclick=\"location.href='ProductDetail.pd?pro_code=" + product.pro_code + "'\" src='" + $imgPath +  "/upload/" + decodingImg  + "'></img>"
 							);
 						}
 						
 			},//success:
 			fail: function(result) {
-			alert("실패");
+			alert("이미지 로드 실패");
 		
 			}//fail:
 	
 		});
-		
-		
 	
 });
 
@@ -124,7 +130,7 @@ cursor: pointer;
 }
 
 .custom-shape-divider-bottom-1673107194 .shape-fill {
-    fill: #fcf4dd;
+    fill: #D7E9B9;
 }
 </style>
 </head>
@@ -145,11 +151,12 @@ cursor: pointer;
 	</div>
 
 <article>
+
+<input type="hidden" id="imgPath" value="<%=request.getScheme()+"://"+request.getServerName() + ":" + request.getServerPort() +"/"+request.getContextPath() %>">
+
 	<%
-	//실제 업로드 경로(집) : C:\Users\eyeds\eclipse_jsp\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\DangDangEat\ upload
-	//실제 업로드 경로(학원) : D:\workspace_jsp5\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\DangDangEat\ upload
-//	//String uploadPath = "ftp://db.itwillbs.dev:8030/upload"; // FTP 주소!!!체크필수!!!  12/30
-	System.out.println("실제 업로드 경로 : " + realPath);
+	System.out.println(request.getContextPath());
+	System.out.println(request.getScheme()+"://"+request.getServerName() + ":" + request.getServerPort());
 	System.out.println("request.getSession().getServletContext().getRealPath(/)"+  request.getSession().getServletContext().getRealPath("upload"));
 	%>
 	     <!-- 메인 네모 부분 // 관련 클래스: main_rec-->
@@ -165,17 +172,15 @@ cursor: pointer;
 	
          <!-- 메인 네모 부분 // 관련 클래스: main_rec-->
         <div class="mt-5 d-flex flex-row justify-content-center">
-	         <div class = ""> NEW EAT </div>
+	         <h3> NEW EAT </h3>
          </div>
 	        <div style="position:relative;" class=" mb-5 d-flex flex-row justify-content-center" id="new_eat">
 <%-- 		         <c:forEachCitems="${productList}" var="product" > --%>
 <%-- 		         ${product.pro_real_thumb } --%>
 <%-- 			       <img class=" bg-light main_rec m-3" src="<%=request.getSession().getServletContext().getRealPath(uploadPath) %>/${product.pro_real_thumb }"></img> --%>
 <%-- 		         </c:forEach> --%>
-]
+
 		</div>
-	        
-	        
 </article>
  
 </body>

@@ -74,7 +74,7 @@ public class OrderFrontController extends HttpServlet {
 	} else if(command.equals("/SearchUsableCoupon.od")) {
 		//coupon_select.jsp 페이지에서 존재하는 쿠폰 조회 (ajax)
 		action = new SearchExistMemberCouponAction();
-		action.execute(request, response);
+		forward = action.execute(request, response);
 		System.out.println("SearchUsableCoupon");
 		
 		
