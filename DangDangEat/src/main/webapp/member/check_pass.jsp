@@ -112,6 +112,13 @@ body {
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
+	<!-- Footer-->
+   <footer class="py-5 bg-dark">
+      <div class="container">
+         <p class="m-0 text-center text-white">Copyright &copy; DangDangEat 2023</p>
+      </div>
+   </footer>
+	
 </body>
 
 </html>

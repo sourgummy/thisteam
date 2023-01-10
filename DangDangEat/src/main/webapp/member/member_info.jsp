@@ -362,6 +362,14 @@ if(sId == null || sId.equals("")) {
             </a>
         </div>
 	</div>
+	
+	<!-- Footer-->
+   <footer class="py-5 bg-dark">
+      <div class="container">
+         <p class="m-0 text-center text-white">Copyright &copy; DangDangEat 2023</p>
+      </div>
+   </footer>
+   
 	<!-- Scripts -->
 	<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
