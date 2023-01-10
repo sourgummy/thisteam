@@ -142,14 +142,15 @@ public class CartDAO {
 	}
 
 	// 장바구니에서 삭제
-	public int deleteCart(int pro_code) {
+	public int deleteCart(CartBean cart) {
 		int deleteCount = 0;
 		
 		PreparedStatement pstmt = null;
 		try {
-			String sql = "DELETE FROM cart WHERE pro_code=?";
+			String sql = "DELETE FROM cart WHERE pro_code=? AND member_id=?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, pro_code);
+			pstmt.setInt(1, cart.getPro_code());
+			pstmt.setString(2, cart.getMember_id());
 			deleteCount = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("SQL 구문 오류 - deleteCart()");
@@ -161,25 +162,28 @@ public class CartDAO {
 		
 		return deleteCount;
 	}
-
-	// update
+	
+	
+	// update(ischecked나 wishlist 1로 만들기)
 	public int updateCart(CartBean cart, boolean isCart) {
 		int updateCount = 0;
 		
 		PreparedStatement pstmt = null;
 		
 		try {// 장바구니 업데이트
-			String sql = "UPDATE cart SET cart_ischecked=1, cart_amount = ? WHERE pro_code=?";
+			String sql = "UPDATE cart SET cart_ischecked=1, cart_amount = ? WHERE pro_code=? AND member_id=?";
 			
 			if(!isCart) { // 위시리스트 업데이트
-				sql = "UPDATE cart SET cart_wishlist=1 WHERE pro_code=?";
+				sql = "UPDATE cart SET cart_wishlist=1 WHERE pro_code=? AND member_id=?";
 			}
 			pstmt = con.prepareStatement(sql);
 			if(isCart) {
 				pstmt.setInt(1, cart.getCart_amount());
 				pstmt.setInt(2, cart.getPro_code());
+				pstmt.setString(3, cart.getMember_id());
 			} else {
 				pstmt.setInt(1, cart.getPro_code());
+				pstmt.setString(2, cart.getMember_id());
 			}
 			updateCount = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -194,20 +198,23 @@ public class CartDAO {
 		return updateCount;
 	}
 	
+	
+	// update(ischecked나 wishlist 0으로 만들기)
 	public int resetCart(CartBean cart, boolean isCart) {
 		int updateCount = 0;
 		
 		PreparedStatement pstmt = null;
 		
 		try {
-			String sql = "UPDATE cart SET cart_ischecked=0, cart_amount=? WHERE pro_code=?";
+			String sql = "UPDATE cart SET cart_ischecked=0, cart_amount=? WHERE pro_code=? AND member_id=?";
 			
-			if(!isCart) { // 위시리스트 업데이트
-				sql = "UPDATE cart SET cart_wishlist=0 WHERE pro_code=?";
+			if(!isCart) { // wishlist = 0 으로 만들기 
+				sql = "UPDATE cart SET cart_wishlist=0 WHERE pro_code=? AND member_id=?";
 			}
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, 1);
 			pstmt.setInt(2, cart.getPro_code());
+			pstmt.setString(3, cart.getMember_id());
 			updateCount = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("SQL 구문 오류 - updateCart()");

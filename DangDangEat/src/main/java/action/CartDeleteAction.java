@@ -43,7 +43,7 @@ public class CartDeleteAction implements Action {
 				// 위시리스트에 있는지 조회
 				boolean isWishlistExist = service.isExist(cart, false);
 				if(!isWishlistExist) { // 위시리스트에 없으면 delete
-					boolean isDeleteSuccess = service.removeCart(pro_code);
+					boolean isDeleteSuccess = service.removeCart(cart);
 					
 					if(!isDeleteSuccess) {
 						response.setContentType("text/html; charset=UTF-8");
@@ -62,7 +62,7 @@ public class CartDeleteAction implements Action {
 						return forward;
 					}
 				} else { // 위시리스트에 있으면 update
-					int updateCount = service.updateCart(pro_code);
+					int updateCount = service.updateCart(cart);
 					if(updateCount > 0) { // 성공
 						forward = new ActionForward();
 						forward.setPath("CartList.ct");

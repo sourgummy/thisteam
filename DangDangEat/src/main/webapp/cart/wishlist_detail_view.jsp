@@ -14,7 +14,8 @@ request.setCharacterEncoding("UTF-8");
 <meta charset="UTF-8">
 <title>wishlist</title>
 <!-- 외부 CSS 가져오기 -->
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+<!-- <link href="css/bootstrap.css" rel="stylesheet" type="text/css"> -->
+<link href="css/styles.css" rel="stylesheet" /> 
 <style>
 	@font-face {
 	    font-family: 'GmarketSansMedium';
@@ -43,70 +44,12 @@ request.setCharacterEncoding("UTF-8");
 		text-align: center;
 	}
 
-	input[type=button], input[type=submit] {
+	input{
 	    font-family:"GmarketSansMedium" ;
+	    border-radius: 0px;
 	}
-
+	
 </style>
-<!-- 챗봇 관련 코드 -->
-<script>
-  (function() {
-    var w = window;
-    if (w.ChannelIO) {
-      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
-    }
-    var ch = function() {
-      ch.c(arguments);
-    };
-    ch.q = [];
-    ch.c = function(args) {
-      ch.q.push(args);
-    };
-    w.ChannelIO = ch;
-    function l() {
-      if (w.ChannelIOInitialized) {
-        return;
-      }
-      w.ChannelIOInitialized = true;
-      var s = document.createElement('script');
-      s.type = 'text/javascript';
-      s.async = true;
-      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
-      s.charset = 'UTF-8';
-      var x = document.getElementsByTagName('script')[0];
-      x.parentNode.insertBefore(s, x);
-    }
-    if (document.readyState === 'complete') {
-      l();
-    } else if (window.attachEvent) {
-      window.attachEvent('onload', l);
-    } else {
-      window.addEventListener('DOMContentLoaded', l, false);
-      window.addEventListener('load', l, false);
-    }
-  })();
-//   ChannelIO('boot', {
-//     pluginKey: "1340eb3c-ddf6-43c5-a497-6a91281156bc", //please fill with your plugin key
-//     memberId: "YOUR_USER_ID", //fill with user id
-//     profile: {
-//       "name": "YOUR_USER_NAME", //fill with user name
-//       "mobileNumber": "YOUR_USER_MOBILE_NUMBER", //fill with user phone number
-//       "CUSTOM_VALUE_1": "VALUE_1", //any other custom meta data
-//       "CUSTOM_VALUE_2": "VALUE_2"
-//     }
-//   });
-  ChannelIO('boot', {
-     pluginKey: '1340eb3c-ddf6-43c5-a497-6a91281156bc'
-      }, function onBoot(error, user) {
-           if (error) {
-                console.error(error);
-           } else {
-             console.log('boot success', user)
-           }
-   });
-  
-</script>
-<!-- 챗봇 관련 코드 -->
 </head>
 <body>
 	<!-- Login, Join 링크 표시 영역 -->
@@ -126,9 +69,15 @@ request.setCharacterEncoding("UTF-8");
 			<input type="hidden" name="cart_code" value=${wishlist.cart_code }>
 			<tr>
 				<td>
-					<input type="checkbox" checked="checked">
+					<input type="checkbox">
 				</td>
-				<td>${wishlist.pro_real_thumb }</td>
+				<td>
+					<div style="text-align: center;">
+                      <img class="card-img-top" style="width: 100px; height: 100px;"
+		                src="<%=request.getScheme()+"://"+request.getServerName() + ":" + request.getServerPort() +"/"+request.getContextPath()%>/upload/${wishlist.pro_real_thumb }"
+        		        alt="..." onerror="this.src='./img/sample1_thumb.png';" />
+        		        </div>
+				</td>
 				<td><a href="ProductDetail.pd?pro_code=${wishlist.pro_code }">${wishlist.pro_name }</a></td>
 				<td><fmt:formatNumber value="${wishlist.pro_price }" pattern="###,###,###"/></td>
 				<td>
@@ -154,5 +103,11 @@ request.setCharacterEncoding("UTF-8");
 <!-- 		<input type="submit" value="삭제하기"> -->
 <!-- 	</form> -->
 <!-- 	<input type="button" value="위시리스트 비우기" onclick="location.href='WishlistDelete.ct'"> -->
+<!-- Footer-->
+   <footer class="py-5 bg-dark margin">
+      <div class="container">
+         <p class="m-0 text-center text-white">Copyright &copy; DangDangEat 2023</p>
+      </div>
+   </footer>
 </body>
 </html>
