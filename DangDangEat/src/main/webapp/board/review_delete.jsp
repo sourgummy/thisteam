@@ -15,11 +15,9 @@
 	font-weight: normal;
 	font-style: normal;
 }
-
 body {
 	font-family: "GmarketSansMedium";
 }
-
 #passForm {
 	width: 300px;
 	margin: auto;
@@ -27,12 +25,10 @@ body {
 	text-align: center;
 	margin-bottom : 100px;
 }
-
 h2 {
 	font-family: "GmarketSansMedium";
 	text-align: center;
 }
-
 table {
 	width: 300px;
 	margin: auto;
@@ -40,92 +36,26 @@ table {
 	border-collapse: separate;
     border-spacing: 0 50px
 }
-
-
 #buttonArea {
 	margin: auto;
 	width: 1024px;
 	text-align: right;
 	margin-top: 10px;
 }
-
 input[type=button], input[type=submit], input[type=password] {
 	border-radius: 0px;
 	font-family: "GmarketSansMedium";
 }
-
 </style>
 </head>
 <body>
 
-	<!-- Login, Join 링크 표시 영역 -->
 	<jsp:include page="/inc/top.jsp"></jsp:include>
-
-	<!-- 챗봇 관련 코드 -->
-	<script>
-  (function() {
-    var w = window;
-    if (w.ChannelIO) {
-      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
-    }
-    var ch = function() {
-      ch.c(arguments);
-    };
-    ch.q = [];
-    ch.c = function(args) {
-      ch.q.push(args);
-    };
-    w.ChannelIO = ch;
-    function l() {
-      if (w.ChannelIOInitialized) {
-        return;
-      }
-      w.ChannelIOInitialized = true;
-      var s = document.createElement('script');
-      s.type = 'text/javascript';
-      s.async = true;
-      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
-      s.charset = 'UTF-8';
-      var x = document.getElementsByTagName('script')[0];
-      x.parentNode.insertBefore(s, x);
-    }
-    if (document.readyState === 'complete') {
-      l();
-    } else if (window.attachEvent) {
-      window.attachEvent('onload', l);
-    } else {
-      window.addEventListener('DOMContentLoaded', l, false);
-      window.addEventListener('load', l, false);
-    }
-  })();
-//   ChannelIO('boot', {
-//     pluginKey: "1340eb3c-ddf6-43c5-a497-6a91281156bc", //please fill with your plugin key
-//     memberId: "YOUR_USER_ID", //fill with user id
-//     profile: {
-//       "name": "YOUR_USER_NAME", //fill with user name
-//       "mobileNumber": "YOUR_USER_MOBILE_NUMBER", //fill with user phone number
-//       "CUSTOM_VALUE_1": "VALUE_1", //any other custom meta data
-//       "CUSTOM_VALUE_2": "VALUE_2"
-//     }
-//   });
-  ChannelIO('boot', {
-     pluginKey: '1340eb3c-ddf6-43c5-a497-6a91281156bc'
-      }, function onBoot(error, user) {
-           if (error) {
-                console.error(error);
-           } else {
-             console.log('boot success', user)
-           }
-   });
-  
-</script>
-	<!-- 챗봇 관련 코드 -->
-
+	
 	<!-- 게시판 글 삭제 -->
-	<h2>Review 삭제</h2>
+	<h2>Review Delete</h2>
 	<section id="passForm">
 		<form action="ReviewDeletePro.bo" name="deleteForm" method="post">
-			<!-- 입력받지 않은 글번호, 페이지번호 hidden 속성으로 전달 -->
 			<input type="hidden" name="review_code" value="${param.review_code }">
 			<input type="hidden" name="pageNum" value="${param.pageNum }">
 			<table>
@@ -142,17 +72,9 @@ input[type=button], input[type=submit], input[type=password] {
 			</table>
 		</form>
 	</section>
-	<!-- Footer-->
-	<footer class="py-5 bg-dark">
-		<div class="container">
-			<p class="m-0 text-center text-white">Copyright &copy;
-				DANGDANGEAT 2022</p>
-		</div>
-	</footer>
-	<!-- Bootstrap core JS-->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-	<!-- Core theme JS-->
-	<script src="../js/scripts.js"></script>
-</body>
-</html>
+		  <!-- Footer-->
+   <footer class="py-5 bg-dark">
+      <div class="container">
+         <p class="m-0 text-center text-white">Copyright &copy; DangDangEat 2023</p>
+      </div>
+   </footer>

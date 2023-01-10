@@ -21,8 +21,6 @@ public class QnaListAction implements Action {
 		if(request.getParameter("pd") != null) {
 			test = true;
 		}
-		// QnaListService 객체를 통해 게시물 목록 조회 후
-		// 조회 결과(List 객체)를 request 객체를 통해 qna_list.jsp 페이지로 전달
 		// ---------------------------------------------------------------------------
 		// 페이징 처리를 위한 변수 선언
 		int listLimit = 10; // 한 페이지에서 표시할 게시물 목록을 10개로 제한
@@ -55,21 +53,15 @@ public class QnaListAction implements Action {
 		int listCount = service.getQnaListCount(keyword);
 //			System.out.println("총 게시물 수 : " + listCount);
 				
-		// 2. 한 페이지에서 표시할 페이지 목록 갯수 설정
-		int pageListLimit = 10; // 한 페이지에서 표시할 페이지 목록을 3개로 제한
+		int pageListLimit = 10;		
 		
-		// 3. 전체 페이지 목록 수 계산
 		int maxPage = listCount / listLimit 
 						+ (listCount % listLimit == 0 ? 0 : 1); 
 		
-		// 4. 시작 페이지 번호 계산
         int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
 		
-		// 5. 끝 페이지 번호 계산
 		int endPage = startPage + pageListLimit - 1;
 		
-		// 6. 만약, 끝 페이지 번호(endPage)가 전체(최대) 페이지 번호(maxPage) 보다
-		//    클 경우, 끝 페이지 번호를 최대 페이지 번호로 교체
 		if(endPage > maxPage) {
 			endPage = maxPage;
 		}
@@ -77,7 +69,6 @@ public class QnaListAction implements Action {
 		// PageInfo 객체 생성 후 페이징 처리 정보 저장
 		PageInfo pageInfo = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
 		// ----------------------------------------------------------------------
-		// 글목록(List 객체)과 페이징정보(PageInfo 객체)를 request 객체에 저장 - setAttribute()
 		request.setAttribute("qnaList", qnaList);
 		request.setAttribute("pageInfo", pageInfo);
 		

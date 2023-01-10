@@ -114,4 +114,27 @@ public class CommentDAO {
 		return commentList;
 	}
 	
+	// 댓글 삭제
+	public int deleteComment(int comment_code) {
+		int deleteCount = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			// 글번호에 해당하는 레코드 삭제
+			String sql = "DELETE FROM comment "
+								+ "WHERE comment_code=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, comment_code);
+			deleteCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 - deleteNotice()");
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(pstmt);
+		}
+		
+		return deleteCount;
+	}
+
 }

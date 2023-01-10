@@ -22,9 +22,6 @@ public class ReviewDetailAction implements Action {
       // 상세정보 조회에 필요한 글번호 가져오기
       int review_code = Integer.parseInt(request.getParameter("review_code"));
 //      System.out.println("review_code = " + review_code);
-      // => pageNum 파라미터는 현재 작업에서 실제로 활용되는 데이터가 아니므로
-      // 다음 페이지 포워딩 시 URL 또는 request 객체에 함께 전달하기만 하면 된다!
-      // => 또한, Dispatch 방식으로 포워딩 시 URL 이 유지되므로 파라미터값 가져오기 불필요
 
       // ReviewDetailService 인스턴스 생성 후 getReview() 메서드 호출하여 게시물 조회 요청
       // => 파라미터 : 글번호, 조회수 증가 여부(true) 리턴타입 : ReviewBean(review)

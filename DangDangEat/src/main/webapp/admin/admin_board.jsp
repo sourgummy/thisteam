@@ -63,6 +63,15 @@ body {
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <script type="text/javascript">	
 	
+	function confirmDelete(id) {
+		// confirm dialog 사용하여 "XXX 회원 기록을 삭제하시겠습니까?" 확인 요청
+		let result = confirm(id + " 회원 기록을 삭제하시겠습니까?");
+		
+		if(result) {
+			location.href = "MemberDelete.ad?id=" + id;
+		}
+	}
+
 		
 </script>
 </head>
@@ -378,28 +387,35 @@ body {
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>번호</th>
+                                            <th>게시판번호</th>
                                             <th>작성자ID</th>
                                             <th>제목</th>
-                                            <th>내용</th>                                            
-                                            <th>작성일시</th>
-                                            <th>조회수</th>
-                                           
+                                            <th>내용</th>
+                                            <th>날짜</th>
+                                            <th>
+                                            
+                                    		</th>
                                         </tr>
-                                    </thead>                                    
+                                    </thead>
+                                    <tfoot>                                        
                                     <tbody>
-                                    	<c:forEach var="notice" items="${noticeList }">
+                                    	<c:forEach var="qna" items="${qnaList }">
 	                                    	<tr>
-	                                            <td class="notice_code">${notice.notice_code }</td>
-	                                             <td>${notice.member_id }</td>
-	                                            <td>${notice.notice_subject }</td>
-	                                            <td>${notice.notice_content }</td>
-	                                            <td>${notice.notice_date }</td>
-	                                            <td>${notice.notice_readcount }</td>                                         
-	                                           
-	                                            <td>                                      
-				                                    
-				                                    
+	                                            <td class="qna_code">${qna.qna_code }</td>
+	                                            <td>${qna.member_id }</td>
+	                                            <td>${qna.qna_subject }</td>
+	                                            <td>${qna.qna_content }</td>
+	                                            <td>${qna.qna_date}</td>
+	                                            <td>
+	                                            	<span class="btn btn-info btn-circle btn-sm">
+				                                        <i class="fas fa-info-circle"></i>
+				                                    </span>
+				                                    <span class="btn btn-warning btn-circle btn-sm">
+				                                        <i class="fas fa-exclamation-triangle"></i>
+				                                    </span>
+				                                    <span class="btn btn-danger btn-circle btn-sm" onclick="confirmDelete('${member.member_id}')">
+				                                        <i class="fas fa-trash"></i>
+				                                    </span>
 	                                    		</td>
 	                                        </tr>
                                         </c:forEach>

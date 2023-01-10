@@ -6,6 +6,7 @@
 <html lang="en">
 <head>
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="css/styles.css" rel="stylesheet" /> 
 <style type="text/css">
 @font-face {
 	font-family: 'GmarketSansMedium';
@@ -148,9 +149,7 @@ input[type=button], input[type=submit], input[type=text] {
 						</c:if> <c:if test="${qna.qna_secret eq 'Y' }">
 						${qna.member_id }
 					</c:if></td>
-					<td>
-						<%-- JSTL 의 fmt 라이브러리를 활용하여 날짜 표현 형식 변경 --%> <%-- fmt:formatDate - Date 타입 날짜 형식 변경 --%>
-						<%-- fmt:parseDate - String 타입 날짜 형식 변경 --%> <fmt:formatDate
+					<td> <fmt:formatDate
 							value="${qna.qna_date }" pattern="yy-MM-dd" />
 					</td>
 				</tr>
@@ -160,16 +159,12 @@ input[type=button], input[type=submit], input[type=text] {
 	<section id="buttonArea">
 		<form action="QnaList.bo">
 			<input type="text" name="keyword"> <input type="submit"
-				value="검색"> &nbsp;&nbsp; <input type="button" value="글쓰기"
-				onclick="location.href='QnaWriteForm.bo'" />
+				value="검색"> &nbsp;&nbsp; 
+				<c:if test="${not empty sessionScope.sId}"><input type="button" value="글쓰기"
+				onclick="location.href='QnaWriteForm.bo'" /></c:if>
 		</form>
 	</section>
-	<section id="pageList">
-		<!-- 
-		현재 페이지 번호(pageNum)가 1보다 클 경우에만 [이전] 링크 동작
-		=> 클릭 시 QnaList.bo 서블릿 주소 요청하면서 
-		   현재 페이지 번호(pageNum) - 1 값을 page 파라미터로 전달
-		-->
+	<section id="pageList">		
 		<c:choose>
 			<c:when test="${pageNum > 1}">
 				<input type="button" value="이전"
@@ -205,17 +200,9 @@ input[type=button], input[type=submit], input[type=text] {
 			</c:otherwise>
 		</c:choose>
 	</section>
-	<!-- Footer-->
-	<footer class="py-5 bg-dark">
-		<div class="container">
-			<p class="m-0 text-center text-white">Copyright &copy;
-				DANGDANGEAT 2022</p>
-		</div>
-	</footer>
-	<!-- Bootstrap core JS-->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-	<!-- Core theme JS-->
-	<script src="../js/scripts.js"></script>
-</body>
-</html>
+	  <!-- Footer-->
+   <footer class="py-5 bg-dark">
+      <div class="container">
+         <p class="m-0 text-center text-white">Copyright &copy; DangDangEat 2023</p>
+      </div>
+   </footer>

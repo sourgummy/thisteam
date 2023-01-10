@@ -17,8 +17,7 @@
 	body {
 	    font-family:"GmarketSansMedium" ;
 	}
-	
-	  
+		  
 	#reviewForm {
 		width: 1224px;
 		height: 450px;
@@ -45,12 +44,7 @@
 	.td_right {
 		width: 300px;
 	}
-	
-	#commandCell {
-		text-align: center;
-		margin-bottom: 30px;
-	}
-	
+		
 	input, textarea {
 	    font-family:"GmarketSansMedium" ;
 	    border-radius: 0px;
@@ -59,12 +53,21 @@
 	textarea {
 		resize: none;
 	}
+	#commandCell {
+		text-align: center;
+		margin-bottom: 30px;
+	}
+		input[type=button], input[type=submit], input[type=reset], input[type=text] {
+	    font-family:"GmarketSansMedium" ;
+	}	
+	
+	table > tbody {
+		border-style: none;
+	}
 </style>
 </head>
-<body>
-	
-		<jsp:include page="/inc/top.jsp"></jsp:include>
-				
+<body>	
+		<jsp:include page="/inc/top.jsp"></jsp:include>				
 	
 	<!-- 게시판 등록 -->
 	<section id="writeForm">
@@ -95,11 +98,9 @@
 				</tr>
 				<tr>
 					<td class="td_left"><label for="review_file">파일 첨부</label></td>
-					<!-- 파일 첨부 형식은 input 태그의 type="file" 속성 사용 -->
 					<td class="td_right">
 						<input type="file" name="review_file" />
-<!-- 						<br><input type="file" name="board_file2" /> -->
-<!-- 						<br><input type="file" name="board_file3" /> -->
+						<br>(기존 파일 : ${review.review_file })
 					</td>
 				</tr>
 			</table>
@@ -110,13 +111,9 @@
 			</section>
 		</form>
 	</section>
- <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; DANGDANGEAT 2022</p></div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="../js/scripts.js"></script>
-    </body>
-</html>
+ 	  <!-- Footer-->
+   <footer class="py-5 bg-dark">
+      <div class="container">
+         <p class="m-0 text-center text-white">Copyright &copy; DangDangEat 2023</p>
+      </div>
+   </footer>

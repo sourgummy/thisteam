@@ -22,10 +22,9 @@ public class NoticeModifyProAction implements Action {
 			
 			// 전달받은 파라미터 데이터를 NoticeBean 클래스 인스턴스 생성 후 저장
 			NoticeBean notice = new NoticeBean();
-			notice.setMember_id(request.getParameter("member_id"));
 			notice.setNotice_subject(request.getParameter("notice_subject"));
 			notice.setNotice_content(request.getParameter("notice_content"));
-			notice.setNotice_content(request.getParameter("notice_date"));
+			notice.setNotice_code(Integer.parseInt(request.getParameter("notice_code")));
 			
 			NoticeModifyProService service = new NoticeModifyProService();
 			boolean isModifySuccess = service.modifyNotice(notice);

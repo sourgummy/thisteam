@@ -20,7 +20,6 @@ public class QnaReplyProService {
 		
 		int insertCount = dao.insertReplyQna(qna);
 		
-		// 작업 처리 결과에 따른 트랜잭션 처리
 		if(insertCount > 0) { // 성공 시
 			JdbcUtil.commit(con);
 			isWriteSuccess = true;
@@ -28,10 +27,9 @@ public class QnaReplyProService {
 			JdbcUtil.rollback(con);
 		}
 		
-		// 공통작업-4. Connection 객체 반환하기
 		JdbcUtil.close(con);
 		
-		return isWriteSuccess; // ReviewReplyProAction 으로 리턴
+		return isWriteSuccess; 
 	}
 
 }

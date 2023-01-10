@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 
 import svc.NoticeWriteProService;
 import vo.ActionForward;
@@ -23,7 +23,9 @@ public class NoticeWriteProAction implements Action {
 			
 			// 전달받은 파라미터 데이터를 NoticeBean 클래스 인스턴스 생성 후 저장
 			NoticeBean notice = new NoticeBean();
-			notice.setMember_id(request.getParameter("member_id"));
+			HttpSession session = request.getSession();
+//			String sId = (String)session.getAttribute("sId");
+			notice.setMember_id((String)session.getAttribute("sId"));
 			notice.setNotice_subject(request.getParameter("notice_subject"));
 			notice.setNotice_content(request.getParameter("notice_content"));
 			

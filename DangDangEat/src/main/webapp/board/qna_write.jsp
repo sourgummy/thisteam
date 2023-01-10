@@ -78,11 +78,12 @@
 	
 		<jsp:include page="/inc/top.jsp"></jsp:include>
 	
-	<!-- 게시판 등록 -->
+	<!-- q&a 등록 -->
 	<section id="writeForm">
-		<h2>Q&A Write</h2>
-		<!-- 파일 업로드 기능 사용 위해 enctype 속성 설정 => cos.jar 라이브러리 필요 -->
+		<h2>Q & A Write</h2>
 		<form action="QnaWritePro.bo" name="qnaForm" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="qna_pass" value="${param.qna_pass }" >
+		<input type="hidden" name="member_id" value="${param.member_id }" >
 			<table class="table container">
 				<tr>
 					<td class="td_left"><label for="member_id">비밀글</label></td>
@@ -91,16 +92,10 @@
 				    <input type="radio" name="qna_secret" id="qna_secret" value="N" class="radio" />&nbsp;&nbsp;&nbsp;&nbsp;<span>비공개</span>&nbsp;
 					</td>
 				</tr>
-				<tr>
-					<td class="td_left"><label for="member_id">작성자</label></td>
-					<td class="td_right"><input type="text" name="member_id" required="required" /></td>
-				</tr>
-				<tr>
-					<td class="td_left"><label for="qna_pass">비밀번호</label></td>
-					<td class="td_right">
-						<input type="password" name="qna_pass" required="required" />
-					</td>
-				</tr>
+<!-- 				<tr> -->
+<!-- 					<td class="td_left"><label for="member_id">작성자</label></td> -->
+<!-- 					<td class="td_right"><input type="text" name="member_id" required="required" /></td> -->
+<!-- 				</tr> -->
 				<tr>
 					<td class="td_left"><label for="qna_subject">제목</label></td>
 					<td class="td_right"><input type="text" name="qna_subject" required="required" /></td>
@@ -114,11 +109,9 @@
 				</tr>
 				<tr>
 					<td class="td_left"><label for="qna_file">파일 첨부</label></td>
-					<!-- 파일 첨부 형식은 input 태그의 type="file" 속성 사용 -->
 					<td class="td_right">
 						<input type="file" name="qna_file" />
-<!-- 						<br><input type="file" name="qna_file2" /> -->
-<!-- 						<br><input type="file" name="qna_file3" /> -->
+						<br>(기존 파일 : ${qna.qna_file })
 					</td>
 				</tr>
 			</table>
@@ -129,13 +122,9 @@
 			</section>
 		</form>
 	</section>
- <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; DANGDANGEAT 2022</p></div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="../js/scripts.js"></script>
-    </body>
-</html>
+	  <!-- Footer-->
+   <footer class="py-5 bg-dark">
+      <div class="container">
+         <p class="m-0 text-center text-white">Copyright &copy; DangDangEat 2023</p>
+      </div>
+   </footer>

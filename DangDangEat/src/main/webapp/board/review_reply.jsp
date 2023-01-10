@@ -16,27 +16,15 @@
 	
 	  body {
 	    font-family:"GmarketSansMedium" ;
-	}
-	
-	#replyForm {
-		width: 1224px;
-		height: 550px;
-		border: 1px solid #D3D3D3;
-		margin: auto;
-	}
-	
+	}	
 	
 	h2 {
 	    font-family:"GmarketSansMedium" ;
 		text-align: center;
-	}
-	
-	table {
-	    border-collapse: collapse; 
-	 	width: 1224px;
-	}
-	
+	}	
+		
 	.td_left {
+    	width: 150px; 
 		background: #D3D3D3;
 		text-align: center;
 	}
@@ -52,6 +40,11 @@
 		margin-bottom: 30px;
 	}
 	
+	input, textarea {
+	    font-family:"GmarketSansMedium" ;
+	    border-radius: 0px;
+	}
+	
 		input[type=button], input[type=submit], input[type=reset], input[type=text] {
 	    font-family:"GmarketSansMedium" ;
 	}
@@ -64,7 +57,7 @@
 </head>
 		<jsp:include page="/inc/top.jsp"></jsp:include>
   	<body>
-  	<!-- 게시판 답글 작성 -->
+  	<!-- 리뷰 답글 작성 -->
 	<section>
 	
 		<h2>Review Reply Write</h2>
@@ -72,42 +65,49 @@
 			<!-- 입력받지 않은 글번호, 페이지번호 hidden 속성으로 전달 -->
 			<input type="hidden" name="review_code" value="${param.review_code }" >
 			<input type="hidden" name="pageNum" value="${param.pageNum }" >
+			<input type="hidden" name="pass_code" value="${param.pass_code }" >
 			<!-- 답글 작성에 필요한 정보도 hidden 속성으로 전달 -->
 			<input type="hidden" name="review_re_ref" value="${review.review_re_ref }" >
 			<input type="hidden" name="review_re_lev" value="${review.review_re_lev }" >
 			<input type="hidden" name="review_re_seq" value="${review.review_re_seq }" >
-			<table class="table">
+			<table class="table container">
 				<tr>
-					<td class="td_left"><label for="member_id">Writer</label></td>
+					<td class="td_left"><label for="member_id">작성자</label></td>
 					<td class="td_right"><input type="text" name="member_id" required="required"></td>
 				</tr>
+<!-- 				<tr> -->
+<!-- 					<td class="td_left"><label for="review_pass">비밀번호</label></td> -->
+<!-- 					<td class="td_right"><input type="password" name="review_pass" required="required"></td> -->
+<!-- 				</tr> -->
 				<tr>
-					<td class="td_left"><label for="review_pass">Pass</label></td>
-					<td class="td_right"><input type="password" name="review_pass" required="required"></td>
-				</tr>
-				<tr>
-					<td class="td_left"><label for="review_subject">Subject</label></td>
+					<td class="td_left"><label for="review_subject">제목</label></td>
 					<td class="td_right"><input type="text" name="review_subject" value="Re: ${review.review_subject }" required="required"></td>
 				</tr>
 				<tr>
-					<td class="td_left"><label for="review_content">Content</label></td>
+					<td class="td_left"><label for="review_content">내용</label></td>
 					<td class="td_right">
 						<textarea id="review_content" name="review_content" cols="40" rows="15" required="required">${review.review_content }</textarea>
 					</td>
 				</tr>
 				<tr>
-					<td class="td_left"><label for="review_file">File</label></td>
+					<td class="td_left"><label for="review_file">파일첨부</label></td>
 					<td class="td_right">
-						<!-- 답글 작성 시 파일 업로드는 선택 사항으로 required 옵션 제거 -->
 						<input type="file" name="review_file">
+						<br>(기존 파일 : ${review.review_file })
 					</td>
 				</tr>
 			</table>
 			<section id="commandCell">
+			 <c:if test="${not empty sessionScope.sId and sessionScope.sId eq 'admin'}"> 
 				<input type="submit" value="답글등록">&nbsp;&nbsp;
 				<input type="reset" value="다시쓰기">&nbsp;&nbsp;
-				<input type="button" value="취소" onclick="history.back()">
+				<input type="button" value="취소" onclick="history.back()"></c:if>
 			</section>
 		</form>
 	</section>
-  
+ 	  <!-- Footer-->
+   <footer class="py-5 bg-dark">
+      <div class="container">
+         <p class="m-0 text-center text-white">Copyright &copy; DangDangEat 2023</p>
+      </div>
+   </footer>
