@@ -198,7 +198,7 @@ if (sId == null || sId.equals("")) {
 							<div class="stat-icon dib flat-color-2">
 								<i class="fa fa-tags"></i>
 							</div>
-							<div class="stat-content"  id="CouponCount" >
+							<div class="stat-content" id="CouponCount">
 								<div class="text-left dib">
 									<div class="stat-heading">쿠폰</div>
 									<div class="stat-text">
@@ -359,15 +359,21 @@ if (sId == null || sId.equals("")) {
 					</div>
 					<div class="col-12 col-md-8">
 						<button onclick="location.href='CheckPassForm.me'"
-							class="btn btn-secondary" value="회원 정보 페이지" style="float: right;">회원
-							정보 페이지</button>
+							class="btn btn-secondary" value="회원 정보 페이지" style="float: right;">회원 정보 페이지</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	
-	</div>
+
+	<!-- Footer-->
+	<footer class="py-5 bg-dark">
+		<div class="container">
+			<p class="m-0 text-center text-white">Copyright &copy;
+				DangDangEat 2023</p>
+		</div>
+	</footer>
+
 	<!-- Scripts -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>

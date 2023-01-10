@@ -55,8 +55,8 @@ public class MailCheckAction implements Action {
 					PrintWriter out = response.getWriter();
 					
 					out.println("<script>");
-					out.println("alert('인증 실패')");
-					out.println("history.back()");
+					out.println("alert('이미 만료된 링크입니다.')");
+					out.println("location.href='http://localhost:8080/DangDangEat/'");
 					out.println("</script>");
 				}
 			} else {
@@ -65,8 +65,8 @@ public class MailCheckAction implements Action {
 				PrintWriter out = response.getWriter();
 				
 				out.println("<script>");
-				out.println("alert('인증 실패')");
-				out.println("history.back()");
+				out.println("alert('이미 만료된 링크입니다.')");
+				out.println("location.href='http://localhost:8080/DangDangEat/'");
 				out.println("</script>");
 			}
 			
