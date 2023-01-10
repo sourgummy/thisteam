@@ -216,10 +216,16 @@ body {
 											<div class="product__item__pic set-bg">
 												<!-- Product image-->
 												<a href="ProductDetail.pd?pro_code=${product.pro_code}">
+													<!-- 상품사진 뿌리기 --> 
+													<!-- [방법1] localhost 주소 설정 -->
+<!-- 													<img class="card-img-top" -->
+<%-- 													src="http://localhost:8080/DangDangEat/upload/${product.pro_real_thumb }" --%>
+<!-- 													alt="..." onerror="this.src='./img/sample1_thumb.png';" /> -->
+													
+													<!-- [방법2] -->
 													<img class="card-img-top"
-													src="http://localhost:8080/DangDangEat/upload/${product.pro_real_thumb }"
+													src="<%=request.getScheme()+"://"+request.getServerName() + ":" + request.getServerPort() +"/"+request.getContextPath()%>/upload/${product.pro_real_thumb }"
 													alt="..." onerror="this.src='./img/sample1_thumb.png';" />
-													<!--alt="..." onerror="this.src='./img/error_img.png';" /> -->
 												</a>
 											</div>
 											<div class="product__item__text">
@@ -310,12 +316,11 @@ body {
 	<!-- Shop Section End -->
 	
 	<!-- Footer-->
-	<footer class="py-5 bg-dark">
-		<div class="container">
-			<p class="m-0 text-center text-white">Copyright &copy; Your
-				Website 2022</p>
-		</div>
-	</footer>
+	   <footer class="py-5 bg-dark">
+	      <div class="container">
+	         <p class="m-0 text-center text-white">Copyright &copy; DangDangEat 2023</p>
+	      </div>
+	   </footer>
 
 	<!-- Js Plugins -->
 	<script src="js/jquery-3.6.3.js"></script>

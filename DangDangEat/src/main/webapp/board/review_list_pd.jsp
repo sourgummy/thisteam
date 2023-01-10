@@ -115,7 +115,9 @@
 							&nbsp;&nbsp;
 						</c:forEach>
 						<%-- 답글 제목 앞에 이미지 추가 --%>
-						<img src="images/re.gif">	
+						<img src="img/reply.png">	
+<!-- 						<img src="img/re.gif">	 -->
+	
 					</c:if>
 					<%-- =============================================================== --%>
 					<a href="ReviewDetail.bo?review_code=${review.review_code }&pageNum=${pageNum }">

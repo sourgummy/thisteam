@@ -22,7 +22,7 @@ public class ProductAdminListAction implements Action {
 		// 조회 결과(List 객체)를 request 객체를 통해 list.jsp 페이지로 전달
 		// ---------------------------------------------------------------------------
 		// 페이징 처리를 위한 변수 선언
-		int listLimit = 10; // 한 페이지에서 표시할 게시물 목록을 10개로 제한
+		int listLimit = -1; // 전체 검색을 위해 -1로 값을 설정함! (dao에서 if문 조건줌)
 		int pageNum = 1; // 현재 페이지 번호 설정(pageNum 파라미터 사용)
 		
 		String category = request.getParameter("category");
