@@ -17,11 +17,11 @@ body {
 /*   margin: 0 auto; */
 }
 
-a {
-  border: 0 none;
-  outline: 0;
-  text-decoration: none;
-}
+/* a { */
+/*   border: 0 none; */
+/*   outline: 0; */
+/*   text-decoration: none; */
+/* } */
 
 strong {
   font-weight: bold;
@@ -32,7 +32,7 @@ p {
 }
 
 h1 {
-  font-size: 1rem; /*default = 0.75rem*/
+  font-size: 1.2rem; /*default = 0.75rem*/
   font-weight: normal;
   margin: 0;
   padding: 0;
@@ -75,23 +75,27 @@ button,
 .product-image,
 .product-details {
   float: left;
- 
+/*   font-size: large; */
 }
 
+/* 23/01/10 수정 부분---------------- */
 .price:after,
 .subtotal:after,
 .subtotal-value:after,
 .total-value:after,
 .promo-value:after {
   content: '원';
+  color: black;
 }
+/* 23/01/10 수정 부분---------------- */
 
-.hide {
-  display: none;
-}
+
+/* .hide { */
+/*   display: none; */
+/* } */
 
 main {
-  clear: both;
+/*   clear: both; */
   font-size: 1rem; /*default = 0.75rem*/
   margin: 0 auto;
   overflow: hidden;
@@ -154,6 +158,7 @@ ul {
   list-style: none;
   margin: 0;
   padding: 0;
+  display: flex;
 }
 
 li {
@@ -175,6 +180,7 @@ li.subtotal:after {
 .quantity,
 .subtotal {
   width: 15%;
+  font-size: initial;
 }
 
 .subtotal {
@@ -199,7 +205,8 @@ li.subtotal:after {
 }
 
 .item-heading {
-  padding-left: 4.375rem;
+  font-size: initial;
+  padding-left: 4.1rem;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -234,7 +241,7 @@ li.subtotal:after {
   background-color: #ccc;
   border: 1px solid #aaa;
   border-radius: 4px;
-  font-size: 0.625rem;
+  font-size: 0.8rem;
   padding: 2px;
   width: 3.75rem;
 }

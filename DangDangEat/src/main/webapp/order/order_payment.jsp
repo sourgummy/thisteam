@@ -21,134 +21,80 @@
 		  
 		* {
 		    font-family:"GmarketSansMedium" ;
+/* 		    vertical-align: middle; */
+/* 			font-size: large; */
 		}
   </style>
 	<!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
   <!-- iamport.payment.js -->
-  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
+  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
   <script type="text/javascript">
-    /* Set values + misc */
-//     var promoCode;
     
-    var fadeTime = 300;
-  
-    function plz() {
-    	$("#promo-code").on("change", function() {
-	    	alert($("#promo-code").val());
-		});
+  		
+//     function iamport() {
 		
-	}
-    
-    function iamport() {
-		
-	      IMP.init('imp03617521');  //가맹점 식별코드(댕댕잇)
-	      IMP.request_pay({
-	          pg : 'html5_inicis', // pg사명
-	          pay_method : 'card', // 결제방식
-	          merchant_uid : 'merchant_' + new Date().getTime(), // 주문번호
-	          name : '${cart.pro_name }' , // 상품명
-	          amount : '${cart.pro_price * cart.cart_amount + 3500 }', // 결제되는 가격
-	          buyer_name : '${order.order_name }' // 주문자 이름
-	      }, function(rsp) {
-	         console.log(rsp);
-	          if ( rsp.success ) {
-	             var msg = '결제가 완료되었습니다.';
-	              msg += '고유ID : ' + rsp.imp_uid;
-	              msg += '상점 거래ID : ' + rsp.merchant_uid;
-	              msg += '결제 금액 : ' + rsp.paid_amount;
-	              msg += '카드 승인번호 : ' + rsp.apply_num;
-	              location.href="OrderPaymentPro.od?order_status=1&pay_amount='${price.pro_price * price.cart_amount + 3500 }''";
-	          } else {
-	              var msg = '결제에 실패하였습니다.';
-	               msg += '에러내용 : ' + rsp.error_msg;
-	               window.history.back();
-	          }
+// 	      IMP.init('TC0ONETIME');  //가맹점 식별코드(댕댕잇)
+// 	      IMP.request_pay({
+// 	          pg : 'kakao', // pg사명
+// 	          pay_method : 'kakaopay', // 결제방식
+// 	          merchant_uid : 'merchant_' + new Date().getTime(), // 주문번호
+// 	          name : '${cart.pro_name }' , // 상품명
+// 	          amount : '${cart.pro_price * cart.cart_amount + 3500 }', // 결제되는 가격
+// 	          buyer_name : '${order.order_name }' // 주문자 이름
+// 	      }, function(rsp) {
+// 	         console.log(rsp);
+// 	          if ( rsp.success ) {
+// 	             var msg = '결제가 완료되었습니다.';
+// 	              msg += '고유ID : ' + rsp.imp_uid;
+// 	              msg += '상점 거래ID : ' + rsp.merchant_uid;
+// 	              msg += '결제 금액 : ' + rsp.paid_amount;
+// 	              msg += '카드 승인번호 : ' + rsp.apply_num;
+// 	              location.href="OrderPaymentPro.od?order_status=1&pay_amount='${price.pro_price * price.cart_amount + 3500 }''";
+// 	          } else {
+// 	              var msg = '결제에 실패하였습니다.';
+// 	               msg += '에러내용 : ' + rsp.error_msg;
+// 	               window.history.back();
+// 	          }
 	        
-	          alert(msg);
-	          
-// 	      }
-	          
-	      });
+// 	          alert(msg);
 	      
+	          
+// 	      }); // rsp
+	    
+//     }// iamport
     
-    $(function() {
-		let promoPrice;
+    
+	function getCouponCode(couponCode) {
     	
-    	$("#promo-code").on("change", function() {
-	    	alert($("#promo-code").val());
-		});
-    	
-    	$("input").change(function(){
-        
-			$.ajax({
+		$("#promo-code").val(couponCode);
+		
+		$.ajax({
 				type: "get",
 				url: "OrderCouponPro.od",
+				dataType : "text",
 				async:false,
 				data: {
-					cp_code : $('#promo-code').val(), 
+					cp_code : couponCode, 
 					pro_amount : $('#pro_amount').val(),
 					cart_code : $('#cart_code').val(),
 					order_code : $('#order_code').val()
 					},
 				success: function (data) {
-					promoPrice = data;
-					alert(promoPrice);
-					 $('#basket-promo').text(promoPrice);
-	               	}
+					alert("할인가격이 넘어왔습니다 : " + data);
+					
+					 $('#basket-promo').text(parseInt(data)).css("color","red"); // action을 통해 계산 완료 후 전달받은 할인금액 입력
+					 $('#basket-total').text(parseInt($('#hidden_total').val()) - parseInt(data)); // 전체 금액 - 완료받은 할인금액 
+					 
+					 $('#cp_discount_amount').val(parseInt(data)); // 할인 금액 전달
+					 $('#cp_code').val(couponCode); // 사용한 쿠폰 코드 전달
+					 
+	               	} // success
+			
 			}); // ajax
-    	}); // input
-    	
-    }); // func()
-    </script>
-    <script type="text/javascript">
-    	
-// 		/* 상품금액 + 배송비 = Total (자동로드 되도록 수정예정)*/
 		
-// // 	    	$("#basket-subtotal").val($(".price").val());
-// // 	    	$("#basket-promo").val($("#promo-code").val());
-// // 	    	$("#basket-total").val($(".subtotal").val());
-		
-	    	
-//     	/* 아임포트 api 연결  */
-	    	
-// // 			function iamPort() {
-			
-// // 			      IMP.init('imp03617521');  //가맹점 식별코드(댕댕잇)
-// // 			      IMP.request_pay({
-// // 			          pg : 'html5_inicis', // pg사명
-// // 			          pay_method : 'card', // 결제방식
-// // 			          merchant_uid : 'merchant_' + new Date().getTime(), // 주문번호
-// // 			          name : '${cart.pro_name }' , // 상품명
-// // 			          amount : '${price.pro_price * price.cart_amount + 3500 }', // 결제되는 가격
-// // 			          buyer_name : '${order.order_name }' // 주문자 이름
-// // 			      }, function(rsp) {
-// // 			         console.log(rsp);
-// // 			          if ( rsp.success ) {
-// // 			             var msg = '결제가 완료되었습니다.';
-// // 			              msg += '고유ID : ' + rsp.imp_uid;
-// // 			              msg += '상점 거래ID : ' + rsp.merchant_uid;
-// // 			              msg += '결제 금액 : ' + rsp.paid_amount;
-// // 			              msg += '카드 승인번호 : ' + rsp.apply_num;
-// // 			              location.href="OrderPaymentPro.od?order_status=1&pay_amount='${price.pro_price * price.cart_amount + 3500 }''";
-// // 			          } else {
-// // 			              var msg = '결제에 실패하였습니다.';
-// // 			               msg += '에러내용 : ' + rsp.error_msg;
-// // 			               window.history.back();
-// // 			          }
-// // 			          alert(msg);
-			          
-// // 			      });
-			
-			
-// // 		}); // 아임포트 api
-	    	
-		
+	}// getCouponCode
 
-	
-	    
-	    
-//     });
 	</script>
 </head>
 
@@ -158,10 +104,14 @@
   <div id="resultArea"></div>
   	<form action="OrderPaymentPro.od" method="post">
   	<c:forEach var="cart" items="${orderProductList }" varStatus="status">
-  		<input type="hidden" name="cart_code" name="cart_code" value="${cart.cart_code }">
-  		<input type="hidden" name="pro_code" value="${cart.pro_code }">
+  		<input type="hidden" name="cart_code" id="cart_code" value="${cart.cart_code }">
+  		<input type="hidden" name="pro_code"  value="${cart.pro_code }">
   		<input type="hidden" name="pro_amount" id ="pro_amount" value="${cart.pro_price * cart.cart_amount + 3500 }">
   	</c:forEach>
+  		<!-- 쿠폰을 사용하지 않을 경우 오류 발생 / 쿠폰 테이블에 쿠폰코드 null 기본값 0인 쿠폰 추가해야 함(임시방편) -->
+  		<input type="hidden" name="cp_code"  id="cp_code" value="Test">
+  		<input type="hidden" name="cp_discount_amount" id="cp_discount_amount" value="${0 }">
+  		
   		<h1 align="center">주문서 확인 & 결제 페이지</h1>
 	    <div class="basket">
   		<h1>주문상품 확인</h1>
@@ -181,7 +131,7 @@
 			          <div class="product-image">
 			          		<a href="ProductDetail.pd?pro_code=${cart.pro_code}">
 			            	<img src="http://localhost:8080/DangDangEat/upload/${cart.pro_real_thumb }" alt="${cart.pro_name }" 
-			            	class="product-frame" height="100" onerror="this.src='./img/sample1_thumb.png';" >
+			            	class="product-frame" height="130" width="140" onerror="this.src='./img/sample1_thumb.png';"  >
 			            	</a>
 			          </div>
 			          <div class="product-details">
@@ -251,37 +201,50 @@
 	  <h1>할인 정보</h1>
 	       <div class="basket-module"> 
 		        <label for="promo-code">Enter a promotional code</label>
-		        <input id="promo-code" type="text"  maxlength="5" class="promo-code-field" >
-		        <button class="promo-code-cta" type="button" onclick = "window.open('SelectCoupon.od', '_blank', 'height:700, width:300')">Coupon</button>
-	      		<pre id="inputPre"></pre>
+		        <input id="promo-code" type="text"  maxlength="5" class="promo-code-field">
+	         <c:forEach var="price" items="${orderProductList }" varStatus="status">
+		        <button class="promo-code-cta" type="button" onclick = "window.open('SelectCoupon.od?total=${price.pro_price * price.cart_amount }', '_blank', 'height=700, width=450, top=70, left=400')">Coupon</button>
+	         </c:forEach>
 	      </div>
 	  	 <hr>
 	</div>
-			<c:forEach var="price" items="${orderProductList }" varStatus="status">
 		      <div class="basket">
 			        <div class="summary-total-items"><span class="total-items"></span> Items in your Bag</div>
 			        <div class="summary-subtotal">
 				          <div class="subtotal-title">상품금액</div>
+				<c:forEach var="price" items="${orderProductList }" varStatus="status">
 				          <div class="subtotal-value final-value" id="basket-subtotal"><fmt:formatNumber pattern="#,###">${price.pro_price * price.cart_amount }</fmt:formatNumber></div>
-				          <div class="summary-promo hide">
-					          <div class="promo-title">할인금액</div>
-					          <div class="promo-value final-value" id="basket-promo"></div>
-				       	  </div>
+			    </c:forEach> 
+<!-- 				          <div class="summary-promo hide"> -->
+<!-- 					          <div class="promo-title">할인금액</div> -->
+<!-- 					          <div class="promo-value final-value" id="basket-promo" ></div> -->
+<!-- 				       	  </div> -->
+						  <div class="subtotal-title">할인금액</div>
+				          <div class="subtotal-value final-value" id="basket-promo">0</div>
 				          <div class="subtotal-title">배송비</div>
 				          <div class="subtotal-value final-value" id="basket-delivery">3,500</div>
 			        </div>
+		     <c:forEach var="price" items="${orderProductList }" varStatus="status">
 			      <div class="summary-total">
 			          <div class="total-title">Total</div>
-			          <div class="total-value final-value" id="basket-total"><fmt:formatNumber pattern="#,###">${price.pro_price * price.cart_amount + 3500 }</fmt:formatNumber></div>
+			          <div class="total-value final-value" id="basket-total"><fmt:formatNumber pattern="#,###">${price.pro_price * price.cart_amount + 3500}</fmt:formatNumber></div>
+			          <input type="hidden" id="hidden_total" value="${price.pro_price * price.cart_amount + 3500}" >
 			      </div>
+	      	</c:forEach>
 		      	  <div class="summary-checkout">
-		             <button class="button" id="checkout" type="submit" >Checkout</button>
+		             <button class="button" id="checkout" type="submit" >Checkout</button><hr>
+		             <button class="button" id="iamport" type="button" >iamport</button><hr>
 		     	  </div>
-		      </div>
-	     </c:forEach> 
-	 
+		      </div><!-- basket div 태그 -->
 	   </form>   
   </main>
+  	<!-- Footer-->
+	<!-- Footer-->
+	<footer class="py-5 bg-dark">
+		<div class="container">
+			<p class="m-0 text-center text-white">Copyright &copy; DangDangEat 2023</p>
+		</div>
+	</footer>
 </body>
 
 </html>
