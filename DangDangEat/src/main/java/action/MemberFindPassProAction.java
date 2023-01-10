@@ -87,13 +87,13 @@ public class MemberFindPassProAction implements Action {
 				if(isUpdateSuccess) { // 임시 비밀번호 DB 적용 후
 					// 임시 비밀번호 메일 전송
 					String title = "댕댕잇 임시 비밀번호입니다.";
-					String content = "<b>" + request.getParameter("name") + "</b> 님의 비밀번호가 요청되었습니다."
+					String content = "<b>" + request.getParameter("name") + "</b> 님의 비밀번호가 요청되었습니다.<br>"
 							+ "회원 아이디 : " + request.getParameter("id") + "<br>"
 							+ "임시 비밀번호 : <strong>" + randomPass + "</strong><br>"
 							+ "비밀번호는 정보관리시스템에서 매우 중요하게 사용되므로 안전하게 관리하시기 바랍니다.<br>"
 							+ "해당 비밀번호로 로그인 후 비밀번호 재설정하세요.<br>"
 							+ "<font color='#ff0000'>본 메일은 발신 전용이므로 회신이 되지 않습니다.</font><br>"
-							+ "<a href='http://localhost:8080/DangDangEat/'>댕댕잇 바로가기</a>";
+							+ "<a href='http://localhost:8080/DangDangEat/MemberLoginForm.me'>댕댕잇 로그인</a>";
 					
 					try {
 						// 1. 시스템(서버 = 톰캣)의 속성 정보(= 서버 정보)

@@ -49,7 +49,7 @@ if(sId == null || sId.equals("")) {
 		%>
 		<script>
 		alert("로그인이 필요한 페이지입니다.");
-		location.href="MemberLoginForm.me";
+		location.href = "MemberLoginForm.me";
 		</script>
 		<%
 }

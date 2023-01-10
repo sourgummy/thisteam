@@ -69,8 +69,8 @@ body {
                                     <hr>
                                     <form class="user">
 	                                    <div class="text-center">
-	                                    	<button onclick="location.href='MemberLoginForm.me'" class="btn btn-primary btn-user btn-block" >로그인</button>
-	                                    	<button onclick="location.href='./'" class="btn btn-primary btn-user btn-block" >댕댕잇 메인 페이지</button>
+	                                    	<input type="button" onclick="location.href='MemberLoginForm.me'" class="btn btn-primary btn-user btn-block" value="로그인">
+	                                    	<input type="button" onclick="location.href='./'" class="btn btn-primary btn-user btn-block" value="댕댕잇 메인 페이지">
 	                                    </div>
                                     </form>
                                 </div>

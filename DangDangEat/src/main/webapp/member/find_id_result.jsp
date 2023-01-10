@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>DangDangShop - Find Id</title>
+    <title>DangDangShop - Find Id Result</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -45,19 +45,6 @@ body {
 	
 
 </script>
-<%
-// 세션 아이디가 null 이거나 "" 일 경우 "로그인이 필요한 페이지입니다." 출력 후 로그인 페이지로 이동
-String sId = (String)session.getAttribute("sId");
-// System.out.println(sId);
-if(sId == null || sId.equals("")) {
-		%>
-		<script>
-		alert("로그인이 필요한 페이지입니다.");
-		location.href="MemberLoginForm.me";
-		</script>
-		<%
-}
-%>
 </head>
 
 <body>
