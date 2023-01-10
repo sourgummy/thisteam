@@ -2,20 +2,24 @@
 
 @import url("https://rsms.me/inter/inter.css");
 
+.mydiv {
+	padding-top: 1rem;
+}
+
 :root {
   --color-gray: #737888;
   --color-lighter-gray: #e3e5ed;
   --color-light-gray: #f7f7fa;
 }
 
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
+/* *, */
+/* *:before, */
+/* *:after { */
+/*   box-sizing: inherit; */
+/* } */
 
 html {
-  font-family: "Inter", sans-serif;
+/*   font-family: "Inter", sans-serif; */
   font-size: 14px;
   box-sizing: border-box;
 }
@@ -27,7 +31,7 @@ html {
 }
 
 body {
-/*   margin: 0; */
+  margin: 0;
 }
 
 h1 {
@@ -47,11 +51,19 @@ hr {
 }
 
 /*23/01/09 이거 수정안하면 top.jsp 다깨진다*/
-.container2 {
-  max-width: 40rem;
-  padding: 10vw 2rem 0;
-  margin: 0 auto;
-  height: 100vh;
+.container {
+/*   height: 100vh; */
+/*   padding: 10vw 2rem 0; */
+ --bs-gutter-x : 1.5rem;
+ --bs-gutter-y : 0;
+/*   max-width: 1140px; */
+  width: 100%;
+  padding-right : calc(var(--bs-gutter-x) * 0.5);
+  padding-left : calc(var(--bs-gutter-x) * 0.5);
+  margin-left: auto;
+  margin-right: auto;
+
+
 }
 
 .form {
@@ -70,7 +82,7 @@ hr {
 
 .field__label {
   color: var(--color-gray);
-  font-size: 0.6rem;
+  font-size: 0.8rem;
   font-weight: 300;
   text-transform: uppercase;
   margin-bottom: 0.25rem
@@ -82,7 +94,7 @@ hr {
   border: 0;
   outline: 0;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.2rem;
   width: 100%;
   -webkit-appearance: none;
   appearance: none;
@@ -106,7 +118,7 @@ hr {
 .button {
   background-color: #000;
   text-transform: uppercase;
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-weight: 600;
   display: block;
   color: #fff;

@@ -28,6 +28,8 @@ public class OrderPaymentService {
 			JdbcUtil.rollback(con);
 		}
 		
+		JdbcUtil.close(con);
+		
 		return isOrderStatusUpdate;
 	}// orderStatusUpdate
 
@@ -47,6 +49,7 @@ public class OrderPaymentService {
 			JdbcUtil.rollback(con);
 		}
 		
+		JdbcUtil.close(con);
 		return cartInfoUpdateCount;
 		
 	} // cartInfoDelete
@@ -67,6 +70,8 @@ public class OrderPaymentService {
 			JdbcUtil.rollback(con);
 		}
 		
+		JdbcUtil.close(con);
+		
 		return paymentInsertCount;
 	}
 
@@ -86,6 +91,8 @@ public class OrderPaymentService {
 			JdbcUtil.rollback(con);
 		}
 		
+		JdbcUtil.close(con);
+		
 		return productQtyUpdateCount;
 	}
 
@@ -100,6 +107,8 @@ public class OrderPaymentService {
 		
 		orderProductList = dao.getViewCartList(id, pro_code, cart_code);
 		
+		JdbcUtil.commit(con);
+		JdbcUtil.close(con);
 		return orderProductList;
 	}
 
@@ -112,6 +121,9 @@ public class OrderPaymentService {
 		dao.setConnection(con);
 		
 		orderInfoList = dao.getOrderMemberList(id, cart_code);
+		
+		JdbcUtil.commit(con);
+		JdbcUtil.close(con);
 		
 		return orderInfoList;
 	}
@@ -127,7 +139,54 @@ public class OrderPaymentService {
 		paymentsList = dao.getOrderPaymentsList(pay_number, cart_code);
 		System.out.println("service로 잘넘어온 결제 정보 : " + paymentsList);
 		
+		JdbcUtil.commit(con);
+		JdbcUtil.close(con);
+		
 		return paymentsList;
+	}
+
+	// 23/01/10 추가
+	// 카트번호 중복 해결 방법
+	// 결제 완료된 카트 (order_product, cart를 삭제하기)
+	// 단, 위시리스트도 함께 삭제되니 유의
+	public int deleteCartPro(int cart_code) {
+		int deleteCartCount = 0;
+		
+		Connection con = JdbcUtil.getConnection();
+		OrderDAO dao = OrderDAO.getInstance();
+		dao.setConnection(con);
+		
+		deleteCartCount = dao.deleteCart(cart_code);
+		
+		if(deleteCartCount > 0) {
+			JdbcUtil.commit(con);
+		} else {
+			JdbcUtil.rollback(con);
+		}
+		JdbcUtil.close(con);
+		
+		return deleteCartCount;
+	}
+
+	// 23/01/10 추가된 메서드
+	// 쿠폰 사용여부를 N > Y로 변경하는 메서드
+	public int getCouponUpdateCount(String cp_code, String id) {
+		int couponUpdateCount = 0;
+		
+		Connection con = JdbcUtil.getConnection();
+		OrderDAO dao = OrderDAO.getInstance();
+		dao.setConnection(con);
+		
+		couponUpdateCount = dao.getCouponUpdateCount(cp_code, id);
+
+			if(couponUpdateCount >= 0) {
+				JdbcUtil.commit(con);
+			} else {
+				JdbcUtil.rollback(con);
+			}
+			JdbcUtil.close(con);
+		
+		return couponUpdateCount;
 	}
  
 	

@@ -161,11 +161,15 @@ body {
 		<div class="container px-4 px-lg-5 my-5">
 			<div class="row gx-4 gx-lg-5 align-items-center">
 				<div class="col-md-6" id="pro_info">
-					<!-- Product 상세 image-->
-					<img class="card-img-top mb-5 mb-md-0" 
-						src="http://localhost:8080/DangDangEat/upload/${product.pro_real_thumb }"
-						onerror="this.src='./img/sample1_thumb.png';" />
+					<!-- Product 메인 썸네일-->
+<!-- 					<img class="card-img-top mb-5 mb-md-0"  -->
+<%-- 						src="http://localhost:8080/DangDangEat/upload/${product.pro_real_thumb }" --%>
+<!-- 						onerror="this.src='./img/sample1_thumb.png';" /> -->
 <!-- 						alt="..." onerror= "this.src='./img/error_img.png'"/> -->
+						<img class="card-img-top"
+						src="<%=request.getScheme()+"://"+request.getServerName() + ":" + request.getServerPort() +"/"+request.getContextPath()%>/upload/${product.pro_real_thumb }"
+						alt="..." onerror="this.src='./img/sample1_thumb.png';" />
+
 				</div>
 				<div class="col-md-6">
 					<!-- 브랜드 페이지 링크 삽입 -->
@@ -265,10 +269,13 @@ body {
 		<div class="container px-4 px-lg-5 mt-3">
 			<div class="">
 					<!-- Product 상세 image-->
-					<img class="card-img-top "
-						src="http://localhost:8080/DangDangEat/upload/${product.pro_real_img }"
-						alt="..." onerror="this.src='./img/sample1_img.jpg';" />
-<!-- 						alt="..." onerror="this.src='./img/error_img.png';" /> -->
+<!-- 					<img class="card-img-top " -->
+<%-- 						src="http://localhost:8080/DangDangEat/upload/${product.pro_real_img }" --%>
+<!-- 						alt="..." onerror="this.src='./img/sample1_img.jpg';" /> -->
+						<img class="card-img-top"
+						src="<%=request.getScheme()+"://"+request.getServerName() + ":" + request.getServerPort() +"/"+request.getContextPath()%>/upload/${product.pro_real_img }"
+						alt="..." onerror="this.src='./img/sample1_thumb.png';" />
+
 				</div>
 		</div>
 	</section>
@@ -482,8 +489,7 @@ body {
 	<!-- Footer-->
 	<footer class="py-5 bg-dark">
 		<div class="container">
-			<p class="m-0 text-center text-white">Copyright &copy; Your
-				Website 2022</p>
+			<p class="m-0 text-center text-white">Copyright &copy; DangDangEat 2023</p>
 		</div>
 	</footer>
 	<!-- Bootstrap core JS-->

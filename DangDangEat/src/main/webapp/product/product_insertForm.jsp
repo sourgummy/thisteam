@@ -35,8 +35,20 @@
 
 </script>
 <style>
-h1 {
+h2 {
 	text-align: center;
+	padding-top: 20px;
+}
+
+
+th {
+	background-color: #e9ecef;
+/* 	text-align: center; */
+}
+
+
+body {
+    font-family:"GmarketSansMedium" ;
 }
 
 /*default*/
@@ -54,9 +66,6 @@ h1 {
 	unicode-range:U+0041-005A,U+0061-007A ;
 }
 
-body {
-    font-family:"GmarketSansMedium" ;
-}
 </style>
 </head>
 <body>
@@ -65,23 +74,23 @@ body {
 		<%-- 		<jsp:include page=""></jsp:include> --%>
 	</header>
 	<br>
-	<h1>상품 등록</h1>
+	<h2>상품 등록</h2>
 	<br>
 	<div class="container mr-sm-2">
 		<form action="ProductInsertPro.pd" method="post" name="InsertForm"
-			enctype="multipart/form-data">
+			enctype="multipart/form-data" style="width: 700px;">
 			<table class="table table-bordered">
 				<tr>
-					<td>상품 코드</td>
+					<th>상품 코드</th>
 					<td></td>
 				</tr>
 				<tr>
-					<td>상품명</td>
+					<th>상품명</th>
 					<td><input type="text" class="form-control" name="pro_name" id="pro_name" size="50"
 						placeholder="상품명을 입력하세요"></td>
 				</tr>
 				<tr>
-					<td>카테고리</td>
+					<th>카테고리</th>
 					<td><select class="form-select" size="1" id="cate_code"
 						name="cate_code">
 							<option value="" selected="selected">카테고리를 선택하세요</option>
@@ -93,7 +102,7 @@ body {
 					</select></td>
 				</tr>
 				<tr>
-					<td>브랜드</td>
+					<th>브랜드</th>
 					<td><select class="form-select" size="1" id="pro_brand"
 						name="pro_brand">
 							<option value="" selected="selected">브랜드를 선택하세요</option>
@@ -105,7 +114,7 @@ body {
 					</select></td>
 				</tr>
 				<tr>
-					<td>옵션</td>
+					<th>옵션</th>
 					<td><select class="form-select" size="1" id="pro_option"
 						name="pro_option">
 							<option value="" selected="selected">옵션을 선택하세요</option>
@@ -136,16 +145,16 @@ body {
 <!-- 					</td> -->
 <!-- 				</tr> -->
 				<tr>
-					<td>상품 재고</td>
+					<th>상품 재고</th>
 					<td><input class="form-control" type="number" name="pro_qty" id="pro_qty" size="20" placeholder="상품 재고를 선택하세요 ex) 10"></td>
 				</tr>
 				<tr>
-					<td>상품 가격</td>
+					<th>상품 가격</th>
 					<td><input type="text" class="form-control" name="pro_price" id="pro_price"
 						size="20" required="required" placeholder="상품 가격을 입력하세요 ex) 50000"></td>
 				</tr>
 				<tr>
-					<td>판매 여부</td>
+					<th>판매 여부</th>
 					<td><input class="form-check-input" type="radio" name="pro_yn"
 						id="pro_yn" size="20" value="1">&nbsp;&nbsp;판매중&nbsp;&nbsp;
 						<input class="form-check-input" type="radio" name="pro_yn"
@@ -154,17 +163,17 @@ body {
 						id="pro_yn" size="20" value="3">&nbsp;&nbsp;재고없음</td>
 				</tr>
 				<tr>
-					<td>상품 메인이미지</td>
+					<th>상품 메인이미지</th>
 					<td><input class="form-control" type="file" name="pro_thumb"
 						id="pro_thumb" size="20"></td>
 				</tr>
 				<tr>
-					<td>상품 상세이미지</td>
+					<th>상품 상세이미지</th>
 					<td><input class="form-control" type="file" name="pro_img"
 						id="pro_img" size="20"></td>
 				</tr>
 				<tr>
-					<td>상품 상세정보</td>
+					<th>상품 상세정보</th>
 					<td><textarea class="form-control" rows="10" cols="50"
 							id="pro_info" name="pro_info" placeholder="상품 상세내용을 입력하세요" ></textarea>
 						<div id="content_cnt">(0 / 500)</div>
@@ -174,7 +183,7 @@ body {
 					<td colspan="2" align="center">
 						<input class="btn btn-outline-dark" type="submit" value="상품등록" onclick="javascript:confirm_insert()">&nbsp;&nbsp;
 						<input class="btn btn-outline-dark" type="button" value="취소"
-						onclick="history.back()"></td>
+						onclick="top.window.close()"></td>
 				</tr>
 			</table>
 		</form>

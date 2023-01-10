@@ -66,7 +66,6 @@ public class CouponRegisterProAction implements Action {
 		int insertCount =  service.inertCoupon(coupon);
 		
 		//자동발급쿠폰일 경우: 쿠폰시작일:null
-
 				if(coupon.getCp_target() == Cp_target.new_member || coupon.getCp_target()  == Cp_target.birth  ) {
 					
 					CouponTargetInsertService service2 = new CouponTargetInsertService();
@@ -79,12 +78,12 @@ public class CouponRegisterProAction implements Action {
 				}
 				
 				
-		System.out.println(this.getClass() + "\n" + coupon);
+		System.out.println(this.getClass() + ": " + coupon);
 		
 		
 		if(insertCount > 0 ) {//쿠폰등록 성공시
 			forward = new ActionForward();
-			forward.setPath("CouponList.ad");
+			forward.setPath("AdminCouponList.ad");
 			forward.setRedirect(false);
 		
 		}else {

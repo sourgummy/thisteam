@@ -20,11 +20,16 @@
 		let result = confirm("상품을 수정하시겠습니까?");
 		
 		if(result){
+// 			form.action = 'ProductModifyPro.pd';
+// 			form.submit();
 			alert("상품 수정이 완료되었습니다!");
+			opener.document.location.reload();
+			self.close();
+// 			window.close();
 		}
-	}
 
-	
+	}
+		
 	//삭제 진행여부 확인
 	function confirm_delete() {
 		// Confirm Dialog 를 활용하여 "상품을 삭제하시겠습니까?" 질문 처리
@@ -55,8 +60,9 @@
 		
 </script>
 <style>
-h1 {
+h2 {
 	text-align: center;
+	padding-top: 20px;
 }
 
 /*default*/
@@ -86,7 +92,7 @@ body {
 	</header>
 <%-- 	${product.pro_code} --%>
 	<br>
-	<h1>상품 수정</h1>
+	<h2>상품 수정</h2>
 	<br>
 	<div class="container mr-sm-2">
 		<form action="ProductModifyPro.pd" method="post" name="ModifyForm" id="ProductMoidfyForm" enctype="multipart/form-data">
@@ -94,38 +100,38 @@ body {
 			<input type="hidden" name="">
 			<table class="table table-bordered">
 				<tr>
-					<td>상품 코드</td>
+					<th>상품 코드</th>
 					<td><input type="text" class="form-control" name="pro_code" value="${product.pro_code }" id="pro_code" size="20" readonly="readonly"></td>
 				</tr>
 				<tr>
-					<td>상품명</td>
+					<th>상품명</th>
 					<td><input type="text" class="form-control" name="pro_name" value="${product.pro_name }" id="pro_name" size="50"
 						placeholder="상품명을 입력하세요"></td>
 				</tr>
 				<tr>
-					<td>카테고리</td>
-					<td><select class="form-select" size="1" id="cate_code" name="cate_code" onchange="select_cate_code(this.value2)">
+					<th>카테고리</th>
+					<th><select class="form-select" size="1" id="cate_code" name="cate_code" onchange="select_cate_code(this.value2)">
 							<option value="" >카테고리를 선택하세요</option>
 							<option value="1" <c:if test="${product.cate_code eq '1'}">selected</c:if>>사료</option>
 							<option value="2" <c:if test="${product.cate_code eq '2'}">selected</c:if>>간식</option>
 							<option value="3" <c:if test="${product.cate_code eq '3'}">selected</c:if>>파우더 · 토핑</option>
 							<option value="4" <c:if test="${product.cate_code eq '4'}">selected</c:if>>껌 · 츄르</option>
 							<option value="5" <c:if test="${product.cate_code eq '5'}">selected</c:if>>건강보조제</option>
-					</select></td>
+					</select></th>
 				</tr>
 				<tr>
-					<td>브랜드</td>
-					<td><select  class="form-select" size="1" id="pro_brand" name="pro_brand" onchange="select_pro_brand">
+					<th>브랜드</th>
+					<th><select  class="form-select" size="1" id="pro_brand" name="pro_brand" onchange="select_pro_brand">
 							<option value="">브랜드를 선택하세요</option>
 							<option value="1" <c:if test="${product.pro_brand eq '1'}">selected</c:if>>없음</option>
 							<option value="2" <c:if test="${product.pro_brand eq '2'}">selected</c:if>>LILY'S KITCHEN</option>
 							<option value="3" <c:if test="${product.pro_brand eq '3'}">selected</c:if>>PETSGREEN</option>
 							<option value="4" <c:if test="${product.pro_brand eq '4'}">selected</c:if>>RICHZ BOX</option>
 							<option value="5" <c:if test="${product.pro_brand eq '5'}">selected</c:if>>LORENZ</option>
-					</select></td>
+					</select></th>
 				</tr>
 				<tr>
-					<td>옵션</td>
+					<th>옵션</th>
 					<td><select class="form-select" size="1" id="pro_option" name="pro_option">
 							<option value="" >옵션을 선택하세요</option>
 							<option value="1" <c:if test="${product.pro_option eq '1'}">selected</c:if>>강아지용</option>
@@ -135,41 +141,41 @@ body {
 					</select></td>
 				</tr>
 				<tr>
-					<td>상품 재고</td>
+					<th>상품 재고</th>
 					<td><input type="number" class="form-control" name="pro_qty" id="pro_qty" size="20" value="${product.pro_qty }"></td>
 				</tr>
 				<tr>
-					<td>상품 가격</td>
+					<th>상품 가격</th>
 					<td><input type="number" class="form-control" name="pro_price" id="pro_price"
 						size="20" required="required" value="${product.pro_price }" ></td>
 				</tr>
 				<tr>
-					<td>판매 여부</td>
+					<th>판매 여부</th>
 					<td><input class="form-check-input" type="radio" name="pro_yn" id="pro_yn" size="20" value="1" <c:if test="${product.pro_yn eq '1'}">checked</c:if>>&nbsp;&nbsp;판매중&nbsp;&nbsp;
 						<input class="form-check-input" type="radio" name="pro_yn" id="pro_yn" size="20" value="2" <c:if test="${product.pro_yn eq '2'}">checked</c:if>>&nbsp;&nbsp;판매중단&nbsp;&nbsp;
 						<input class="form-check-input" type="radio" name="pro_yn" id="pro_yn" size="20" value="3" <c:if test="${product.pro_yn eq '3'}">checked</c:if>>&nbsp;&nbsp;재고없음
 					</td>
 				</tr>
 				<tr>
-					<td>상품 메인이미지</td>
+					<th>상품 메인이미지</th>
 					<td><input class="form-control" type="file" name="pro_thumb" id="pro_thumb"
 						size="20" value="${product.pro_thumb }">
 						<br>(기존파일 : ${product.pro_thumb })</td>
 				</tr>
 				<tr>
-					<td>상품 상세이미지</td>
+					<th>상품 상세이미지</th>
 					<td><input class="form-control" type="file" name="pro_img" id="pro_img" size="20">
 					<br>(기존파일 : ${product.pro_img })</td>
 				</tr> 
 			
 				<tr>
-					<td>상품 상세정보</td>
+					<th>상품 상세정보</th>
 					<td><textarea class="form-control" rows="10" cols="50" id="pro_info" name="pro_info" >${product.pro_info }</textarea></td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
 						<input class="btn btn-outline-dark" type="submit" value="수정" onclick="javascript:confirm_modify()">&nbsp;&nbsp;
-						<input class="btn btn-outline-dark" type="button" value="취소" onclick="history.back()">&nbsp;&nbsp;
+						<input class="btn btn-outline-dark" type="button" value="취소" onclick="top.window.close()">&nbsp;&nbsp;
 						<input class="btn btn-outline-dark" type="button" value="삭제" onclick="javascript:confirm_delete()">&nbsp;&nbsp;
 					</td>
 				</tr>

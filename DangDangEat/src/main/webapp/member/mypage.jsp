@@ -96,7 +96,7 @@ if (sId == null || sId.equals("")) {
 		
 		$("#CouponCount").on("click", function(){
 			
-			$.ajax({//자동등록된 쿠폰(생일쿠폰,회원가입쿠폰) 있는지 확인
+			const searchCoupon = $.ajax({//자동등록된 쿠폰(생일쿠폰,회원가입쿠폰) 있는지 확인
 				type: "get",
 				url: "SearchUsableCoupon.od",
 				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
@@ -107,9 +107,9 @@ if (sId == null || sId.equals("")) {
 
 			})
 			.done(function(result){
-	    		
+	    		alert(result);
 				$("#ajax_changeDiv").html(result);
-				
+				$("#ajax_changeDiv_wapper").append("<input type='button' value='마이페이지 메인' class='mb-5 mx-3 p-2 btn btn-sm  btn-secondary rounded '  style='float: right;' id='goMypagebtn'></button>");
 				//현재 URL가져와서 파라미터(cp_code)존재하면 값주기
 				const urlParams = new URL(location.href).searchParams;
 				
@@ -130,13 +130,16 @@ if (sId == null || sId.equals("")) {
 			});
 				
 
-			
-
-			
 				
 				
 			
 		});//$("#CouponCount")
+	});
+	
+	$(document).on("click", "#goMypagebtn", function(){
+		//Mypage로 이동하는 버튼
+		//동적할당된 버튼이므로 따로 정의
+		location.reload(true);
 	});
 </script>
 
@@ -251,12 +254,13 @@ if (sId == null || sId.equals("")) {
 	</div>
 	<!-- /Widgets -->
 
-	<div class="container" id="ajax_changeDiv">
-		<div class="card" id="titleDiv">
+	<div class="container" id="ajax_changeDiv_wapper">
+	<div id="ajax_changeDiv">
+		<div class="card" >
 			<div class="card-header">
 				<strong>회원 정보</strong>
 			</div>
-			<div class="card-body card-block" id="coupinDiv">
+			<div class="card-body card-block" >
 				<div class="row form-group">
 					<div class="col col-md-3">
 						<label class="form-control-label font-weight-bold">ID</label>
