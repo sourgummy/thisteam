@@ -23,69 +23,18 @@
 		* {
 		    font-family:"GmarketSansMedium" ;
 		}
+		
+		input:button {
+			font-family:"GmarketSansMedium" ;
+		}
+		
+		h6{
+		 font-family:"GmarketSansMedium" ;
+		}
+		
   </style>
     <!-- jQuery for import--> 
-    <!-- 23/01/08 추가 챗봇 관련 코드 -->
-    <script>
-  (function() {
-    var w = window;
-    if (w.ChannelIO) {
-      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
-    }
-    var ch = function() {
-      ch.c(arguments);
-    };
-    ch.q = [];
-    ch.c = function(args) {
-      ch.q.push(args);
-    };
-    w.ChannelIO = ch;
-    function l() {
-      if (w.ChannelIOInitialized) {
-        return;
-      }
-      w.ChannelIOInitialized = true;
-      var s = document.createElement('script');
-      s.type = 'text/javascript';
-      s.async = true;
-      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
-      s.charset = 'UTF-8';
-      var x = document.getElementsByTagName('script')[0];
-      x.parentNode.insertBefore(s, x);
-    }
-    if (document.readyState === 'complete') {
-      l();
-    } else if (window.attachEvent) {
-      window.attachEvent('onload', l);
-    } else {
-      window.addEventListener('DOMContentLoaded', l, false);
-      window.addEventListener('load', l, false);
-    }
-  })();
-//   ChannelIO('boot', {
-//     pluginKey: "1340eb3c-ddf6-43c5-a497-6a91281156bc", //please fill with your plugin key
-//     memberId: "YOUR_USER_ID", //fill with user id
-//     profile: {
-//       "name": "YOUR_USER_NAME", //fill with user name
-//       "mobileNumber": "YOUR_USER_MOBILE_NUMBER", //fill with user phone number
-//       "CUSTOM_VALUE_1": "VALUE_1", //any other custom meta data
-//       "CUSTOM_VALUE_2": "VALUE_2"
-//     }
-//   });
-  ChannelIO('boot', {
-     pluginKey: '1340eb3c-ddf6-43c5-a497-6a91281156bc'
-      }, function onBoot(error, user) {
-           if (error) {
-                console.error(error);
-           } else {
-             console.log('boot success', user)
-           }
-   });
-  
-</script>
-<!-- 챗봇 관련 코드 -->
   <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
-<!--  <img src="http://localhost:8080/DangDangEat/upload/${cart.pro_real_thumb }" alt="${cart.pro_name }" class="product-frame" height="100">  -->
 </head>
 <body>
 <jsp:include page="../inc/top.jsp"></jsp:include>
@@ -131,8 +80,8 @@
 				<td width="60%"> <span class="font-weight-bold">상품명 : ${orderProduct.pro_name }</span>
 					<div class="product-qty"> <span class="d-block">주문수량 : ${orderProduct.cart_amount }개</span></div>
 				</td>
-				<td width="20%">
-					<div class="text-right"> <span class="font-weight-bold">상품금액 : ${orderProduct.pro_price}원</span> </div>
+				<td width="25%">
+					<div class="text-right"><span class="font-weight-bold">상품금액 : <fmt:formatNumber pattern="#,###">${orderProduct.pro_price}</fmt:formatNumber>원</span></div>
 				</td>
 			</tr>
 			</tbody>
@@ -146,8 +95,8 @@
 		<c:forEach var="pay" items="${paymentList }" varStatus="status">
 			<tbody class="totals">
 			<tr>
-				<td><div class="text-left"> <span class="text-muted">주문금액</span> </div></td>
-				<td><div class="text-right"><span class="price">${pay.cp_discount_amount + pay.pay_amount}원</span></div></td>
+				<td><div class="text-left"><span class="text-muted">주문금액</span></div></td>
+				<td><div class="text-right"><span class="price"><fmt:formatNumber pattern="#,###">${pay.cp_discount_amount + pay.pay_amount}</fmt:formatNumber>원</span></div></td>
 			</tr>
 			<tr>
 				<td><div class="text-left"> <span class="text-muted">배송비</span> </div></td>
@@ -155,18 +104,18 @@
 			</tr>
 			<tr>
 				<td><div class="text-left"> <span class="text-muted">할인금액</span> </div></td>
-				<td><div class="text-right"><span class="text-success">${pay.cp_discount_amount }원</span></div></td>
+				<td><div class="text-right"><span class="text-success"><fmt:formatNumber pattern="#,###">${pay.cp_discount_amount }</fmt:formatNumber>원</span></div></td>
 			</tr>
 			<tr class="border-top border-bottom">
 				<td><div class="text-left"> <span class="font-weight-bold">총주문금액</span> </div></td>
-				<td><div class="text-right"><span class="font-weight-bold">${pay.pay_amount }원</span> </div></td>
+				<td><div class="text-right"><span class="font-weight-bold"><fmt:formatNumber pattern="#,###">${pay.pay_amount }</fmt:formatNumber>원</span> </div></td>
 			</tr>
 			</tbody>
 		</c:forEach>	
 		</table>
 	  </div>
 	</div>
-			<p align="center">We will be sending shipping confirmation email when the item shipped successfully!</p>
+			<p align="center"><br>We will be sending shipping confirmation email <br> when the item shipped successfully!</p>
 			<p class="font-weight-bold mb-0" align="center">Thanks for shopping with us!</p><br> <p align="center"><span >DangDangEat Team</span></p><br>
 	<div class="container" align="center">
 		<input type="button" value="장바구니로 돌아가기" onclick="location.href='CartList.ct'">&nbsp;&nbsp;
@@ -178,13 +127,15 @@
 	</div>
 	</div>
 	</div> 
-    
-    
-    
-    
-    
   </main>
+	<!-- Footer-->
+	<footer class="py-5 bg-dark">
+		<div class="container">
+			<p class="m-0 text-center text-white">Copyright &copy; DangDangEat 2023</p>
+		</div>
+	</footer>
 </body>
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js?version=2"></script>
-</body>
+
 </html>

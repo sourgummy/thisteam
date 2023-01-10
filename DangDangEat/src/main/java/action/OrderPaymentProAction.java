@@ -26,7 +26,7 @@ public class OrderPaymentProAction implements Action {
 		// 결제 페이지 진행하는 액션 (주문번호 생성)
 		
 		/*
-		 *  1. 입력받은 쿠폰 코드를 가져와서 수식 계산을 하는(구문만 짜두기 연결은 별도)
+		 *  완료 1. 입력받은 쿠폰 코드를 가져와서 수식 계산을 하는(구문만 짜두기 연결은 별도)
 		 *  
 		 *  완료 2. payment(결제) 테이블로 정보를 입력 
 		 *  	pay_number : varchar(20)
@@ -41,9 +41,23 @@ public class OrderPaymentProAction implements Action {
 		 *  완료 6. 주문완료한 수량 product 수량에서 (-)변경하기   
 		 *  
 		 *  23/01/07 진행 부분
-		 *  1. 주문 확인서 페이지에 넘길 정보 생성하기 (주문상품 + 배송정보 + 주문 금액 관련 정보)
-		 *  2. 쿠폰 페이지 연결하기
+		 *  완료 1. 주문 확인서 페이지에 넘길 정보 생성하기 (주문상품 + 배송정보 + 주문 금액 관련 정보)
+		 *  완료 2. 쿠폰 페이지 연결하기
 		 *  3. 아임포트 api 연결하기
+		 *  
+		 *  23/01/08 진행 
+		 *  완료 1. 쿠폰 코드 + 할인금액 포함해서 payments 빈 생성하기
+		 *  
+		 *  23/01/09 진행
+		 *  완료 1. 쿠폰 팝업(자식창)에서 쿠폰 코드 가져오기
+		 *  완료 2. action과 연결 시켜서 할인 금액 리턴 및 연산 작업 수행
+		 *  완료 / 문제 발생 3. 쿠폰코드와 할인금액 payments 테이블에 저장하기
+		 *  4. 쿠폰 사용시 mc_used (member_coupon) n > y로 변경하기
+		 *  
+		 *  23/01/10 진행
+		 *  완료 1. 결제 완료시 order_product, cart 삭제하기 (같은 카트번호 사용)
+		 *  완료 2. 쿠폰 사용시 mc_used (member_coupon) n > y로 변경하기
+		 *  
 		 */
 		
 		
@@ -54,10 +68,23 @@ public class OrderPaymentProAction implements Action {
 		int pro_amount = Integer.parseInt(request.getParameter("pro_amount"));
 		int order_code = Integer.parseInt(request.getParameter("order_code"));
 		
+		// 23/01/10 발생한 문제점
+		// 쿠폰을 사용하지 않고는 결제 불가능
+		
+		String cp_code = request.getParameter("cp_code");
+		String cp_discount = request.getParameter("cp_discount_amount");
+		int cp_discount_amount = Integer.parseInt(request.getParameter("cp_discount_amount"));
+		
+		if(cp_code.equals(null) || cp_discount.equals(null) ) {
+			cp_code = "none";
+			cp_discount_amount = 0;
+		}
 		System.out.println("상품 코드 잘넘어 옵니까" + pro_code);
 		System.out.println("카트 코드 잘넘어 옵니까" + cart_code);
 		System.out.println("상품금액 잘넘어 옵니까" + pro_amount);
 		System.out.println("주문번호 잘넘어 옵니까" + order_code);
+		System.out.println("쿠폰번호 잘넘어 옵니까" + cp_code);
+		System.out.println("할인금액 잘넘어 옵니까" + cp_discount_amount);
 		
 		// 주문번호 생성을 위한 구문------------------------------------------
 		
@@ -76,6 +103,8 @@ public class OrderPaymentProAction implements Action {
 		payments.setPay_number(pay_number); // 최종 주문번호 
 		payments.setPay_amount(pro_amount); // 결제금액
 		payments.setOrder_code(order_code); // orders 테이블 주문번호
+		payments.setCp_code(cp_code);
+		payments.setCp_discount_amount(cp_discount_amount);
 		
 		OrderPaymentService service = new OrderPaymentService();
 		// orders 테이블에 order_status = 1 (결제완료) 로 변환하는 작업
@@ -94,26 +123,51 @@ public class OrderPaymentProAction implements Action {
 		List<OrdersBean> orderInfoList = service.getOrderInfoList(id, cart_code);
 		request.setAttribute("orderInfoList", orderInfoList);
 		System.out.println("페이먼트 프로 액션 주문 정보 리스트" + orderInfoList);
+		// 카트 중복 해결하는 방법 > 결제 완료 후 order_product와 cart 삭제
+		int deleteCartCount = service.deleteCartPro(cart_code);
+		// 장바구니 화면에서 제거(cart테이블 cart_ischecked)
+		int cartUpdateCount = service.cartInfoUpdate(id, cart_code);
+		// 결제완료시 상품 테이블에서 수량변경하는 코드
+		int productQtyUpdateCount = service.productQtyUpdate(order_code, pro_code);
+		// 사용한 쿠폰 mc_used = 'N' > 'Y'
+		int couponUpdateCount = service.getCouponUpdateCount(cp_code, id);
+		
+		
 		
 			try {
 				// orders 테이블에 order_status = 1 (결제완료) 로 변환하는 작업
 				if(isOrderStatusUpdate) {
-				
-					// 장바구니 화면에서 제거(cart테이블 cart_ischecked)
-					int cartUpdateCount = service.cartInfoUpdate(id, cart_code);
-					
-					 if(cartUpdateCount > 0) {
-						 
-						 
-						 // 결제완료시 상품 테이블에서 수량변경하는 코드
-						 int productQtyUpdateCount = service.productQtyUpdate(order_code, pro_code);
-						 
-							 if(productQtyUpdateCount > 0) {
-								 
+					// 결제 후 장바구니 보이지 않도록 수정
+//					 if(cartUpdateCount > 0) {
+							// 상품 수량 수정
+//							 if(productQtyUpdateCount > 0) {
+								 // 결제 정보 입력
 								 if(paymentInsertCount > 0 ) {
-										forward = new ActionForward();
-										forward.setPath("OrderConfirm.od");
-										forward.setRedirect(false);
+									 // 결제 완료 카트 삭제 (23/01/10 코드 꼬여서 실패)
+									 if(deleteCartCount > 0) {
+										 // cp_target(new_member, event)면 쿠폰 사용여부를 N > Y로 바꿈
+										 if( couponUpdateCount >= 0) {
+												 forward = new ActionForward();
+												 forward.setPath("OrderConfirm.od");
+												 forward.setRedirect(false);
+											 } else {
+											 	response.setContentType("text/html; charset=UTF-8");
+												PrintWriter out = response.getWriter();
+												out.println("<script>");
+												out.println("alert('쿠폰 사용여부 업데이트 실패')");
+												out.println("history.back()");
+												out.println("</script>");
+											 }
+										 } else {
+												response.setContentType("text/html; charset=UTF-8");
+												PrintWriter out = response.getWriter();
+												out.println("<script>");
+												out.println("alert('중복카트 삭제 실패')");
+												out.println("history.back()");
+												out.println("</script>");
+												
+										 } // deleteCartCount
+									 
 									} else {
 										response.setContentType("text/html; charset=UTF-8");
 										PrintWriter out = response.getWriter();
@@ -121,38 +175,42 @@ public class OrderPaymentProAction implements Action {
 										out.println("alert('결제정보 입력 실패')");
 										out.println("history.back()");
 										out.println("</script>");
-									}
+									} // paymentInsertCount
+//							 	} else {
+//									response.setContentType("text/html; charset=UTF-8");
+//									PrintWriter out = response.getWriter();
+//									out.println("<script>");
+//									out.println("alert('상품 수량 업데이트 실패')");
+//									out.println("history.back()");
+//									out.println("</script>");
 								 
-							 }
+//							 } // productQtyUpdateCount
 						 
 						
-					 } else {
-						response.setContentType("text/html; charset=UTF-8");
-						PrintWriter out = response.getWriter();
-						
-						out.println("<script>");
-						out.println("alert('장바구니 업데이트 실패')");
-						out.println("history.back()");
-						out.println("</script>");
-					 }
+//					 } else {
+//						response.setContentType("text/html; charset=UTF-8");
+//						PrintWriter out = response.getWriter();
+//						
+//						out.println("<script>");
+//						out.println("alert('장바구니 업데이트 실패')");
+//						out.println("history.back()");
+//						out.println("</script>");
+//					 } // cartUpdateCount
 				 
-					
 				} else {
 					response.setContentType("text/html; charset=UTF-8");
 //				
 					PrintWriter out = response.getWriter();
-					
 					out.println("<script>");
 					out.println("alert('주문상태 업데이트 실패')");
 					out.println("history.back()");
 					out.println("</script>");
-				}
+				} //isOrderStatusUpdate
+				
 			} catch (IOException e) {
 				System.out.println("OrderPaymentProAction 오류 발생");
 				e.printStackTrace();
-			} finally {
-				
-			}
+			} 
 		
 		
 		return forward;

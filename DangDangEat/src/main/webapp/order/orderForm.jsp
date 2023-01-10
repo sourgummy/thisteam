@@ -9,6 +9,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>orderForm</title>
+  <link href="css/styles.css" rel="stylesheet" />
   <link href="css/orderForm.css" rel="stylesheet" type="text/css">
   <!-- top.jsp 랑 중복되는 container  : orderForm2.css -->
   <link href="css/orderForm2.css" rel="stylesheet" type="text/css">
@@ -83,7 +84,7 @@
 			          <div class="product-image">
 			            <a href="ProductDetail.pd?pro_code=${cart.pro_code}">
 			            	<img src="http://localhost:8080/DangDangEat/upload/${cart.pro_real_thumb }" alt="${cart.pro_name }" 
-			            	class="product-frame" height="100" onerror="this.src='./img/sample1_thumb.png';" >
+			            	class="product-frame" height="130" width="140" onerror="this.src='./img/sample1_thumb.png';" >
 			           	</a>
 			          </div>
 			          <div class="product-details">
@@ -202,12 +203,17 @@
 		 </div>
 		 <br><br>
 	      <div class="summary-checkout">
-	          <button class="button" type="submit" id="checkout" >Checkout</button>
+	          <button class="button" type="submit" id="checkout" >Checkout</button><hr>
 	      </div>
 	   </form>   
   </main>
 <!--   </section> -->
-  
+  	<!-- Footer-->
+	<footer class="py-5 bg-dark">
+		<div class="container">
+			<p class="m-0 text-center text-white">Copyright &copy; DangDangEat 2023</p>
+		</div>
+	</footer>
 </body>
 <%-- 카카오 주소 API 적용하기 --%>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

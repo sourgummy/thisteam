@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import action.CouponSearchAction;
 import action.OrderCouponProAction;
-import action.CheckCouponCodeAction;
 import action.OrderFormAction;
 import action.OrderInsertProAction;
 import action.OrderPaymentProAction;
@@ -85,40 +84,40 @@ public class OrderFrontController extends HttpServlet {
 		
     //------------------------------------------ order 작업 부분 
 		} else if(command.equals("/OrderForm.od")) {
-			// 주문 페이지 (주문서 작성)
+			// 1. 주문 페이지 (주문서 작성)
 			action = new OrderFormAction();
 			forward = action.execute(request, response);
 		
 		} else if(command.equals("/OrderInsertPro.od")) {
-			// orders & order_product 테이블로 주문정보 입력 
+			// 2. orders & order_product 테이블로 주문정보 입력 
 			System.out.println("오더 테이블로 구문 넣는 orderInsertPro");
 			action = new OrderInsertProAction();
 			forward = action.execute(request, response);	
 			
 		} else if(command.equals("/OrderPaymentForm.od")) { 
-			// 장바구니 상품 결제 페이지
+			// 3. 장바구니 상품 결제 페이지
 			System.out.println("장바구니 상품 결제 페이지 > OrderPaymentForm.od");
 			forward = new ActionForward();
 			forward.setPath("/order/order_payment.jsp");
 			forward.setRedirect(false);
 			
 		} else if(command.equals("/OrderPaymentPro.od")) {
-			// 주문확인서 생성 및 결제 작업 진행 페이지
+			// 4. 주문확인서 생성 및 결제 작업 진행 페이지
 			System.out.println("주문확인서 생성 페이지 > orderPaymentPro.od");
 			action = new OrderPaymentProAction();
 			forward = action.execute(request, response);	
 			
 		} else if(command.equals("/OrderConfirm.od")) {
-			// 주문확인서 페이지
+			// 5. 주문확인서 페이지
 			System.out.println("주문확인서 > OrderConfirm.od");
 			forward = new ActionForward();
 			forward.setPath("order/orderConfirmation.jsp");
 			forward.setRedirect(false);
+			
 		} else if(command.equals("/OrderCouponPro.od")) {
-			// 쿠폰 페이지에서 받아온 쿠폰코드로 할인금액 계산하는 페이지
+			// 3-(1).쿠폰 페이지에서 받아온 쿠폰코드로 할인금액 계산하는 페이지
 			action = new OrderCouponProAction();
 			forward = action.execute(request, response);
-			
 			
 		} 
  
