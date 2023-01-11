@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -167,16 +169,70 @@ public class CouponDAO {
 		// mc_view 에서 존재하는 쿠폰 있는지 검색(자동발급이나 등록 후 사용하지않은 쿠폰)
 		
 		PreparedStatement pstmt = null;
-
+		PreparedStatement pstmt2 = null;
+		PreparedStatement pstmt3 = null;
+	
 		ResultSet rs = null;
-		String sql = "SELECT * FROM mc_view  "
-		+" WHERE  member_id = ?  AND   cp_status = 1  AND  mc_stat = 1 AND mc_used = 'N' ";
+		int countUpdate = 0;
+		JSONArray odj = null;
+		
+		try {
+		
+			String sql = "SELECT p.cp_code "
+					+ "		FROM orders o , payments p , mc_view "
+					+ "			WHERE o.order_code = p.order_code "
+					+ "            	AND mc.cp_code = p.cp_code "
+					+ "				AND o.order_status = 1 "
+					+ "				AND mc.cp_target = 'birth' "
+					+ "				AND o.order_date BETWEEN mc.target_sd AND mc.target_ed "
+					+ "				AND o.member_id = ? ";
+			pstmt2 = con.prepareStatement(sql);
+			rs = pstmt2.executeQuery();
+			List<String> cp_codeUpdate = new ArrayList<String>();
+			
+			//기간 내에 사용 기록이 있는 cp_target = 'birth' 의 cp_code 조회
+			if(rs.next()) {
+				cp_codeUpdate.add(rs.getString("cp_code")); 
+			}
+			
+			if(cp_codeUpdate != null) { //사용기록이 있을 경우 
+				
+				sql = "UPDATE member_coupon SET mc_used = 'Y'  WHERE member_id = ? AND  cp_code = ? ";
+				
+				for(int i = 0; i < cp_codeUpdate.size(); i++) {
+					
+					pstmt3 = con.prepareStatement(sql);
+					pstmt3.setString(1, sId);
+					pstmt3.setString(2, cp_codeUpdate.get(i));
+					countUpdate = pstmt3.executeUpdate();
+				}
+				
+				
+			}else {//사용기록이 없을 경우
+				
+				sql = "UPDATE member_coupon SET mc_used = 'N'  WHERE member_id = ? AND  cp_code = ? ";
+				
+				for(int i = 0; i < cp_codeUpdate.size(); i++) {
+					
+					pstmt3 = con.prepareStatement(sql);
+					pstmt3.setString(1, sId);
+					pstmt3.setString(2, cp_codeUpdate.get(i));
+					countUpdate = pstmt3.executeUpdate();
+				}
+			}
+			
+			
+			
+			
+			
+			System.out.println(pstmt3 +"/  업데이트 결과: " + countUpdate);
+			
+			 sql = "SELECT * FROM mc_view  "
+			+" WHERE  member_id = ?  AND   cp_status = 1  AND  mc_stat = 1 AND mc_used = 'N' ";
 	
 		
-		
-		JSONArray odj = new JSONArray();
+		odj = new JSONArray();
 
-		try {
 			
 			pstmt = con.prepareStatement(sql);
 			
@@ -213,7 +269,6 @@ public class CouponDAO {
 			JdbcUtil.close(pstmt);
 			
 		}
-		
 		
 		
 		return odj;
