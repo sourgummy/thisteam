@@ -14,10 +14,8 @@ import vo.NoticeBean;
 public class NoticeDeleteProAction implements Action {
 
 	@Override
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
-       		
-    	System.out.println("NoticeDeleteProAction");
-        
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {       		
+    	System.out.println("NoticeDeleteProAction");        
     	ActionForward forward = null;
 
     	int notice_code = Integer.parseInt(request.getParameter("notice_code"));
@@ -25,8 +23,8 @@ public class NoticeDeleteProAction implements Action {
 
 		try {
 			
-		NoticeDeleteProService service = new NoticeDeleteProService();
-		boolean isNoticeWriter = service.isNoticeWriter(notice_code);
+		   NoticeDeleteProService service = new NoticeDeleteProService();
+		   boolean isNoticeWriter = service.isNoticeWriter(notice_code);
 		
 		if (!isNoticeWriter) {			
 			response.setContentType("text/html; charset=UTF-8");
@@ -49,14 +47,14 @@ public class NoticeDeleteProAction implements Action {
 				out.println("history.back()");
 				out.println("</script>");
 			} else { // 삭제 성공 시
-			
-					
+							
 			forward = new ActionForward();
 			forward.setPath("NoticeList.bo?page=" + request.getParameter("pageNum"));
 			forward.setRedirect(true);
+		}	
+		
 		}
-	
-		}
+		
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

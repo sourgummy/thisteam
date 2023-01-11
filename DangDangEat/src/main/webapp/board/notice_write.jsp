@@ -77,9 +77,9 @@
 			<table class="table container">
 			<tbody>
 <!-- 				<tr> -->
-<!-- 					<td class="td_left"><label for="member_id">Writer</label></td> -->
-<!-- 					<td class="td_right"><input type="text" name="member_id" required="required" /></td> -->
-<!-- 				</tr>				 -->
+<!--  					<td class="td_left"><label for="member_id">Writer</label></td>  -->
+<!-- 					<td class="td_right"><input type="text" name="member_id" required="required" /></td>  -->
+<!-- 				</tr>				  -->
 					
 				<tr>
 					<td class="td_left"><label for="notice_subject">제목</label></td>

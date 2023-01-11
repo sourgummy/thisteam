@@ -1,6 +1,5 @@
 package action;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -20,13 +19,13 @@ public class QnaDeleteProAction implements Action {
 		
 		// 글번호, 패스워드 파라미터 가져오기
 		int qna_code = Integer.parseInt(request.getParameter("qna_code"));
-		String qna_pass = request.getParameter("qna_pass");
-		System.out.println(qna_code + ", " + qna_pass);
+//		String qna_pass = request.getParameter("qna_pass");
+//		System.out.println(qna_code + ", " + qna_pass);
 		System.out.println(request.getParameter("pageNum"));
 		
 		try {
 			QnaDeleteProService service = new QnaDeleteProService();
-			boolean isQnaWriter = service.isQnaWriter(qna_code, qna_pass);
+			boolean isQnaWriter = service.isQnaWriter(qna_code);
 			System.out.println("isQnaWriter : " + isQnaWriter);
 						
 			if(!isQnaWriter) { // 삭제 권한 없음
@@ -58,12 +57,12 @@ public class QnaDeleteProAction implements Action {
 					System.out.println("realPath : " + realPath);
 					
 					// 업로드 된 실제 파일 삭제
-					File f = new File(realPath, qna.getQna_real_file());
+//					File f = new File(realPath, qna.getQna_real_file());
 					
 					// 해당 디렉토리 및 파일 존재 여부 판별
-					if(f.exists()) { 
-						f.delete();
-					}
+//					if(f.exists()) { 
+//						f.delete();
+//					}
 					
 					forward = new ActionForward();
 					forward.setPath("QnaList.bo?pageNum=" + request.getParameter("pageNum"));

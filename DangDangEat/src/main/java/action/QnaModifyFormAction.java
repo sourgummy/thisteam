@@ -11,10 +11,12 @@ public class QnaModifyFormAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("QnaModifyAction");
+		
 		ActionForward forward = null;
 		
 		int qna_code = Integer.parseInt(request.getParameter("qna_code"));
-
+		
 		QnaDetailService service = new QnaDetailService();
 		QnaBean qna = service.getQna(qna_code);
 

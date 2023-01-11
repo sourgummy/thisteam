@@ -21,6 +21,8 @@ public class NoticeListService {
 			
 			noticeList = dao.selectNoticeList(keyword, startRow, listLimit);
 			
+			JdbcUtil.commit(con);
+			
 			JdbcUtil.close(con);
 			
 			return noticeList;
@@ -40,7 +42,8 @@ public class NoticeListService {
 			// => 파라미터 : 검색어     리턴타입 : int(listCount)
 			listCount = dao.selectNoticeListCount(keyword);
 			
-			// 공통작업-4. Connection 객체 반환하기
+			JdbcUtil.commit(con);
+			
 			JdbcUtil.close(con);
 			
 			return listCount;

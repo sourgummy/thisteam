@@ -14,7 +14,7 @@ public class QnaReplyFormAction implements Action {
 		ActionForward forward = null;
 		
 		int qna_code = Integer.parseInt(request.getParameter("qna_code"));
-//		System.out.println(qna_code);
+		//		System.out.println(qna_code);
 		
 		// QnaDetailService 클래스의 인스턴스 생성 및 getQnaw() 메서드를 호출하여
 		// 글 상세정보 조회 작업 요청

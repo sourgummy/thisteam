@@ -81,7 +81,6 @@ input[type=button], input[type=submit], input[type=text] {
 	font-family: "GmarketSansMedium";
 }
 </style>
-<%String sId = (String)session.getAttribute("sId"); %>
 </head>
 <body>
 	<jsp:include page="../inc/top.jsp"></jsp:include>

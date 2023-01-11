@@ -53,13 +53,13 @@ td {
 }
 
 #articleContentArea {
-	margin-bottom: 30px;
-	background: #D3D3D3;
-	margin-top: 20px;
-	height: 350px;
-	text-align: center;
-	overflow: auto;
-	white-space: pre-line;
+ 	margin-bottom: 30px; 
+ 	background: #D3D3D3; 
+	margin-top: 20px; 
+ 	height: 350px; 
+ 	text-align: center; 
+	overflow: auto; 
+ 	white-space: pre-line; 
 }
 
 #commandList {
@@ -87,16 +87,19 @@ input {
 	font-family: "GmarketSansMedium";
 }
 </style>
-
 </head>
+
 <body>
 
 	<jsp:include page="/inc/top.jsp"></jsp:include>
 	<div class="container">
-		<!-- 게시판 상세내용 보기 -->
+	<input type="hidden" name="pageNum" value="${param.pageNum }" >
+	<input type="hidden" name="review_readcount" value="${review.review_readcount }" >
+	<input type="hidden" name="review_code" value="${review.review_code }" >
+		<!-- 게시판 상세내용 보기 -->	
 		<section>
 			<section>
-				<table class="table">
+				<table class="table">				
 					<tr>
 						<th width="70">제 목</th>
 						<td colspan="3">${review.review_subject }</td>
@@ -106,15 +109,15 @@ input {
 						<td>${review.member_id }</td>
 						<th width="70">작성일</th>
 						<td><fmt:formatDate value="${review.review_date }"
-								pattern="yy-MM-dd" /></td>
-					</tr>
+								pattern="yy-MM-dd" /></td>					
 					<tr>
 						<th width="70">첨부파일</th>
 						<td colspan="3"><a href="upload/${review.review_real_file }"
 							download="${review.review_file }"> ${review.review_file } </a></td>
 				</table>
 			</section>
-			<section id="articleContentArea">${review.review_content }
+			
+						<section id="articleContentArea">${review.review_content }
 			</section>
 		</section>
 	</div>
@@ -122,10 +125,10 @@ input {
 	<c:if test="${not empty sessionScope.sId and sessionScope.sId eq 'admin'}">
 		<input type="button" value="답변"
 			onclick="location.href='ReviewReplyForm.bo?review_code=${param.review_code}&pageNum=${param.pageNum }'"></c:if>
-		<c:if test="${not empty sessionScope.sId and sessionScope.sId eq 'sId'}"><input type="button" value="수정"
+		<c:if test="${sessionScope.sId eq 'admin' || sessionScope.sId == review.member_id}"><input type="button" value="수정"
 			onclick="location.href='ReviewModifyForm.bo?review_code=${param.review_code}&pageNum=${param.pageNum }'">
 		<input type="button" value="삭제"
-			onclick="location.href='ReviewDeleteForm.bo?review_code=${param.review_code}&pageNum=${param.pageNum }'"></c:if>
+			onclick="location.href='ReviewDeletePro.bo?review_code=${param.review_code}&pageNum=${param.pageNum }'"></c:if>
 		<input type="button" value="목록"
 			onclick="location.href='ReviewList.bo?pageNum=${param.pageNum}'">
 	</section>

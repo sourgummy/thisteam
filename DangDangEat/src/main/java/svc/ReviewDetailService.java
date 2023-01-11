@@ -28,6 +28,9 @@ public class ReviewDetailService {
 			}
 		
 		}
+		
+		JdbcUtil.commit(con);
+		
 		JdbcUtil.close(con);
 		
 		return review;

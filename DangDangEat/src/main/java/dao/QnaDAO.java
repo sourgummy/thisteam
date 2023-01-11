@@ -10,19 +10,8 @@ import java.util.List;
 import db.JdbcUtil;
 import vo.QnaBean;
 
-// 실제 비즈니스 로직을 수행하는 QnaDAO 클래스 정의
-// => 각 Service 클래스 인스턴스에서 QnaDAO 인스턴스에 접근 시 고유 데이터가 불필요하므로
-//    QnaDAO 인스턴스는 애플리케이션에서 단 하나만 생성하여 공유해도 된다!
-//    따라서, 싱글톤 디자인 패턴을 적용하여 클래스를 정의하면 메모리 낭비를 막을 수 있다!
 public class QnaDAO {
-	// ------------ 싱글톤 디자인 패턴을 활용한 QnaDAO 인스턴스 생성 작업 -------------
-	// 1. 외부에서 인스턴스 생성이 불가능하도록 생성자를 private 접근제한자로 선언
-	// 2. 자신의 클래스 내에서 직접 인스턴스를 생성하여 멤버변수에 저장
-	//    => 인스턴스 생성없이 클래스가 메모리에 로딩될 때 함께 로딩되도록 static 변수로 선언
-	//    => 외부에서 접근하여 함부로 값을 변경할 수 없도록 private 접근제한자로 선언
-	// 3. 생성된 인스턴스를 외부로 리턴하는 Getter 메서드 정의
-	//    => 인스턴스 생성없이 클래스가 메모리에 로딩될 때 함께 로딩되도록 static 메서드로 선언
-	//    => 누구나 접근 가능하도록 public 접근제한자로 선언
+
 	private QnaDAO() {}
 	
 	private static QnaDAO instance = new QnaDAO();
@@ -228,7 +217,7 @@ public class QnaDAO {
 	
 	
 	// 패스워드 일치 여부 확인
-	public boolean isQnaWriter(int qna_code, String qna_pass) {
+	public boolean isQnaWriter(int qna_code) {
 		boolean isQnaWriter = false;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -236,11 +225,9 @@ public class QnaDAO {
 		try {
 			// qna 테이블에서 글번호(qna)가 일치하는 1개 레코드 조회
 			String sql = "SELECT * FROM qna "
-								+ "WHERE qna_code=? "
-								+ 		"AND qna_pass=?";
+								+ "WHERE qna_code=? ";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, qna_code);
-			pstmt.setString(2, qna_pass);
 			rs = pstmt.executeQuery();
 			
 			// 조회 결과가 있을 경우
@@ -390,15 +377,15 @@ public class QnaDAO {
 			pstmt2 = con.prepareStatement(sql);
 			pstmt2.setInt(1, qna_code); // 글번호
 			pstmt2.setString(2, qna.getMember_id()); // 작성자
-			pstmt2.setString(4, qna.getQna_pass()); 
-			pstmt2.setString(5, qna.getQna_subject()); // 제목
-			pstmt2.setString(6, qna.getQna_content()); // 내용
-			pstmt2.setString(7, qna.getQna_file()); // 원본파일명
-			pstmt2.setString(8, qna.getQna_real_file()); // 실제파일명
-			pstmt2.setInt(9, ref); // 참조글번호
-			pstmt2.setInt(10, lev); // 들여쓰기레벨
-			pstmt2.setInt(11, seq); // 순서번호
-			pstmt2.setString(12, qna.getQna_secret());
+			pstmt2.setString(3, qna.getQna_pass()); 
+			pstmt2.setString(4, qna.getQna_subject()); // 제목
+			pstmt2.setString(5, qna.getQna_content()); // 내용
+			pstmt2.setString(6, qna.getQna_file()); // 원본파일명
+			pstmt2.setString(7, qna.getQna_real_file()); // 실제파일명
+			pstmt2.setInt(8, ref); // 참조글번호
+			pstmt2.setInt(9, lev); // 들여쓰기레벨
+			pstmt2.setInt(10, seq); // 순서번호
+			pstmt2.setString(11, qna.getQna_secret());
 			
 			insertCount = pstmt2.executeUpdate();
 			

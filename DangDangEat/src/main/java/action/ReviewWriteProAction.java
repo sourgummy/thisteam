@@ -49,7 +49,7 @@ public class ReviewWriteProAction implements Action {
 			HttpSession session = request.getSession();
 //			String sId = (String)session.getAttribute("sId");
 			review.setMember_id((String)session.getAttribute("sId"));			
-			review.setReview_pass(multi.getParameter("review_pass"));
+//			review.setReview_pass(multi.getParameter("review_pass"));
 			review.setReview_subject(multi.getParameter("review_subject"));
 			review.setReview_content(multi.getParameter("review_content"));
 			review.setReview_file(multi.getOriginalFileName("review_file"));

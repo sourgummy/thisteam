@@ -1,6 +1,5 @@
 package action;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -20,13 +19,13 @@ public class ReviewDeleteProAction implements Action {
 		
 		// 글번호, 패스워드 파라미터 가져오기
 		int review_code = Integer.parseInt(request.getParameter("review_code"));
-		String review_pass = request.getParameter("review_pass");
-		System.out.println(review_code + ", " + review_pass);
+//		String review_pass = request.getParameter("review_pass");
+//		System.out.println(review_code + ", " + review_pass);
 		System.out.println(request.getParameter("pageNum"));
 		
 		try {
 			ReviewDeleteProService service = new ReviewDeleteProService();
-			boolean isReviewWriter = service.isReviewWriter(review_code, review_pass);
+			boolean isReviewWriter = service.isReviewWriter(review_code);
 			System.out.println("isReviewWriter : " + isReviewWriter);			
 			
 			if(!isReviewWriter) { // 삭제 권한 없음
@@ -58,13 +57,13 @@ public class ReviewDeleteProAction implements Action {
 					System.out.println("realPath : " + realPath);
 					
 					// 업로드 된 실제 파일 삭제
-					File f = new File(realPath, review.getReview_real_file());
+//					File f = new File(realPath, review.getReview_real_file());
 					
 					// 해당 디렉토리 및 파일 존재 여부 판별
-					if(f.exists()) { // 존재할 경우
+//					if(f.exists()) { // 존재할 경우
 						// File 객체의 delete() 메서드를 호출하여 해당 파일 삭제
-						f.delete();
-					}
+//						f.delete();
+//					}
 					
 					forward = new ActionForward();
 					forward.setPath("ReviewList.bo?pageNum=" + request.getParameter("pageNum"));

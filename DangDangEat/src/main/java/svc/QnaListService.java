@@ -22,6 +22,8 @@ public class QnaListService {
 		
 		qnaList = dao.selectQnaList(keyword, startRow, listLimit);
 		
+		JdbcUtil.commit(con);
+		
 		JdbcUtil.close(con);
 		
 		return qnaList;
@@ -40,6 +42,8 @@ public class QnaListService {
 		dao.setConnection(con);
 		
 		listCount = dao.selectQnaListCount(keyword);
+		
+		JdbcUtil.commit(con);
 		
 		JdbcUtil.close(con);
 		

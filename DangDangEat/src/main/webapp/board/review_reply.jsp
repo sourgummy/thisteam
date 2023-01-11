@@ -6,6 +6,7 @@
 <html lang="en">
     <head>
   <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="css/styles.css" rel="stylesheet" /> 
   <style type="text/css">
 	@font-face {
 	    font-family: 'GmarketSansMedium';
@@ -73,7 +74,7 @@
 			<table class="table container">
 				<tr>
 					<td class="td_left"><label for="member_id">작성자</label></td>
-					<td class="td_right"><input type="text" name="member_id" required="required"></td>
+					<td class="td_right"><input type="text" name="member_id" value="admin" required="required"></td>
 				</tr>
 <!-- 				<tr> -->
 <!-- 					<td class="td_left"><label for="review_pass">비밀번호</label></td> -->

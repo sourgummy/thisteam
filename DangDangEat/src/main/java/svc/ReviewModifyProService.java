@@ -16,7 +16,9 @@ public class ReviewModifyProService {
 		
 		dao.setConnection(con);
 		
-		isReviewWriter = dao.isReviewWriter(review.getReview_code(), review.getReview_pass());
+		isReviewWriter = dao.isReviewWriter(review.getReview_code());
+		
+		JdbcUtil.commit(con);
 		
 		JdbcUtil.close(con);
 		
@@ -40,6 +42,8 @@ public class ReviewModifyProService {
 		} else {
 			JdbcUtil.rollback(con);
 		}
+		
+		JdbcUtil.commit(con);
 		
 		JdbcUtil.close(con);
 		

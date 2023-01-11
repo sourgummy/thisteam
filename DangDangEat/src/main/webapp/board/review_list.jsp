@@ -6,6 +6,7 @@
 <html lang="en">
     <head>
   <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="css/styles.css" rel="stylesheet" />   
   <style type="text/css">
 	@font-face {
 	    font-family: 'GmarketSansMedium';
@@ -51,9 +52,9 @@
 	}
 	
 	#pageList {
-		margin: auto;
+		margin-bottom: 30px;
 		width: 1024px;
-		text-align: center;
+ 		text-align: right; 
 	}
 	
 	#emptyArea {
@@ -67,6 +68,11 @@
 		width: 1024px;
 		text-align: right;
 		margin-top: 10px;
+	}
+	
+	#commandCell {
+		text-align: center;
+		margin-bottom: 30px;
 	}
 	
 	a {
@@ -120,7 +126,6 @@
 							&nbsp;&nbsp;
 						</c:forEach>
 						<%-- 답글 제목 앞에 이미지 추가 --%>
-						<img src="images/re.gif">	
 					</c:if>
 					<%-- =============================================================== --%>
 					<a href="ReviewDetail.bo?review_code=${review.review_code }&pageNum=${pageNum }">
@@ -141,12 +146,10 @@
 			<input type="text" name="keyword">
 			<input type="submit" value="검색">
 			&nbsp;&nbsp;
-			<c:if test="${not empty sessionScope.sId and sessionScope.sId eq 'admin'}">
-			<input type="button" value="글쓰기" onclick="location.href='ReviewWriteForm.bo'" /></c:if>
-		</form>
+		
+			<input type="button" value="글쓰기" onclick="location.href='ReviewWriteForm.bo'" />
 	</section>
-	<section id="pageList">
-			
+	<section id="pageList">			
 		<c:choose>
 			<c:when test="${pageNum > 1}">
 				<input type="button" value="이전" onclick="location.href='ReviewList.bo?pageNum=${pageNum - 1}'">

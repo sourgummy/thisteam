@@ -6,50 +6,43 @@
 <html lang="en">
     <head>
   <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="css/styles.css" rel="stylesheet" />  
   <style type="text/css">
 	@font-face {
 	    font-family: 'GmarketSansMedium';
 	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
 	    font-weight: normal;
 	    font-style: normal;
-	}
-	
+	}	
 	body {
 	    font-family:"GmarketSansMedium" ;
-	}
-        
+	}        
 	#articleForm {
 		width: 1224px;
 		height: 550px;
 		border: 1px solid #D3D3D3; 
 		margin: auto;
-	}
-	
+	}	
 	h2 {
 		font-family:"GmarketSansMedium" ;
 		text-align: center;
-	}
-	
+	}	
 	table {
  		border-collapse: collapse;  
 	 	width: 1224px;
 	 	border-bottom-width: 1px;
-	}
-	
+	}	
 	th {
 		text-align: center;
-	}
-	
+	}	
 	td {
 		width: 150px;
 		text-align: center;
-	}
-	
+	}	
 	#basicInfoArea {
 		height: 70px;
 		text-align: center;
-	}
-	
+	}	
 	#articleContentArea {
 		margin-bottom: 30px;
 		background: #D3D3D3;
@@ -58,29 +51,24 @@
 		text-align: center;
 		overflow: auto;
 		white-space: pre-line;
-	}
-	
+	}	
 	#commandList {
 		margin: auto;
 		margin-bottom: 30px;
 		width: 500px;
 		text-align: center;
-	}
-	
+	}	
 	input[type=button], input[type=submit] {
 		border-radius: 0px;
 	    font-family:"GmarketSansMedium" ;
-	}
-	
+	}	
 </style>
 </head>
-<body>
-	
-		<jsp:include page="../inc/top.jsp"></jsp:include>
+<body>	
+	<jsp:include page="../inc/top.jsp"></jsp:include>
 	
 	<div class="container">
-	<!-- 게시판 상세내용 보기 -->
-<!-- 		<h2>글 상세내용 보기</h2> -->
+	<!-- qna 상세내용 보기 -->
 	<section>
 		<section>
 			<table class="table">
@@ -107,8 +95,8 @@
 			</div>
 	<section id="commandList"><c:if test="${not empty sessionScope.sId and sessionScope.sId eq 'admin'}">
 		<input type="button" value="답변" onclick="location.href='QnaReplyForm.bo?qna_code=${param.qna_code}&pageNum=${param.pageNum }'"></c:if>
-		<c:if test="${not empty sessionScope.sId and sessionScope.sId eq 'sId'}"><input type="button" value="수정" onclick="location.href='QnaModifyForm.bo?qna_code=${param.qna_code}&pageNum=${param.pageNum }'">
-		<input type="button" value="삭제" onclick="location.href='QnaDeleteForm.bo?qna_code=${param.qna_code}&pageNum=${param.pageNum }'"></c:if>
+		<c:if test="${sessionScope.sId eq 'admin' || sessionScope.sId == qna.member_id}"> <input type="button" value="수정" onclick="location.href='QnaModifyForm.bo?qna_code=${param.qna_code}&pageNum=${param.pageNum }'">
+		<input type="button" value="삭제" onclick="location.href='QnaDeletePro.bo?qna_code=${param.qna_code}&pageNum=${param.pageNum }'"></c:if>
 		<input type="button" value="목록" onclick="location.href='QnaList.bo?pageNum=${param.pageNum}'">
 	</section>
     <!-- Footer-->

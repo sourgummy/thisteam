@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-  <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="css/styles.css" rel="stylesheet" /> 
   <style type="text/css">
 	@font-face {
 	    font-family: 'GmarketSansMedium';
@@ -19,59 +19,60 @@
 	}
 	
 	#modifyForm {
-    	width: 1224px;
-		height: 550px;
-		border: 1px solid #D3D3D3;
+		width: 500px;
+		height: 500px;
+		border: 1px solid black;
 		margin: auto;
 	}
 	
 	h2 {
-	    font-family:"GmarketSansMedium" ;
+		font-family:"GmarketSansMedium" ;
 		text-align: center;
 	}
 	
 	table {
-	   border-collapse: collapse; 
-	 	width: 1224px;
-	   }
+		margin: auto;
+		width: 450px;
+	}
 	
 	.td_left {
- 		width: 150px; 
+		width: 150px;
 		background: #D3D3D3;
 		text-align: center;
 	}
 	
 	.td_right {
- 		width: 300px; 
-	}	
+/* 		width: 300px; */
+		background: white;
+	}
 	
 	#commandCell {
 		text-align: center;
 		margin-bottom: 30px;
 	}
 	
-	input, textarea {
+	input[type=button], input[type=submit], input[type=reset], input[type=text] {
 	    font-family:"GmarketSansMedium" ;
-	    border-radius: 0px;
-	}	
+	}
 	
 	table > tbody {
 		border-style: none;
 	}
-			
+	
 </style>
 </head>
-  <jsp:include page="/inc/top.jsp"></jsp:include>
-
-<body>	
-		
-	<!-- Q&A 글 수정 -->	
+<body>
+	
+		<jsp:include page="/inc/top.jsp"></jsp:include>
+	
+	<!-- 게시판 글 수정 -->
+<!-- 	<section id="modifyForm"> -->
 		<h2>Q & A Modify</h2>
 		<form action="QnaModifyPro.bo" name="qnaForm" method="post" enctype="multipart/form-data">
-		
+			<!-- 입력받지 않은 글번호, 페이지번호 hidden 속성으로 전달 -->
 			<input type="hidden" name="qna_code" value="${param.qna_code }" >
-			<input type="hidden" name="pageNum" value="${param.pageNum }" >
 			<input type="hidden" name="qna_pass" value="${param.qna_pass }" >
+			<input type="hidden" name="pageNum" value="${param.pageNum }" >
 			<!-- 파일 수정 시 기존 파일 삭제를 위해 실제 파일명도 파라미터로 전달 필요 -->
 			<input type="hidden" name="qna_real_file" value="${qna.qna_real_file }" >
 			<table class="table container">
@@ -80,7 +81,7 @@
 					<td class="td_right"><input type="text" name="member_id" value="${qna.member_id }" readonly="readonly"></td>
 				</tr>
 <!-- 				<tr> -->
-<!-- 					<td class="td_left"><label for="qna_pass"></label></td> -->
+<!-- 					<td class="td_left"><label for="qna_pass">비밀번호</label></td> -->
 <!-- 					<td class="td_right"><input type="password" name="qna_pass" required="required"></td> -->
 <!-- 				</tr> -->
 				<tr>
@@ -94,7 +95,8 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="td_left"><label for="qna_file">첨부 파일</label></td>
+					<td class="td_left"><label for="qna_file">파일</label></td>
+					<!-- 파일 수정할 경우에만 선택하도록 required 속성 제거 -->
 					<td class="td_right">
 						<input type="file" name="qna_file">
 						<br>(기존 파일 : ${qna.qna_file })
@@ -102,12 +104,12 @@
 				</tr>
 			</table>
 			<section id="commandCell">
-		    	<c:if test="${not empty sessionScope.sId and sessionScope.sId eq 'sId'}"><input type="submit" value="수정">&nbsp;&nbsp;</c:if>
+				<c:if test="${not empty sessionScope.sId}"><input type="submit" value="수정"></c:if>&nbsp;&nbsp;
 				<input type="reset" value="다시쓰기">&nbsp;&nbsp;
 				<input type="button" value="취소" onclick="history.back()">
 			</section>
 		</form>	
-	  <!-- Footer-->
+    <!-- Footer-->
    <footer class="py-5 bg-dark">
       <div class="container">
          <p class="m-0 text-center text-white">Copyright &copy; DangDangEat 2023</p>

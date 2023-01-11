@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
+
 <!DOCTYPE html>
+
 <html lang="en">
     <head>
 <!--   <link href="css/bootstrap.css" rel="stylesheet" type="text/css"> -->
@@ -111,7 +113,7 @@
 							&nbsp;&nbsp;
 						</c:forEach>
 						<%-- 답글 제목 앞에 이미지 추가 --%>
-						<img src="images/re.gif">	
+						
 					</c:if>
 					<%-- =============================================================== --%>
 					<a href="ReviewDetail.bo?review_code=${review.review_code }&pageNum=${pageNum }">
@@ -131,7 +133,7 @@
 		<form action="ReviewList.bo">
 			<input type="text" name="keyword">
 			<input type="submit" value="검색">
-			&nbsp;&nbsp;<c:if test="${not empty sessionScope.sId and sessionScope.sId eq 'admin'}">
+			&nbsp;&nbsp;<c:if test="${not empty sessionScope.sId}">
 			<input type="button" value="글쓰기" onclick="location.href='ReviewWriteForm.bo'" /></c:if>
 		</form>
 	</section>

@@ -29,6 +29,8 @@ public class QnaWriteProService {
 			JdbcUtil.rollback(con);
 		}
 		
+		JdbcUtil.commit(con);
+		
 		JdbcUtil.close(con);
 		
 		return isWriteSuccess; 

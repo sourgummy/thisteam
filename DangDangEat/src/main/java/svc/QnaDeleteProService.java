@@ -7,7 +7,7 @@ import db.JdbcUtil;
 
 public class QnaDeleteProService {
 
-	public boolean isQnaWriter(int qna_code, String qna_pass) {
+	public boolean isQnaWriter(int qna_code) {
 		boolean isQnaWriter = false;
 		
 		Connection con = JdbcUtil.getConnection();
@@ -16,7 +16,7 @@ public class QnaDeleteProService {
 		
 		dao.setConnection(con);
 		
-		isQnaWriter = dao.isQnaWriter(qna_code, qna_pass);
+		isQnaWriter = dao.isQnaWriter(qna_code);
 		
 		JdbcUtil.close(con);
 		

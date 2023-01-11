@@ -21,6 +21,8 @@ public class CommentListService {
 			
 			commentList = dao.selectCommentList(review_code, startRow, listLimit);
 			
+			JdbcUtil.commit(con);
+			
 			JdbcUtil.close(con);
 			
 			return commentList;

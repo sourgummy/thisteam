@@ -29,6 +29,8 @@ public class ReviewWriteProService {
 			JdbcUtil.rollback(con);
 		}
 		
+		JdbcUtil.commit(con);
+		
 		JdbcUtil.close(con);
 		
 		return isWriteSuccess; 

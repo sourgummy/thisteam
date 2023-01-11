@@ -7,7 +7,7 @@ import db.JdbcUtil;
 
 public class ReviewDeleteProService {
 
-	public boolean isReviewWriter(int review_code, String review_pass) {
+	public boolean isReviewWriter(int review_code) {
 		boolean isReviewWriter = false;
 		
 		Connection con = JdbcUtil.getConnection();
@@ -16,7 +16,7 @@ public class ReviewDeleteProService {
 		
 		dao.setConnection(con);
 		
-		isReviewWriter = dao.isReviewWriter(review_code, review_pass);
+		isReviewWriter = dao.isReviewWriter(review_code);
 		
 		JdbcUtil.close(con);
 		

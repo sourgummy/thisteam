@@ -54,7 +54,9 @@
 		font-family:"GmarketSansMedium" ;
 	}	
 	
-	
+	input[type=radio]{
+		top: -0.7em;
+	}
 	
 	
 </style>
@@ -72,15 +74,24 @@
 			<!-- 입력받지 않은 글번호, 페이지번호 hidden 속성으로 전달 -->
 			<input type="hidden" name="qna_code" value="${param.qna_code }" >
 			<input type="hidden" name="pageNum" value="${param.pageNum }" >
-			<input type="hidden" name="qna_pass" value="${param.qna_pass }" >
+			<input type="hidden" name="qna_pass" value="${qna.qna_pass }" >
+			<input type="hidden" name="qna_secret" value="${qna.qna_secret }" >
 			<!-- 답글 작성에 필요한 정보도 hidden 속성으로 전달 -->
 			<input type="hidden" name="qna_re_ref" value="${qna.qna_re_ref }" >
 			<input type="hidden" name="qna_re_lev" value="${qna.qna_re_lev }" >
 			<input type="hidden" name="qna_re_seq" value="${qna.qna_re_seq }" >
 			<table class="table container">
+<!-- 			<tr> -->
+<!-- 					<td class="td_left"><label for="member_id">비밀글</label></td> -->
+<!-- 					<td class="td_right"> -->
+<!--     				<input type="radio" name="qna_secret" id="qna_secret" value="Y" class="radio" />&nbsp;&nbsp;&nbsp;&nbsp;<span>공개</span>&nbsp;&nbsp;&nbsp;&nbsp; -->
+<!-- 				    <input type="radio" name="qna_secret" id="qna_secret" value="N" class="radio" />&nbsp;&nbsp;&nbsp;&nbsp;<span>비공개</span>&nbsp; -->
+<!-- 					</td> -->
+<!-- 				</tr> -->
+			
 				<tr>
 					<td class="td_left"><label for="member_id">작성자</label></td>
-					<td class="td_right"><input type="text" name="member_id" required="required"></td>
+					<td class="td_right"><input type="text" name="member_id" value="admin"></td>
 				</tr>
 				
 				<tr>

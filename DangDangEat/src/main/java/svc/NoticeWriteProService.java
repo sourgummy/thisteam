@@ -29,6 +29,9 @@ public class NoticeWriteProService {
 			} else { // 실패 시
 				JdbcUtil.rollback(con);
 			}
+			
+			JdbcUtil.commit(con);
+			
 			JdbcUtil.close(con);
 			
 			return isWriteSuccess; 

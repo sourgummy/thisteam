@@ -16,7 +16,9 @@ public class QnaModifyProService {
 		
 		dao.setConnection(con);
 		
-		isQnaWriter = dao.isQnaWriter(qna.getQna_code(), qna.getQna_pass());
+		isQnaWriter = dao.isQnaWriter(qna.getQna_code());
+		
+		JdbcUtil.commit(con);
 		
 		JdbcUtil.close(con);
 		
@@ -40,6 +42,8 @@ public class QnaModifyProService {
 		} else {
 			JdbcUtil.rollback(con);
 		}
+		
+		JdbcUtil.commit(con);
 		
 		JdbcUtil.close(con);
 		

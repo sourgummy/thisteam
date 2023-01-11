@@ -6,26 +6,24 @@
 <html lang="en">
     <head>
   <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="css/styles.css" rel="stylesheet" /> 
   <style type="text/css">
 	@font-face {
 	    font-family: 'GmarketSansMedium';
 	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
 	    font-weight: normal;
 	    font-style: normal;
-	}
-	
+	}	
 	body {
 	    font-family:"GmarketSansMedium" ;
-	}
-	
+	}	
 	  
 	#reviewForm {
 		width: 500px;
 		height: 450px;
 		border: 1px solid black;
 		margin: auto;
-	}
-	
+	}	
 	h2 {
 	    font-family:"GmarketSansMedium" ;
 		text-align: center;
@@ -63,11 +61,7 @@
 	textarea {
 		resize: none;
 	}
-	
-	input[type=radio]{
-		top: -0.7em;
-	}
-	
+		
 	input{
 	    font-family:"GmarketSansMedium" ;
 	    border-radius: 0px;
@@ -82,8 +76,10 @@
 	<section id="writeForm">
 		<h2>Q & A Write</h2>
 		<form action="QnaWritePro.bo" name="qnaForm" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="qna_code" value="${param.qna_code }" >
 		<input type="hidden" name="qna_pass" value="${param.qna_pass }" >
-		<input type="hidden" name="member_id" value="${param.member_id }" >
+		<input type="hidden" name="member_id" value="${qna.member_id }" >
+		<input type="hidden" name="pageNum" value="${param.pageNum }" >
 			<table class="table container">
 				<tr>
 					<td class="td_left"><label for="member_id">비밀글</label></td>
@@ -104,7 +100,7 @@
 				<tr>
 					<td class="td_left"><label for="qna_content">내용</label></td>
 					<td class="td_right">
-						<textarea cols="50" rows="15" required="required"></textarea>
+						<textarea cols="50" rows="15" required="required" name="qna_content" required="required"></textarea>
 					</td>
 				</tr>
 				<tr>
@@ -116,7 +112,7 @@
 				</tr>
 			</table>
 			<section id="commandCell">
-				<input type="submit" value="등록">&nbsp;&nbsp;
+				<c:if test="${not empty sessionScope.sId}"><input type="submit" value="등록">&nbsp;&nbsp;</c:if>
 				<input type="reset" value="다시쓰기">&nbsp;&nbsp;
 				<input type="button" value="취소" onclick="history.back()">
 			</section>

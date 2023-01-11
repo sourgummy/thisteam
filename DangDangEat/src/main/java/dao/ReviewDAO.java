@@ -10,19 +10,8 @@ import java.util.List;
 import db.JdbcUtil;
 import vo.ReviewBean;
 
-// 실제 비즈니스 로직을 수행하는 ReviewDAO 클래스 정의
-// => 각 Service 클래스 인스턴스에서 ReviewDAO 인스턴스에 접근 시 고유 데이터가 불필요하므로
-//    ReviewDAO 인스턴스는 애플리케이션에서 단 하나만 생성하여 공유해도 된다!
-//    따라서, 싱글톤 디자인 패턴을 적용하여 클래스를 정의하면 메모리 낭비를 막을 수 있다!
 public class ReviewDAO {
-	// ------------ 싱글톤 디자인 패턴을 활용한 ReviewDAO 인스턴스 생성 작업 -------------
-	// 1. 외부에서 인스턴스 생성이 불가능하도록 생성자를 private 접근제한자로 선언
-	// 2. 자신의 클래스 내에서 직접 인스턴스를 생성하여 멤버변수에 저장
-	//    => 인스턴스 생성없이 클래스가 메모리에 로딩될 때 함께 로딩되도록 static 변수로 선언
-	//    => 외부에서 접근하여 함부로 값을 변경할 수 없도록 private 접근제한자로 선언
-	// 3. 생성된 인스턴스를 외부로 리턴하는 Getter 메서드 정의
-	//    => 인스턴스 생성없이 클래스가 메모리에 로딩될 때 함께 로딩되도록 static 메서드로 선언
-	//    => 누구나 접근 가능하도록 public 접근제한자로 선언
+	
 	private ReviewDAO() {}
 	
 	private static ReviewDAO instance = new ReviewDAO();
@@ -68,7 +57,7 @@ public class ReviewDAO {
 			// --------------------------------------------------------------------------------
 			// 전달받은 데이터(ReviewBean 객체)를 사용하여 INSERT 작업 수행
 			// => 참조글번호(review_re_ref)는 새 글 번호와 동일한 번호로 지정
-			// => 들여쓰기레벨(review_re_lev)과 순서번호(board_re_seq)는 0으로 지정
+			// => 들여쓰기레벨(review_re_lev)과 순서번호(review_re_seq)는 0으로 지정
 			// => INSERT 구문 실행 후 리턴값을 insertCount 변수에 저장
 			sql = "INSERT INTO review VALUES (?,?,?,?,?,?,?,?,?,?,?,now())";
 			pstmt2 = con.prepareStatement(sql);
@@ -135,7 +124,7 @@ public class ReviewDAO {
 				ReviewBean review = new ReviewBean();
 				review.setReview_code(rs.getInt("review_code"));
 				review.setMember_id(rs.getString("member_id"));
-//				review.setReview_pass(rs.getString("review_pass"));
+				review.setReview_pass(rs.getString("review_pass"));
 				review.setReview_subject(rs.getString("review_subject"));
 				review.setReview_content(rs.getString("review_content"));
 				review.setReview_file(rs.getString("review_file"));
@@ -270,7 +259,7 @@ public class ReviewDAO {
 	}
 	
 	// 패스워드 일치 여부 확인
-	public boolean isReviewWriter(int review_code, String review_pass) {
+	public boolean isReviewWriter(int review_code) {
 		boolean isReviewWriter = false;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -279,10 +268,9 @@ public class ReviewDAO {
 			// review 테이블에서 글번호(review)가 일치하는 1개 레코드 조회
 			String sql = "SELECT * FROM review "
 								+ "WHERE review_code=? "
-								+ 		"AND review_pass=?";
+								;
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, review_code);
-			pstmt.setString(2, review_pass);
 			rs = pstmt.executeQuery();
 			
 			// 조회 결과가 있을 경우

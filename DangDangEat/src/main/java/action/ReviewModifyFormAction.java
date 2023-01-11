@@ -11,6 +11,8 @@ public class ReviewModifyFormAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("ReviewModifyFormAction");
+		
 		ActionForward forward = null;
 		
 		int review_code = Integer.parseInt(request.getParameter("review_code"));

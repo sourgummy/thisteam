@@ -18,6 +18,7 @@ public class QnaDetailAction implements Action {
 		
 		// 상세정보 조회에 필요한 글번호 가져오기
 		int qna_code = Integer.parseInt(request.getParameter("qna_code"));
+		
 //		System.out.println("qna_code = " + qna_code);
 		QnaDetailService service = new QnaDetailService();
 		QnaBean qna = service.getQna(qna_code);

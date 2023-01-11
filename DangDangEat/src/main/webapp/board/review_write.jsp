@@ -6,6 +6,7 @@
 <html lang="en">
     <head>
   <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="css/styles.css" rel="stylesheet" /> 
   <style type="text/css">
 	@font-face {
 	    font-family: 'GmarketSansMedium';
@@ -75,17 +76,17 @@
 		<!-- 파일 업로드 기능 사용 위해 enctype 속성 설정 => cos.jar 라이브러리 필요 -->
 		<form action="ReviewWritePro.bo" name="reviewForm" method="post" enctype="multipart/form-data">
 			<table class="table container">
-				<tr>
-					<td class="td_left"><label for="member_id">작성자</label></td>
-					<td class="td_right"><input type="text" name="member_id" required="required" /></td>
-				</tr>
+<!-- 				<tr> -->
+<!-- 					<td class="td_left"><label for="member_id">작성자</label></td> -->
+<!-- 					<td class="td_right"><input type="text" name="member_id" required="required" /></td> -->
+<!-- 				</tr> -->
 				
-				<tr>
-					<td class="td_left"><label for="review_pass">비밀번호</label></td>
-					<td class="td_right">
-						<input type="password" name="review_pass" required="required" />
-					</td>
-				</tr>
+<!--  				<tr>  -->
+<!-- 					<td class="td_left"><label for="review_pass">비밀번호</label></td> -->
+<!-- 					<td class="td_right"> -->
+<!-- 						<input type="password" name="review_pass" required="required" /> -->
+<!-- 					</td> -->
+<!-- 				</tr> -->
 				<tr>
 					<td class="td_left"><label for="review_subject">제목</label></td>
 					<td class="td_right"><input type="text" name="review_subject" required="required" /></td>
@@ -93,7 +94,7 @@
 				<tr>
 					<td class="td_left"><label for="review_content">내용</label></td>
 					<td class="td_right">
-						<textarea cols="50" rows="15" required="required"></textarea>
+						<textarea cols="50" rows="15" name="review_content" required="required"></textarea>
 					</td>
 				</tr>
 				<tr>

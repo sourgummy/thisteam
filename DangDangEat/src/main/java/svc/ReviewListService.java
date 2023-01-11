@@ -20,6 +20,8 @@ public class ReviewListService {
 		
 		reviewList = dao.selectReviewList(keyword, startRow, listLimit);
 		
+		JdbcUtil.commit(con);
+		
 		JdbcUtil.close(con);
 		
 		return reviewList;
@@ -35,6 +37,8 @@ public class ReviewListService {
 		dao.setConnection(con);
 		
 		listCount = dao.selectReviewListCount(keyword);
+		
+		JdbcUtil.commit(con);
 		
 		JdbcUtil.close(con);
 		
