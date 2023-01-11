@@ -75,10 +75,11 @@ public class OrderPaymentProAction implements Action {
 		String cp_discount = request.getParameter("cp_discount_amount");
 		int cp_discount_amount = Integer.parseInt(request.getParameter("cp_discount_amount"));
 		
-		if(cp_code.equals(null) || cp_discount.equals(null) ) {
+		if(cp_code.equals(null) || cp_discount.equals(null) ) { // 이용하지 않는 구문
 			cp_code = "none";
 			cp_discount_amount = 0;
 		}
+		
 		System.out.println("상품 코드 잘넘어 옵니까" + pro_code);
 		System.out.println("카트 코드 잘넘어 옵니까" + cart_code);
 		System.out.println("상품금액 잘넘어 옵니까" + pro_amount);
@@ -90,12 +91,12 @@ public class OrderPaymentProAction implements Action {
 		
 			// 현재 날짜 구하기
 	        LocalDate now = LocalDate.now();
-	        // 포맷 정의 (230107 + 주문번호)
+	        // 포맷 정의 (230105 + 주문 순서 인덱스)
 	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyMMdd00");
 	        int formatedNow = Integer.parseInt(now.format(formatter));
 	        int pay_number = (formatedNow + order_code);
 	        // 결과 출력
-	        System.out.println(pay_number);  // 23010500
+	        System.out.println(pay_number);  // 230105-00
 	        
 	     //------------------------------------------------------------------
 	        

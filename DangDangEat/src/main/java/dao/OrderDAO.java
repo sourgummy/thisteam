@@ -566,14 +566,13 @@ public class OrderDAO {
 						+ "(SELECT cp_discount_value FROM coupon WHERE cp_code = ? ) / 100 ),0) "
 						+ "FROM cart_product_view WHERE cart_code = ?";
 				
-				
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, cp_code);
 				pstmt.setInt(2, cart_code);
 				rs = pstmt.executeQuery();
 				
 				if(rs.next()) { // 코드번호에 할당된 최대 할인 금액 구하는 공식
-					couponDiscountAmount = rs.getInt(1); // 할인금액 가지고 return
+					couponDiscountAmount = rs.getInt(1); // 조건에 해당되는 할인금액 가지고 return
 					System.out.println("ORDERDAO - getCouponDiscountAmount 할인금액 : " + couponDiscountAmount);
 					
 					sql = "SELECT cp_max_discount FROM coupon WHERE cp_code = ?";
