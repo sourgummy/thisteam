@@ -169,7 +169,7 @@ if(sId == null || sId.equals("")) {
 					dataType: "text",
 					success: function(result) {
 						//작업이 성공적으로 발생했을 경우
-						alert("이메일이 변경되었습니다.");
+						alert(result);
 						location.reload();
 					},
 					error:function() {  
