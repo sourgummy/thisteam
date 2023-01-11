@@ -60,17 +60,25 @@ int finalTotal = 0;
 	    text-align: center;
 /* 	    width: 70px; */
 	}
+	
+	#buttonBox {
+		text-align: center;
+		vertical-align: center;
+	}
+	
+	#order {
+		margin-bottom: 10px;		                       
+	}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <script type="text/javascript">
 function amountChange(){
 	var value = Number(document.getElementById('amount').value);
-	var price = Number(document.getElementById('price').value;
+	var initialPrice = document.getElementById('price').value;
+	var price = Number(initialPrice.replace(',', ''));
 	var totalPrice = value * price;
-	
-	alert(totalPrice);
-	alert(value);
-	alert(price);
+
+	document.getElementById('lastPrice').innerHTML=totalPrice;
 }
 
 $(function() {
@@ -183,7 +191,7 @@ $(function() {
 			<c:when test="${empty cartList }">
 				<tr>
 					<td colspan="7">
-						<div id="empty">장바구니가 비어있습니다.</div>
+						<div id="empty">장바구니가 비어있습니다</div>
 					</td>
 				</tr>
 			</c:when>
@@ -225,17 +233,19 @@ $(function() {
 <!-- 					</td> -->
 					<td>
 						<div style="text-align: center;">
-						<input type="text" value="<fmt:formatNumber value="${cart.pro_price * cart.cart_amount }" pattern="###,###,###"/>">
+						<input type="text" id="lastPrice" value="<fmt:formatNumber value="${cart.pro_price * cart.cart_amount }" pattern="###,###,###"/>">
 <%-- 					<c:set var="total" value="${total+(cart.pro_price*cart.cart_amount) }"/> --%>
 <%-- 					<c:out value="${total }"/> --%>
 						</div>
 					</td>
 					<td>
+						<div id="buttonBox">
 						<input type="button" value="주문하기" id="order" onclick="location.href='OrderForm.od?pro_code=${cart.pro_code}&cart_code=${cart.cart_code}'">
 						<form action="CartDelete.ct" method="post">
 							<input type="hidden" name="pro_code" value=${cart.pro_code }>
 							<input type="submit" value="삭제">
 						</form>
+						</div>
 					</td>
 					<c:set var="finalTotal" value="${finalTotal+(cart.pro_price*cart.cart_amount) }" />
 				</tr> 
