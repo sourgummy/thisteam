@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="../css/orderConfirmation.css">
   <!-- 버튼을 위한 css -->
   <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="css/styles.css" rel="stylesheet" />
   <style type="text/css">
 		@font-face {
 		    font-family: 'GmarketSansMedium';
@@ -80,8 +81,8 @@
 				<td width="60%"> <span class="font-weight-bold">상품명 : ${orderProduct.pro_name }</span>
 					<div class="product-qty"> <span class="d-block">주문수량 : ${orderProduct.cart_amount }개</span></div>
 				</td>
-				<td width="25%">
-					<div class="text-right"><span class="font-weight-bold">상품금액 : <fmt:formatNumber pattern="#,###">${orderProduct.pro_price}</fmt:formatNumber>원</span></div>
+				<td width="40%">
+					<div class="text-right"><span class="font-weight-bold">상품금액<br><fmt:formatNumber pattern="#,###">${orderProduct.pro_price}</fmt:formatNumber>원</span></div>
 				</td>
 			</tr>
 			</tbody>
@@ -96,7 +97,7 @@
 			<tbody class="totals">
 			<tr>
 				<td><div class="text-left"><span class="text-muted">주문금액</span></div></td>
-				<td><div class="text-right"><span class="price"><fmt:formatNumber pattern="#,###">${pay.cp_discount_amount + pay.pay_amount}</fmt:formatNumber>원</span></div></td>
+				<td><div class="text-right"><span class="price"><fmt:formatNumber pattern="#,###">${pay.pay_amount - 3500}</fmt:formatNumber>원</span></div></td>
 			</tr>
 			<tr>
 				<td><div class="text-left"> <span class="text-muted">배송비</span> </div></td>
@@ -108,7 +109,7 @@
 			</tr>
 			<tr class="border-top border-bottom">
 				<td><div class="text-left"> <span class="font-weight-bold">총주문금액</span> </div></td>
-				<td><div class="text-right"><span class="font-weight-bold"><fmt:formatNumber pattern="#,###">${pay.pay_amount }</fmt:formatNumber>원</span> </div></td>
+				<td><div class="text-right"><span class="font-weight-bold"><fmt:formatNumber pattern="#,###">${pay.pay_amount - pay.cp_discount_amount}</fmt:formatNumber>원</span> </div></td>
 			</tr>
 			</tbody>
 		</c:forEach>	

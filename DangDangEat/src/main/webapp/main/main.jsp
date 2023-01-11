@@ -25,7 +25,6 @@
 			//        slideWidth: 1300,  // 절대 수정 금지!!!건들지마세요!!!
 			speed : 15, // 숫자 작을수록 빠르게 넘어감
 			infinitelLoop : true
-
 		});
 	});
 	

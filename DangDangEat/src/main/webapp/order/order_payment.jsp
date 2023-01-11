@@ -9,6 +9,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>orderPayment</title>
+  <link href="css/styles.css" rel="stylesheet" />
   <link href="css/orderForm.css" rel="stylesheet" type="text/css">
   <link href="css/orderForm2.css" rel="stylesheet" type="text/css">
   <style type="text/css">
@@ -25,46 +26,63 @@
 /* 			font-size: large; */
 		}
   </style>
-	<!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
   <!-- iamport.payment.js -->
   <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
   <script type="text/javascript">
+ 
+  	 $(function() {
+		$("#iamportPayment").click(function() {
+			iamport();
+		});
+  		 
+	 });	
+  
+  	 function iamport() {
+		  
+	        IMP.init('imp03617521'); // 댕댕잇 (가맹점코드)
+	        IMP.request_pay({
+	            pg : 'kakaopay', // 거래방법
+	            pay_method : 'card',
+	            merchant_uid : 'merchant_' + new Date().getTime(), // 주문번호
+	            name : '${sessionScope.sId}' + "님의 주문" , // 화면에 표시되는 거래명
+	            amount : parseInt($('#hidden_total').val() - $('#cp_discount_amount').val()), // 총 결제금액
+	            buyer_name : '${sessionScope.sId}' // 거래명
+	        }, function(rsp) {
+	           console.log(rsp);
+	            if ( rsp.success ) {
+	            	
+					 $.ajax({
+		                  type: "GET", 
+		                  url: "OrderPaymentPro.od", 
+		                  data: {
+				                   pro_code : $('#pro_code').val(),
+				           		   cart_code : $('#cart_code').val(),
+				           		   pro_amount : $('#pro_amount').val(),
+				           		   order_code : $('#order_code').val(),
+				           		   cp_code : $('#cp_code').val(),
+				           		   cp_discount_amount : $('#cp_discount_amount').val()
+		                		 },
+					 	 }); // ajax
+					 	 
+			               var msg = '결제가 완료되었습니다.';
+// 			                msg += 'DangDangEat: ' + rsp.imp_uid;
+			                msg += '결제 금액 : ' + rsp.paid_amount;
+// 			                msg += '상점 거래ID : ' + rsp.merchant_uid;
+
+					 	 $('#orderPaymentForm').submit(); // 폼 제출하여 결제 & 주문서 생성 작업 진행
+					  
+	            } else {
+	                var msg = '결제에 실패하였습니다.';
+	                 msg += '에러내용 : ' + rsp.error_msg;
+	                 window.history.back();
+	            }
+	            alert(msg);
+	            
+	        }); // fun()
     
-  		
-//     function iamport() {
-		
-// 	      IMP.init('TC0ONETIME');  //가맹점 식별코드(댕댕잇)
-// 	      IMP.request_pay({
-// 	          pg : 'kakao', // pg사명
-// 	          pay_method : 'kakaopay', // 결제방식
-// 	          merchant_uid : 'merchant_' + new Date().getTime(), // 주문번호
-// 	          name : '${cart.pro_name }' , // 상품명
-// 	          amount : '${cart.pro_price * cart.cart_amount + 3500 }', // 결제되는 가격
-// 	          buyer_name : '${order.order_name }' // 주문자 이름
-// 	      }, function(rsp) {
-// 	         console.log(rsp);
-// 	          if ( rsp.success ) {
-// 	             var msg = '결제가 완료되었습니다.';
-// 	              msg += '고유ID : ' + rsp.imp_uid;
-// 	              msg += '상점 거래ID : ' + rsp.merchant_uid;
-// 	              msg += '결제 금액 : ' + rsp.paid_amount;
-// 	              msg += '카드 승인번호 : ' + rsp.apply_num;
-// 	              location.href="OrderPaymentPro.od?order_status=1&pay_amount='${price.pro_price * price.cart_amount + 3500 }''";
-// 	          } else {
-// 	              var msg = '결제에 실패하였습니다.';
-// 	               msg += '에러내용 : ' + rsp.error_msg;
-// 	               window.history.back();
-// 	          }
+  		} // iamport()
 	        
-// 	          alert(msg);
-	      
-	          
-// 	      }); // rsp
-	    
-//     }// iamport
-    
-    
 	function getCouponCode(couponCode) {
     	
 		$("#promo-code").val(couponCode);
@@ -86,6 +104,8 @@
 					 $('#basket-promo').text(parseInt(data)).css("color","red"); // action을 통해 계산 완료 후 전달받은 할인금액 입력
 					 $('#basket-total').text(parseInt($('#hidden_total').val()) - parseInt(data)); // 전체 금액 - 완료받은 할인금액 
 					 
+// 					 $('#iamportPayment').text(parseInt($('#hidden_total').val()) - parseInt(data));
+					 
 					 $('#cp_discount_amount').val(parseInt(data)); // 할인 금액 전달
 					 $('#cp_code').val(couponCode); // 사용한 쿠폰 코드 전달
 					 
@@ -102,7 +122,7 @@
  <jsp:include page="../inc/top.jsp"></jsp:include>
   <main>
   <div id="resultArea"></div>
-  	<form action="OrderPaymentPro.od" method="post">
+  	<form action="OrderPaymentPro.od" method="post" id="orderPaymentForm" >
   	<c:forEach var="cart" items="${orderProductList }" varStatus="status">
   		<input type="hidden" name="cart_code" id="cart_code" value="${cart.cart_code }">
   		<input type="hidden" name="pro_code"  value="${cart.pro_code }">
@@ -111,8 +131,7 @@
   		<!-- 쿠폰을 사용하지 않을 경우 오류 발생 / 쿠폰 테이블에 쿠폰코드 null 기본값 0인 쿠폰 추가해야 함(임시방편) -->
   		<input type="hidden" name="cp_code"  id="cp_code" value="Test">
   		<input type="hidden" name="cp_discount_amount" id="cp_discount_amount" value="${0 }">
-  		
-  		<h1 align="center">주문서 확인 & 결제 페이지</h1>
+  		<br><h1 align="center">주문서 확인 & 결제 페이지</h1><hr>
 	    <div class="basket">
   		<h1>주문상품 확인</h1>
   		<p>Please check your shopping details.</p>
@@ -215,10 +234,6 @@
 				<c:forEach var="price" items="${orderProductList }" varStatus="status">
 				          <div class="subtotal-value final-value" id="basket-subtotal"><fmt:formatNumber pattern="#,###">${price.pro_price * price.cart_amount }</fmt:formatNumber></div>
 			    </c:forEach> 
-<!-- 				          <div class="summary-promo hide"> -->
-<!-- 					          <div class="promo-title">할인금액</div> -->
-<!-- 					          <div class="promo-value final-value" id="basket-promo" ></div> -->
-<!-- 				       	  </div> -->
 						  <div class="subtotal-title">할인금액</div>
 				          <div class="subtotal-value final-value" id="basket-promo">0</div>
 				          <div class="subtotal-title">배송비</div>
@@ -229,11 +244,12 @@
 			          <div class="total-title">Total</div>
 			          <div class="total-value final-value" id="basket-total"><fmt:formatNumber pattern="#,###">${price.pro_price * price.cart_amount + 3500}</fmt:formatNumber></div>
 			          <input type="hidden" id="hidden_total" value="${price.pro_price * price.cart_amount + 3500}" >
+<!-- 			          <input type="hidden" id="iamportPayment" > -->
 			      </div>
 	      	</c:forEach>
 		      	  <div class="summary-checkout">
 		             <button class="button" id="checkout" type="submit" >Checkout</button><hr>
-		             <button class="button" id="iamport" type="button" >iamport</button><hr>
+		             <button class="button" id="iamportPayment" type="button" >iamport</button><hr>
 		     	  </div>
 		      </div><!-- basket div 태그 -->
 	   </form>   

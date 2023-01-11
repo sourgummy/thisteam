@@ -190,6 +190,7 @@ public class OrderDAO {
 					
 					if(insertCount > 0) {
 						// 주문 테이블 입력 성공 후 실행되는 주문 상품 정보 입력
+						
 						sql = "INSERT INTO order_product (order_code, pro_code, order_stock, cart_code) "
 								+ "SELECT o.order_code, c.pro_code, c.cart_amount, c.cart_code "
 								+ "FROM orders o NATURAL JOIN cart c "
@@ -408,10 +409,12 @@ public class OrderDAO {
 			PreparedStatement pstmt = null;
 			
 			try {
+				
 				String sql = "UPDATE product SET pro_qty = "
 						+ "((SELECT pro_qty FROM (SELECT pro_qty, pro_code FROM product) AS pro_update_sample WHERE pro_code = ?) "
 						+ "- (SELECT order_stock FROM order_product WHERE order_code = ?)) "
 						+ "WHERE pro_code = (SELECT pro_code FROM order_product WHERE order_code = ?)";
+				
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, pro_code);
 				pstmt.setInt(2, order_code);
@@ -558,9 +561,12 @@ public class OrderDAO {
 			ResultSet rs2 = null;
 			
 			try { // 쿠폰 적용 할인 금액 구하는 공식
+				
 				String sql = "SELECT TRUNCATE(((pro_price * cart_amount) * "
 						+ "(SELECT cp_discount_value FROM coupon WHERE cp_code = ? ) / 100 ),0) "
 						+ "FROM cart_product_view WHERE cart_code = ?";
+				
+				
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, cp_code);
 				pstmt.setInt(2, cart_code);

@@ -24,22 +24,37 @@ body {
 }
 </style>
 </head>
+<% if(session.getAttribute("sId") == null){%>
+
+ <script type="text/javascript">
+ alert("잘못된 접근입니다.");
+ location.href="MemberLoginForm.me";
+ </script>
+
+<% }%>
+
 
 <script type="text/javascript">
+//submit시 동작하는 함수
 function setOrderCouponValue() {
-// alert("setOrderCouponValue()");
-// alert("$('#selectedCoupon').val()" + $("#selectedCoupon").val());
-// alert('$("input[type=radio]:checked").attr("value1")' + $("input[type=radio]:checked").attr("value1"));
-
+	let noSelected = false;
+	
 	$("input[type=radio]").each(function(){
-		if(this.is(":checked") == false){
+		if($("input[type=radio]").is(":checked") == false){
+			noSelected = true;
+		}
+	});
+		
+		if(noSelected){
 			alert("선택된 쿠폰이 없습니다.");
 		    window.close();
-		}
-	}
+		}else{
 			opener.getCouponCode($("input[type=radio]:checked").attr("value1"));
 	  	 	window.close();
+		}
+
 }
+   
    
    
 $(function(){
@@ -75,10 +90,8 @@ $(function(){
 							$("#coupon_list").append(
 									"<div  class='border rounded-2 d-flex bg-secondary bg-gradient' style='--bs-bg-opacity: .1' >"
 										+"<div class='p-3'>"
-											+"<input type='radio' disabled='disabled' name='cp_code' value1="+coupon.cp_code+">" 
-											+"<input type='hidden' id='cp_min_price' value2="+coupon.cp_min_price+">" 
-										
-									 		+"<label for='selectedCoupon'></label>"
+											+"<input type='radio'id='disabledCoupon' disabled='disabled' name='cp_code' value1="+coupon.cp_code+">" 
+									 		+"<label for='disabledCoupon'></label>"
 								  		 +"</div>"
 										+"<div class='p-3'>"
 										   +  "<h4>"+coupon.cp_name+"</h4>"
@@ -146,7 +159,8 @@ $(function(){
 				}else{
 					
 // 				alert(JSON.stringify(result));
-// 					$("#coupon_list").empty();
+					$("#coupon_list").empty(); //쿠폰리스트 초기화 후 다시 뿌리기
+					
 					for(let coupon of result) {
 						$("#coupon_list").append(
 								"<div  class='border rounded-2 d-flex ' >"
@@ -162,7 +176,6 @@ $(function(){
 									   +"<input type='hidden' name='cp_code' value='"+coupon.cp_code+"'>"
 									+"</div>"
 								+"</div><br>"
-								
 						);
 					}//end of for
 				

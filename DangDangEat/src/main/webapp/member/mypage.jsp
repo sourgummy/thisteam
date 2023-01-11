@@ -73,73 +73,80 @@ if (sId == null || sId.equals("")) {
 
 <script type="text/javascript">
 
-
-	$(function(cp_code) {
+	
+	
+	$(function() {
 
 		let id = $("#id").text(); // 회원 아이디
 		let email = $("#email").val(); // 이메일 인증 상태 확인용 (원래 이메일 주소)
 		// 		alert(email);
 
-		
-	
-		
-		
-		//파라미터 cp_code 추출
 		const param = new URL(location).searchParams;
-		param.get("cp_code")
-		if(param.get("cp_code") != null){
-			
-			$("#CouponCount").trigger("click");
-// 			alert("클릭됨 !");
-		}
+		//전역함수 정의
+		function searchCoupon(){
+				
+								 $.ajax({//자동등록된 쿠폰(생일쿠폰,회원가입쿠폰) 있는지 확인
+											type: "get",
+											url: "SearchUsableCoupon.od",
+											contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+											dataType: "HTML",
+											data:{
+												"isMypage":true//마이페이지에서 요청할 경우 HTML로 받아옴
+											}
+							
+										})
+										.done(function(result){
+								    		
+											$("#ajax_changeDiv").html(result);
+											
+											$("#couponDiv").after("<input type='button' value='마이페이지 메인' class='mb-5 mx-3 p-2 btn btn-sm  btn-secondary rounded '  style='float: right;' id='goMypagebtn'></button>");
+											
+											if(param.get("cp_code") != null){//파라미터 cp_code 추출
+// 												alert(param.get("cp_code"));
+												$("#search_coupon_code").text(param.get("cp_code"));
+											}
+										})
+										.fail(function(data){
+											alert("ajax요청 실패");
+										});
+											
+									}
+									
+		
 
 		
-		$("#CouponCount").on("click", function(){
+		
+		
+		//1)파라미터가 존재하면 쿠폰 ajax 요청
+		if(param.get("cp_code") != null){//파라미터 cp_code 추출
 			
-			const searchCoupon = $.ajax({//자동등록된 쿠폰(생일쿠폰,회원가입쿠폰) 있는지 확인
-				type: "get",
-				url: "SearchUsableCoupon.od",
-				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-				dataType: "HTML",
-				data:{
-					"isMypage":true
-				}
-
-			})
-			.done(function(result){
-	    		alert(result);
-				$("#ajax_changeDiv").html(result);
-				$("#ajax_changeDiv_wapper").append("<input type='button' value='마이페이지 메인' class='mb-5 mx-3 p-2 btn btn-sm  btn-secondary rounded '  style='float: right;' id='goMypagebtn'></button>");
-				//현재 URL가져와서 파라미터(cp_code)존재하면 값주기
-				const urlParams = new URL(location.href).searchParams;
-				
-				//파라미터가 깨지므로 decode
-// 				alert(decodeURI(urlParams));
-// 				alert("urlParams.has('cp_code') : "+ urlParams.has('cp_code'));
-				if(urlParams.has('cp_code')){
-					
-				const cp_code = decodeURI(urlParams.get('cp_code'));
-				result.find("#search_coupon_code").val() = cp_code;
-				
-				}else{
-					
-				}
-			})
-			.fail(function(data){
-				alert("ajax요청 실패");
-			});
-				
-
-				
-				
+			searchCoupon(); //쿠폰 코드가 넘어오면 ajax실행
 			
-		});//$("#CouponCount")
+			
+		}else {
+			
+		//2) 쿠폰영역 클릭 될 경우 쿠폰리스트 ajax로 요청
+			$("#CouponCount").on("click", function (){
+				searchCoupon();
+			});//$("#CouponCount")
+			
+		}
 	});
 	
+	
+	
+	//Mypage로 이동하는 버튼 - 동적할당된 버튼이므로 별도 정의
 	$(document).on("click", "#goMypagebtn", function(){
-		//Mypage로 이동하는 버튼
-		//동적할당된 버튼이므로 따로 정의
-		location.reload(true);
+	
+		const param = new URL(location).searchParams;
+		if(param.get("cp_code") != null){//파라미터cp_code가 존재하면 자동으로 쿠폰페이지로 넘어가므로 페이지 이동
+			
+			location.href="MyPage.me"; 
+			
+		}else{//파라미터가 없으면 리로드//파라미터cp_code가 존재하면 자동으로 쿠폰페이지로 넘어가므로 페이지 이동
+			
+			location.reload(true);
+		}
 	});
 </script>
 
@@ -254,8 +261,8 @@ if (sId == null || sId.equals("")) {
 	</div>
 	<!-- /Widgets -->
 
-	<div class="container" id="ajax_changeDiv_wapper">
-	<div id="ajax_changeDiv">
+
+	<div class="container" id="ajax_changeDiv">
 		<div class="card" >
 			<div class="card-header">
 				<strong>회원 정보</strong>
