@@ -104,7 +104,7 @@
 						<c:forEach var="i" begin="1" end="${qna.qna_re_lev }">
 							&nbsp;&nbsp;
 						</c:forEach>						
-						<img src="images/re.gif">	
+							<img src="img/reply.png">
 					</c:if>
 					<%-- =============================================================== --%>
 					<c:if test="${qna.qna_secret eq 'N' }">
