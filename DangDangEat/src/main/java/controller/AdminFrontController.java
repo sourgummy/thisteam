@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.AdminBoardListAction;
 import action.AdminOrderListAction;
-import action.BoardAdminListAction;
 import action.AdminTotalMainAction;
 import action.CouponCodeCheckAction;
 import action.CouponDeleteAction;
@@ -121,8 +121,7 @@ public class AdminFrontController extends HttpServlet {
 			forward = action.execute(request, response);
 
 		} else if (command.equals("/AdminBoardList.ad")) { // 게시판 관리
-			System.out.println("게시판");
-			action = new BoardAdminListAction();
+			action = new AdminBoardListAction();
 			forward = action.execute(request, response);
 			
 		}  else if (command.equals("/AdminCouponList.ad")) { // 쿠폰 관리 새로 매핑해주세요!!

@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
+
 <!DOCTYPE html>
+
 <html lang="en">
     <head>
 <!--   <link href="css/bootstrap.css" rel="stylesheet" type="text/css"> -->
@@ -16,8 +18,7 @@
 	
 	body {
 	    font-family:"GmarketSansMedium" ;
-	}
-	
+	}	
 	  
 	#listForm {
 		width: 1224px;
@@ -80,7 +81,7 @@
 	
 <%-- 		<jsp:include page="/inc/top.jsp"></jsp:include> --%>
 	
-	<!-- 게시판 리스트 -->
+	<!-- 리뷰 리스트 -->
 	<section id="listForm">
 <!-- 	<h2>REVIEW</h2> -->
 	<table class="container">
@@ -91,13 +92,10 @@
 			<td width="150px">Date</td>
 			<td width="100px">Hit</td>
 		</tr>
-		<!-- JSTL 과 EL 활용하여 글목록 표시 작업 반복 -->
 		<%-- for(ReviewBean review : reviewList) {} --%>
 		<c:forEach var="review" items="${reviewList }">
 			<tr>
-				<td>${review.review_code }</td>
-				<!-- 제목 하이퍼링크(ReviewDetail.bo) 연결 -> 파라미터 : 글번호, 페이지번호 -->
-				<!-- 만약, pageNum 파라미터가 비어있을 경우 pageNum 변수 선언 및 기본값 1로 설정 -->
+				<td>${review.review_code }</td>				
 				<c:choose>
 					<c:when test="${empty param.pageNum }">
 						<c:set var="pageNum" value="1" />
@@ -116,8 +114,6 @@
 						</c:forEach>
 						<%-- 답글 제목 앞에 이미지 추가 --%>
 						<img src="img/reply.png">	
-<!-- 						<img src="img/re.gif">	 -->
-	
 					</c:if>
 					<%-- =============================================================== --%>
 					<a href="ReviewDetail.bo?review_code=${review.review_code }&pageNum=${pageNum }">
@@ -125,11 +121,8 @@
 					</a>
 				</td>
 				<td>${review.member_id }</td>
-				<td>
-					<%-- JSTL 의 fmt 라이브러리를 활용하여 날짜 표현 형식 변경 --%>
-					<%-- fmt:formatDate - Date 타입 날짜 형식 변경 --%>
-					<%-- fmt:parseDate - String 타입 날짜 형식 변경 --%>
-					<fmt:formatDate value="${review.review_date }" pattern="yy-MM-dd HH:mm"/>
+				<td>					
+					<fmt:formatDate value="${review.review_date }" pattern="yy-MM-dd"/>
 				</td>
 				<td>${review.review_readcount }</td>
 			</tr>
@@ -140,16 +133,11 @@
 		<form action="ReviewList.bo">
 			<input type="text" name="keyword">
 			<input type="submit" value="검색">
-			&nbsp;&nbsp;
-			<input type="button" value="글쓰기" onclick="location.href='ReviewWriteForm.bo'" />
+			&nbsp;&nbsp;<c:if test="${not empty sessionScope.sId}">
+			<input type="button" value="글쓰기" onclick="location.href='ReviewWriteForm.bo'" /></c:if>
 		</form>
 	</section>
-	<section id="pageList">
-		<!-- 
-		현재 페이지 번호(pageNum)가 1보다 클 경우에만 [이전] 링크 동작
-		=> 클릭 시 ReviewList.bo 서블릿 주소 요청하면서 
-		   현재 페이지 번호(pageNum) - 1 값을 page 파라미터로 전달
-		-->
+	<section id="pageList">		
 		<c:choose>
 			<c:when test="${pageNum > 1}">
 				<input type="button" value="이전" onclick="location.href='ReviewList.bo?pageNum=${pageNum - 1}'">

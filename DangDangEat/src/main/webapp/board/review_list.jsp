@@ -6,6 +6,7 @@
 <html lang="en">
     <head>
   <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="css/styles.css" rel="stylesheet" />   
   <style type="text/css">
 	@font-face {
 	    font-family: 'GmarketSansMedium';
@@ -51,9 +52,9 @@
 	}
 	
 	#pageList {
-		margin: auto;
+		margin-bottom: 30px;
 		width: 1024px;
-		text-align: center;
+ 		text-align: right; 
 	}
 	
 	#emptyArea {
@@ -67,6 +68,11 @@
 		width: 1024px;
 		text-align: right;
 		margin-top: 10px;
+	}
+	
+	#commandCell {
+		text-align: center;
+		margin-bottom: 30px;
 	}
 	
 	a {
@@ -88,7 +94,7 @@
 	<section id="listForm">
 	
 	<table class="table">	
-	<h2>REVIEW</h2>
+	<h2>Review</h2>
 		<tr id="tr_top">
 			<td width="100px">No</td>
 			<td>Subject</td>
@@ -120,7 +126,7 @@
 							&nbsp;&nbsp;
 						</c:forEach>
 						<%-- 답글 제목 앞에 이미지 추가 --%>
-						<img src="img/reply.png">	
+      			<img src="img/reply.png">	
 					</c:if>
 					<%-- =============================================================== --%>
 					<a href="ReviewDetail.bo?review_code=${review.review_code }&pageNum=${pageNum }">
@@ -128,10 +134,7 @@
 					</a>
 				</td>
 				<td>${review.member_id }</td>
-				<td>
-					<%-- JSTL 의 fmt 라이브러리를 활용하여 날짜 표현 형식 변경 --%>
-					<%-- fmt:formatDate - Date 타입 날짜 형식 변경 --%>
-					<%-- fmt:parseDate - String 타입 날짜 형식 변경 --%>
+				<td>				
 					<fmt:formatDate value="${review.review_date }" pattern="yy-MM-dd"/>
 				</td>
 				<td>${review.review_readcount }</td>
@@ -144,15 +147,10 @@
 			<input type="text" name="keyword">
 			<input type="submit" value="검색">
 			&nbsp;&nbsp;
+		
 			<input type="button" value="글쓰기" onclick="location.href='ReviewWriteForm.bo'" />
-		</form>
 	</section>
-	<section id="pageList">
-		<!-- 
-		현재 페이지 번호(pageNum)가 1보다 클 경우에만 [이전] 링크 동작
-		=> 클릭 시 ReviewList.bo 서블릿 주소 요청하면서 
-		   현재 페이지 번호(pageNum) - 1 값을 page 파라미터로 전달
-		-->
+	<section id="pageList">			
 		<c:choose>
 			<c:when test="${pageNum > 1}">
 				<input type="button" value="이전" onclick="location.href='ReviewList.bo?pageNum=${pageNum - 1}'">
@@ -185,3 +183,9 @@
 			</c:otherwise>
 		</c:choose>
 	</section>
+		  <!-- Footer-->
+   <footer class="py-5 bg-dark">
+      <div class="container">
+         <p class="m-0 text-center text-white">Copyright &copy; DangDangEat 2023</p>
+      </div>
+   </footer>

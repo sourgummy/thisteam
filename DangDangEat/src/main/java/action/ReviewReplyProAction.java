@@ -29,14 +29,12 @@ public class ReviewReplyProAction implements Action {
 			// D:\Shared\JSP\workspace_jsp5\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\댕댕잇\ upload
 			int fileSize = 1024 * 1024 * 10;
 			// --------------------------------------------------------------------
-			// 파일 업로드 처리(enctype="mutlipart/form-data") 를 위해
-			// MultipartRequest 객체 생성 => cos.jar 라이브러리 필요
 			MultipartRequest multi = new MultipartRequest(
-					request,  // 1) 실제 요청 정보(파라미터)가 포함된 request 객체
-					realPath, // 2) 실제 업로드 경로
-					fileSize, // 3) 업로드 파일 최대 사이즈
-					"UTF-8",  // 4) 한글 파일명 처리 위한 인코딩 방식
-					new DefaultFileRenamePolicy() // 5) 중복 파일명을 처리할 객체
+					request,  
+					realPath, 
+					fileSize,
+					"UTF-8", 
+					new DefaultFileRenamePolicy() 
 			);
 			
 			// 전달받은 파라미터 데이터를 ReviewBean 클래스 인스턴스 생성 후 저장

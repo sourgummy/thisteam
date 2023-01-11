@@ -50,6 +50,7 @@ public class QnaReplyProAction implements Action {
 			qna.setQna_re_ref(Integer.parseInt(multi.getParameter("qna_re_ref")));
 			qna.setQna_re_lev(Integer.parseInt(multi.getParameter("qna_re_lev")));
 			qna.setQna_re_seq(Integer.parseInt(multi.getParameter("qna_re_seq")));
+			qna.setQna_secret(multi.getParameter("qna_secret"));
 //			System.out.println(qna);
 			
 			// 만약, 파일명이 null 일 경우 널스트링으로 교체(답글은 파일 업로드가 선택사항)

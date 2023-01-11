@@ -19,9 +19,6 @@ public class NoticeDAO {
 	public static NoticeDAO getInstance() {
 		return instance;
 	}
-	// ----------------------------------------------------------------------------------
-	// 데이터베이스 접근에 사용할 Connection 객체를 Service 객체로부터 전달받기 위한
-	// Connection 타입 멤버변수 선언 및 Setter 메서드 정의
 	private Connection con;
 
 	public void setConnection(Connection con) {
@@ -29,14 +26,11 @@ public class NoticeDAO {
 	}
 	// ----------------------------------------------------------------------------------
 	// 글쓰기 작업 수행
-	// => Service 로부터 전달받은 NoticeBean 객체를 사용하여 INSERT 작업 수행
 	public int insertNotice(NoticeBean notice) {
 		System.out.println("NoticeDAO - insertNotice()");
 		
-		// INSERT 작업 결과를 리턴받아 저장할 변수 선언
 		int insertCount = 0;
 		
-		// 데이터베이스 작업에 필요한 변수 선언
 		PreparedStatement pstmt = null, pstmt2 = null;
 		ResultSet rs = null;
 		
@@ -47,9 +41,9 @@ public class NoticeDAO {
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
-			if(rs.next()) { // 조회 결과가 있을 경우(= 기존 게시물이 하나라도 존재할 경우)
-				// (만약, 게시물이 존재하지 않을 경우 DB 에서 NULL 로 표기, rs.next() 가 false)
-				notice_code = rs.getInt(1) + 1; // 기존 게시물 번호 중 가장 큰 번호(= 조회 결과) + 1
+			if(rs.next()) { 
+				
+				notice_code = rs.getInt(1) + 1; 
 			}
 			System.out.println("새 글 번호 : " + notice_code);
 			// --------------------------------------------------------------------------------
@@ -67,14 +61,12 @@ public class NoticeDAO {
 			System.out.println("SQL 구문 오류! - insertNotice()");
 			e.printStackTrace();
 		} finally {
-			// DB 자원 반환
 			JdbcUtil.close(rs);
 			JdbcUtil.close(pstmt);
 			JdbcUtil.close(pstmt2);
-			// 주의! Connection 객체는 Service 클래스가 관리하므로 DAO 에서 반환 금지!
 		}
 		
-		return insertCount; // Service 로 리턴
+		return insertCount; 
 	}
 		
 	
@@ -180,6 +172,7 @@ public class NoticeDAO {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, notice.getNotice_subject());
 			pstmt.setString(2, notice.getNotice_content());
+			pstmt.setInt(3, notice.getNotice_code());
 			
 			updateCount = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -305,5 +298,5 @@ public boolean isNoticeWriter(int notice_code) {
 	}
 	
 	return isNoticeWriter;
-}
+ }
 }

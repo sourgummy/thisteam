@@ -6,14 +6,14 @@
 <html lang="en">
     <head>
   <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="css/styles.css" rel="stylesheet" /> 
   <style type="text/css">
 	@font-face {
 	    font-family: 'GmarketSansMedium';
 	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
 	    font-weight: normal;
 	    font-style: normal;
-	}
-	  
+	 }	  
 	  
 	body {
 	    font-family:"GmarketSansMedium" ;
@@ -109,13 +109,8 @@
 		<input type="button" value="목록" onclick="location.href='NoticeList.bo?pageNum=${param.pageNum}'">
 	</section>
        
-        <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; DANGDANGEAT 2022</p></div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="../js/scripts.js"></script>
-    </body>
-</html>
+     <footer class="py-5 bg-dark">
+      <div class="container">
+         <p class="m-0 text-center text-white">Copyright &copy; DangDangEat 2023</p>
+      </div>
+   </footer>

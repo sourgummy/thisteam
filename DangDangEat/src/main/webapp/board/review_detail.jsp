@@ -53,13 +53,13 @@ td {
 }
 
 #articleContentArea {
-	margin-bottom: 30px;
-	background: #D3D3D3;
-	margin-top: 20px;
-	height: 350px;
-	text-align: center;
-	overflow: auto;
-	white-space: pre-line;
+ 	margin-bottom: 30px; 
+ 	background: #D3D3D3; 
+	margin-top: 20px; 
+ 	height: 350px; 
+ 	text-align: center; 
+	overflow: auto; 
+ 	white-space: pre-line; 
 }
 
 #commandList {
@@ -87,18 +87,19 @@ input {
 	font-family: "GmarketSansMedium";
 }
 </style>
-
 </head>
+
 <body>
 
-	<!-- Login, Join 링크 표시 영역 -->
 	<jsp:include page="/inc/top.jsp"></jsp:include>
 	<div class="container">
-		<!-- 게시판 상세내용 보기 -->
+	<input type="hidden" name="pageNum" value="${param.pageNum }" >
+	<input type="hidden" name="review_readcount" value="${review.review_readcount }" >
+	<input type="hidden" name="review_code" value="${review.review_code }" >
+		<!-- 게시판 상세내용 보기 -->	
 		<section>
-			<!-- 		<h2>리뷰 내용</h2> -->
 			<section>
-				<table class="table">
+				<table class="table">				
 					<tr>
 						<th width="70">제 목</th>
 						<td colspan="3">${review.review_subject }</td>
@@ -108,25 +109,26 @@ input {
 						<td>${review.member_id }</td>
 						<th width="70">작성일</th>
 						<td><fmt:formatDate value="${review.review_date }"
-								pattern="yy-MM-dd" /></td>
-					</tr>
+								pattern="yy-MM-dd" /></td>					
 					<tr>
 						<th width="70">첨부파일</th>
 						<td colspan="3"><a href="upload/${review.review_real_file }"
 							download="${review.review_file }"> ${review.review_file } </a></td>
 				</table>
 			</section>
-			<section id="articleContentArea">${review.review_content }
+			
+						<section id="articleContentArea">${review.review_content }
 			</section>
 		</section>
 	</div>
 	<section id="commandList">
+	<c:if test="${not empty sessionScope.sId and sessionScope.sId eq 'admin'}">
 		<input type="button" value="답변"
-			onclick="location.href='ReviewReplyForm.bo?review_code=${param.review_code}&pageNum=${param.pageNum }'">
-		<input type="button" value="수정"
+			onclick="location.href='ReviewReplyForm.bo?review_code=${param.review_code}&pageNum=${param.pageNum }'"></c:if>
+		<c:if test="${sessionScope.sId eq 'admin' || sessionScope.sId == review.member_id}"><input type="button" value="수정"
 			onclick="location.href='ReviewModifyForm.bo?review_code=${param.review_code}&pageNum=${param.pageNum }'">
 		<input type="button" value="삭제"
-			onclick="location.href='ReviewDeleteForm.bo?review_code=${param.review_code}&pageNum=${param.pageNum }'">
+			onclick="location.href='ReviewDeletePro.bo?review_code=${param.review_code}&pageNum=${param.pageNum }'"></c:if>
 		<input type="button" value="목록"
 			onclick="location.href='ReviewList.bo?pageNum=${param.pageNum}'">
 	</section>
@@ -142,14 +144,12 @@ input {
 				<div id="insertForm">
 					<form action="CommentWritePro.bo" method="post">
 						<!-- 글번호, 게시판타입, 페이지번호를 함께 전달 -->
-						<input type="hidden" name="review_code"
-							value=${param.review_code }> <input type="hidden"
-							name="pageNum" value=${param.pageNum }> <input
-							type="hidden" name="comment_code" value=${param.comment_code }>
+						<input type="hidden" name="review_code" value=${param.review_code }> 
+						<input type="hidden" name="pageNum" value=${param.pageNum }>
 						<input type="text" name="comment_content" id="replyTextarea"
 							style="width: 300px">
 						<!-- 							<textarea rows="3" cols="50" name="comment_content" id="replyTextarea"></textarea>  -->
-						<input type="submit" value="등록" id="replySubmit">
+						<c:if test="${not empty sessionScope.sId and sessionScope.sId eq 'admin'}"><input type="submit" value="등록" id="replySubmit"></c:if>
 					</form>
 				</div>
 			</c:if>
@@ -161,29 +161,24 @@ input {
 				<table style="width: 500px;">
 					<c:forEach var="comment" items="${commentList }">
 
-						<input type="hidden" name="comment_code"
-							value=${param.comment_code }>
+						<input type="hidden" name="comment_code" value=${param.comment_code }>
 						<!-- 					<th width="70"></th> -->
 						<tr>
 							<td>${comment.member_id }</td>
-							<td><fmt:formatDate value="${comment.comment_date }"
-									pattern="yy-MM-dd" /></td>
-
-							<td>${comment.comment_content }<img src="img/delete.png"
-								width="10px" height="10px"></td>
+							<td><fmt:formatDate value="${comment.comment_date }" pattern="yy-MM-dd" /></td>
+							<td>${comment.comment_content }</td>	 								
+							<c:if test="${not empty sessionScope.sId and sessionScope.sId eq 'admin'}"><td><input type="button" value="댓글삭제"
+			onclick="location.href='CommentDelete.bo?review_code=${param.review_code}&pageNum=${param.pageNum }&comment_code=${comment.comment_code }'">
+							</td></c:if>
 						</tr>
 					</c:forEach>
 				</table>
 			</section>
 		</div>
 	</div>
-	<!-- Footer-->
-     <footer class="py-5 bg-dark">
-         <div class="container"><p class="m-0 text-center text-white">Copyright &copy; DANGDANGEAT 2022</p></div>
-     </footer>
-     <!-- Bootstrap core JS-->
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-     <!-- Core theme JS-->
-     <script src="../js/scripts.js"></script>
-</body>
-</html>
+		  <!-- Footer-->
+   <footer class="py-5 bg-dark">
+      <div class="container">
+         <p class="m-0 text-center text-white">Copyright &copy; DangDangEat 2023</p>
+      </div>
+   </footer>

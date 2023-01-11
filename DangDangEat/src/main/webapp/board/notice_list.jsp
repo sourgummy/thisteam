@@ -6,6 +6,7 @@
 <html lang="en">
     <head>
   <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="css/styles.css" rel="stylesheet" /> 
   <style type="text/css">
 	@font-face {
 	    font-family: 'GmarketSansMedium';
@@ -49,10 +50,9 @@
 	}
 	
 	#pageList {
-		margin: auto;
-		width: 1024px;
-		text-align: center;
 		margin-bottom: 30px;
+/* 		width: 1024px; */
+		text-align: center;
 	}
 	
 	#emptyArea {
@@ -72,7 +72,7 @@
 	a {
 		text-decoration: none;
 	}
-		input {
+		input[type=button], input[type=submit], input[type=text] {
 	    font-family:"GmarketSansMedium" ;
 	    border-radius: 0px;
 	}
@@ -90,21 +90,19 @@
 		
   <section id="listForm">
   <h2>Notice List</h2>
-	<table class="table">	
+	<table class="table container">
 	<tr id="tr_top">
-      <th scope="row" width="100">NO.</th>
+      <th width="100">No</th>
       <td width="400px">Subject</td>
       <td width="150px">Writer</td>
       <td width="150px">Date</td>
-      <td width="100px">Views</td>
+      <td width="100px">Hit</td>
     </tr>	
-    <!-- JSTL 과 EL 활용하여 글목록 표시 작업 반복 -->
 		<%-- for(NoticeBean notice : noticeList) {} --%>
 		<c:forEach var="notice" items="${noticeList }">
 			<tr>
 				<td>${notice.notice_code }</td>
 				<!-- 제목 하이퍼링크(NoticeDetail.bo) 연결 -> 파라미터 : 글번호, 페이지번호 -->
-				<!-- 만약, pageNum 파라미터가 비어있을 경우 pageNum 변수 선언 및 기본값 1로 설정 -->
 				<c:choose>
 					<c:when test="${empty param.pageNum }">
 						<c:set var="pageNum" value="1" />
@@ -120,9 +118,6 @@
 				</td>
 				<td>${notice.member_id }</td>
 				<td>
-				<%-- JSTL 의 fmt 라이브러리를 활용하여 날짜 표현 형식 변경 --%>
-					<%-- fmt:formatDate - Date 타입 날짜 형식 변경 --%>
-					<%-- fmt:parseDate - String 타입 날짜 형식 변경 --%>
 					<fmt:formatDate value="${notice.notice_date }" pattern="yy-MM-dd"/>
 				</td>	
 				<td>${notice.notice_readcount }</td>
@@ -146,11 +141,6 @@
 
 
 <section id="pageList">
-		<!-- 
-		현재 페이지 번호(pageNum)가 1보다 클 경우에만 [이전] 링크 동작
-		=> 클릭 시 NoticeList.bo 서블릿 주소 요청하면서 
-		   현재 페이지 번호(pageNum) - 1 값을 page 파라미터로 전달
-		-->
 		<c:choose>
 			<c:when test="${pageNum > 1}">
 				<input type="button" value="이전" onclick="location.href='NoticeList.bo?pageNum=${pageNum - 1}'">
@@ -160,9 +150,7 @@
 			</c:otherwise>
 		</c:choose>
 			
-		<!-- 페이지 번호 목록은 시작 페이지(startPage)부터 끝 페이지(endPage) 까지 표시 -->
 		<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
-			<!-- 단, 현재 페이지 번호는 링크 없이 표시 -->
 			<c:choose>
 				<c:when test="${pageNum eq i}">
 					${i }
@@ -173,7 +161,6 @@
 			</c:choose>
 		</c:forEach>
 
-		<!-- 현재 페이지 번호(pageNum)가 총 페이지 수보다 작을 때만 [다음] 링크 동작 -->
 		<c:choose>
 			<c:when test="${pageNum < pageInfo.maxPage}">
 				<input type="button" value="다음" onclick="location.href='NoticeList.bo?pageNum=${pageNum + 1}'">
@@ -183,13 +170,10 @@
 			</c:otherwise>
 		</c:choose>
 	</section>
+       
  <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; DANGDANGEAT 2022</p></div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="../js/scripts.js"></script>
-    </body>
-</html>
+   <footer class="py-5 bg-dark">
+      <div class="container">
+         <p class="m-0 text-center text-white">Copyright &copy; DangDangEat 2023</p>
+      </div>
+   </footer>

@@ -18,7 +18,8 @@ public class ReviewModifyProAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
-		
+		System.out.println("ReviewModifyProAction");
+				
 		ActionForward forward = null;
 		
 		String realPath = "";
@@ -29,7 +30,7 @@ public class ReviewModifyProAction implements Action {
 			String uploadPath = "upload"; // 업로드 가상 디렉토리(이클립스)
 			realPath = request.getServletContext().getRealPath(uploadPath);
 //			System.out.println("실제 업로드 경로 : " + realPath);
-			// D:\Shared\JSP\workspace_jsp5\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\MVC_Board\ upload
+			// D:\Shared\JSP\workspace_jsp5\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\DangDangEat \ upload
 			
 			// 만약, 해당 디렉토리가 존재하지 않을 경우 디렉토리 생성
 			// => java.io.File 클래스 인스턴스 생성(파라미터로 해당 디렉토리 전달)
@@ -63,12 +64,10 @@ public class ReviewModifyProAction implements Action {
 			review.setReview_file(multi.getOriginalFileName("review_file"));
 			review.setReview_real_file(multi.getFilesystemName("review_file"));
 			// => 만약, 수정할 파일을 선택하지 않았을 경우 파일명은 null 값이 저장됨
-//			System.out.println(board);
-//			System.out.println("원본 파일명 : " + board.getBoard_file());
-//			System.out.println("실제 파일명 : " + board.getBoard_real_file());
+//			System.out.println(review);
+//			System.out.println("원본 파일명 : " + review.getBoard_file());
+//			System.out.println("실제 파일명 : " + review.getBoard_real_file());
 			
-			// BoardModifyProService - isBoardWriter() 호출하여 패스워드 일치 여부 확인
-			// => 파라미터 : BoardBean 객체    리턴타입 : boolean(isBoardWriter)
 			ReviewModifyProService service = new ReviewModifyProService();
 			boolean isReviewWriter = service.isReviewWriter(review);
 			
@@ -86,8 +85,8 @@ public class ReviewModifyProAction implements Action {
 				// 삭제할 파일명을 새 파일의 실제 파일명으로 지정
 				deleteFileName = review.getReview_real_file();
 			} else { // 수정 권한 있음
-				// BoardModifyProService - modifyBoard() 호출하여 글 수정 작업 요청
-				// => 파라미터 : BoardBean 객체    리턴타입 : boolean(isModifySuccess)
+				// ReviewModifyProService - modifyReview() 호출하여 글 수정 작업 요청
+				// => 파라미터 : ReviewBean 객체    리턴타입 : boolean(isModifySuccess)
 				boolean isModifySuccess = service.modifyReview(review);
 				
 				// 수정 결과를 판별하여 실패 시 자바스크립트 오류 메세지 출력 및 이전페이지로 이동하고

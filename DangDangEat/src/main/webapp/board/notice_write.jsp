@@ -6,6 +6,7 @@
 <html lang="en">
     <head>
   <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="css/styles.css" rel="stylesheet" /> 
   <style type="text/css">
 	@font-face {
 	    font-family: 'GmarketSansMedium';
@@ -27,9 +28,10 @@
 	}
 	
 	table {
-		margin: auto;
-		width: 1224px;
-	}
+	    border-collapse: collapse; 
+	 	width: 1224px;
+	   }
+	
 	
 	.td_left {
 /* 		width: 150px; */
@@ -47,18 +49,19 @@
 		margin-bottom: 30px;
 	}
 
-	input[type=button], input[type=submit], input[type=reset], input[type=text], textarea {
+   input, textarea {
 	    font-family:"GmarketSansMedium" ;
 	    border-radius: 0px;
+	}
+
+	input[type=button], input[type=submit], input[type=reset], input[type=text] {
+	     font-family:"GmarketSansMedium" ;
 	}
 	
 	table > tbody {
 		border-style: none;
 	}
-	
-	textarea {
-		resize: none;
-	}
+		
 	
 </style>
     </head>
@@ -68,43 +71,37 @@
     <body>
 
 	<!-- 게시판 등록 -->
-	<section class="writeForm">
+	<section id="writeForm">
 		<h2>Notice Write</h2>
 		<form action="NoticeWritePro.bo" name="noticeForm" method="post">
 			<table class="table container">
 			<tbody>
 <!-- 				<tr> -->
-<!-- 					<td class="td_left"><label for="member_id">Writer</label></td> -->
-<!-- 					<td class="td_right"><input type="text" name="member_id" required="required" /></td> -->
-<!-- 				</tr>				 -->
+<!--  					<td class="td_left"><label for="member_id">Writer</label></td>  -->
+<!-- 					<td class="td_right"><input type="text" name="member_id" required="required" /></td>  -->
+<!-- 				</tr>				  -->
 					
 				<tr>
-					<td class="td_left"><label for="notice_subject">Subject</label></td>
-					<td class="td_right"><input type="text" name="notice_subject" required="required" /></td>
+					<td class="td_left"><label for="notice_subject">제목</label></td>
+					<td class="td_right"><input type="text" name="notice_subject" required="required" style="width: 1224px;"/></td>
 				</tr>
 				<tr>
-					<td class="td_left"><label for="notice_content">Content</label></td>
+					<td class="td_left"><label for="notice_content">내용</label></td>
 					<td class="td_right">
-<!-- 						<input type="text" id="notice_content" style="width: 500px; height: 300px;" required="required"> -->
-						<textarea cols="50" rows="15" required="required"></textarea>
+<!-- 						<input type="textarea" id="notice_content" style="width: 500px"> -->
+						<textarea id="notice_content" name="notice_content" required="required" style="width: 1224px; height: 500px;"></textarea>
 					</td>
 				</tr>	
-				</tbody>			
-			</table>
+			</table>			
 			<section id="commandCell">
 				<input type="submit" value="등록">&nbsp;&nbsp;
 				<input type="reset" value="다시쓰기">&nbsp;&nbsp;
 				<input type="button" value="취소" onclick="history.back()">
 			</section>
-		</form>
-	</section>
-        <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; DANGDANGEAT 2022</p></div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="../js/scripts.js"></script>
-    </body>
-</html>
+		</form>	
+<!-- Footer-->
+   <footer class="py-5 bg-dark">
+      <div class="container">
+         <p class="m-0 text-center text-white">Copyright &copy; DangDangEat 2023</p>
+      </div>
+   </footer>		

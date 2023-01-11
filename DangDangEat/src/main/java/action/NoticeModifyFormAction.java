@@ -17,9 +17,6 @@ public class NoticeModifyFormAction implements Action {
 			int notice_code = Integer.parseInt(request.getParameter("notice_code"));
 //			System.out.println(notice_code);
 			
-			// 글 상세정보 조회 작업 요청
-			// => 주의! NoticeModifyFormService 클래스는 생성하지 않는다! (중복이므로 불필요)
-			// => 파라미터 : 글번호, 조회수 증가 여부(false)   리턴타입 : NoticeBean(notice)
 			NoticeDetailService service = new NoticeDetailService();
 			NoticeBean notice = service.getNotice(notice_code, false);
 //			System.out.println(notice);
