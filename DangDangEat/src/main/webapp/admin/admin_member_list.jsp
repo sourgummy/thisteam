@@ -29,35 +29,34 @@
 <!-- 폰트 설정 -->
 <style>
 @font-face {
-	font-family: 'GmarketSans';
-	font-weight: 300;
-	font-style: normal;
-	src:
-		url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.eot');
-	src:
-		url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.eot?#iefix')
-		format('embedded-opentype'),
-		url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.woff2')
-		format('woff2'),
-		url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.woff')
-		format('woff'),
-		url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.ttf')
-		format("truetype");
-	font-display: swap;
-}
+    font-family: 'GmarketSans';
+    font-weight: normal;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.eot?#iefix') format('embedded-opentype'),
+         url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.woff2') format('woff2'),
+         url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.woff') format('woff'),
+         url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.ttf') format("truetype");
+    font-display: swap;
+} 
+  @font-face { /*지마켓 산스*/
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}    
 
 body {
-	font-family: 'GmarketSans';
+    font-family: 'GmarketSansMedium';
+/*     vertical-align: middle; */
 }
 
-.main-icon {
-	padding: 1%;
-	height: 40px;
-	width: auto;
-	margin-right: 3%;
-	padding: 5px;
+#accordionSidebar{
+font-family: 'GmarketSans';
 }
+
 </style>
+
 <%
 // 세션 아이디가 null 이거나 "admin" 이 아닐 경우 "잘못된 접근입니다!" 출력 후 메인페이지로 이동
 String sId = (String)session.getAttribute("sId");
