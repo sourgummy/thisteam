@@ -145,7 +145,7 @@ cursor: pointer;
 	<div id="slider">
 		<ul class="slider_image">
 			<li><img src="img/slider1.png" /></li>
-			<li><img src="img/cheerup.jpg" /></li>
+			<li><img src="img/slider2.png" /></li>
 			<li><img src="img/cheerup.jpg" /></li>
 		</ul>
 	</div>
