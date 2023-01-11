@@ -119,7 +119,7 @@ input[type=button], input[type=submit], input[type=text] {
 							&nbsp;&nbsp;
 						</c:forEach>
 							<%-- 답글 제목 앞에 이미지 추가 --%>
-							<img src="images/re.gif">
+							<img src="img/reply.png">
 						</c:if> <%-- =============================================================== --%>
 						<c:if test="${qna.qna_secret eq 'N' }">
 							<img alt="" src="img/lock.svg">
