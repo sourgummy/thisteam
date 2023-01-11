@@ -62,6 +62,7 @@ body {
 	padding: 5px;
 }
 </style>
+
 <%
 // 세션 아이디가 null 이거나 "admin" 이 아닐 경우 "잘못된 접근입니다!" 출력 후 메인페이지로 이동
 String sId = (String) session.getAttribute("sId");
@@ -366,16 +367,16 @@ if (sId == null || !sId.equals("admin")) {
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold text-primary">DataTables
-								Example</h6>
+							<h6 class="m-0 font-weight-bold text-primary">상품 목록</h6>
 
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
-								<table class="table table-bordered" id="dataTable" width="100%"
-									cellspacing="0">
+								<table class="table table-bordered table-striped" id="dataTable"
+									width="100%" cellspacing="0">
 									<thead>
 										<tr>
+											<th>상품 등록일자</th>
 											<th>상품 코드</th>
 											<th>상품명</th>
 											<th>카테고리</th>
@@ -383,13 +384,15 @@ if (sId == null || !sId.equals("admin")) {
 											<th>상품 재고</th>
 											<th>상품 가격</th>
 											<th>상품 판매여부</th>
-											<th>상품 등록일자</th>
 											<th>관리</th>
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach var="product" items="${productList }">
+										<c:forEach var="product" items="${productList }"> 
 											<tr>
+												<td>
+													<c:out value="${fn:substring(product.pro_date, 0, 10)}" />
+												</td>
 												<td class="pro_code">${product.pro_code }</td>
 												<td>${product.pro_name }</td>
 												<%--<td>${product.cate_code }</td>--%>
@@ -407,13 +410,7 @@ if (sId == null || !sId.equals("admin")) {
 														test="${product.pro_yn eq '1'}">판매중</c:if> <c:if
 														test="${product.pro_yn eq '2'}">판매중단</c:if> <c:if
 														test="${product.pro_yn eq '3'}">재고없음</c:if></td>
-												<td>
-													<%-- 												${product.pro_date } --%> <c:out
-														value="${fn:substring(product.pro_date, 0, 10)}" /> <%-- 												<fmt:parseDate value="${product.pro_date }" var="dateValue" pattern="yyyy-MM-dd"/> --%>
-													<%-- 												<fmt:formatDate value="${product.pro_date }" pattern="yyyy-MM-dd"/> --%>
-												</td>
 
-												<%-- 												<td><input type="button" value="수정" class="form-control text-center"  onclick="location.href='ProductModifyForm.pd?pro_code='+${product.pro_code}"></td> --%>
 												<td><input type="button" value="수정"
 													class="form-control text-center"
 													onclick="window.open('ProductModifyForm.pd?pro_code=${product.pro_code}','ProductInsertForm','width=700, height=920,location=no,status=no,scrollbars=yes');">
@@ -423,7 +420,6 @@ if (sId == null || !sId.equals("admin")) {
 										</c:forEach>
 									</tbody>
 								</table>
-								<!-- 								<button type="button" class="btn btn-outline-secondary" onclick="location.href='ProductInsertForm.pd'">상품 등록</button> -->
 								<button type="button" class="btn btn-outline-secondary"
 									onclick="window.open('ProductInsertForm.pd', 'ProductInsertForm','width=700,height=920,location=no,status=no,scrollbars=yes');">상품
 									등록</button>
@@ -495,6 +491,7 @@ if (sId == null || !sId.equals("admin")) {
 
 	<!-- Page level custom scripts -->
 	<script src="js/demo/datatables-demo.js"></script>
+
 
 </body>
 

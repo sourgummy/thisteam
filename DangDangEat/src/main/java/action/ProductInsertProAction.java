@@ -111,12 +111,18 @@ public class ProductInsertProAction implements Action {
 				out.println("</script>");
 				// ActionForward 객체 생성하지 않음!! => null 값 전달
 
-			} else { //성공 시
+			} else { //성공 시 알림 팝업창으로 변경
 				// 포워딩 정보 저장을 위한 ActionForward 객체 생성
 				// 포워딩 경로 : ProductList.pd, 포워딩 방식 : Redirect
-				forward = new ActionForward();
-				forward.setPath("AdminProductList.ad"); 
-				forward.setRedirect(true);
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				
+				out.println("<script>");
+				out.println("alert('상품 등록 완료되었습니다');");
+				out.println("opener.document.location.reload();"); //부모창에 화면 새로고침
+				out.println("self.close();"); //팝업 창 끄기
+				out.println("</script>");				
+
 			}
 
 			
