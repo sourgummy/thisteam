@@ -278,14 +278,29 @@ public class ProductDAO {
 					+ "WHERE pro_name "
 					+ "LIKE ? "
 					+ " AND cate_code like ?"
+					/*
+					 * if(상품페이지일 경우) { + "AND pro__yn='1'" }
+					 */
 //					+ "AND pro_use_yn='Y'"
-					+ "ORDER BY pro_code DESC LIMIT ?,?";
+					+ "ORDER BY pro_code DESC ";
+			
+			//listLimit이 0보다 작을 경우 전체 검색을 하기위한 조건
+			//0보다 클 경우 기존처럼 행번호, 갯수만큼 조회
+			if(listLimit > 0) {
+				sql += " LIMIT ?,?";
+			}
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%" + keyword + "%");
 			pstmt.setString(2, "%" + category + "%");
-			pstmt.setInt(3, startRow);
-			pstmt.setInt(4, listLimit);
+			
+			//listLimit이 0보다 작을 경우 전체 검색을 하기위한 조건
+			//0보다 클 경우 기존처럼 행번호, 갯수만큼 조회			
+			if(listLimit > 0) {
+				pstmt.setInt(3, startRow);
+				pstmt.setInt(4, listLimit);
+			}
+			
 			System.out.println("pstmt::"+pstmt);
 			rs = pstmt.executeQuery();
 
@@ -384,16 +399,7 @@ public class ProductDAO {
 		return listCount;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
 	public JSONArray selectNewProduct(int numberOfProducts) {
-	
-
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

@@ -32,7 +32,7 @@ public class MyPageAction implements Action {
 				
 				out.println("<script>");
 				out.println("alert('로그인이 필요한 페이지입니다!')");
-				out.println("history.back()");
+				out.println("location.href='MemberLoginForm.me'");
 				out.println("</script>");
 			} else { // 세션 아이디 있을 경우
 				// 아이디 저장

@@ -16,7 +16,8 @@ int finalTotal = 0;
 <meta charset="UTF-8">
 <title>장바구니</title>
 <!-- 외부 CSS 가져오기 -->
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+<!-- <link href="css/bootstrap.css" rel="stylesheet" type="text/css"> -->
+<link href="css/styles.css" rel="stylesheet" /> 
 <style type="text/css">
 	@font-face {
 	    font-family: 'GmarketSansMedium';
@@ -44,19 +45,45 @@ int finalTotal = 0;
 		text-align: center;
 	}
 	
-	input[type=button], input[type=submit] {
+	input, input[type=number] {
 	    font-family:"GmarketSansMedium" ;
+	    border-radius: 0px;
 	}
 	
+	#lastbutton {
+		margin-bottom: 30px;
+	}
+	
+	input[type=text] {
+	    font-family:"GmarketSansMedium" ;
+	    border: none;
+	    text-align: center;
+/* 	    width: 70px; */
+	}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <script type="text/javascript">
+function amountChange(){
+	var value = Number(document.getElementById('amount').value);
+	var price = Number(document.getElementById('price').value;
+	var totalPrice = value * price;
+	
+	alert(totalPrice);
+	alert(value);
+	alert(price);
+}
+
 $(function() {
 	    // 주문
 	    $("#order").on("click", function() {
 	        $("#result").val();
 // 	       alert($("#result").val());
 	    });
+	    
+// 	    $("#amount").on("click", function(){
+// 	    	alert($("#amount").val());
+// // 	    	console.log()
+// 	    })
        
     // 전체선택 체크박스의 상태가 변하면 이벤트 처리
 	$("#allCheck").on("change", function() {
@@ -155,7 +182,7 @@ $(function() {
 		<c:choose>
 			<c:when test="${empty cartList }">
 				<tr>
-					<td colspan="6">
+					<td colspan="7">
 						<div id="empty">장바구니가 비어있습니다.</div>
 					</td>
 				</tr>
@@ -167,14 +194,25 @@ $(function() {
 					<td>
 						<input type="checkbox" id="selection" name="selection">
 					</td>
-					<td>${cart.pro_real_thumb }</td>
+					<td>
+					<div style="text-align: center;">
+                      <img class="card-img-top" style="width: 100px; height: 100px;"
+		                src="<%=request.getScheme()+"://"+request.getServerName() + ":" + request.getServerPort() +"/"+request.getContextPath()%>/upload/${cart.pro_real_thumb }"
+        		        alt="..." onerror="this.src='./img/sample1_thumb.png';" />
+        		        </div>
+					</td>
 					<td><a href="ProductDetail.pd?pro_code=${cart.pro_code }">${cart.pro_name }</a></td>
-					<td><fmt:formatNumber value="${cart.pro_price }" pattern="###,###,###"/></td>
+					<td>
+						<div style="text-align: center;">
+						<input type="text" id="price" value="<fmt:formatNumber value="${cart.pro_price }" pattern="###,###,###"/>">
+						</div>
+<%-- 					<fmt:formatNumber value="${cart.pro_price }" pattern="###,###,###"/> --%>
+					</td>
 					 <!-- 상품 수량 -->
                      <td class="text-center">
 	                     <form action="CartUpdate.ct" method="post">
         				 <input type="hidden" name="pro_code" value=${cart.pro_code }>
-	                     <input class="form-control text-center me-3" name="amount" type="number" value="${cart.cart_amount}" MIN="1" MAX="100" />
+	                     <input class="form-control text-center me-3" name="amount" id="amount" type="number" value="${cart.cart_amount}" MIN="1" MAX="100" onchange="amountChange()" />
 	                     <input type="submit" value="변경">
 	                     </form>
                      </td>
@@ -186,9 +224,11 @@ $(function() {
 <!-- 						<input type="button" class="plus" value="+" onclick="count('plus')"> -->
 <!-- 					</td> -->
 					<td>
-					<fmt:formatNumber value="${cart.pro_price * cart.cart_amount }" pattern="###,###,###"/>
+						<div style="text-align: center;">
+						<input type="text" value="<fmt:formatNumber value="${cart.pro_price * cart.cart_amount }" pattern="###,###,###"/>">
 <%-- 					<c:set var="total" value="${total+(cart.pro_price*cart.cart_amount) }"/> --%>
 <%-- 					<c:out value="${total }"/> --%>
+						</div>
 					</td>
 					<td>
 						<input type="button" value="주문하기" id="order" onclick="location.href='OrderForm.od?pro_code=${cart.pro_code}&cart_code=${cart.cart_code}'">
@@ -208,9 +248,15 @@ $(function() {
 		Total : <fmt:formatNumber value="${finalTotal }" pattern="###,###,###"/>원
 <%-- 		<c:out value="Total : ${finalTotal }원" /> --%>
 	</div>
-	<div class="container">
-	<input type="button" value="선택상품 주문하기" onclick="location.href='orderFormPro.od'">
-	<input type="button" value="선택상품 삭제하기" onclick="location.href='CartDelete.ct'">
+	<div class="container" id="lastbutton">
+		<input type="button" value="선택상품 주문하기" onclick="location.href='orderFormPro.od'">
+		<input type="button" value="선택상품 삭제하기" onclick="location.href='CartDelete.ct'">
 	</div>
+<!-- Footer-->
+   <footer class="py-5 bg-dark">
+      <div class="container">
+         <p class="m-0 text-center text-white">Copyright &copy; DangDangEat 2023</p>
+      </div>
+   </footer>
 </body>
 </html>

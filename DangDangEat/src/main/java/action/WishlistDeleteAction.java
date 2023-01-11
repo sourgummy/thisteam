@@ -41,7 +41,7 @@ public class WishlistDeleteAction implements Action {
 				// 장바구니에 있는지 조회
 				boolean isCartExist = service.isExist(cart, false);
 				if(!isCartExist) { // 장바구니에 없으면 delete
-					boolean isDeleteSuccess = service.removeWishlist(pro_code);
+					boolean isDeleteSuccess = service.removeWishlist(cart);
 					
 					if(!isDeleteSuccess) { // 삭제 실패
 						response.setContentType("text/html; charset=UTF-8");

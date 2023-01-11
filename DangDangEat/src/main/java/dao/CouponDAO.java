@@ -262,7 +262,7 @@ public class CouponDAO {
 		ResultSet rs = null;
 		
 		String sql =  " SELECT *  "
-				+ " FROM coupon_view WHERE cp_status = 1";
+				+ " FROM coupon_view WHERE cp_status = 1 ORDER BY cp_enddate DESC";
 			
 		
 		JSONArray couponList = new JSONArray();
@@ -472,6 +472,36 @@ public class CouponDAO {
 		
 		e.printStackTrace();
 		System.out.println("SQL 구문 오류 -  autoCouponInsertForNew(String member_id)");
+		System.out.println(pstmt);
+		
+	}finally {
+	
+		JdbcUtil.close(pstmt);
+		
+	}
+		return insertCount;
+	}
+
+	public int selectCouponCount() {
+		// 관리자페이지 쿠폰 개수 조회
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int insertCount = 0;
+		try {
+			
+			String sql = "SELECT count(cp_code) FROM coupon_view WHERE cp_status = 1 "
+					   + " AND ((cp_current_st = 1 AND cp_target ='event') OR (cp_target IN('new_member','birth')));";
+			pstmt = con.prepareStatement(sql);
+			rs  = pstmt.executeQuery();
+		
+			if(rs.next()) {
+				insertCount = rs.getInt("count(cp_code)");
+			}
+			
+	} catch (SQLException e) {
+		
+		e.printStackTrace();
+		System.out.println("SQL 구문 오류 -  selectCouponCount()");
 		System.out.println(pstmt);
 		
 	}finally {

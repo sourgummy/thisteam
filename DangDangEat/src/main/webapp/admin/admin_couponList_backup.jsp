@@ -283,8 +283,6 @@ $(document).on("click", "input[name=updateCpBtn]", function(){
 			let isDelete = confirm("쿠폰을 삭제하시겠습니까? \n\n ※삭제될 쿠폰명 : "+ cp_name);
 			
 			if(isDelete){
-				
-			
 				location.href = "CouponDelete.ad?cp_code="+cp_code+"&isDelete=" + isDelete;
 			}
 		
@@ -603,7 +601,7 @@ $(document).on("click", "input[name=updateCpBtn]", function(){
   </ul>
 </div>
  	  > &#127903; 쿠폰등록
- 		<div class="m-3"> <h3>등록된 쿠폰 관리&#127903;</h3>(현재 발급중인 쿠폰 : ${couponCount } 개)</div>
+ 		<div class="m-3"> <h3>등록된 쿠폰 관리&#127903;</h3></div>
  		<hr>
  		
 	 		<table class="table">
@@ -650,7 +648,7 @@ $(document).on("click", "input[name=updateCpBtn]", function(){
 	 					if(coupon.get("cp_target").equals("event")){%> 
 	 					   만료됨
 	 					<%}else{%>
-						   발급중 </td>
+						   - </td>
 	 				<%} 
 	 				} %>
 	 				<td>

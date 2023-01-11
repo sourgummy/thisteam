@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link href="css/styles.css" rel="stylesheet" /> 
 <title></title>
 <style type="text/css">
 @font-face {
@@ -22,8 +23,23 @@
     outline: none; /*focus 했을때 테두리 나오게 */
 }
 
+   @font-face { /*지마켓 산스*/
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}    
+
+body {
+
+}
+
+input::placeholder  {
+	font-family: "GmarketSans";
+}
+
 body{
-    font-family: 'GmarketSans', sans-serif;
+    font-family: 'GmarketSans';
     font-size:14px;
     background-color: #f5f6f7;
     line-height: 1.5em;
@@ -72,8 +88,10 @@ a{
 
 .member input[type=button],
 .member input[type=submit]{
-background-color: #D3D3D3;
-color:#fff
+ 	background-color: #cce4a8;
+ 	color:#999999;
+	font-family: "GmarketSans";
+	font-weight: bold;
 }
 
 .member input:focus, .member select:focus{
@@ -100,26 +118,16 @@ color:#fff
 .field.tel-number div input:nth-child(2){
     flex:1;
 }
-
+input::placeholder  {
+   font-family: "GmarketSans";
+   font-weight: bold;
+}
 .field.gender div{
     border: 1px solid #dadada;
     padding: 15px 5px;
     background-color: #fff;
 }
 
-.placehold-text{
-    display: block; /*span 으로 감싸서 크기영역을 블록요소로 만들어ㅜ저야한다*/
-    position:relative;
-    /* border: 1px solid #000; */
-}
-
-/* .placehold-text:before{  */
-/*     content : "@naver.com"; */
-/*     position:absolute; /*before은 inline 요소이기 때문에 span으로 감싸줌 */ */
-/*     right : 20px; */
-/*     top:13px; */
-/*     pointer-events: none; /*자체가 가지고 있는 pointer event 를 없애준다 */ */
-/* } */
 
 .userpw{
     background:url(./images/images2/icon-01.png) no-repeat center right 15px;
@@ -134,6 +142,7 @@ color:#fff
 }
 
 .member-footer {
+	font-family: "GmarketSans";
     text-align: center;
     font-size: 12px;
     margin-top: 20px;
@@ -160,11 +169,11 @@ color:#fff
     display: none;
 }
 
- @media (max-width:768px) { 
-     .member{ 
-         width: 100%; 
-    } 
- } 
+/*  @media (max-width:768px) {  */
+/*      .member{  */
+/*          width: 100%;  */
+/*     }  */
+/*  }  */
 </style>
 <script src="js/jquery-3.6.3.js"></script>
 <script type="text/javascript">
@@ -239,7 +248,7 @@ var emailResult = false;
 					case 2 : $("#checkPw").html("패스워드 너무 쉽개!").css("color","red"),
 							 $("#passwd").css("color","red"),
 							 passwdResult = true; break;
-					case 1 : $("#checkPw").html("사용불가").css("color","#D3D3D3"),
+					case 1 : $("#checkPw").html("사용불가").css("color","#999999"),
 							 passwdResult = false;
 				}
 				count = 0;
@@ -394,7 +403,7 @@ var emailResult = false;
 <form action="MemberJoin.me" method="post">
 	<div class="member">
         <!--  로고 -->
-        <a href=""><img class="logo" src="img/logo3.png"></a>
+        <a href="http://localhost:8080/DangDangEat/"><img class="logo" src="img/logo3.png"></a>
 
         <!--  필드 -->
         <div class="field">
@@ -429,7 +438,7 @@ var emailResult = false;
         <div class="field tel-number">
             <b>휴대전화</b>
             <div>
-                <input type="text" placeholder="전화번호 입력" name="mobile">
+                <input type="text" placeholder="숫자만 입력해주세요." name="mobile">
             </div>
         </div>
         <!-- 주소 -->
@@ -463,7 +472,6 @@ var emailResult = false;
                 <a href="#none">이용약관</a>
                 <a href="#none">개인정보처리방침</a>
                 <a href="#none">책임의 한계와 법적고지</a>
-                <a href="#none">회원정보 고객센터</a>
             </div>
             <span><a href="#none"></a></span>
         </div>

@@ -5,7 +5,6 @@ import java.util.List;
 
 import dao.OrderDAO;
 import db.JdbcUtil;
-import vo.MemberBean;
 import vo.Order_productBean;
 import vo.OrdersBean;
 import vo.cart_productBean;
@@ -45,6 +44,8 @@ public class OrderInsertService {
 				JdbcUtil.rollback(con);
 			}
 		
+			JdbcUtil.close(con);
+			
 		return isInsertOrderSuccess;
 	} // insertOrder
 

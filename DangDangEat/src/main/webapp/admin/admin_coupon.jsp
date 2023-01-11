@@ -30,11 +30,26 @@
     font-style: normal;
 }    
 
+@font-face {
+    font-family: 'GmarketSans';
+    font-weight: normal;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.eot?#iefix') format('embedded-opentype'),
+         url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.woff2') format('woff2'),
+         url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.woff') format('woff'),
+         url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.ttf') format("truetype");
+    font-display: swap;
+} 
 body {
     font-family: 'GmarketSansMedium';
     vertical-align: middle;
     
 }
+#accordionSidebar{
+font-family: 'GmarketSans';
+}
+
 	input {
   width: 400x;
   height: 32px;
@@ -65,10 +80,17 @@ body {
 <script type="text/javascript">
 
 //onsumit메서드 실행 시 체크할 항목 변수선언
-let submitCheckRegex_name = false;
-let submitCheckRegex_code = false;
-let submitCheckCount_codeLength = false;
+let submitCheckRegex_name = false;//쿠폰이름
+let submitCheckRegex_code = false;//쿠폰코드
+let submitCheckCount_canUseCode = false;//사용가능한 쿠폰코드인지
 
+//발행대상 관련 span태그
+$(document).on("change","select[name=coupon_target]",function(){
+	$("#coupon_target option:selected").val() == 'new_member' ?
+			$("#coupon_target_Span").html(" <small>회원가입하는 모든 회원에게 자동 발급 됩니다.</small>")
+	:		$("#coupon_target_Span").html(" <small>강아지 생일을 입력한 모든 회원의 생일을 기준으로 [유효기간÷2]일 전 후로 사용 가능합니다.</small>")
+	
+});
 	$(function() {
 		
 		//쿠폰 자동 생성 radio버튼 클릭시 관련 내용 보이기
@@ -78,10 +100,10 @@ let submitCheckCount_codeLength = false;
 		 		"<tr id='coupon_target'>"+
 	 				"<td>발행대상</td>"+
 	 				"<td>"+
-	 					"<select name='coupon_target'>"+
+	 					"<select name='coupon_target' id='coupon_target'>"+
 	 						"<option value='new_member'> 첫 회원가입 </option>"+
 	 						"<option value='birth'> 댕댕이 생일 </option>"+
-	 					"</select>"+
+	 					"</select><span id='coupon_target_Span'></span>"+
 	 				"</td>"+
 	 			"</tr>");
 			
@@ -155,7 +177,6 @@ let submitCheckCount_codeLength = false;
 		});
 		
 		$("#coupon_code").on("change",function(){
-			
 			if(!regex.exec($("#coupon_code").val())){
 				submitCheckRegex_code = false;
 				$("#code_check-span").html("  <small>2 - 30자 이내 , 한글,영어,특수문자(_%)만 사용가능합니다</small>").css("color","red");
@@ -188,7 +209,7 @@ let submitCheckCount_codeLength = false;
 									
 									}else{
 										
-										submitCheckCount_codeLength = true;
+										submitCheckCount_canUseCode = true;
 										$("#code_check").html("<small>사용가능한 쿠폰 코드입니다.</small>").css("color", "royalblue").focus();
 										$("input[type=submit]").attr("disabled", false);
 									
@@ -196,7 +217,7 @@ let submitCheckCount_codeLength = false;
 									
 						},//success:
 						fail: function(result) {
-						
+							alert("중복쿠폰 조회에 실패했습니다.");
 					
 						}//fail:
 					
@@ -206,17 +227,22 @@ let submitCheckCount_codeLength = false;
 			
 		$("form").submit(function(){
 			
-			
-				if(submitCheckRegex_name && submitCheckRegex_code && submitCheckCount_codeLength){
+// 			alert("submitCheckRegex_name : "+ submitCheckRegex_name);
+// 			alert("submitCheckRegex_code : "+ submitCheckRegex_name);
+// 			alert("submitCheckCount_canUseCode : "+ submitCheckCount_canUseCode);
+				if(submitCheckRegex_name && submitCheckRegex_code && submitCheckCount_canUseCode){
+					 alert("쿠폰 등록에 성공했습니다.\n쿠폰 리스트 페이지로 이동합니다.");
 					return true;
+				
 				}else{
-					switch(true){
-						case submitCheckRegex_name: $("#coupon_name").focus(); 
-						case submitCheckRegex_code: $("#coupon_code").focus(); 
-						case submitCheckCount_codeLength:$("#coupon_code").focus();
-				
-					}
-				
+					
+						switch(false){
+							case submitCheckRegex_name: $("#coupon_name").css("backgroundColor", "rgba(255, 0, 0 , 0.5)") ;
+							case submitCheckRegex_code: $("#coupon_code").css("backgroundColor", "rgba(255, 0, 0, 0.5)"); 
+							case submitCheckCount_codeLength: $("#coupon_code").css("backgroundColor", "rgba(255, 0, 0, 0.5)");
+							
+						}
+						$("input[type=submit]").attr("disabled", false);
 					return false;
 				}
 		
