@@ -20,6 +20,8 @@ public class QnaDetailService {
 		
 		qna = dao.selectQna(qna_code);				
 		
+		JdbcUtil.commit(con);
+		
 		JdbcUtil.close(con);
 		
 		return qna;
