@@ -111,7 +111,7 @@ public class QnaDAO {
 				QnaBean qna = new QnaBean();
 				qna.setQna_code(rs.getInt("qna_code"));
 				qna.setMember_id(rs.getString("member_id"));
-//				qna.setQna_pass(rs.getString("qna_pass"));
+				qna.setQna_pass(rs.getString("qna_pass"));
 				qna.setQna_subject(rs.getString("qna_subject"));
 				qna.setQna_content(rs.getString("qna_content"));
 				qna.setQna_file(rs.getString("qna_file"));
@@ -191,7 +191,7 @@ public class QnaDAO {
 				qna = new QnaBean();
 				qna.setQna_code(rs.getInt("qna_code"));
 				qna.setMember_id(rs.getString("member_id"));
-//				qna.setQna_pass(rs.getString("qna_pass"));
+				qna.setQna_pass(rs.getString("qna_pass"));
 				qna.setQna_subject(rs.getString("qna_subject"));
 				qna.setQna_content(rs.getString("qna_content"));
 				qna.setQna_file(rs.getString("qna_file"));
@@ -217,7 +217,7 @@ public class QnaDAO {
 	
 	
 	// 패스워드 일치 여부 확인
-	public boolean isQnaWriter(int qna_code) {
+	public boolean isQnaWriter(int qna_code, String qna_pass) {
 		boolean isQnaWriter = false;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -225,9 +225,11 @@ public class QnaDAO {
 		try {
 			// qna 테이블에서 글번호(qna)가 일치하는 1개 레코드 조회
 			String sql = "SELECT * FROM qna "
-								+ "WHERE qna_code=? ";
+					+ "WHERE qna_code=? "
+					+ 		"AND qna_pass=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, qna_code);
+			pstmt.setString(2, qna_pass);
 			rs = pstmt.executeQuery();
 			
 			// 조회 결과가 있을 경우
@@ -257,7 +259,7 @@ public class QnaDAO {
 		try {
 			// 글번호에 해당하는 레코드 삭제
 			String sql = "DELETE FROM qna "
-								+ "WHERE qna_code=?";
+								+ "WHERE qna_code=?";								
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, qna_code);
 			deleteCount = pstmt.executeUpdate();
@@ -293,6 +295,7 @@ public class QnaDAO {
 			
 					sql			+= " WHERE"
 								+ " 	qna_code = ?";
+							    
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, qna.getQna_subject());
 			pstmt.setString(2, qna.getQna_content());
