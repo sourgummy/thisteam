@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <link href="css/styles.css" rel="stylesheet" /> 
-<title></title>
+<title>DangDangEat - Join</title>
 <style type="text/css">
 @font-face {
     font-family: 'GmarketSans';
@@ -194,7 +194,7 @@ var emailResult = false;
 				idResult = false;
 				//// 정규표현식을 이용한 ID 유효성 검사 ////
 			} else if(!regex.exec(id)) {
-				$("#checkId").html("영문자, 숫자 조합 5~14자 입력해주세요").css("color","orange");
+				$("#checkId").html("영문자, 숫자 5~14자 입력해주세요").css("color","orange");
 				idResult = false;
 			} else {
 				//// ID 중복체크 ////
@@ -408,7 +408,7 @@ var emailResult = false;
         <!--  필드 -->
         <div class="field">
             <b>아이디</b>
-            <span class="placehold-text"><input type="text" name="id" id="id" required="required" placeholder="5~14자 대,소문자 숫자 조합"></span>
+            <span class="placehold-text"><input type="text" name="id" id="id" required="required" placeholder="5~14자 대,소문자 숫자 사용가능"></span>
             <span id="checkId"></span>
         </div>
         <div class="field">
