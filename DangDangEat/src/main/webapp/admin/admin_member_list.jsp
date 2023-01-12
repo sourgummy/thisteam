@@ -13,7 +13,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>DangDangEat Admin - MemberList</title>
+<title>DangDangEAT Admin - MemberList</title>
 
 <!-- Custom fonts for this template -->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
@@ -55,6 +55,13 @@ body {
 font-family: 'GmarketSans';
 }
 
+.main-icon {
+    padding: 1%;
+    height: 40px;
+    width: auto;
+	margin-right: 3%;
+	padding: 5px;
+}
 </style>
 
 <%
