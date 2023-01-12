@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>product_modifyForm</title>
+<title>DangDangEAT - Product_Modify</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -20,12 +20,8 @@
 		let result = confirm("상품을 수정하시겠습니까?");
 		
 		if(result){
-// 			form.action = 'ProductModifyPro.pd';
-// 			form.submit();
-			alert("상품 수정이 완료되었습니다!");
-			opener.document.location.reload();
-			self.close();
-// 			window.close();
+			const form = document.getElementById('ProductModifyForm');
+ 			form.submit();
 		}
 
 	}
@@ -39,7 +35,7 @@
 		// 단, multi로 설정했기때문에(=> 첨부파일 등록이 아니므로) 
 		// form.enctype을 기본값으로 재설정하는 과정이 필요하다!
 		if(result) {
-			const form = document.getElementById('ProductMoidfyForm');
+			const form = document.getElementById('ProductModifyForm');
 			form.action = 'ProductDeletePro.pd';
 			form.enctype = 'application/x-www-form-urlencoded';
 			form.submit();
@@ -95,7 +91,7 @@ body {
 	<h2>상품 수정</h2>
 	<br>
 	<div class="container mr-sm-2">
-		<form action="ProductModifyPro.pd" method="post" name="ModifyForm" id="ProductMoidfyForm" enctype="multipart/form-data">
+		<form action="ProductModifyPro.pd" method="post" name="ModifyForm" id="ProductModifyForm" enctype="multipart/form-data">
 			<!-- 파일 수정 시 기존파일 삭제를 위해 실제 파일명도 파라미터로 전달 필요 -->
 			<input type="hidden" name="">
 			<table class="table table-bordered">
@@ -174,7 +170,7 @@ body {
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
-						<input class="btn btn-outline-dark" type="submit" value="수정" onclick="javascript:confirm_modify()">&nbsp;&nbsp;
+						<input class="btn btn-outline-dark" type="button" value="수정" onclick="javascript:confirm_modify()">&nbsp;&nbsp;
 						<input class="btn btn-outline-dark" type="button" value="취소" onclick="top.window.close()">&nbsp;&nbsp;
 						<input class="btn btn-outline-dark" type="button" value="삭제" onclick="javascript:confirm_delete()">&nbsp;&nbsp;
 					</td>

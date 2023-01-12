@@ -11,7 +11,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>DangDangShop - Member Info</title>
+<title>DangDangEAT - Member Info</title>
 <meta name="description" content="Ela Admin - HTML5 Admin Template">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -169,7 +169,7 @@ if(sId == null || sId.equals("")) {
 					dataType: "text",
 					success: function(result) {
 						//작업이 성공적으로 발생했을 경우
-						alert("이메일이 변경되었습니다.");
+						alert(result);
 						location.reload();
 					},
 					error:function() {  

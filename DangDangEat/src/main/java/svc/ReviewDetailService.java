@@ -26,10 +26,12 @@ public class ReviewDetailService {
 				
 				review.setReview_readcount(review.getReview_readcount() + 1);
 			}
+			else {
+				JdbcUtil.rollback(con);
+			}
 		
 		}
 		
-		JdbcUtil.commit(con);
 		
 		JdbcUtil.close(con);
 		

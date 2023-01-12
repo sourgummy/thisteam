@@ -10,7 +10,8 @@ import vo.CommentBean;
 public class CommentListService {
 
 		public List<CommentBean> getCommentList(int review_code, int startRow, int listLimit) {
-						
+			System.out.println("CommentListService - getCommenList()");
+			
 			List<CommentBean> commentList = null;
 			
 			Connection con = JdbcUtil.getConnection();

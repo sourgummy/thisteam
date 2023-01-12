@@ -11,7 +11,6 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import svc.ReviewReplyProService;
-import svc.ReviewWriteProService;
 import vo.ActionForward;
 import vo.ReviewBean;
 
@@ -26,7 +25,7 @@ public class ReviewReplyProAction implements Action {
 			// 업로드 실제 디렉토리(톰캣) 얻어오기
 			String realPath = request.getServletContext().getRealPath(uploadPath);
 			System.out.println("실제 업로드 경로 : " + realPath);
-			// D:\Shared\JSP\workspace_jsp5\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\댕댕잇\ upload
+			// D:\Shared\JSP\workspace_jsp5\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\DangDangEat\ upload
 			int fileSize = 1024 * 1024 * 10;
 			// --------------------------------------------------------------------
 			MultipartRequest multi = new MultipartRequest(

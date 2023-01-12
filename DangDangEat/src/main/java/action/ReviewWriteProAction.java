@@ -28,7 +28,7 @@ public class ReviewWriteProAction implements Action {
 			// 업로드 실제 디렉토리(톰캣) 얻어오기
 			String realPath = request.getServletContext().getRealPath(uploadPath);
 			System.out.println("실제 업로드 경로 : " + realPath);
-			// D:\Shared\JSP\workspace_jsp5\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\DangDang\ upload
+			// D:\Shared\JSP\workspace_jsp5\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\DangDangEat\ upload
 			int fileSize = 1024 * 1024 * 10;
 			
 			// --------------------------------------------------------------------

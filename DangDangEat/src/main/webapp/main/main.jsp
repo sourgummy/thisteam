@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Shop Homepage - Start Bootstrap Template</title>
+<title>DangDangEAT</title>
 
 <link href="css/styles.css" rel="stylesheet" />
 

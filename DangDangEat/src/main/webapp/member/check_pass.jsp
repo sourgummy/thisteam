@@ -12,7 +12,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>DangDangShop - Check Pass</title>
+<title>DangDangEAT - Check Pass</title>
 
 <%
 // 세션 아이디가 null 이거나 "" 일 경우 "로그인이 필요한 페이지입니다." 출력 후 로그인 페이지로 이동

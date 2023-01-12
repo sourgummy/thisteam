@@ -5,6 +5,8 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+    <title>DangDangEAT - Review Modify</title>
+  <link href="css/styles.css" rel="stylesheet" />  
   <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
   <style type="text/css">
 	@font-face {
@@ -109,3 +111,5 @@
          <p class="m-0 text-center text-white">Copyright &copy; DangDangEat 2023</p>
       </div>
    </footer>
+    </body>
+</html>

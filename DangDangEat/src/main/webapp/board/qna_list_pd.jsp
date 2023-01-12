@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-<!--   <link href="css/bootstrap.css" rel="stylesheet" type="text/css"> -->
+    <title>DangDangEAT - Qna List Product</title>
   <style type="text/css">
 	@font-face {
 	    font-family: 'GmarketSansMedium';
@@ -104,7 +104,7 @@
 						<c:forEach var="i" begin="1" end="${qna.qna_re_lev }">
 							&nbsp;&nbsp;
 						</c:forEach>						
-							<img src="img/reply.png">
+						<img src="img/reply.png">
 					</c:if>
 					<%-- =============================================================== --%>
 					<c:if test="${qna.qna_secret eq 'N' }">
@@ -179,3 +179,5 @@
 			</c:otherwise>
 		</c:choose>
 	</section>
+	</body>
+</html>

@@ -12,7 +12,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>DangDangShop - Find Password</title>
+<title>DangDangEAT - Find Password</title>
 
 <!-- Custom fonts for this template-->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
@@ -88,7 +88,7 @@ body {
 												class="form-control form-control-user" id="email"
 												placeholder="이메일">
 										</div>
-										<input type="submit" value="인증번호 전송"
+										<input type="submit" value="임시 비밀번호 전송"
 											class="btn btn-primary btn-user btn-block">
 									</form>
 									<hr>

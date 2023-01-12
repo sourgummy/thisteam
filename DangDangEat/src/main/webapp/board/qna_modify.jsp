@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+    <title>DangDangEAT - Qna Modify</title>
   <link href="css/styles.css" rel="stylesheet" /> 
   <style type="text/css">
 	@font-face {
@@ -71,7 +72,6 @@
 		<form action="QnaModifyPro.bo" name="qnaForm" method="post" enctype="multipart/form-data">
 			<!-- 입력받지 않은 글번호, 페이지번호 hidden 속성으로 전달 -->
 			<input type="hidden" name="qna_code" value="${param.qna_code }" >
-			<input type="hidden" name="qna_pass" value="${param.qna_pass }" >
 			<input type="hidden" name="pageNum" value="${param.pageNum }" >
 			<!-- 파일 수정 시 기존 파일 삭제를 위해 실제 파일명도 파라미터로 전달 필요 -->
 			<input type="hidden" name="qna_real_file" value="${qna.qna_real_file }" >
@@ -80,10 +80,10 @@
 					<td class="td_left"><label for="member_id">작성자</label></td>
 					<td class="td_right"><input type="text" name="member_id" value="${qna.member_id }" readonly="readonly"></td>
 				</tr>
-<!-- 				<tr> -->
-<!-- 					<td class="td_left"><label for="qna_pass">비밀번호</label></td> -->
-<!-- 					<td class="td_right"><input type="password" name="qna_pass" required="required"></td> -->
-<!-- 				</tr> -->
+				<tr>
+					<td class="td_left"><label for="qna_pass">비밀번호</label></td>
+					<td class="td_right"><input type="password" name="qna_pass" required="required"></td>
+				</tr>
 				<tr>
 					<td class="td_left"><label for="qna_subject">제목</label></td>
 					<td class="td_right"><input type="text" name="qna_subject" value="${qna.qna_subject }" required="required"></td>
@@ -115,3 +115,5 @@
          <p class="m-0 text-center text-white">Copyright &copy; DangDangEat 2023</p>
       </div>
    </footer>
+    </body>
+</html>
