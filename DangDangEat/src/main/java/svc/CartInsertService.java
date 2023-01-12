@@ -48,6 +48,8 @@ public class CartInsertService {
 			}
 		} else { // 장바구니에 있으면 이미 있습니다 출력
 			insertCount = 2;
+			
+			JdbcUtil.commit(con);
 		}
 		
 		// 공통작업-4. Connection 객체 반환하기

@@ -18,7 +18,7 @@ public class CartUpdateAction implements Action {
 		HttpSession session = request.getSession();
 		String id = (String)session.getAttribute("sId");
 		int cart_amount = Integer.parseInt(request.getParameter("amount"));
-		System.out.println(pro_code + id + cart_amount);
+//		System.out.println(pro_code + id + cart_amount);
 		CartBean cart = new CartBean();
 		cart.setPro_code(pro_code);
 		cart.setMember_id(id);

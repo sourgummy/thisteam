@@ -30,7 +30,7 @@ public class CartInsertAction implements Action {
 			
 			// 로그인 회원만 가능
 			if(id == null || id.equals(null)) {
-				System.out.println(id);
+//				System.out.println(id);
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
 				out.println("<script>");

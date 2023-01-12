@@ -247,7 +247,7 @@ public class CartDAO {
 			pstmt.setInt(4, 1);
 			
 			insertWishlistCount = pstmt.executeUpdate();
-			System.out.println("위시리스트 담기 성공!");
+//			System.out.println("위시리스트 담기 성공!");
 		} catch (SQLException e) {
 			System.out.println("SQL 구문 오류! - insertWishlist()");
 			e.printStackTrace();

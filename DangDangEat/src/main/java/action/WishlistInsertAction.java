@@ -51,7 +51,7 @@ public class WishlistInsertAction implements Action {
 					// ajax로 구현
 					} else if(path.equals("wishlist")) { // 경로 위시리스트
 						forward = new ActionForward();
-						forward.setPath("Wishlist.ct");
+						forward.setPath("WishlistDetail.ct");
 						forward.setRedirect(true);
 					} else if(path.equals("product_list")) { // 경로 상품 목록
 						forward = new ActionForward();
