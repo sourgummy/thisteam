@@ -42,7 +42,7 @@
 			   
 		      var url_href = window.location.href;
 		      var url = new URL(url_href);
-		      alert($("#amount").val());
+//		      alert($("#amount").val());
 		       
 		       $.ajax({
 		          url: "CartInsert.ct",
