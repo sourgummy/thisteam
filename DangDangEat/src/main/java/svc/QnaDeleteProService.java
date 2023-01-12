@@ -18,6 +18,8 @@ public class QnaDeleteProService {
 		
 		isQnaWriter = dao.isQnaWriter(qna_code, qna_pass);
 		
+		JdbcUtil.commit(con);
+		
 		JdbcUtil.close(con);
 		
 		return isQnaWriter;
