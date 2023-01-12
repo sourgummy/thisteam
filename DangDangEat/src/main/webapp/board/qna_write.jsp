@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+    <title>DangDangEAT - Qna Write</title>
   <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
   <link href="css/styles.css" rel="stylesheet" /> 
   <style type="text/css">
@@ -77,7 +78,6 @@
 		<h2>Q & A Write</h2>
 		<form action="QnaWritePro.bo" name="qnaForm" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="qna_code" value="${param.qna_code }" >
-		<input type="hidden" name="qna_pass" value="${param.qna_pass }" >
 		<input type="hidden" name="member_id" value="${qna.member_id }" >
 		<input type="hidden" name="pageNum" value="${param.pageNum }" >
 			<table class="table container">
@@ -94,7 +94,11 @@
 <!-- 				</tr> -->
 				<tr>
 					<td class="td_left"><label for="qna_subject">제목</label></td>
-					<td class="td_right"><input type="text" name="qna_subject" required="required" /></td>
+					<td class="td_right"><input type="text" name="qna_subject" required="required" /></td>					
+				</tr>
+				<tr>
+					<td class="td_left"><label for="qna_pass">비밀번호</label></td>
+					<td class="td_right"><input type="password" name="qna_pass" required="required" /></td>								
 					
 				</tr>
 				<tr>
@@ -124,3 +128,5 @@
          <p class="m-0 text-center text-white">Copyright &copy; DangDangEat 2023</p>
       </div>
    </footer>
+    </body>
+</html>

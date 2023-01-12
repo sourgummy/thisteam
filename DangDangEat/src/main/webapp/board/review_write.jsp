@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+      <title>DangDangEAT - Review Write</title>
   <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
   <link href="css/styles.css" rel="stylesheet" /> 
   <style type="text/css">
@@ -80,17 +81,16 @@
 <!-- 					<td class="td_left"><label for="member_id">작성자</label></td> -->
 <!-- 					<td class="td_right"><input type="text" name="member_id" required="required" /></td> -->
 <!-- 				</tr> -->
-				
-<!--  				<tr>  -->
-<!-- 					<td class="td_left"><label for="review_pass">비밀번호</label></td> -->
-<!-- 					<td class="td_right"> -->
-<!-- 						<input type="password" name="review_pass" required="required" /> -->
-<!-- 					</td> -->
-<!-- 				</tr> -->
 				<tr>
 					<td class="td_left"><label for="review_subject">제목</label></td>
 					<td class="td_right"><input type="text" name="review_subject" required="required" /></td>
 				</tr>
+ 				<tr> 
+					<td class="td_left"><label for="review_pass">비밀번호</label></td>
+					<td class="td_right">
+						<input type="password" name="review_pass" required="required" />
+					</td>
+				</tr>				
 				<tr>
 					<td class="td_left"><label for="review_content">내용</label></td>
 					<td class="td_right">
@@ -118,3 +118,5 @@
          <p class="m-0 text-center text-white">Copyright &copy; DangDangEat 2023</p>
       </div>
    </footer>
+    </body>
+</html>

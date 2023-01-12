@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<title>DangDangEAT - Qna Delete</title>
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="css/styles.css" rel="stylesheet" /> 
 <style type="text/css">
@@ -82,3 +83,5 @@ input[type=button], input[type=submit], input[type=password] {
          <p class="m-0 text-center text-white">Copyright &copy; DangDangEat 2023</p>
       </div>
    </footer>
+   </body>
+</html>

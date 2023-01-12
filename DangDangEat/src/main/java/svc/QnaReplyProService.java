@@ -22,12 +22,11 @@ public class QnaReplyProService {
 		
 		if(insertCount > 0) { // 성공 시
 			JdbcUtil.commit(con);
-			isWriteSuccess = true;
+			isWriteSuccess = true;			
 		} else { // 실패 시
 			JdbcUtil.rollback(con);
 		}
 		
-		JdbcUtil.commit(con);
 		
 		JdbcUtil.close(con);
 		

@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+    <title>DangDangEAT - Review List</title>
   <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
   <link href="css/styles.css" rel="stylesheet" />   
   <style type="text/css">
@@ -29,7 +30,6 @@
 	h2 {
 		text-align: center;
 		font-family:"GmarketSansMedium" ;
-		margin-bottom: 30px;
 	}
 	
 	table {
@@ -52,9 +52,10 @@
 	}
 	
 	#pageList {
-		margin-bottom: 30px;
-		width: 1024px;
- 		text-align: right; 
+	margin: auto;
+	width: 1024px;
+	text-align: center;
+	margin-bottom: 30px;
 	}
 	
 	#emptyArea {
@@ -68,6 +69,7 @@
 		width: 1024px;
 		text-align: right;
 		margin-top: 10px;
+		margin-bottom: 30px;
 	}
 	
 	#commandCell {
@@ -79,8 +81,8 @@
 		text-decoration: none;
 	}
 		input[type=button], input[type=submit], input[type=text] {
-		border-radius: 0px;
 	    font-family:"GmarketSansMedium" ;
+	    border-radius: 0px;
 	}
 	
 </style>
@@ -126,7 +128,7 @@
 							&nbsp;&nbsp;
 						</c:forEach>
 						<%-- 답글 제목 앞에 이미지 추가 --%>
-      			<img src="img/reply.png">	
+      			     <img src="img/reply.png">	
 					</c:if>
 					<%-- =============================================================== --%>
 					<a href="ReviewDetail.bo?review_code=${review.review_code }&pageNum=${pageNum }">
@@ -189,3 +191,5 @@
          <p class="m-0 text-center text-white">Copyright &copy; DangDangEat 2023</p>
       </div>
    </footer>
+    </body>
+</html>

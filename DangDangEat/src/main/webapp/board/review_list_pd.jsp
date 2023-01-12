@@ -7,7 +7,7 @@
 
 <html lang="en">
     <head>
-<!--   <link href="css/bootstrap.css" rel="stylesheet" type="text/css"> -->
+    <title>DangDangEAT - Review List Product</title>
   <style type="text/css">
 	@font-face {
 	    font-family: 'GmarketSansMedium';
@@ -31,7 +31,7 @@
 	}
 	
 	table {
-		margin: 20px;
+	    margin: auto;
 		width: 1024px;
 	}
 	
@@ -170,3 +170,5 @@
 			</c:otherwise>
 		</c:choose>
 	</section>
+	 </body>
+</html>

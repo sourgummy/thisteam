@@ -5,7 +5,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<title>DangDangEAT - Review Detail</title>
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="css/styles.css" rel="stylesheet" />  
 <style type="text/css">
 @font-face {
 	font-family: 'GmarketSansMedium';
@@ -21,7 +23,7 @@ body {
 }
 
 #articleForm {
-	width: 500px;
+	width: 1224px;
 	height: 550px;
 	border: 1px solid #D3D3D3;
 	margin: auto;
@@ -33,9 +35,9 @@ h2 {
 }
 
 table {
-	/* 		border: 1px solid black; */
-	border-collapse: collapse;
-	width: 500px;
+	border-collapse: collapse;  
+	width: 1224px;
+	border-bottom-width: 1px;
 }
 
 th {
@@ -82,10 +84,11 @@ td {
 	text-align: center;
 }
 
-input {
-	border-radius: 0px;
-	font-family: "GmarketSansMedium";
-}
+input[type=button], input[type=submit] {
+		border-radius: 0px;
+	    font-family:"GmarketSansMedium" ;
+	}	
+
 </style>
 </head>
 
@@ -117,7 +120,8 @@ input {
 				</table>
 			</section>
 			
-						<section id="articleContentArea">${review.review_content }
+						<section id="articleContentArea">
+						${review.review_content }
 			</section>
 		</section>
 	</div>
@@ -128,7 +132,7 @@ input {
 		<c:if test="${sessionScope.sId eq 'admin' || sessionScope.sId == review.member_id}"><input type="button" value="수정"
 			onclick="location.href='ReviewModifyForm.bo?review_code=${param.review_code}&pageNum=${param.pageNum }'">
 		<input type="button" value="삭제"
-			onclick="location.href='ReviewDeletePro.bo?review_code=${param.review_code}&pageNum=${param.pageNum }'"></c:if>
+			onclick="location.href='ReviewDeleteForm.bo?review_code=${param.review_code}&pageNum=${param.pageNum }'"></c:if>
 		<input type="button" value="목록"
 			onclick="location.href='ReviewList.bo?pageNum=${param.pageNum}'">
 	</section>
@@ -156,15 +160,15 @@ input {
 
 			<!-- 댓글 표시 영역 -->
 			<section
-				style="margin-left: 400px; margin-right: 150px; margin-top: 30px; margin-bottom: 30px;">
+				style="margin-top: 30px; margin-bottom: 30px; margin-left: 100px; margin-left: 250px">
 				<%-- for(CommentBean comment : commentList) {} --%>
-				<table style="width: 500px;">
+				<table style="width: 800px;">
 					<c:forEach var="comment" items="${commentList }">
 
 						<input type="hidden" name="comment_code" value=${param.comment_code }>
 						<!-- 					<th width="70"></th> -->
 						<tr>
-							<td>${comment.member_id }</td>
+							<td><img src="img/foot.png" style=" width: 30px;">${comment.member_id }</td>
 							<td><fmt:formatDate value="${comment.comment_date }" pattern="yy-MM-dd" /></td>
 							<td>${comment.comment_content }</td>	 								
 							<c:if test="${not empty sessionScope.sId and sessionScope.sId eq 'admin'}"><td><input type="button" value="댓글삭제"
@@ -182,3 +186,5 @@ input {
          <p class="m-0 text-center text-white">Copyright &copy; DangDangEat 2023</p>
       </div>
    </footer>
+    </body>
+</html>

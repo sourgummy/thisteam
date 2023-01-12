@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+    <title>DangDangEAT - Qna Detail</title>
   <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
   <link href="css/styles.css" rel="stylesheet" />  
   <style type="text/css">
@@ -28,7 +29,7 @@
 		text-align: center;
 	}	
 	table {
- 		border-collapse: collapse;  
+  		border-collapse: collapse;   
 	 	width: 1224px;
 	 	border-bottom-width: 1px;
 	}	
@@ -96,7 +97,7 @@
 	<section id="commandList"><c:if test="${not empty sessionScope.sId and sessionScope.sId eq 'admin'}">
 		<input type="button" value="답변" onclick="location.href='QnaReplyForm.bo?qna_code=${param.qna_code}&pageNum=${param.pageNum }'"></c:if>
 		<c:if test="${sessionScope.sId eq 'admin' || sessionScope.sId == qna.member_id}"> <input type="button" value="수정" onclick="location.href='QnaModifyForm.bo?qna_code=${param.qna_code}&pageNum=${param.pageNum }'">
-		<input type="button" value="삭제" onclick="location.href='QnaDeletePro.bo?qna_code=${param.qna_code}&pageNum=${param.pageNum }'"></c:if>
+		<input type="button" value="삭제" onclick="location.href='QnaDeleteForm.bo?qna_code=${param.qna_code}&pageNum=${param.pageNum }'"></c:if>
 		<input type="button" value="목록" onclick="location.href='QnaList.bo?pageNum=${param.pageNum}'">
 	</section>
     <!-- Footer-->
@@ -105,3 +106,5 @@
          <p class="m-0 text-center text-white">Copyright &copy; DangDangEat 2023</p>
       </div>
    </footer>
+    </body>
+</html>

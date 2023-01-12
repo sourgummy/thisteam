@@ -41,9 +41,7 @@ public class ReviewModifyProService {
 			isModifySuccess = true;
 		} else {
 			JdbcUtil.rollback(con);
-		}
-		
-		JdbcUtil.commit(con);
+		}		
 		
 		JdbcUtil.close(con);
 		
