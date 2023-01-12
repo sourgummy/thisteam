@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <link href="css/styles.css" rel="stylesheet" /> 
-<title></title>
+<title>DangDangEAT - Member Join</title>
 <style type="text/css">
 @font-face {
     font-family: 'GmarketSans';
