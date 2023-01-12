@@ -71,10 +71,10 @@ body {
 									<hr>
 									<form class="user">
 										<div class="text-center">
-											<button onclick="location.href='MemberJoinForm.me'"
-												class="btn btn-primary btn-user btn-block">회원가입</button>
-											<button onclick="location.href='./'"
-												class="btn btn-primary btn-user btn-block">댕댕잇 바로가기</button>
+											<input type="button" onclick="location.href='MemberJoinForm.me'"
+                                    			class="btn btn-primary btn-user btn-block" value="회원가입">
+                                 			<input type="button" onclick="location.href='./'"
+                                    			class="btn btn-primary btn-user btn-block" value="댕댕잇 바로가기">
 										</div>
 									</form>
 								</div>

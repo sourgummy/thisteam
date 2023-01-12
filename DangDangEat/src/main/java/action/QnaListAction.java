@@ -46,8 +46,8 @@ public class QnaListAction implements Action {
 		
 		// QnaListService 객체의 getQnaList() 메서드를 호출하여 게시물 목록 조회
 		// => 파라미터 : 시작행번호, 목록갯수   리턴타입 : List<QnaBean>(qnaList)
-		List<QnaBean> qnaList = service.getQnaList(keyword, startRow, listLimit);
-				
+//		List<QnaBean> qnaList = service.getQnaList(keyword, startRow, listLimit);
+		List<QnaBean> qnaList = service.getRealQnaList2(startRow, listLimit);		
 		// ---------------------------------------------------------
 		// 페이징 처리
 		int listCount = service.getQnaListCount(keyword);

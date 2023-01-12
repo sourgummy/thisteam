@@ -50,5 +50,36 @@ public class QnaListService {
 		return listCount;
 	}
 
-
+	// 23/01/12 Qna 목록 전체 조회 구문
+	public List<QnaBean> getRealQnaList() {
+		List<QnaBean> realQnaList = null;
+		
+		Connection con = JdbcUtil.getConnection();
+		QnaDAO dao = QnaDAO.getInstance();
+		dao.setConnection(con);
+		
+		realQnaList = dao.AllQnaList();
+		System.out.println("QnaListService로 넘어온 RealQnaList" + realQnaList);
+		JdbcUtil.commit(con);
+		JdbcUtil.close(con);
+		
+		return realQnaList;
+	}
+	
+	// 23/01/12 Qna 목록 전체 조회 구문
+		public List<QnaBean> getRealQnaList2(int startRow, int listLimit) {
+			List<QnaBean> realQnaList = null;
+			
+			Connection con = JdbcUtil.getConnection();
+			QnaDAO dao = QnaDAO.getInstance();
+			dao.setConnection(con);
+			
+			realQnaList = dao.AllQnaList2(startRow, listLimit);
+			System.out.println("QnaListService로 넘어온 RealQnaList2" + realQnaList);
+			JdbcUtil.commit(con);
+			JdbcUtil.close(con);
+			
+			return realQnaList;
+		}
+	
 }

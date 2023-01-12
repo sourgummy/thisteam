@@ -21,7 +21,7 @@ if(sId == null || !sId.equals("admin")) {
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>DangDangEat Admin</title>
+<title>DangDangEAT - Admin Board</title>
 
 <!-- Custom fonts for this template -->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -34,17 +34,9 @@ if(sId == null || !sId.equals("admin")) {
 
 <!-- 폰트 설정 -->
 <style>
-
-.main-icon {
-    padding: 1%;
-    height: 40px;
-    width: auto;
-   margin-right: 3%;
-   padding: 5px;
-}
 @font-face {
     font-family: 'GmarketSans';
-    font-weight: 300;
+    font-weight: normal;
     font-style: normal;
     src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.eot');
     src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.eot?#iefix') format('embedded-opentype'),
@@ -53,9 +45,28 @@ if(sId == null || !sId.equals("admin")) {
          url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.ttf') format("truetype");
     font-display: swap;
 } 
+@font-face { /*지마켓 산스*/
+  font-family: 'GmarketSansMedium';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}    
 
 body {
-    font-family: 'GmarketSans';
+    font-family: 'GmarketSansMedium';
+/*     vertical-align: middle; */
+}
+
+#accordionSidebar{
+font-family: 'GmarketSans';
+}
+
+.main-icon {
+    padding: 1%;
+    height: 40px;
+    width: auto;
+   margin-right: 3%;
+   padding: 5px;
 }
 
 </style>
@@ -253,7 +264,7 @@ body {
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">게시판 관리</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Q&A 게시판 관리</h1>
                     <p class="mb-4">게시판 목록 페이지 
 
                     <!-- DataTales Example -->

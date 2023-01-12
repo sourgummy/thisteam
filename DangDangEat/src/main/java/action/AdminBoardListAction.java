@@ -38,10 +38,12 @@ public class AdminBoardListAction implements Action {
 		// QnaListService 클래스 인스턴스 생성
 		QnaListService service = new QnaListService();
 		
+		// 23/01/12 오류 확인한 구문 절대 사용 금지
 		// QnaListService 객체의 getQnaList() 메서드를 호출하여 게시물 목록 조회
 		// => 파라미터 : 시작행번호, 목록갯수   리턴타입 : List<QnaBean>(qnaList)
-		List<QnaBean> qnaList = service.getQnaList(keyword, startRow, listLimit);
-				
+//		List<QnaBean> qnaList = service.getQnaList(keyword, startRow, listLimit);
+		List<QnaBean> adminQnaList = service.getRealQnaList();
+		
 		// ---------------------------------------------------------
 		// 페이징 처리
 		int listCount = service.getQnaListCount(keyword);
@@ -70,7 +72,7 @@ public class AdminBoardListAction implements Action {
 		PageInfo pageInfo = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
 		// ----------------------------------------------------------------------
 		// 글목록(List 객체)과 페이징정보(PageInfo 객체)를 request 객체에 저장 - setAttribute()
-		request.setAttribute("qnaList", qnaList);
+		request.setAttribute("qnaList", adminQnaList);
 		request.setAttribute("pageInfo", pageInfo);
 		
 		forward = new ActionForward();

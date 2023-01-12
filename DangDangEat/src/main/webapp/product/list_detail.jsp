@@ -37,7 +37,8 @@
 
 
 	$(function() {
-		
+		const productDIV = $("#productDIV").css("hight");
+		const tableSize = $("#tableSize").css("width");
 		$("#cart").on("click",function(){
 			   
 		      var url_href = window.location.href;
@@ -93,12 +94,18 @@
 					// 익명 함수 파라미터로 응답 데이터가 전달됨(처리 페이지의 응답 결과)
 					// id 선택자 resultArea 영역에 응답 데이터(response) 출력
 					$("#resultArea").html(response);
+					$("#productDIV").css("hight",productDIV);
+					$("#productDIV").css("text-align", "left");
+					$("#pro_name").css("text-align", "left");
+					$("#pro_nameSize").css("text-align", "left");
+// 					$("#tableSize > colgroup").css("width", tableSize);
 				},
 				error: function(xhr, textStatus, errorThrown) {
 					$("#resultArea").html("xhr = " + xhr + "<br>textStatus =  " + textStatus + "<br>errorThrown =  " + errorThrown );
 				}
 			});
 		}); // qna_button
+		
 		
 		$("#review_button").on("click", function() {
 			let sendData = $("form").serialize();
@@ -112,6 +119,10 @@
 					// 익명 함수 파라미터로 응답 데이터가 전달됨(처리 페이지의 응답 결과)
 					// id 선택자 resultArea 영역에 응답 데이터(response) 출력
 					$("#resultArea").html(response);
+					$("#productDIV").css("hight",productDIV);
+					$("#productDIV").css("text-align", "left");
+					$("#pro_name").css("text-align", "left");
+					$("#pro_nameSize").css("text-align", "left");
 				},
 				error: function(xhr, textStatus, errorThrown) {
 					$("#resultArea").html("xhr = " + xhr + "<br>textStatus =  " + textStatus + "<br>errorThrown =  " + errorThrown );
@@ -150,6 +161,8 @@ body {
     padding-bottom: 0rem;
 }
 
+
+
 </style>
 </head>
 <body>
@@ -171,7 +184,7 @@ body {
 						alt="..." onerror="this.src='./img/sample1_thumb.png';" />
 
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-6" id="productDIV">
 					<!-- 브랜드 페이지 링크 삽입 -->
 <!-- 					<div class="small mb-1"> -->
 <%-- 						 ${product.pro_brand } --%>
@@ -187,7 +200,7 @@ body {
 					</p>
 					
 					<!-- 선택한 상품 출력 테이블 -->
-					<table class="table"> 
+					<table class="table" id="tableSize"> 
 						<colgroup>
 							<col style="width:50%;">
 							<col style="width:20%;">
@@ -202,7 +215,7 @@ body {
 					  </thead>
 					  <tbody>
 					    <tr>
-					      <td>${product.pro_name }</td>
+					      <td id="pro_nameSize">${product.pro_name }</td>
 					      <!-- 상품 수량 -->
 					      <td class="text-center">
 					      <input class="form-control text-center me-3" id="amount" type="number" value="1" MIN="1" MAX="${product.pro_qty}" 

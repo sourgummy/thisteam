@@ -63,6 +63,8 @@ $(document).on("click","#c-search-btn",function(){
 				<strong>내가 가진 쿠폰</strong>
 			</div>
 		<div id="in-container">
+<%-- <%=request.getAttribute("couponList").toString().compareTo("[]") %> --%>
+<%-- <%=request.getAttribute("couponList") %> --%>
 
 			<div class="card-body card-block" id="couponWapper">
 
@@ -73,7 +75,8 @@ $(document).on("click","#c-search-btn",function(){
 			
 
 					<div class='card-body card-block' id='couponDiv'>
-				<% if (request.getAttribute("couponList") == "[]"){%>
+				<% if (request.getAttribute("couponList").toString().compareTo("[]")  == 0){%>
+				
 							<div class='d-flex py-2 border border-dark rounded-2'>
 								<div class='align-self-center p-2'><img src='img/no_coupon.png' width='100px'></div>
 								<div class='align-self-center p-2'>사용가능한 쿠폰이 없습니다.</div>

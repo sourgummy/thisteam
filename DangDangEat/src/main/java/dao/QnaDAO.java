@@ -138,6 +138,56 @@ public class QnaDAO {
 		return qnaList;
 	}
 	
+	// 23/01/12 게시판 관리 페이지를 위해 추가한 전체 목록 조회
+	public List<QnaBean> AllQnaList() {
+		List<QnaBean> adminQnaList = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT * FROM qna";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			// 전체 목록 저장할 List 객체 생성
+			adminQnaList = new ArrayList<QnaBean>();
+			
+			// 조회 결과가 있을 경우
+			while(rs.next()) {
+				// QnaBean 객체(qna) 생성 후 조회 데이터 저장
+				QnaBean qna = new QnaBean();
+				qna.setQna_code(rs.getInt("qna_code"));
+				qna.setMember_id(rs.getString("member_id"));
+				qna.setQna_pass(rs.getString("qna_pass"));
+				qna.setQna_subject(rs.getString("qna_subject"));
+				qna.setQna_content(rs.getString("qna_content"));
+				qna.setQna_file(rs.getString("qna_file"));
+				qna.setQna_real_file(rs.getString("qna_real_file"));
+				qna.setQna_re_ref(rs.getInt("qna_re_ref"));
+				qna.setQna_re_lev(rs.getInt("qna_re_lev"));
+				qna.setQna_re_seq(rs.getInt("qna_re_seq"));
+				qna.setQna_date(rs.getDate("qna_date"));
+				qna.setQna_secret(rs.getString("qna_secret"));
+				System.out.println(qna);
+				
+				adminQnaList.add(qna);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("qnaDAO - AllQnaList()");
+			e.printStackTrace();
+		} finally {
+			// DB 자원 반환
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+		
+		return adminQnaList;
+	}
+	
+	
+	
 	// 글목록 갯수 조회
 	public int selectQnaListCount(String keyword) {
 		int listCount = 0;
@@ -404,5 +454,57 @@ public class QnaDAO {
 		
 		return insertCount;
 	}
+	
+	// 23/01/12 게시판 관리 페이지를 위해 추가한 전체 목록 조회
+	public List<QnaBean> AllQnaList2(int startRow, int listLimit) {
+		List<QnaBean> adminQnaList = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT * FROM qna "					
+					+ "ORDER BY qna_re_ref DESC, qna_re_seq ASC "
+					+ "LIMIT ?,?";			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, listLimit);
+			rs = pstmt.executeQuery();
+			
+			// 전체 목록 저장할 List 객체 생성
+			adminQnaList = new ArrayList<QnaBean>();
+			
+			// 조회 결과가 있을 경우
+			while(rs.next()) {
+				// QnaBean 객체(qna) 생성 후 조회 데이터 저장
+				QnaBean qna = new QnaBean();
+				qna.setQna_code(rs.getInt("qna_code"));
+				qna.setMember_id(rs.getString("member_id"));
+				qna.setQna_pass(rs.getString("qna_pass"));
+				qna.setQna_subject(rs.getString("qna_subject"));
+				qna.setQna_content(rs.getString("qna_content"));
+				qna.setQna_file(rs.getString("qna_file"));
+				qna.setQna_real_file(rs.getString("qna_real_file"));
+				qna.setQna_re_ref(rs.getInt("qna_re_ref"));
+				qna.setQna_re_lev(rs.getInt("qna_re_lev"));
+				qna.setQna_re_seq(rs.getInt("qna_re_seq"));
+				qna.setQna_date(rs.getDate("qna_date"));
+				qna.setQna_secret(rs.getString("qna_secret"));
+				System.out.println(qna);
+				
+				adminQnaList.add(qna);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("qnaDAO - AllQnaList2()");
+			e.printStackTrace();
+		} finally {
+			// DB 자원 반환
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+		
+		return adminQnaList;
+	}	
 	
 }
