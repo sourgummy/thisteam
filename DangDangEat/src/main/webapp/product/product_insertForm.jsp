@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>product_insertForm</title>
+<title>DangDangEAT - Product_Insert</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -15,10 +15,7 @@
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript">
 	
-	function confirm_insert() {
-		alert("상품등록이 완료되었습니다!");
-	}
-	
+
 	//옵션 추가 폼 (사용안할예정이라 주석처리함)
 // 	function fn_addOption(obj){
 // 		if(obj.classList.contains("bi-plus")){
@@ -181,7 +178,7 @@ body {
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
-						<input class="btn btn-outline-dark" type="submit" value="상품등록" onclick="javascript:confirm_insert()">&nbsp;&nbsp;
+						<input class="btn btn-outline-dark" type="submit" value="상품등록">&nbsp;&nbsp;
 						<input class="btn btn-outline-dark" type="button" value="취소"
 						onclick="top.window.close()"></td>
 				</tr>
