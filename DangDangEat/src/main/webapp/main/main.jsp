@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Shop Homepage - Start Bootstrap Template</title>
+<title>DangDangEAT</title>
 
 <link href="css/styles.css" rel="stylesheet" />
 <link rel="stylesheet"
@@ -145,8 +145,8 @@ cursor: pointer;
 	<div id="slider">
 		<ul class="slider_image">
 			<li><img src="img/slider1.png" /></li>
-			<li><img src="img/cheerup.jpg" /></li>
-			<li><img src="img/cheerup.jpg" /></li>
+			<li><img src="img/slider2.png" /></li>
+			<li><img src="img/slider3.png" /></li>
 		</ul>
 	</div>
 

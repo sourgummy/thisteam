@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
-<title>list | Template</title>
+<title>DangDangEAT - List</title>
 <link href="css/styles.css" rel="stylesheet" />
  <link rel="stylesheet" href="resources/css/bootstrap.min.css"
 	type="text/css">
