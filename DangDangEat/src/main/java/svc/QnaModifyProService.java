@@ -22,6 +22,8 @@ public class QnaModifyProService {
 		// => 파라미터 : 글번호, 패스워드    리턴타입 : boolean(isQnaWriter)
 		isQnaWriter = dao.isQnaWriter(qna.getQna_code(), qna.getQna_pass());
 		
+		JdbcUtil.commit(con);
+		
 		// 공통작업-4. Connection 객체 반환하기
 		JdbcUtil.close(con);
 		
