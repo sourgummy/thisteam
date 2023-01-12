@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Shop Homepage - Start Bootstrap Template</title>
+<title>DangDangEAT</title>
 
 <link href="css/styles.css" rel="stylesheet" />
 <link rel="stylesheet"
@@ -144,8 +144,8 @@ cursor: pointer;
 	<div id="slider">
 		<ul class="slider_image">
 			<li><img src="img/slider1.png" /></li>
-			<li><img src="img/cheerup.jpg" /></li>
-			<li><img src="img/cheerup.jpg" /></li>
+			<li><img src="img/slider2.png" /></li>
+			<li><img src="img/slider3.png" /></li>
 		</ul>
 	</div>
 
@@ -156,7 +156,8 @@ cursor: pointer;
 	<%
 	System.out.println(request.getContextPath());
 	System.out.println(request.getScheme()+"://"+request.getServerName() + ":" + request.getServerPort());
-	System.out.println("request.getSession().getServletContext().getRealPath(/)"+  request.getSession().getServletContext().getRealPath("upload"));
+	System.out.println("request.getSession().getServletContext().getRealPath(/)"+  request.getServletContext().getRealPath("upload"));
+	System.out.println(request.getServletContext().getRealPath("/upload"));
 	%>
 	     <!-- 메인 네모 부분 // 관련 클래스: main_rec-->
         <div class="mt-5 d-flex flex-row justify-content-center" >

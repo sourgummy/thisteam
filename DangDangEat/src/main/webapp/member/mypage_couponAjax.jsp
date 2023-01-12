@@ -57,7 +57,6 @@ $(document).on("click","#c-search-btn",function(){
 });//$(document)
 </script>
 
-
 	<div class="container" id="mypage_couponAjax">
 		<div class="card" id="titleDiv">
 			<div class="card-header">
