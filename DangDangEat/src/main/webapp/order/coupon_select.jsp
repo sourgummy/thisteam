@@ -17,7 +17,7 @@
     font-weight: normal;
     font-style: normal;
 }    
-
+    
 body {
     font-family: 'GmarketSansMedium';
     vertical-align: middle;

@@ -157,7 +157,8 @@ cursor: pointer;
 	<%
 	System.out.println(request.getContextPath());
 	System.out.println(request.getScheme()+"://"+request.getServerName() + ":" + request.getServerPort());
-	System.out.println("request.getSession().getServletContext().getRealPath(/)"+  request.getSession().getServletContext().getRealPath("upload"));
+	System.out.println("request.getSession().getServletContext().getRealPath(/)"+  request.getServletContext().getRealPath("upload"));
+	System.out.println(request.getServletContext().getRealPath("/upload"));
 	%>
 	     <!-- 메인 네모 부분 // 관련 클래스: main_rec-->
         <div class="mt-5 d-flex flex-row justify-content-center" >

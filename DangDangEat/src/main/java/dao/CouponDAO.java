@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -167,37 +169,98 @@ public class CouponDAO {
 		// mc_view 에서 존재하는 쿠폰 있는지 검색(자동발급이나 등록 후 사용하지않은 쿠폰)
 		
 		PreparedStatement pstmt = null;
-
+		PreparedStatement pstmt2 = null;
+		PreparedStatement pstmt3 = null;
+		PreparedStatement pstmt4 = null;
+	
 		ResultSet rs = null;
-		String sql = "SELECT * FROM mc_view  "
-		+" WHERE  member_id = ?  AND   cp_status = 1  AND  mc_stat = 1 AND mc_used = 'N' ";
+		ResultSet rs2 = null;
+		int countUpdate = 0;
+		JSONArray odj = null;
+		
+		try {
+		
+			String sql = "SELECT p.cp_code "
+					+ "		FROM orders o , payments p , mc_view mc "
+					+ "			WHERE o.order_code = p.order_code "
+					+ "            	AND mc.cp_code = p.cp_code "
+					+ "				AND o.order_status = 1 "
+					+ "				AND mc.cp_target = 'birth' "
+					+ "				AND o.order_date BETWEEN mc.target_sd AND mc.target_ed "
+					+ "				AND o.member_id = ? ";
+			pstmt2 = con.prepareStatement(sql);
+			pstmt2.setString(1, sId);
+			rs = pstmt2.executeQuery();
+			
+			List<String> cp_codeUpdate = new ArrayList<String>();
+			
+			//기간 내에 사용 기록이 있는 cp_target = 'birth' 의 cp_code 조회
+			if(rs.next()) {
+				//결과가 있을 경우
+				cp_codeUpdate.add(rs.getString("cp_code")); 
+			}
+			
+			//생일쿠폰 사용유무(mc_used)를 사용기록 유무에 따라 변경
+			
+			if(cp_codeUpdate.size() == 0) { //사용기록이 없을 경우
+				
+				sql = "UPDATE member_coupon SET mc_used = 'N'  WHERE member_id = ? AND  cp_code = ? ";
+				
+				for(int i = 0; i < cp_codeUpdate.size(); i++) {
+					
+					pstmt3 = con.prepareStatement(sql);
+					pstmt3.setString(1, sId);
+					pstmt3.setString(2, cp_codeUpdate.get(i));
+					countUpdate = pstmt3.executeUpdate();
+				
+				}
+				
+			}else {//사용기록이 있을 경우:  생일쿠폰 사용유무(mc_used) 
+				sql = "UPDATE member_coupon SET mc_used = 'Y'  WHERE member_id = ? AND  cp_code = ? ";
+				
+				for(int i = 0; i < cp_codeUpdate.size(); i++) {
+					
+					pstmt4 = con.prepareStatement(sql);
+					pstmt4.setString(1, sId);
+					pstmt4.setString(2, cp_codeUpdate.get(i));
+					countUpdate = pstmt4.executeUpdate();
+				}
+				
+			}
+			
+			
+			
+			
+			
+			System.out.println(sId + "/  생일쿠폰 수정 업데이트 결과: " + countUpdate);
+			
+			 sql = "SELECT * FROM mc_view  "
+			+" WHERE  member_id = ?  AND   cp_status = 1  AND  mc_stat = 1 AND mc_used = 'N' ";
 	
 		
-		
-		JSONArray odj = new JSONArray();
+		odj = new JSONArray();
 
-		try {
 			
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, sId);
-			rs = pstmt.executeQuery();
+			rs2 = pstmt.executeQuery();
 		
-			System.out.println(this.getClass() + "      "+pstmt);
+			System.out.println(this.getClass() + "  "+pstmt);
 		
-			while(rs.next()) {
+			while(rs2.next()) {
 				
 				JSONObject couponOdj = new JSONObject();
 				
-				couponOdj.put("member_id", rs.getString("member_id")); 				
-				couponOdj.put("cp_code", rs.getString("cp_code"));   				
-				couponOdj.put("cp_name", rs.getString("cp_name")); 				
-				couponOdj.put("cp_discount_value", rs.getInt("cp_discount_value")); 				
-				couponOdj.put("cp_period",rs.getInt("cp_period"));      				
-				couponOdj.put("cp_min_price",rs.getInt("cp_min_price"));      				
-				couponOdj.put("cp_max_discount", rs.getInt("cp_max_discount"));          				
-				couponOdj.put("target_sd", rs.getString("target_sd"));				
-				couponOdj.put("target_ed", rs.getString("target_ed"));
+				couponOdj.put("member_id", rs2.getString("member_id")); 				
+				couponOdj.put("cp_code", rs2.getString("cp_code"));   				
+				couponOdj.put("cp_name", rs2.getString("cp_name")); 				
+				couponOdj.put("cp_discount_value", rs2.getInt("cp_discount_value")); 				
+				couponOdj.put("cp_period",rs2.getInt("cp_period"));      				
+				couponOdj.put("cp_min_price",rs2.getInt("cp_min_price"));      				
+				couponOdj.put("cp_max_discount", rs2.getInt("cp_max_discount"));          				
+				couponOdj.put("target_sd", rs2.getString("target_sd"));				
+				couponOdj.put("target_ed", rs2.getString("target_ed"));
 			
 		
 				odj.put(couponOdj);
@@ -207,13 +270,19 @@ public class CouponDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("SQL 구문 오류 - selectMemberCoupon(String sId)");
-			System.out.println(pstmt);
+			System.out.println("1: "+ pstmt2);
+			System.out.println("if: "+ pstmt3);
+			System.out.println("else:  "+ pstmt4);
+			System.out.println(" "+ pstmt);
 		}finally {
-			JdbcUtil.close(rs);
 			JdbcUtil.close(pstmt);
+			JdbcUtil.close(rs2);
+			JdbcUtil.close(pstmt4);
+			JdbcUtil.close(pstmt3);
+			JdbcUtil.close(pstmt2);
+			JdbcUtil.close(rs);
 			
 		}
-		
 		
 		
 		return odj;
