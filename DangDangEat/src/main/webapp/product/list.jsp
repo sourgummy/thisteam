@@ -103,33 +103,6 @@ body {
 		$(".totalPrice").text(totalPrice+" 원");
 	}
 
-
-
-	$(function() {
-		
-		$("#cart").on("click",function(){
-			   
-		      var url_href = window.location.href;
-		      var url = new URL(url_href);
-
-		      alert($("#amount").val());
-		       
-		       $.ajax({
-		          url: "CartInsert.ct",
-		          data: {
-		             pro_code : url.searchParams.get("pro_code"),
-		             amount : $("#amount").val(),
-		             pro_name : $("#pro_name").val()
-		          },
-		          success: function(result) {
-		             alert("성공");
-		          }
-		          
-		          
-		       });//    $.ajax({
-
-	 	 });
-	 });
 	
 </script>
 
@@ -258,27 +231,19 @@ body {
 											</div>
 											<div>
 												<!-- 장바구니 -->
-												<form action="CartInsert.ct" method="post"
-													style="display: inline">
-													<input type="hidden" name="pro_code"
-														value=${product.pro_code }> <input type="hidden"
-														name="path" value="product"> <input type="hidden"
-														name="amount" value="1">
-													<!-- 											<i class="bi-cart-fill me-1"></i> -->
-													<input type="submit"
-														class="btn btn-outline-dark flex-shrink-0"
-														value="Add to Cart">
+												<form action="CartInsert.ct" method="post" style="display: inline">
+													<input type="hidden" name="pro_code" value=${product.pro_code }>
+													<input type="hidden" name="path" value="product_list">
+													<input type="hidden" name="amount" value="1">
+													<input type="submit" class="btn btn-outline-dark flex-shrink-0" value="Add to Cart">
 												</form>
+												&nbsp;
 												<!-- wishList -->
-												<form action="WishlistInsert.ct" method="post"
-													style="display: inline">
-													<input type="hidden" name="pro_code"
-														value=${product.pro_code }> <input type="hidden"
-														name="amount" value="1">
-													<!-- 											<i class="bi bi-heart-fill"></i> -->
-													<input type="submit"
-														class="btn btn-outline-dark flex-shrink-0"
-														value="Wishlist">
+												<form action="WishlistInsert.ct" method="post" style="display: inline">
+													<input type="hidden" name="pro_code" value=${product.pro_code }>
+													<input type="hidden" name="path" value="product_list">
+													<input type="hidden" name="amount" value="1">
+													<input type="submit" class="btn btn-outline-dark flex-shrink-0" value="Wishlist">
 												</form>
 											</div>
 										</div>
