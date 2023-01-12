@@ -26,7 +26,7 @@ public class CartListAction implements Action {
 		List<cart_wish_proBean> cartList = service.getCartList(id);
 		
 		request.setAttribute("cartList", cartList);
-		System.out.println(cartList);
+//		System.out.println(cartList);
 		forward = new ActionForward();
 		forward.setPath("cart/cart_detail_view.jsp");
 		forward.setRedirect(false);

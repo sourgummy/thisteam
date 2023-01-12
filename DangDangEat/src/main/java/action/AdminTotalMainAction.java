@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import svc.MemberMonthlyJoinService;
-import svc.NotAnswerCountService;
+import svc.ReviewCountMonthlyService;
 import svc.OrderMonthlyService;
 import svc.WishProductListService;
 import vo.ActionForward;
@@ -33,9 +33,9 @@ public class AdminTotalMainAction implements Action {
 		int salesTotal = service3.getSalesTotalMonthly();
 		request.setAttribute("salesTotal", salesTotal);
 		
-		NotAnswerCountService service4 = new NotAnswerCountService();
-		int notAnswerCount = service4.getNotAnswerCount();
-		request.setAttribute("notAnswerCount", notAnswerCount);
+		ReviewCountMonthlyService service4 = new ReviewCountMonthlyService();
+		int reviewCount = service4.getReviewCountMonthly();
+		request.setAttribute("reviewCount", reviewCount);
 		
 		
 		forward = new ActionForward();

@@ -18,7 +18,7 @@ public class CartInsertService {
 		// 공통작업-3. BoardDAO 객체에 Connection 객체 전달하기
 		dao.setConnection(con);
 		
-		System.out.println(cart.getCart_amount());
+//		System.out.println(cart.getCart_amount());
 		// 장바구니에 있는지 확인
 		boolean isCartExist = dao.isExist(cart, true);
 		
@@ -48,6 +48,8 @@ public class CartInsertService {
 			}
 		} else { // 장바구니에 있으면 이미 있습니다 출력
 			insertCount = 2;
+			
+			JdbcUtil.commit(con);
 		}
 		
 		// 공통작업-4. Connection 객체 반환하기

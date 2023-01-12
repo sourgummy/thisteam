@@ -8,25 +8,39 @@
 <title>DangDangEAT</title>
 
 <link href="css/styles.css" rel="stylesheet" />
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+	<link href="jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
 <script src="../js/jquery-3.6.3.js"></script>
 <script type="text/javascript">
 
-	$(document).ready(function() {
-		$('.slider_image').bxSlider({
-			mode : "horizontal",
-			auto : true,
-			pager : true,
-			//        slideWidth: 1300,  // 절대 수정 금지!!!건들지마세요!!!
-			speed : 15, // 숫자 작을수록 빠르게 넘어감
-			infinitelLoop : true
-		});
+
+$(document).ready(function(){
+	$('.bxslider').bxSlider({
+		auto: true,
+		speed: 10,
+		pause: 4000,
+		mode:'fade',
+		autoControls: true,
+		pager:false,
 	});
+});
+
+
+// 	$(document).ready(function() {
+// 		$('.slider_image').bxSlider({
+// 			mode : "horizontal",
+// 			auto : true,
+// 			pager : true,
+// 			//        slideWidth: 1300,  // 절대 수정 금지!!!건들지마세요!!!
+// 			speed : 15, // 숫자 작을수록 빠르게 넘어감
+// 			infinitelLoop : true
+
+// 		});
+// 	});
 	
 	$(document).ready(function() {
 		
@@ -85,11 +99,37 @@ body {
 
 #slider {
 	margin: 0 auto;
-	width: 1200px;
+	width: 100%;
 	padding: 0;
 	position: relative;
 }
+#slide_wapper-div{
+position:relative;
+height:600px;
+width: 100%;
+background-color: #f5f5f5;
 
+}
+
+
+.bx-viewport {
+position:absolute;
+object-fit:cover;
+left: 20%;
+}
+.bxslider> li >img{
+height:500PX;
+width:100%
+object-fit:cover;
+
+}
+
+.bx-controls-direction{
+visibility :hidden;
+}
+.bx-controls-auto{
+visibility :hidden;
+}
 
 .main_rec{
 	/*main 네모*/
@@ -139,16 +179,15 @@ cursor: pointer;
 	<!--         </nav> -->
 	<!-- Header-->
 
-	<section class="py-1"></section>
-
-	<div id="slider">
-		<ul class="slider_image">
-			<li><img src="img/slider1.png" /></li>
-			<li><img src="img/slider2.png" /></li>
-			<li><img src="img/slider3.png" /></li>
-		</ul>
-	</div>
-
+<!-- 	<section class="py-1"></section> -->
+<div id="slide_wapper-div">
+	<ul class="bxslider">
+			<li><img src="img/main01.jpg" /></li>
+			<li><img src="img/main02.jpg" /></li>
+			<li><img src="img/main03.jpg" /></li>
+	</ul>
+</div>
+<div class="m-5"></div>
 <article>
 
 <input type="hidden" id="imgPath" value="<%=request.getScheme()+"://"+request.getServerName() + ":" + request.getServerPort() +"/"+request.getContextPath() %>">
@@ -160,8 +199,7 @@ cursor: pointer;
 	System.out.println(request.getServletContext().getRealPath("/upload"));
 	%>
 	     <!-- 메인 네모 부분 // 관련 클래스: main_rec-->
-        <div class="mt-5 d-flex flex-row justify-content-center" >
-         </div>
+        <div class="mt-5 d-flex flex-row justify-content-center"style="position:relative;" >
 	        <div class=" mb-5 d-flex flex-row justify-content-center" >
 	        		<div  width="500" style="position:relative;">
 				       <img class="m-3" src="img/salebanner.png" width="500"></img>
@@ -169,6 +207,7 @@ cursor: pointer;
 	       			</div>
 			       <img class="m-3"  src="img/orderbanner.png" width="500"></img>
 	        </div>
+         </div>
 	
          <!-- 메인 네모 부분 // 관련 클래스: main_rec-->
         <div class="mt-5 d-flex flex-row justify-content-center">
@@ -188,13 +227,13 @@ cursor: pointer;
 <footer class="py-5" style="position:relative;">
 	<div class="container">
 <div class="custom-shape-divider-bottom-1673107194">
+		<p class="m-0 text-center text-white">Copyright &copy; DANGDANGEAT
+			2022</p>
 
     <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
         <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
     </svg>
 </div>
-		<p class="m-0 text-center text-white">Copyright &copy; DANGDANGEAT
-			2022</p>
 	</div>
 </footer>
 <!-- Bootstrap core JS-->

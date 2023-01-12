@@ -36,6 +36,8 @@ public class WishlistInsertService {
 				}
 			} else { // 위시리스트에 있으면 이미있습니다 출력
 				insertCount = 2;
+				
+				JdbcUtil.commit(con);
 			}
 		} else { // 장바구니에 있으면
 			boolean isWishlistExist = dao.isExist(cart, false);
@@ -50,6 +52,8 @@ public class WishlistInsertService {
 				}
 			} else { // 위시리스트에 있으면
 				insertCount = 2;
+				
+				JdbcUtil.commit(con);
 			}
 		}
 		

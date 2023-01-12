@@ -17,11 +17,13 @@ public class WishlistInsertAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = null;
 		
+		// 상품 코드
 		int pro_code = Integer.parseInt(request.getParameter("pro_code"));
+		// 아이디 (회원만 가능)
 		HttpSession session = request.getSession();
 		String id = (String)session.getAttribute("sId");
-//		String id = request.getParameter("id");
-		
+		// 경로
+		String path = request.getParameter("path");
 		try {
 			if(id == null || id.equals(null)) {
 				response.setContentType("text/html; charset=UTF-8");
@@ -45,12 +47,17 @@ public class WishlistInsertAction implements Action {
 			int insertCount = service.insertWishlist(cart);
 			
 				if(insertCount == 1) { // 위시리스트 추가 성공
-					
-					forward = new ActionForward();
-					forward.setPath("ProductDetail.pd?pro_code=" + pro_code);
-					forward.setRedirect(true);
-					
-					return forward;
+					if(path.equals("product_detail")) { // 경로 상품상세
+					// ajax로 구현
+					} else if(path.equals("wishlist")) { // 경로 위시리스트
+						forward = new ActionForward();
+						forward.setPath("WishlistDetail.ct");
+						forward.setRedirect(true);
+					} else if(path.equals("product_list")) { // 경로 상품 목록
+						forward = new ActionForward();
+						forward.setPath("ProductList.pd");
+						forward.setRedirect(true);
+					}
 				} else if(insertCount == 2){ // 이미 있음
 					response.setContentType("text/html; charset=UTF-8");
 					PrintWriter out = response.getWriter();

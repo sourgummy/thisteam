@@ -48,8 +48,6 @@ public class CartDAO {
 			pstmt.setInt(4, 1);
 			
 			insertCartCount = pstmt.executeUpdate();
-			System.out.println(pstmt + "피에스");
-			System.out.println("장바구니 담기 성공!");
 		} catch (SQLException e) {
 			System.out.println("SQL 구문 오류! - insertCart()");
 			e.printStackTrace();
@@ -93,7 +91,6 @@ public class CartDAO {
 				cart.setCart_ischecked(rs.getInt("cart_ischecked"));
 				cart.setCart_wishlist(rs.getInt("cart_wishlist"));
 				cartList.add(cart);
-			
 			}
 		} catch (SQLException e) {
 			System.out.println("SQL 구문 오류 - selectCartList()");
@@ -212,9 +209,14 @@ public class CartDAO {
 				sql = "UPDATE cart SET cart_wishlist=0 WHERE pro_code=? AND member_id=?";
 			}
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, 1);
-			pstmt.setInt(2, cart.getPro_code());
-			pstmt.setString(3, cart.getMember_id());
+			if(isCart) {
+				pstmt.setInt(1, 1);
+				pstmt.setInt(2, cart.getPro_code());
+				pstmt.setString(3, cart.getMember_id());
+			} else {
+				pstmt.setInt(1, cart.getPro_code());
+				pstmt.setString(2, cart.getMember_id());
+			}
 			updateCount = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("SQL 구문 오류 - updateCart()");
@@ -245,7 +247,7 @@ public class CartDAO {
 			pstmt.setInt(4, 1);
 			
 			insertWishlistCount = pstmt.executeUpdate();
-			System.out.println("위시리스트 담기 성공!");
+//			System.out.println("위시리스트 담기 성공!");
 		} catch (SQLException e) {
 			System.out.println("SQL 구문 오류! - insertWishlist()");
 			e.printStackTrace();
@@ -258,7 +260,7 @@ public class CartDAO {
 		return insertWishlistCount;
 	}
 	
-	// view 페이지 통하여 장바구니 상품정보 가져오는 메서드 (단일상품 주문하기)
+		// view 페이지 통하여 장바구니 상품정보 가져오는 메서드 (단일상품 주문하기)
 	   public List<cart_wish_proBean> getViewCartList(String id, boolean isCart) {
 	      
 	      List<cart_wish_proBean> viewCartList = null;
@@ -304,7 +306,9 @@ public class CartDAO {
 	      return viewCartList;
 	   }// getViewCartList
 
-
+	   
+	   
+	// 장바구니 수량 변경
 	public int updateCartNumber(CartBean cart) {
 		int updateCount = 0;
 		

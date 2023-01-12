@@ -77,7 +77,7 @@ public class AdminDAO {
 		return wishlist;
 	}
 
-
+	// 한달 가입자 수
 	public int getMemberMonthlyJoin() {
 		int joinCount = 0;
 		
@@ -103,7 +103,7 @@ public class AdminDAO {
 		return joinCount;
 	}
 
-
+	// 한 달 주문 건 수
 	public int getOrderMonthly() {
 		int orderCount = 0;
 		
@@ -131,7 +131,7 @@ public class AdminDAO {
 		return orderCount;
 	}
 
-
+	// 한 달 매출액 수
 	public int getSalesTotalMonthly() {
 		int salesTotal = 0;
 		
@@ -160,22 +160,22 @@ public class AdminDAO {
 		return salesTotal;
 	}
 
-
-	public int getNotAnswerCount() {
-		int notAnswerCount = 0;
+	// 한 달 리뷰 수
+	public int getReviewCountMonthly() {
+		int reviewCount = 0;
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
 		try {
-			String sql = "SELECT COUNT(qna_code) AS isnotanswer FROM qna WHERE qna_status = '답변대기'";
+			String sql = "SELECT COUNT(review_code) AS reviewCount FROM review WHERE DATE_FORMAT(review_date, '%m') = DATE_FORMAT(sysdate(), '%m')";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				notAnswerCount = rs.getInt("isnotanswer");
+				reviewCount = rs.getInt("reviewCount");
 			}
 		} catch (SQLException e) {
-			System.out.println("SQL 구문 오류! - getNotAnswerCount()");
+			System.out.println("SQL 구문 오류! - getReviewCountMonthly()");
 			e.printStackTrace();
 		} finally {
 			JdbcUtil.close(rs);
@@ -183,6 +183,6 @@ public class AdminDAO {
 		}
 	
 		
-		return notAnswerCount;
+		return reviewCount;
 	}
 }
