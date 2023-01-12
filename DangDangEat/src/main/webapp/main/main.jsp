@@ -182,8 +182,8 @@ cursor: pointer;
 <!-- 	<section class="py-1"></section> -->
 <div id="slide_wapper-div">
 	<ul class="bxslider">
-			<li><img src="img/main01.jpg" /></li>
-			<li><img src="img/main02.jpg" /></li>
+			<li><img src="img/main01.png" /></li>
+			<li><img src="img/main02.png" /></li>
 			<li><img src="img/main03.jpg" /></li>
 	</ul>
 </div>
