@@ -18,7 +18,7 @@ public class CartInsertService {
 		// 공통작업-3. BoardDAO 객체에 Connection 객체 전달하기
 		dao.setConnection(con);
 		
-		System.out.println(cart.getCart_amount());
+//		System.out.println(cart.getCart_amount());
 		// 장바구니에 있는지 확인
 		boolean isCartExist = dao.isExist(cart, true);
 		

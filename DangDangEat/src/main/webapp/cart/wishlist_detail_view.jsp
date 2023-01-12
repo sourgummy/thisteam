@@ -12,7 +12,7 @@ request.setCharacterEncoding("UTF-8");
 <html>
 <head>
 <meta charset="UTF-8">
-<title>wishlist</title>
+<title>DangDangEAT - Wishlist</title>
 <!-- 외부 CSS 가져오기 -->
 <!-- <link href="css/bootstrap.css" rel="stylesheet" type="text/css"> -->
 <link href="css/styles.css" rel="stylesheet" />
@@ -57,7 +57,7 @@ input {
 	<jsp:include page="/inc/top.jsp"></jsp:include>
 	<!-- 장바구니 번호, 사진(대표이미지), 상품명, 사이즈,색상,수량,가격, 삭제 -->
 	<div class="container">
-		<div id="id">${sessionScope.sId }님의위시리스트</div>
+		<div id="id">${sessionScope.sId }님의 위시리스트</div>
 		<table class="table">
 			<tr>
 				<th></th>

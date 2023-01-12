@@ -39,25 +39,25 @@ public class CartFrontController extends HttpServlet {
 		
 		// 추출 된 서블릿 주소(command)를 if문을 통해 문자열 비교를 수행하고
 		// 각 주소에 따른 액션(작업) 요청
-		if(command.equals("/CartInsert.ct")) {
+		if(command.equals("/CartInsert.ct")) { // 장바구니 담기
 			action = new CartInsertAction();
 			forward = action.execute(request, response);
-		} else if(command.equals("/CartList.ct")) {
+		} else if(command.equals("/CartList.ct")) { // 장바구니 목록
 			action = new CartListAction();
 			forward = action.execute(request, response);
-		} else if(command.equals("/CartDelete.ct")) {
+		} else if(command.equals("/CartDelete.ct")) { // 장바구니 삭제
 			action = new CartDeleteAction();
 			forward = action.execute(request, response);
-		} else if(command.equals("/WishlistInsert.ct")) {
+		} else if(command.equals("/WishlistInsert.ct")) { // 위시리스트 담기
 			action = new WishlistInsertAction();
 			forward = action.execute(request, response);
-		} else if(command.equals("/WishlistDetail.ct")) {
+		} else if(command.equals("/WishlistDetail.ct")) { // 위시리스트 목록
 			action = new WishlistDetailAction();
 			forward = action.execute(request, response);
-		} else if(command.equals("/WishlistDelete.ct")) {
+		} else if(command.equals("/WishlistDelete.ct")) { // 위시리스트 삭제
 			action = new WishlistDeleteAction();
 			forward = action.execute(request, response);
-		} else if(command.equals("/CartUpdate.ct")) {
+		} else if(command.equals("/CartUpdate.ct")) { // 장바구니 수량 변경
 			action = new CartUpdateAction();
 			forward = action.execute(request, response);
 		}

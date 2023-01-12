@@ -37,6 +37,8 @@ public class WishlistDeleteAction implements Action {
 				out.println("alert('삭제할 상품이 없습니다!')");
 				out.println("history.back()");
 				out.println("</script>");
+				
+				return forward;
 			} else { // 위시리스트에 있으면
 				// 장바구니에 있는지 조회
 				boolean isCartExist = service.isExist(cart, false);
@@ -50,17 +52,24 @@ public class WishlistDeleteAction implements Action {
 						out.println("alert('삭제 실패!')");
 						out.println("history.back()");
 						out.println("</script>");
+						
+						return forward;
 					} else { // 삭제 성공
 						forward = new ActionForward();
-						forward.setPath("CartList.ct");
+						forward.setPath("WishlistDetail.ct");
 						forward.setRedirect(true);
+						
+						return forward;
 					}
 				} else { // 장바구니에 있으면 update
-					int updateCount = service.updateWishlist(pro_code);
+					int updateCount = service.updateWishlist(cart);
+					System.out.println(updateCount);
 					if(updateCount > 0) { // 성공
 						forward = new ActionForward();
-						forward.setPath("CartList.ct");
+						forward.setPath("WishlistDetail.ct");
 						forward.setRedirect(true);
+						
+						return forward;
 					} else { //실패
 						response.setContentType("text/html; charset=UTF-8");
 						PrintWriter out = response.getWriter();
@@ -68,6 +77,8 @@ public class WishlistDeleteAction implements Action {
 						out.println("alert('삭제 실패!')");
 						out.println("history.back()");
 						out.println("</script>");
+						
+						return forward;
 					}
 				}
 			}

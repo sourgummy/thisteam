@@ -13,7 +13,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>DangDangEat Admin</title>
+<title>DangDangEAT - Admin Main</title>
 <%
 // 세션 아이디가 null 이거나 "admin" 이 아닐 경우 "잘못된 접근입니다!" 출력 후 메인페이지로 이동
 String sId = (String)session.getAttribute("sId");
@@ -42,7 +42,7 @@ if(sId == null || !sId.equals("admin")) {
 <style>
 @font-face {
     font-family: 'GmarketSans';
-    font-weight: 300;
+    font-weight: normal;
     font-style: normal;
     src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.eot');
     src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.eot?#iefix') format('embedded-opentype'),
@@ -51,10 +51,37 @@ if(sId == null || !sId.equals("admin")) {
          url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.ttf') format("truetype");
     font-display: swap;
 } 
+  @font-face { /*지마켓 산스*/
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}    
 
 body {
-    font-family: 'GmarketSans';
+    font-family: 'GmarketSansMedium';
+/*     vertical-align: middle; */
 }
+
+#accordionSidebar{
+	font-family: 'GmarketSans';
+}
+/* ======================================= */
+/* @font-face { */
+/*     font-family: 'GmarketSans'; */
+/*     font-weight: 300; */
+/*     font-style: normal; */
+/*     src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.eot'); */
+/*     src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.eot?#iefix') format('embedded-opentype'), */
+/*          url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.woff2') format('woff2'), */
+/*          url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.woff') format('woff'), */
+/*          url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.ttf') format("truetype"); */
+/*     font-display: swap; */
+/* }  */
+
+/* body { */
+/*     font-family: 'GmarketSans'; */
+/* } */
 
 .main-icon {
     padding: 1%;
@@ -381,8 +408,8 @@ body {
 
                      <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">관리자 메인 페이지</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+<!--                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i -->
+<!--                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
                     </div>
 
                     <!-- Content Row -->
@@ -394,9 +421,9 @@ body {
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                월별 가입자 수</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber value="${joinCount }" pattern="###,###,###"/></div>
+                                            <div class="text-primary text-uppercase mb-1">
+                                                한달 가입자 수</div>
+                                            <div class="h5 mb-0 text-gray-800"><fmt:formatNumber value="${joinCount }" pattern="###,###,###"/></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -412,9 +439,9 @@ body {
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                월별 매출액</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber value="${salesTotal }" pattern="###,###,###"/></div>
+                                            <div class="text-success text-uppercase mb-1">
+                                                한달 매출액</div>
+                                            <div class="h5 mb-0 text-gray-800"><fmt:formatNumber value="${salesTotal }" pattern="###,###,###"/></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -430,11 +457,11 @@ body {
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">월별 주문 수
+                                            <div class="text-info text-uppercase mb-1">한달 주문 수
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                                    <div class="h5 mb-0 mr-3 text-gray-800">
                                                     <fmt:formatNumber value="${orderCount }" pattern="###,###,###"/></div>
                                                 </div>
                                                 <div class="col">
@@ -460,10 +487,10 @@ body {
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                미답변 Q&A</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            <fmt:formatNumber value="${notAnswerCount }" pattern="###,###,###"/></div>
+                                            <div class="text-warning text-uppercase mb-1">
+                                                한달 리뷰 수</div>
+                                            <div class="h5 mb-0 text-gray-800">
+                                            <fmt:formatNumber value="${reviewCount }" pattern="###,###,###"/></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -537,7 +564,7 @@ body {
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold text-primary">Wishlist Top Ranking</h6>
+							<h6 class="m-0 text-primary">Wishlist Top Ranking</h6>
 
 						</div>
 						<div class="card-body">

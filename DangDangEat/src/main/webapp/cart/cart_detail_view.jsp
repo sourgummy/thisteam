@@ -7,14 +7,14 @@
 <%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <%
 request.setCharacterEncoding("UTF-8");
-List<cart_wish_proBean> cartlist = (List<cart_wish_proBean>)request.getAttribute("cartList");
+// List<cart_wish_proBean> cartlist = (List<cart_wish_proBean>)request.getAttribute("cartList");
 int finalTotal = 0;
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>장바구니</title>
+<title>DangDangEAT - Cart</title>
 <!-- 외부 CSS 가져오기 -->
 <!-- <link href="css/bootstrap.css" rel="stylesheet" type="text/css"> -->
 <link href="css/styles.css" rel="stylesheet" /> 
@@ -31,6 +31,7 @@ int finalTotal = 0;
 	}
 	#total {
 		text-align: right;
+		margin-bottom: 30px;
 	}
 	
 	table {
@@ -48,10 +49,6 @@ int finalTotal = 0;
 	input, input[type=number] {
 	    font-family:"GmarketSansMedium" ;
 	    border-radius: 0px;
-	}
-	
-	#lastbutton {
-		margin-bottom: 30px;
 	}
 	
 	input[type=text] {
@@ -72,14 +69,16 @@ int finalTotal = 0;
 </style>
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <script type="text/javascript">
-function amountChange(){
-	var value = Number(document.getElementById('amount').value);
-	var initialPrice = document.getElementById('price').value;
-	var price = Number(initialPrice.replace(',', ''));
-	var totalPrice = value * price;
-
-	document.getElementById('lastPrice').innerHTML=totalPrice;
-}
+// function amountChange(){
+// 	var value = Number(document.getElementById('amount').value);
+// 	var initialPrice = document.getElementById('price').value;
+// 	var price = Number(initialPrice.replace(',', ''));
+// 	var totalPrice = value * price;
+	
+// 	alert
+// 	$("#lastPrice").text(totalPrice);
+// // 	document.getElementById('lastPrice').innerHTML=totalPrice;
+// }
 
 $(function() {
 	    // 주문
@@ -92,6 +91,8 @@ $(function() {
 // 	    	alert($("#amount").val());
 // // 	    	console.log()
 // 	    })
+
+
        
     // 전체선택 체크박스의 상태가 변하면 이벤트 처리
 	$("#allCheck").on("change", function() {
@@ -113,62 +114,6 @@ $(function() {
 
 });
 
-// 챗봇 api
-(function() {
-    var w = window;
-    if (w.ChannelIO) {
-      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
-    }
-    var ch = function() {
-      ch.c(arguments);
-    };
-    ch.q = [];
-    ch.c = function(args) {
-      ch.q.push(args);
-    };
-    w.ChannelIO = ch;
-    function l() {
-      if (w.ChannelIOInitialized) {
-        return;
-      }
-      w.ChannelIOInitialized = true;
-      var s = document.createElement('script');
-      s.type = 'text/javascript';
-      s.async = true;
-      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
-      s.charset = 'UTF-8';
-      var x = document.getElementsByTagName('script')[0];
-      x.parentNode.insertBefore(s, x);
-    }
-    if (document.readyState === 'complete') {
-      l();
-    } else if (window.attachEvent) {
-      window.attachEvent('onload', l);
-    } else {
-      window.addEventListener('DOMContentLoaded', l, false);
-      window.addEventListener('load', l, false);
-    }
-  })();
-//   ChannelIO('boot', {
-//     pluginKey: "1340eb3c-ddf6-43c5-a497-6a91281156bc", //please fill with your plugin key
-//     memberId: "YOUR_USER_ID", //fill with user id
-//     profile: {
-//       "name": "YOUR_USER_NAME", //fill with user name
-//       "mobileNumber": "YOUR_USER_MOBILE_NUMBER", //fill with user phone number
-//       "CUSTOM_VALUE_1": "VALUE_1", //any other custom meta data
-//       "CUSTOM_VALUE_2": "VALUE_2"
-//     }
-//   });
-  ChannelIO('boot', {
-     pluginKey: '1340eb3c-ddf6-43c5-a497-6a91281156bc'
-      }, function onBoot(error, user) {
-           if (error) {
-                console.error(error);
-           } else {
-             console.log('boot success', user)
-           }
-   });
-// 챗봇 api 끝
 </script>
 </head>
 <body>
@@ -255,12 +200,8 @@ $(function() {
 	</table>
 	</div>
 	<div class="container" id="total">
-		Total : <fmt:formatNumber value="${finalTotal }" pattern="###,###,###"/>원
+		Total : <fmt:formatNumber value="${finalTotal }" pattern="###,###,###"/> 원
 <%-- 		<c:out value="Total : ${finalTotal }원" /> --%>
-	</div>
-	<div class="container" id="lastbutton">
-		<input type="button" value="선택상품 주문하기" onclick="location.href='orderFormPro.od'">
-		<input type="button" value="선택상품 삭제하기" onclick="location.href='CartDelete.ct'">
 	</div>
 <!-- Footer-->
    <footer class="py-5 bg-dark">
