@@ -51,8 +51,16 @@ body {
 
 #accordionSidebar{
 font-family: 'GmarketSans';
+
 }
 
+.main-icon {
+    padding: 1%;
+    height: 40px;
+    width: auto;
+   margin-right: 3%;
+   padding: 5px;
+}
 </style>
 
 

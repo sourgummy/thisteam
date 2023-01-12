@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>orderPayment</title>
+  <title>DangDangEat - OrderPayment</title>
   <link href="css/styles.css" rel="stylesheet" />
   <link href="css/orderForm.css" rel="stylesheet" type="text/css">
   <link href="css/orderForm2.css" rel="stylesheet" type="text/css">
@@ -99,7 +99,7 @@
 					order_code : $('#order_code').val()
 					},
 				success: function (data) {
-					alert("할인가격이 넘어왔습니다 : " + data);
+					alert("쿠폰을 사용한 할인금액이 적용되었습니다!");
 					
 					 $('#basket-promo').text(parseInt(data)).css("color","red"); // action을 통해 계산 완료 후 전달받은 할인금액 입력
 					 $('#basket-total').text(parseInt($('#hidden_total').val()) - parseInt(data)); // 전체 금액 - 완료받은 할인금액 

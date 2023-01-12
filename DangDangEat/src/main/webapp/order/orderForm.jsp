@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>orderForm</title>
+  <title>DangDangEat - OrderForm</title>
   <link href="css/styles.css" rel="stylesheet" />
   <link href="css/orderForm.css" rel="stylesheet" type="text/css">
   <!-- top.jsp 랑 중복되는 container  : orderForm2.css -->
